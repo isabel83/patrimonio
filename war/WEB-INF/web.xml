@@ -8,7 +8,7 @@
   <!-- Servlets -->
   <servlet>
     <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.patrimonio.plantillas.server.GreetingServiceImpl</servlet-class>
+    <servlet-class>com.patrimonio.plantillas.server.LoginServiceImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>
