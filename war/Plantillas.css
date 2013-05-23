@@ -1,0 +1,213 @@
+/** Add css rules here for your application. */
+
+
+/** Example rules used by the template application (remove for your app) */
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+  color: #777777;
+  margin: 40px 0px 70px;
+  text-align: center;
+}
+
+.gwt-PushButton {
+  display: block;
+  font-size: 10pt;
+  text-align: right;
+}
+
+/** Most GWT widgets already have a style name defined */
+.gwt-DialogBox {
+  width: 400px;
+}
+
+.dialogVPanel {
+  margin: 5px;
+}
+
+.serverResponseLabelError {
+  color: red;
+}
+
+/** Set ids using widget.getElement().setId("idOfElement") */
+#closeButton {
+  margin: 15px 6px 6px;
+}
+.aceptar {
+	background-image: url("resources/images/icons/arrow-forward.png");
+	background-repeat: no-repeat;
+}
+.cerrar {
+	background-image: url("resources/images/icons/eject.png");
+	background-repeat: no-repeat;
+}
+
+.gwt-PushButton-up,
+.gwt-PushButton-up-hovering,
+.gwt-PushButton-up-disabled,
+.gwt-PushButton-down,
+.gwt-PushButton-down-hovering,
+.gwt-PushButton-down-disabled {
+  margin: 0;
+  text-decoration: none;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+}
+.gwt-PushButton-up,
+.gwt-PushButton-up-hovering,
+.gwt-PushButton-up-disabled {
+  padding: 3px 5px 3px 5px;
+}
+.gwt-PushButton-up {
+  border:1px solid #bbb;
+  border-bottom: 1px solid #a0a0a0;
+  cursor: pointer;
+  cursor: hand;
+}
+.gwt-PushButton-up-hovering {
+  border: 1px solid;
+  border-color: #939393;
+  cursor: pointer;
+  cursor: hand;
+}
+.gwt-PushButton-up-disabled {
+  border: 1px solid #bbb;
+  cursor: default;
+  opacity: .5;
+  filter: alpha(opacity=45);
+  zoom: 1;
+}
+.gwt-PushButton-down,
+.gwt-PushButton-down-hovering,
+.gwt-PushButton-down-disabled {
+  padding: 4px 4px 2px 6px;
+  outline:none;
+}
+.gwt-PushButton-down {
+  border: 1px inset #666;
+  cursor: pointer;
+  cursor: hand;
+}
+.gwt-PushButton-down-hovering {
+  border: 1px solid #939393;
+  border-top: 1px solid #333333;
+  cursor: pointer;
+  cursor: hand;
+}
+.gwt-PushButton-down-disabled {
+  border: 1px outset #ccc;
+  cursor: default;
+  opacity: 0.5;
+  filter: alpha(opacity=45);
+  zoom: 1;
+}
+
+.x-form-label-top .x-form-item{
+	padding-bottom: 2px;
+}
+
+.x-menubar {
+  border-color: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+.x-menubar-item{
+	border-right: 1px solid #000 !important;
+	padding: 1px 15px;
+}
+
+.x-menubar-item-active{
+	background-color: #233D6D;
+	color: #fff;
+	font-weight:  bold;
+}
+
+.gwt-MenuBar-horizontal{
+	background: none !important; 
+	border: none !important;
+}
+
+.x-menu-item-active{
+	background: none;
+	border: 1px solid #233D6D;
+	font-weight: bold;
+}
+
+.x-menu-item-active a{
+		color: #233D6D !important;
+}
+
+.mnuFinal{
+	border-right: none !important;
+}
+
+.botonesFuncionales{
+	padding: 15px;
+    float: right;
+}
+
+.dlgBusqueda .x-toolbar-left{
+	float: right;
+}
+
+.txtDlgBusqueda .x-form-text{
+	margin-left: 12px;
+	width: 400px !important;
+}
+
+
+
+.iconoDisabled{
+	opacity:0.4;
+	filter:alpha(opacity=40); /* For IE8 and earlier */
+}
+
+.etiqueta{
+	font: normal 12px tahoma, arial, helvetica, sans-serif;
+}
+
+
+
+/** ESTILO DEL PANEL DE ENTRADA **/
+.panelEntradas{
+	background: transparent;
+	padding: 0 5 0 5;
+}
+
+.x-tab-strip-active span.x-tab-strip-text{
+	color: #233D6D;
+	font-weight: bold;
+}
+
+.tabNuevo{
+	background-image: url("resources/images/icons/new.png");
+}
+
+.x-tab-panel-header{
+	background-color: transparent;
+	border: none;
+}
+
+ul.x-tab-strip-top{
+	border: none;
+	background: transparent;
+	margin-bottom: 10px;
+}
+
+.x-tab-strip-top .x-tab-right, .x-tab-strip-top .x-tab-left, .x-tab-strip-top .x-tab-strip-inner {
+	background-image: none;
+}
+
+.check{
+	padding-top: 10px;
+}
+
+.check .x-form-checkbox{
+	top:1px;
+}
+
+.check .x-form-item .x-form-item-label{
+	float: left;
+	padding-top: 8px;
+}
