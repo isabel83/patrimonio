@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                    http://www.springframework.org/schema/security 
+                    http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+                    
+
+
+	<!-- CON ESTO PERMITIMOS QUE CUALQUIERA ENTRE SIN REQUERIR AUTENTICACION  -->
+     <http use-expressions="true">  
+        <intercept-url pattern="/**" access="permitAll" />
+        <form-login />
+    </http>
+     
+     
+     
+     <!-- PONEMOS LAS RUTAS QUE NO NECESITAN DE AUTENTICACION 
+
+     ESTO ES PARA QUE LA AUTENTICACION DE USUARIOS SE HAGA EN UN FORMULARIO NUESTRO Y NO DEL MODO PREDETERMINADO DE SPRING SECURITY 
+     <http auto-config='true'>
+	    <intercept-url pattern="/login.jsp*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+	    <intercept-url pattern="/**" access="ROLE_USER" />
+	    <form-login login-page="/login.jsp" authentication-failure-url="/login/login.jsp?login_error=1" />
+	    <logout logout-success-url="/login.jsp"/>    
+	    
+	    <session-management>
+                <concurrency-control max-sessions="2" error-if-maximum-exceeded="true" expired-url="/login.jsp" /> 
+        </session-management>  
+	  </http>
+  
+  
+     ASI OBLIGAMOS A QUE EL USUARIO ESTE AUTENTICADO PARA ACCEDER A SEGUN QUE ZONAS (habra que modificar a las rutas adecuadas)
+     <http use-expressions="true">
+	    <intercept-url pattern="/index.jsp" access="permitAll" />
+	    <intercept-url pattern="/secure/extreme/**" access="hasRole('supervisor')" />
+	    <intercept-url pattern="/secure/**" access="isAuthenticated()" />
+	    <intercept-url pattern="/listAccounts.html" access="isAuthenticated()" />
+	    <intercept-url pattern="/post.html" access="hasAnyRole('supervisor','teller')" />
+	    <intercept-url pattern="/**" access="denyAll" />
+	    <form-login />
+	</http>-->
+
+	<beans:bean id="customAuthenticationProvider" class="com.parimonio.plantillas.server.CustomAuthenticationProvider" />  
+
+
+    <authentication-manager alias="authenticationManager">
+    <!-- <authentication-provider ref="customAuthenticationProvider"/> esto hace referencia a un bean en el que tenemos el codigo para autenticar los usuarios y quitar lo de abajo -->
+        <authentication-provider>
+            <user-service> <!-- AQUI TENDREMOS QUE METER LOS VALORES DE LOS DIFERENTES PERFILES -->
+                <user name="rod" password="koala" authorities="supervisor, teller, user" />
+                <user name="dianne" password="emu" authorities="teller, user" />
+                <user name="scott" password="wombat" authorities="user" />
+                <user name="peter" password="opal" authorities="user" />
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+</beans:beans>   

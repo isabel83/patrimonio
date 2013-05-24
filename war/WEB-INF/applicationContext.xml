@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:oxm="http://www.springframework.org/schema/oxm"
+	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+        <!-- ANNOTATIONS - Esta configuracion le permite a spring poder instancializar todos los beans que estan bajo ese paquete. 
+                 Spring provides the capability of automatically detecting 'stereotyped' classes and registering corresponding BeanDefinitions with the ApplicationContext                
+                 By default, classes annotated with @Component, @Repository, @Service, or @Controller (or classes annotated with a custom annotation 
+                 that itself is annotated with @Component) are the only detected candidate component
+                 To autodetect these classes and register the corresponding beans requires the inclusion of the following element in XML where 'basePackage' -->
+        <context:component-scan base-package="com.patrimonio.plantillas" />
+        
+        <!-- TX - enable the configuration of transactional behavior based on annotations
+                 You can also use an annotation-based approach to transaction configuration declaring transaction semantics directly in the Java source 
+                 Ver: http://static.springsource.org/spring/docs/2.0.x/reference/transaction.html
+                 Ver: http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/transaction.html#transaction-declarative -->                             
+        <tx:annotation-driven />
+        
+        <!-- AOP - para interceptar las llamadas a los metodos del servicio -->
+        <aop:config>
+                <!-- The execution of any method defined by the interface execution(* com.xyz.service.MyService.*(..))  -->
+                <!-- the execution of any method defined in the service package: execution(*com.xyz.service.*.*(..))  -->
+                <aop:advisor advice-ref="interfeceptServiceFacade" pointcut="execution(* com.patrimonio.plantillas.client.CustomerService.*(..))"/>
+        </aop:config>
+
+        <aop:aspectj-autoproxy/>
+
+        <bean id="interfeceptServiceFacade" class="com.patrimonio.plantillas.server.auth.CustomAuthenticationInterceptor" />
+                
+        <!-- JPA - Entity manager de JPA && Persistence Unit (persistence.xml) -->
+        <bean class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean" id="entityManagerFactory">
+                <property name="persistenceUnitName" value="sampleAppUnit" />
+        </bean>
+
+        <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">
+                <property name="entityManagerFactory" ref="entityManagerFactory" />
+        </bean>
+        
+
+</beans>
