@@ -48,7 +48,8 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.TabPanel;
 import com.extjs.gxt.ui.client.widget.TabItem;
 
-import com.patrimonio.plantillas.client.Stock;
+import com.patrimonio.plantillas.client.design.MenuIconos;
+import com.patrimonio.plantillas.client.design.Stock;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
