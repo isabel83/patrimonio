@@ -158,11 +158,11 @@
             <artifactId>hibernate-entitymanager</artifactId>
             <version>3.5.2-Final</version>
         </dependency>
-        <!-- <dependency> -->
-        <!-- <groupId>org.hibernate</groupId> -->
-        <!-- <artifactId>hibernate-validator</artifactId> -->
-        <!-- <version>4.2.0.Final</version> -->
-        <!-- </dependency> -->
+        <dependency> 
+	         <groupId>org.hibernate</groupId>
+	         <artifactId>hibernate-validator</artifactId> 
+	         <version>4.2.0.Final</version> 
+        </dependency>
         <!-- Necesario para Hibernate, ya que pide una clase cuando inicializa la app y sino la tiene pincha. Es por eso que se tiene q bajar esta dependencia extra a SLF4J -->
         <dependency>
             <groupId>org.slf4j</groupId>
