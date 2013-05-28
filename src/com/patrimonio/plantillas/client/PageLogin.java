@@ -11,7 +11,7 @@ import com.patrimonio.plantillas.client.design.ButtonWithImageAndText;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-public class Login {
+public class PageLogin {
 
 	public void onModuleLoad() {
 		final TextBox nameField = new TextBox();

@@ -9,16 +9,16 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "CUSTOMER")
-public class Customer implements java.io.Serializable {
+@Table(name = "USER")
+public class User implements java.io.Serializable {
         
                 /**
                  * 
                  */
                 private static final long serialVersionUID = 1L;
 
-                @SequenceGenerator(name="CUSTOMER_SEQUENCE_GENERATOR",sequenceName="CUSTOMER_SEQ")
-                @Id @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CUSTOMER_SEQUENCE_GENERATOR")      
+                @SequenceGenerator(name="USER_SEQUENCE_GENERATOR",sequenceName="USER_SEQ")
+                @Id @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USER_SEQUENCE_GENERATOR")      
             private long employeeId;
            
             @Column(name="employee_name", nullable = false, length=30)
@@ -30,11 +30,11 @@ public class Customer implements java.io.Serializable {
             @Column(name="job", length=50)
             private String job;
 
-                public Customer() {
+                public User() {
                         
                 }
 
-                public Customer(String employeeName, String employeeSurname, String job) {
+                public User(String employeeName, String employeeSurname, String job) {
                         super();
                         this.employeeName = employeeName;
                         this.employeeSurname = employeeSurname;

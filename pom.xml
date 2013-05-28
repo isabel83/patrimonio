@@ -210,6 +210,7 @@
         </dependency>
     </dependencies>
     <build>
+        <outputDirectory>war/WEB-INF/classes</outputDirectory>
         <sourceDirectory>src</sourceDirectory>
         <testSourceDirectory>test</testSourceDirectory>
         <resources>
