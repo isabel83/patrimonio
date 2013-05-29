@@ -16,7 +16,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         
         static {
                 users.put("admin", "admin");
-                users.put("justin", "javacodegeeks");
+                users.put("begoña", "mico");
+                users.put("rod", "eo");
+                users.put("isabel", "ap");
         }
 
         /**
@@ -33,7 +35,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
                 System.out.println("CustomAuthenticationProvider => authenticate() ");
                 
                 String username = (String) authentication.getPrincipal();
-                String password = (String)authentication.getCredentials();
+                String password = (String) authentication.getCredentials();
                 
                 /*
                  * Go to BD to check if this user and pass exists.

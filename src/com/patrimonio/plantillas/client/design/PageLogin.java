@@ -1,12 +1,10 @@
-package com.patrimonio.plantillas.client;
+package com.patrimonio.plantillas.client.design;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.patrimonio.plantillas.client.design.ButtonWithImageAndText;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -16,7 +14,6 @@ public class PageLogin {
 	public void onModuleLoad() {
 		final TextBox nameField = new TextBox();
 		nameField.setText("Bego\u00F1a Encinas");
-		final Label errorLabel = new Label();
 
 
 		// Add the nameField and sendButton to the RootPanel

@@ -13,6 +13,7 @@
 	<!-- CON ESTO PERMITIMOS QUE CUALQUIERA ENTRE SIN REQUERIR AUTENTICACION  -->
      <http use-expressions="true">  
         <intercept-url pattern="/**" access="permitAll" />
+        <intercept-url pattern="/Plantillas.html*" access="hasRole('user')" />
         <form-login />
     </http>
      

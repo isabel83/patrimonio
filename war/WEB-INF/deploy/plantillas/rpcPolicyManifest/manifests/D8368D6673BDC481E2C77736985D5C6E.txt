@@ -1,0 +1,2 @@
+serviceClass: com.patrimonio.plantillas.client.LoginService
+path: DB88F61C40CAF3836518A58D9D652497.gwt.rpc

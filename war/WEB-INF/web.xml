@@ -32,31 +32,33 @@
                 <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
         </listener>
         <!-- SPRING -->
-        
-        <!-- SPRING SECURITY & SPRING -->
-        <!-- Adding the listener to web.xml causes an ApplicationEvent to be published to the Spring ApplicationContext every time 
-                 a HttpSession commences or terminates 
-                 Esto permite que la aplicacion escuche todos los eventos relacionados con la session del usuario (creacion y destruccion). 
-                 Estos eventos heredan de ApplicationEvent -->
+
         <listener>
           <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
         </listener>
  <!-- SPRING SECURITY & SPRING  -->
         
+	<servlet>
+		<servlet-name>springGwtRemoteServiceServlet</servlet-name>
+		<servlet-class>org.spring4gwt.server.SpringGwtRemoteServiceServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>loginServlet</servlet-name>
+		<servlet-class>com.patrimonio.plantillas.server.LoginServiceImpl</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>loginServlet</servlet-name>
+		<url-pattern>/plantillas/login</url-pattern>
+	</servlet-mapping>
 
-        <!-- No vamos a definir cada servicio de GWT como un servlet como se hace en GWT puro.
-                 Para esto utilizareos el JAR spring4gwt que se encarga de manejar los servicios de spring -->
-        <!-- <servlet> -->
-        <!-- <servlet-name>greetServlet</servlet-name> -->
-        <!-- <servlet-class>au.com.uptick.gwt.maven.sample.server.GreetingServiceImpl</servlet-class> -->
-        <!-- </servlet> -->
 
-        <!-- <servlet-mapping> -->
-        <!-- <servlet-name>greetServlet</servlet-name> -->
-        <!-- <url-pattern>/mygwtmavensampleapp/greet</url-pattern> -->
-        <!-- </servlet-mapping> -->
-
-        
+	
+	<servlet-mapping>
+		<servlet-name>springGwtRemoteServiceServlet</servlet-name>
+		<url-pattern>/com.javacodegeeks.gwtspring.Application/springGwtServices/*</url-pattern>
+	</servlet-mapping> 
         <!--  Esto funciona a la perfeccion para llamadas que no son por AJAX. por ejemplo, para esta aplicacion, esto solo funcionara
                   en caso que hagamos un refresh (F5) de la pagina. En caso que ejecutemos una accion, como por ejemplo, presionamos un boton
                   esto funcionará a medias. Es decir, no redireccionara al login o no mostrara al usuario que es lo que paso, pero 
@@ -65,19 +67,7 @@
             <session-timeout>1</session-timeout> <!-- in minutes -->
         </session-config>
     
-  <!-- servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.patrimonio.plantillas.server.LoginServiceImpl</servlet-class>
-  </servlet>
-  
-
-  
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/plantillas/greet</url-pattern>
-  </servlet-mapping>
-  
-   Default page to serve -->
+  <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>Plantillas.html</welcome-file>
   </welcome-file-list>

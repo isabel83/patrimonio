@@ -168,6 +168,17 @@ h1 {
 }
 
 
+.margen{
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+.margen-left{
+	margin-bottom: 5px !important;
+	margin-left: 50px !important;
+	margin-top: 5px !important;
+}
+
 
 /** ESTILO DEL PANEL DE ENTRADA **/
 .panelEntradas{

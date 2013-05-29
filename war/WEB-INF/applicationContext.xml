@@ -29,20 +29,20 @@
                  Ver: http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/transaction.html#transaction-declarative -->                             
         <tx:annotation-driven />
         
-        <!-- AOP - para interceptar las llamadas a los metodos del servicio -->
+        <!-- AOP - para interceptar las llamadas a los metodos del servicio 
         <aop:config>
-                <!-- The execution of any method defined by the interface execution(* com.xyz.service.MyService.*(..))  -->
-                <!-- the execution of any method defined in the service package: execution(*com.xyz.service.*.*(..))  -->
+                 The execution of any method defined by the interface execution(* com.xyz.service.MyService.*(..)) 
+                 the execution of any method defined in the service package: execution(*com.xyz.service.*.*(..))  
                 <aop:advisor advice-ref="interfeceptServiceFacade" pointcut="execution(* com.patrimonio.plantillas.client.CustomerService.*(..))"/>
         </aop:config>
 
         <aop:aspectj-autoproxy/>
 
-        <bean id="interfeceptServiceFacade" class="com.patrimonio.plantillas.server.auth.CustomAuthenticationInterceptor" />
+        <bean id="interfeceptServiceFacade" class="com.patrimonio.plantillas.server.auth.CustomAuthenticationInterceptor" />-->
                 
         <!-- JPA - Entity manager de JPA && Persistence Unit (persistence.xml) -->
         <bean class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean" id="entityManagerFactory">
-                <property name="persistenceUnitName" value="sampleAppUnit" />
+                <property name="persistenceUnitName" value="patrimonioAppUnit" />
         </bean>
 
         <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">
