@@ -19,6 +19,10 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.http.client.RequestBuilder;
+import com.google.gwt.http.client.RequestCallback;
+import com.google.gwt.http.client.RequestException;
+import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
@@ -54,10 +58,12 @@ public class Plantillas implements EntryPoint {
 		formulario.setMethod(Method.POST);
 		formulario.setLabelAlign(LabelAlign.TOP);  
 		formulario.setButtonAlign(HorizontalAlignment.CENTER);  
+		formulario.setAction("../j_spring_security_check");
 		
 		final TextBox nameField = new TextBox();
 		nameField.setText("Bego\u00F1a Encinas");
 		nameField.setSize("143px", "10px");
+		nameField.setName("j_username");
 		nameField.setFocus(true);
 		nameField.selectAll();
 		nameField.addStyleName("margen");
@@ -79,6 +85,7 @@ public class Plantillas implements EntryPoint {
 		final PasswordTextBox pswrdtxtbxPrueba = new PasswordTextBox();
 		formulario.add(pswrdtxtbxPrueba, new FormData("50%"));
 		pswrdtxtbxPrueba.setText("mico");
+		pswrdtxtbxPrueba.setName("j_password");
 		pswrdtxtbxPrueba.setSize("143px", "10px");
 		pswrdtxtbxPrueba.addStyleName("margen");
 		
@@ -119,6 +126,7 @@ public class Plantillas implements EntryPoint {
 			 * Fired when the user clicks on the sendButton.
 			 */
 			public void onClick(ClickEvent event) {
+				Log.debug("Hemos hecho click en el boton");
 				sendValuesToServer();
 			}
 
@@ -127,6 +135,7 @@ public class Plantillas implements EntryPoint {
 			 */
 			public void onKeyUp(KeyUpEvent event) {
 				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
+					Log.debug("Hemos pulsado el intro");
 					sendValuesToServer();
 				}
 			}
@@ -135,24 +144,54 @@ public class Plantillas implements EntryPoint {
 			 * Send the name from the nameField to the server and wait for a response.
 			 */
 			private void sendValuesToServer() {
+				
+				final String url = GWT.getHostPageBaseURL() + "/j_spring_security_check";
+				Log.debug("El valor de la base url es: " + url);
+				
+				final RequestBuilder rb = new RequestBuilder(RequestBuilder.POST, url);
+				rb.setCallback(new RequestCallback() {
+
+					@Override
+					public void onResponseReceived(com.google.gwt.http.client.Request request, Response response) {
+						if (response.getStatusCode() == Response.SC_OK) {
+							String welcomeMsg = "You are not logged";
+							if (response.getText() != null && response.getText().length() > 0) {
+								welcomeMsg = "Welcome: " + response.getText();
+							}
+							Log.debug(welcomeMsg);
+						}
+					}
+
+					@Override
+					public void onError(com.google.gwt.http.client.Request request, Throwable exception) {
+						//principalLabel.setText("Can't retrieve principal's name");
+					}
+				});
+				try {
+					rb.send();
+				} catch (RequestException e) {
+					e.printStackTrace();
+				}
+				
+				
+				
 				// First, we validate the input.
 				errorLabel.setText("");
 				String textToServer = nameField.getText();
 				String passToServer = pswrdtxtbxPrueba.getText();
-				if (!com.patrimonio.plantillas.shared.FieldVerifier.isValidName(textToServer)) {
-					errorLabel.setText("Please enter at least four characters");
-					return;
-				}
+//				if (!com.patrimonio.plantillas.shared.FieldVerifier.isValidName(textToServer)) {
+//					errorLabel.setText("Please enter at least four characters");
+//					return;
+//				}
 
 				// Then, we send the input to the server.
-				btnAceptar.setEnabled(false);
+				//btnAceptar.setEnabled(false);
 				 
 				Log.debug("Estamos en sendValuesToServer, ANTES DE LA LLAMADA AL SERVER");
 				Log.debug("El valor de texto es: " + textToServer);
 				Log.debug("El valor de password es: " + passToServer);
 
-				loginService.loginServer(textToServer, passToServer,  
-						new AsyncCallback<String>() {
+				loginService.loginServer(textToServer, passToServer, new AsyncCallback<String>() {
 							public void onFailure(Throwable caught) {
 								// Show the RPC error message to the user
 								Log.debug("ERROR EN EL SERVIDOR: " + caught.getLocalizedMessage());

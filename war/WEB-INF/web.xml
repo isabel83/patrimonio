@@ -9,7 +9,7 @@
         <context-param>
            <param-name>contextConfigLocation</param-name>
            <param-value>
-                 /WEB-INF/applicationContext.xml          
+                 /WEB-INF/applicationContext.xml    
                  /WEB-INF/security-app-context.xml
            </param-value>
         </context-param>
@@ -38,6 +38,13 @@
         </listener>
  <!-- SPRING SECURITY & SPRING  -->
         
+        	<!-- Front Controller for all GWT Spring based servlets -->
+	<servlet>
+		<servlet-name>gwt</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+        
 	<servlet>
 		<servlet-name>springGwtRemoteServiceServlet</servlet-name>
 		<servlet-class>org.spring4gwt.server.SpringGwtRemoteServiceServlet</servlet-class>
@@ -53,7 +60,10 @@
 		<url-pattern>/plantillas/login</url-pattern>
 	</servlet-mapping>
 
-
+	<servlet-mapping>
+		<servlet-name>gwt</servlet-name>
+		<url-pattern>gwtmodule/rpc/*</url-pattern>
+	</servlet-mapping>
 	
 	<servlet-mapping>
 		<servlet-name>springGwtRemoteServiceServlet</servlet-name>
