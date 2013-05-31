@@ -142,6 +142,11 @@ h1 {
 	border-right: none !important;
 }
 
+.menu-principal{
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+
 .botonesFuncionales{
 	padding: 15px;
     float: right;
@@ -198,6 +203,10 @@ h1 {
 .x-tab-panel-header{
 	background-color: transparent;
 	border: none;
+}
+
+.x-border-panel{
+	position: relative !important;
 }
 
 ul.x-tab-strip-top{

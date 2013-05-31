@@ -1,13 +1,17 @@
-package com.patrimonio.plantillas.client.design;
+package com.patrimonio.plantillas.client.widgets.forms;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
+import com.allen_sauer.gwt.log.client.Log;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
+import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.Style.Orientation;
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
 import com.extjs.gxt.ui.client.data.BeanModelReader;
@@ -26,6 +30,8 @@ import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
+import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
+import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.layout.ColumnData;
 import com.extjs.gxt.ui.client.widget.layout.ColumnLayout;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
@@ -46,122 +52,42 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.TabPanel;
 import com.extjs.gxt.ui.client.widget.TabItem;
 
-import com.patrimonio.plantillas.client.design.MenuIconos;
-import com.patrimonio.plantillas.client.design.Stock;
+import com.patrimonio.plantillas.client.widgets.Stock;
+import com.patrimonio.plantillas.client.widgets.menus.MenuIconos;
+import com.patrimonio.plantillas.client.widgets.menus.MenuNavegacion;
 
-public class FormPage {
+public class FormPage extends ContentPanel{
 
-	/**
-	 * This is the entry point method.
-	 */
-	public void onModuleLoad() {
-		
-		// Add the nameField and sendButton to the RootPanel
-		// Use RootPanel.get() to get the entire body element
-		//RootPanel rootPanel = RootPanel.get("nameFieldContainer");
-		
-		Image image = new Image("resources/images/logoPatrimonioPrueba.png");
-		RootPanel.get().add(image);
-		
-		
-		/** ENTRADAS DE ALMACEN **/
-		
-		MenuBar menuPrincipal = new MenuBar();
-		
-		Menu submnuEntradas = new Menu();
-				
-		MenuItem itemPedidos = new MenuItem("Nuevo Pedido");
-		submnuEntradas.add(itemPedidos);
+	@Override
+	protected void onRender(Element parent, int pos) {
+		super.onRender(parent, pos);
 
-		MenuItem itemRecepcionPedido = new MenuItem("Recepcion de Pedidos");
-		submnuEntradas.add(itemRecepcionPedido);
-		
-		SeparatorMenuItem separatorMenuItem = new SeparatorMenuItem();
-		submnuEntradas.add(separatorMenuItem);
-		
-		MenuItem itemNuevoArticulo = new MenuItem("Nuevo articulo");
-		submnuEntradas.add(itemNuevoArticulo);
-		
-		MenuItem itemRecuperarArticulo = new MenuItem("Recuperar articulo");
-		submnuEntradas.add(itemRecuperarArticulo);
-		
-		MenuBarItem mnuEntradas = new MenuBarItem("Entradas", submnuEntradas);
-		menuPrincipal.add(mnuEntradas);
-		
-		/** SALIDAS DE ALMACEN **/
-		
-		Menu submnuSalidas = new Menu();
-		
-		MenuItem itemNuevaSolicitud = new MenuItem("Nueva solicitud");
-		submnuSalidas.add(itemNuevaSolicitud);
-		
-		MenuItem itemAlbaranes = new MenuItem("Albaranes de solicitud");
-		submnuSalidas.add(itemAlbaranes);
-		
-		SeparatorMenuItem separatorMenuItem_1 = new SeparatorMenuItem();
-		submnuSalidas.add(separatorMenuItem_1);
-		
-		MenuItem itemBajaArticulos = new MenuItem("Baja de art\u00EDculos");
-		submnuSalidas.add(itemBajaArticulos);
-		
-		MenuBarItem menuSalidas = new MenuBarItem("Salida", submnuSalidas);
-		menuPrincipal.add(menuSalidas);
-		
-		/** CONSULTAS **/
-		
-		Menu submnuConsultas = new Menu();
-		
-		MenuItem itemCnsPedidos = new MenuItem("Pedidos");
-		submnuConsultas.add(itemCnsPedidos);
-		
-		MenuItem itemCnsMaterialSolicitado = new MenuItem("Albaran Material solicitado");
-		submnuConsultas.add(itemCnsMaterialSolicitado);
-		
-		MenuItem itemCnsMaterialServido = new MenuItem("Albaran Material servido");
-		submnuConsultas.add(itemCnsMaterialServido);
-		
-		MenuBarItem menuConsultas = new MenuBarItem("Consultas", submnuConsultas);
-		menuPrincipal.add(menuConsultas);
-		
-		/** INFORMES **/
-		
-		Menu submnuInformes = new Menu();
-		
-		MenuItem itemInPedidos = new MenuItem("Pedidos");
-		submnuInformes.add(itemInPedidos);
-		MenuBarItem mnbrtmInformes = new MenuBarItem("Informes", submnuInformes);
-		menuPrincipal.add(mnbrtmInformes);
-		
-		
-		/** MANTENIMIENTO DE ALMACEN **/
-		
-		Menu submnuMantenimiento = new Menu();
-		
-		MenuItem itemProveedores = new MenuItem("Proveedores");
-		submnuMantenimiento.add(itemProveedores);
-		
-		MenuItem itemDestinatarios = new MenuItem("Destinatarios");
-		submnuMantenimiento.add(itemDestinatarios);
-		MenuBarItem menuMantenimientoTablas = new MenuBarItem("Mantenimiento Tablas", submnuMantenimiento);
-		menuPrincipal.add(menuMantenimientoTablas);
-		
-		/** OPERACIONES ESPECIALES **/
-		
-		Menu submnuEspeciales = new Menu();
-		
-		MenuItem itemPrevisionDeVestuario = new MenuItem("Prevision de vestuario");
-		submnuEspeciales.add(itemPrevisionDeVestuario);
-		
-		MenuBarItem mnuOperacionesEspeciales = new MenuBarItem("Operaciones Especiales", submnuEspeciales);
-		mnuOperacionesEspeciales.addStyleName("mnuFinal");
-		menuPrincipal.add(mnuOperacionesEspeciales);
-		
-		
-		/** CARGA DE MENU **/
-		RootPanel.get().add(menuPrincipal);
-		RootPanel.get().setWidgetPosition(menuPrincipal, 2, 126);
+		Log.debug("En el onRender del FormPage");
 
 		
+		setLayout(new BorderLayout());
+		setBodyBorder(false);
+		setBorders(false);
+		setHeaderVisible(false);
+		setSize(1024, 768);
+		
+		GWT.setUncaughtExceptionHandler(new   
+			      GWT.UncaughtExceptionHandler() {  
+			      public void onUncaughtException(Throwable e) {  
+			        Log.debug("EN UNCAUGHT: " + e.getCause()); 
+			    }  
+			    // do module loading stuff  
+			  });    
+		
+		
+		
+		Log.debug("Antes de pintal el menu");
+		
+		add(new MenuNavegacion());
+		
+
+
+		Log.debug("antes de cargar los tab panels del Formulario");
 		
 		TabPanel tabPanel = new TabPanel();
 		tabPanel.setAutoHeight(true);
@@ -170,11 +96,21 @@ public class FormPage {
 		tabPanel.setBorders(false);
 		loadEntradas(tabPanel);
 		
-		RootPanel.get().add(tabPanel);
-		RootPanel.get().setWidgetPosition(tabPanel, 15, 157);
+		add(tabPanel);
 		
-				
+		Log.debug("Terminando en el onrender del formPage");
+			
 	}
+	
+	@Override
+	protected void onLoad() {
+		// TODO Auto-generated method stub
+		super.onLoad();
+
+		recalculate();
+	}
+	
+
 
 	private void loadEntradas(TabPanel panel) {
 		
@@ -184,17 +120,12 @@ public class FormPage {
 		loadFormulario(formularioDemo);
 		
 		TabItem tabNuevo = new TabItem("Nuevo Pedido");
-		tabNuevo.add(new MenuIconos());
+		//tabNuevo.add(new MenuIconos());
 		tabNuevo.add(formularioDemo);
 		tabNuevo.setIconStyle("tabNuevo");
 		
 		panel.add(tabNuevo);
 		TabItem tabRecepcion = new TabItem("Recepcion de Pedidos");
-//		tabRecepcion.addListener(Events.Select, new Listener<ComponentEvent>() {  
-//		      public void handleEvent(ComponentEvent be) {  
-//		          Window.alert("Event Tab Was Selected");  
-//		        }  
-//		      });  
 		panel.add(tabRecepcion);
 		TabItem tabArticulo = new TabItem("Nuevo articulo");
 		tabArticulo.add(new MenuIconos());
@@ -336,15 +267,7 @@ public class FormPage {
 	  
 	    panel.add(main, new FormData("100%"));  
 	  
-	    
-	    //esto sera el grid con los datos del pedido, la seleccion de materiales
-	    
-//	    
-//	    HtmlEditor a = new HtmlEditor();  
-//	    a.setFieldLabel("Comment");  
-//	    a.setHeight(200);  
-//	    panel.add(a, new FormData("100%"));  
-	    
+
 	    List<ColumnConfig> configs = new ArrayList<ColumnConfig>();  
 	    
 	    ColumnConfig column = new ColumnConfig();  
@@ -401,7 +324,6 @@ public class FormPage {
 	    
 	    final PagingToolBar toolBar = new PagingToolBar(50); 
 	    toolBar.bind(loader);
-//	    toolBar.disable();
 	    
 	    ContentPanel cp = new ContentPanel();  
 	    cp.setBodyBorder(true);  
@@ -439,9 +361,8 @@ public class FormPage {
 	    
 	    panel.add(gButtons);  
 	  
-	   // vp.add(panel);  
 		
-		
+		recalculate();
 	}
 
 

@@ -11,7 +11,6 @@ import com.extjs.gxt.ui.client.widget.form.FormPanel.Method;
 import com.extjs.gxt.ui.client.widget.layout.ColumnData;
 import com.extjs.gxt.ui.client.widget.layout.ColumnLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
-import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -29,7 +28,11 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.patrimonio.plantillas.client.design.ButtonWithImageAndText;
+import com.patrimonio.plantillas.client.layouts.LayoutTwoPanels;
+import com.patrimonio.plantillas.client.widgets.ButtonWithImageAndText;
+import com.patrimonio.plantillas.client.widgets.forms.FormPage;
+import com.patrimonio.plantillas.client.widgets.menus.MenuNavegacion;
+import com.patrimonio.plantillas.client.widgets.menus.MenuPrincipal;
 import com.allen_sauer.gwt.log.client.Log;
 
 
@@ -40,6 +43,8 @@ public class Plantillas implements EntryPoint {
 
 	private final LoginServiceAsync loginService = GWT.create(LoginService.class);
 	private FormPanel formulario;
+	
+	LayoutTwoPanels layoutPrincipal = new LayoutTwoPanels();
 
 	@Override
 	public void onModuleLoad() {
@@ -48,7 +53,10 @@ public class Plantillas implements EntryPoint {
 
 		// Add the nameField and sendButton to the RootPanel
 		// Use RootPanel.get() to get the entire body element
-		RootPanel rootPanel = RootPanel.get("nameFieldContainer");
+		final RootPanel rootPanel = RootPanel.get("nameFieldContainer");
+		
+		rootPanel.setLayoutData(layoutPrincipal);
+		
 		
 		formulario = new FormPanel();
 		formulario.setHeaderVisible(false);
@@ -60,6 +68,7 @@ public class Plantillas implements EntryPoint {
 		formulario.setButtonAlign(HorizontalAlignment.CENTER);  
 		formulario.setAction("../j_spring_security_check");
 		
+				
 		final TextBox nameField = new TextBox();
 		nameField.setText("Bego\u00F1a Encinas");
 		nameField.setSize("143px", "10px");
@@ -118,8 +127,8 @@ public class Plantillas implements EntryPoint {
   		formData.setMargins(new Margins(300,0,0,100));
   		formulario.add(main, formData);
   		
+
   		rootPanel.add(formulario, 664, 332);
-	    
 		
 		class MyHandler implements ClickHandler, KeyUpHandler {
 			/**
@@ -127,7 +136,21 @@ public class Plantillas implements EntryPoint {
 			 */
 			public void onClick(ClickEvent event) {
 				Log.debug("Hemos hecho click en el boton");
-				sendValuesToServer();
+				//sendValuesToServer();
+				
+				
+				//**************************POR AHORA OBVIAMOS LA AUTENTICACION****************************//
+				rootPanel.clear();
+				
+				
+				FormPage frm = new FormPage();
+				frm.setBodyBorder(false);
+				frm.setBorders(false);
+				frm.setHeaderVisible(false);
+				Log.debug("Vamos a añadir el formulario al principal");
+				rootPanel.add(frm);	
+				
+		
 			}
 
 			/**
@@ -212,11 +235,6 @@ public class Plantillas implements EntryPoint {
 		
 		MyHandler handler = new MyHandler();
 		btnAceptar.addClickHandler(handler);
-		
-		
-		Image image = new Image("resources/images/logoPatrimonioPrueba.png");
-		rootPanel.add(image, 348, 71);
-		image.setSize("291px", "158px");
 	}
 
 }

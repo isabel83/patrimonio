@@ -21,21 +21,6 @@
 	  
 	<!-- Or create our own implementation: 
 	    Seehttp://groups.google.com/group/gwt-sl/msg/3677e59c4a7c2dee -->
-	  
-	 <!-- A GWT Spring bean -->   
-	<bean id ="loginService" class="com.patrimonio.plantillas.server.LoginServiceImpl" >
-		<property name="springService" ref="springService" />
-	</bean>
-	
-	<!-- A Spring bean-->
-	<bean id="springService" class="com.patrimonio.plantillas.service.SpringService" />
-	
-	<!-- The GWT handler. Watch out the mappings! -->
-	<bean class="org.gwtwidgets.server.spring.GWTHandler">
-		<property name="mappings">
-			<map>
-				<entry key="/login" value-ref="loginService"/></map>
-		</property>
-	</bean>
+
 	
 </beans>

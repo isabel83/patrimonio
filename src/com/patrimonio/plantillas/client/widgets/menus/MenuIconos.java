@@ -1,10 +1,11 @@
-package com.patrimonio.plantillas.client.design;
+package com.patrimonio.plantillas.client.widgets.menus;
 
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
+import com.patrimonio.plantillas.client.widgets.DialogoBuscar;
 
 public class MenuIconos extends Composite {
 	

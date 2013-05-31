@@ -1,10 +1,11 @@
-package com.patrimonio.plantillas.client.design;
+package com.patrimonio.plantillas.client.widgets.forms;
 
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
+import com.patrimonio.plantillas.client.widgets.ButtonWithImageAndText;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.

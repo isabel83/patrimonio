@@ -1,4 +1,4 @@
-package com.patrimonio.plantillas.client.design;
+package com.patrimonio.plantillas.client.widgets;
 
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.PushButton;
