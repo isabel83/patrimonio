@@ -1,4 +1,4 @@
-package com.patrimonio.plantillas.client.widgets;
+package com.patrimonio.plantillas.client.widgets.dialogs;
 
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.util.Margins;
