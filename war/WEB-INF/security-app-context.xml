@@ -23,13 +23,13 @@
 
 
     <!-- CON ESTO PERMITIMOS QUE CUALQUIERA ENTRE SIN REQUERIR AUTENTICACION -->
-    <http auto-config="true" use-expressions="true" access-denied-page="/denegado" entry-point-ref="customAuthenticationEntryPoint">
+    <!--http auto-config="true" use-expressions="true" access-denied-page="/denegado" entry-point-ref="customAuthenticationEntryPoint">
         <intercept-url pattern="/plantillas/**" access="ROLE_USER" />
         <intercept-url pattern="/gwt/**" access="ROLE_USER" />
         <intercept-url pattern="/**/*.html" access="ROLE_USER" />
         <intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <form-login  />
-    </http>
+    </http-->
  
     <beans:bean id="customAuthenticationProvider" class="com.patrimonio.plantillas.server.auth.CustomAuthenticationProvider" />
     

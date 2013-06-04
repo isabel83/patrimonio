@@ -1,2 +1,3 @@
 # Module plantillas
 # RPC service class, partial path of RPC policy file
+com.patrimonio.plantillas.client.LoginService, DB88F61C40CAF3836518A58D9D652497.gwt.rpc

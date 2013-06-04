@@ -59,7 +59,7 @@
 
 	<servlet-mapping>
 		<servlet-name>gwt</servlet-name>
-		<url-pattern>gwtmodule/rpc/*</url-pattern>
+		<url-pattern>/gwtmodule/rpc/*</url-pattern>
 	</servlet-mapping>
 	
 

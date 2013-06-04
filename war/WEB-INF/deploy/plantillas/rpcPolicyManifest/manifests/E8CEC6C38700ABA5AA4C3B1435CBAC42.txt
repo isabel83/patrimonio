@@ -1,2 +1,0 @@
-serviceClass: com.patrimonio.plantillas.client.GreetingService
-path: 3606DEBFDD3BC92FC94A3D557422FEAC.gwt.rpc

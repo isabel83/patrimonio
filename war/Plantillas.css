@@ -176,14 +176,21 @@ h1 {
 .margen{
 	margin-bottom: 5px;
 	margin-top: 5px;
+	margin-right: 5px;
 }
 
-.margen-left{
-	margin-bottom: 5px !important;
-	margin-left: 50px !important;
-	margin-top: 5px !important;
+.lblPass{
+	padding-top: 10px !important;
+	padding-bottom: 11px !important;
 }
 
+
+.loginButons{
+	width: 100px !important;
+	height: 30px !important;
+	margin-left: 100px !important;
+	margin-top: 10px !important;
+}
 
 /** ESTILO DEL PANEL DE ENTRADA **/
 .panelEntradas{

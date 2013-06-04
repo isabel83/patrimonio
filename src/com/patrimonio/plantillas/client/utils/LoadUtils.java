@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.extjs.gxt.ui.client.Style.ButtonScale;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.Orientation;
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
@@ -13,7 +12,6 @@ import com.extjs.gxt.ui.client.data.DataProxy;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.event.BaseEvent;
-import com.extjs.gxt.ui.client.event.EventType;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.store.ListStore;
@@ -39,11 +37,11 @@ import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.layout.RowData;
 import com.extjs.gxt.ui.client.widget.layout.RowLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextArea;
 import com.patrimonio.plantillas.client.widgets.Stock;
-import com.patrimonio.plantillas.client.widgets.dialogs.DialogoBuscar;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoRecepcionarArticulo;
 
 public class LoadUtils {
@@ -76,10 +74,13 @@ public class LoadUtils {
 	    layout.setLabelAlign(LabelAlign.TOP);  
 	    left.setLayout(layout);  
 	  
+	    DateTimeFormat dtFormat = DateTimeFormat.getFormat("dd-MM-yyyy");
 	    DateField fechaPedido = new DateField();
+	    fechaPedido.getPropertyEditor().setFormat(dtFormat);
 	    fechaPedido.setTitle("Seleccione la fecha en la que desea realizar el pedido");
 	    fechaPedido.setFieldLabel("Fecha del pedido");
-	    left.add(fechaPedido,formData);  
+	    fechaPedido.setStyleAttribute("paddingBottom", "5px");
+	    left.add(fechaPedido,new FormData("40%"));  
 	  
 	    TextField<String> numPedido = new TextField<String>();  
 	    numPedido.setFieldLabel("Número de pedido");  
@@ -443,7 +444,6 @@ public class LoadUtils {
 
 	public void loadFormNuevoArticulo(FormPanel frmNuevoArticulo) {
 		
-		ColumnData cData = new ColumnData(1); 
 		FormData formData = new FormData("100%"); 
 		Margins m = new Margins();
 		m.top = 5;
@@ -472,7 +472,7 @@ public class LoadUtils {
 	    right.setStyleAttribute("paddingLeft", "100px");
 	    layout = new FormLayout();  
 	    layout.setLabelAlign(LabelAlign.TOP);  
-	    left.setLayout(layout);  
+	    right.setLayout(layout);  
 	    
 	    LayoutContainer bottom = new LayoutContainer();  
 	    layout = new FormLayout();  
@@ -656,8 +656,159 @@ public class LoadUtils {
 	    
 	}
 
+	
 	public void loadFormArticuloEliminado(FormPanel frmArticuloEliminado) { 
-		// TODO Auto-generated method stub
+
+		
+		FormData formData = new FormData("100%"); 
+		Margins m = new Margins();
+		m.top = 5;
+		m.left=5;
+		m.right=5;
+		formData.setMargins(m);
+		
+		frmArticuloEliminado.setSize("100%", "100%");  
+		frmArticuloEliminado.setBodyBorder(false);
+		frmArticuloEliminado.setLabelAlign(LabelAlign.TOP);  
+		frmArticuloEliminado.setButtonAlign(HorizontalAlignment.CENTER);  
+	   
+	  
+	    LayoutContainer main = new LayoutContainer();  
+	    main.setLayout(new ColumnLayout());  
+	    main.setStyleAttribute("paddingBottom", "15px");
+	    main.setBorders(false);
+	  
+	    LayoutContainer left = new LayoutContainer();  
+	    left.setStyleAttribute("paddingLeft", "10px");
+	    FormLayout layout = new FormLayout();  
+	    layout.setLabelAlign(LabelAlign.TOP);  
+	    left.setLayout(layout);  
+	    
+	    LayoutContainer right = new LayoutContainer();
+	    right.setStyleAttribute("paddingLeft", "10px");
+	    layout = new FormLayout();  
+	    layout.setLabelAlign(LabelAlign.TOP);  
+	    right.setLayout(layout);  
+	    
+	    LayoutContainer bottom = new LayoutContainer();  
+	    layout = new FormLayout();  
+	    layout.setLabelAlign(LabelAlign.TOP);  
+	    bottom.setLayout(layout); 
+	    bottom.setStyleAttribute("paddingLeft", "10px");
+	    bottom.setStyleAttribute("paddingLRight", "10px");
+	    
+	    
+	   
+	    Label lblSeccion = new Label("Sección:");
+	    lblSeccion.setStyleName("etiqueta");
+	    ListBox lstSeccion = new ListBox();
+	    lstSeccion.setVisibleItemCount(1);
+	    left.add(lblSeccion,formData);
+	    left.add(lstSeccion,formData);
+
+	    Label lblFamilia = new Label("Familia:");
+	    lblFamilia.setStyleName("etiqueta");
+	    ListBox lstFamilia = new ListBox();
+	    lstFamilia.setVisibleItemCount(1);
+	    right.add(lblFamilia,formData);
+	    right.add(lstFamilia,formData);
+	    
+	    Label lblSubFamilia = new Label("Subfamilia:");
+	    lblSubFamilia.setStyleName("etiqueta");
+	    ListBox lstSubFamilia = new ListBox();
+	    lstSubFamilia.setVisibleItemCount(1);
+	    right.add(lblSubFamilia,formData);
+	    right.add(lstSubFamilia,formData);
+	    
+	    
+	    TextField<String> codigoArt = new TextField<String>();  
+	    codigoArt.setFieldLabel("Código de Artículo");
+	    bottom.add(codigoArt,formData);
+	    
+	    TextField<String> nombreArt = new TextField<String>();  
+	    nombreArt.setFieldLabel("Nombre del artículo");
+	    bottom.add(nombreArt,formData);
+	    
+	    TextField<String> marcaArt = new TextField<String>();  
+	    marcaArt.setFieldLabel("Marca del artículo");
+	    bottom.add(marcaArt,formData);
+	    
+	    TextField<String> obsArt = new TextField<String>();  
+	    obsArt.setFieldLabel("Observaciones");
+	    bottom.add(obsArt,formData);
+	    
+	    
+	    RowLayout rgtLayout = new RowLayout();
+	    rgtLayout.setOrientation(Orientation.HORIZONTAL);
+	    ContentPanel cpExistencias = new ContentPanel();
+	    cpExistencias.setHeading("Existencias");
+	    cpExistencias.setLayout(rgtLayout);  
+	    cpExistencias.setHeight("90px");
+	    cpExistencias.setStyleAttribute("paddingBottom", "10px");
+	    
+	    Label lblMinimas = new Label();
+	    lblMinimas.setText("Mínimas");
+	    
+	    TextField<String> minimas = new TextField<String>();  
+	    cpExistencias.add(lblMinimas, new RowData(-1, -1, new Margins(20)));
+	    cpExistencias.add(minimas, new RowData(-1, -1, new Margins(20,20,20,0)));
+	    
+	    
+	    Label lblIdoneas = new Label();
+	    lblIdoneas.setText("Idoneas");
+	    
+	    TextField<String> idoneas = new TextField<String>();  
+
+	    cpExistencias.add(lblIdoneas, new RowData(-1, -1, new Margins(20)));
+	    cpExistencias.add(idoneas, new RowData(-1, -1, new Margins(20)));
+	    
+	    
+	    Label lblReales = new Label();
+	    lblReales.setText("Reales");
+	    
+	    TextField<String> reales = new TextField<String>();  
+
+	    cpExistencias.add(lblReales, new RowData(-1, -1, new Margins(20)));
+	    cpExistencias.add(reales, new RowData(-1, -1, new Margins(20,20,20,0)));
+
+	    bottom.add(cpExistencias,formData);
+	    
+	    Label lblProveedor = new Label("Proveedor:");
+	    lblProveedor.setStyleName("etiqueta");
+	    ListBox lstProveedor = new ListBox();
+	    lstProveedor.setVisibleItemCount(1);
+	    bottom.add(lblProveedor,formData);
+	    bottom.add(lstProveedor,formData);
+	    
+	    
+	    
+	    ButtonGroup gButtons = new ButtonGroup(3);
+	    Button b1  = new Button(), b2 = new Button(), b3 = new Button();
+	    b1.setText("Grabar");
+	    b1.setEnabled(false);
+	    b1.setStyleAttribute("padding-right", "5px");
+	    b2.setText("Deshacer");
+	    b2.setStyleAttribute("padding-right", "5px");
+	    b3.setText("Salir");
+	    b3.setEnabled(false);
+	   	    
+	    gButtons.add(b1);
+	    gButtons.add(b2);
+	    gButtons.add(b3);
+	    gButtons.setBodyBorder(false);
+	    gButtons.setBorders(false);
+	    gButtons.addStyleName("botonesFuncionales");
+	    
+	   
+
+	    
+	    main.add(left, new ColumnData(.4));
+	    main.add(right, new ColumnData(.6));
+	    main.add(bottom, new ColumnData(1));
+
+	    main.add(gButtons, new ColumnData(1));
+	    
+	    frmArticuloEliminado.add(main, new FormData("100%"));
 		
 	}
 	

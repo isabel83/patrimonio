@@ -11,6 +11,7 @@ import com.extjs.gxt.ui.client.widget.form.FormPanel.Method;
 import com.extjs.gxt.ui.client.widget.layout.ColumnData;
 import com.extjs.gxt.ui.client.widget.layout.ColumnLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
+import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -30,9 +31,8 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.patrimonio.plantillas.client.layouts.LayoutTwoPanels;
 import com.patrimonio.plantillas.client.widgets.ButtonWithImageAndText;
-import com.patrimonio.plantillas.client.widgets.forms.FormPage;
+import com.patrimonio.plantillas.client.widgets.forms.FormEntradas;
 import com.patrimonio.plantillas.client.widgets.menus.MenuNavegacion;
-import com.patrimonio.plantillas.client.widgets.menus.MenuPrincipal;
 import com.allen_sauer.gwt.log.client.Log;
 
 
@@ -53,77 +53,78 @@ public class Plantillas implements EntryPoint {
 
 		// Add the nameField and sendButton to the RootPanel
 		// Use RootPanel.get() to get the entire body element
-		final RootPanel rootPanel = RootPanel.get("nameFieldContainer");
+		final RootPanel rootPanel = RootPanel.get("principalContainer");
 		
 		rootPanel.setLayoutData(layoutPrincipal);
 		
 		
 		formulario = new FormPanel();
+		formulario.setLayout(new FormLayout());
 		formulario.setHeaderVisible(false);
 		formulario.setWidth("550px");
 		formulario.setBodyBorder(false);
 		formulario.setLabelAlign(LabelAlign.TOP);  
 		formulario.setMethod(Method.POST);
-		formulario.setLabelAlign(LabelAlign.TOP);  
 		formulario.setButtonAlign(HorizontalAlignment.CENTER);  
 		formulario.setAction("../j_spring_security_check");
 		
+		LayoutContainer main = new LayoutContainer();  
+	    main.setLayout(new ColumnLayout());  
+	    main.setStyleAttribute("paddingBottom", "15px");
+	    
+	    LayoutContainer left = new LayoutContainer();  
+	    FormLayout layout = new FormLayout();  
+	    layout.setLabelAlign(LabelAlign.TOP);  
+	    left.setLayout(layout);
+	    
+	    LayoutContainer right = new LayoutContainer(); 
+	    layout = new FormLayout();  
+	    layout.setLabelAlign(LabelAlign.TOP);  
+	    right.setLayout(layout); 
 				
 		final TextBox nameField = new TextBox();
 		nameField.setText("Bego\u00F1a Encinas");
-		nameField.setSize("143px", "10px");
 		nameField.setName("j_username");
 		nameField.setFocus(true);
 		nameField.selectAll();
 		nameField.addStyleName("margen");
 		
 		Label lblNombre = new Label("Usuario:");
-		formulario.add(lblNombre, new FormData("10%"));
-		//lblNombre.setSize("87px", "18px");
+		left.add(lblNombre, new FormData("100%"));
 		lblNombre.addStyleName("margen");
-		formulario.add(nameField, new FormData("50%"));
+		right.add(nameField, new FormData("100%"));
 		
 		
 		Label lblNewLabel = new Label("Contrase\u00F1a:");
-		lblNewLabel.addStyleName("margen");
-		//lblNewLabel.setSize("87px", "18px");
-		formulario.add(lblNewLabel, new FormData("10%"));
+		lblNewLabel.addStyleName("lblPass");
+		left.add(lblNewLabel, new FormData("100%"));
 		
-		
-		
-		final PasswordTextBox pswrdtxtbxPrueba = new PasswordTextBox();
-		formulario.add(pswrdtxtbxPrueba, new FormData("50%"));
-		pswrdtxtbxPrueba.setText("mico");
-		pswrdtxtbxPrueba.setName("j_password");
-		pswrdtxtbxPrueba.setSize("143px", "10px");
-		pswrdtxtbxPrueba.addStyleName("margen");
+		final PasswordTextBox txtPassword = new PasswordTextBox();
+		right.add(txtPassword, new FormData("100%"));
+		txtPassword.setText("mico");
+		txtPassword.setName("j_password");
+		txtPassword.addStyleName("margen");
 		
 		
 		final ButtonWithImageAndText btnAceptar = new ButtonWithImageAndText(new Image("resources/images/icons/tick.png"),"Aceptar");
-		formulario.add(btnAceptar, new FormData("50%"));
-		btnAceptar.setSize("60px", "30px");
-		btnAceptar.addStyleName("margen-left");
+		left.add(btnAceptar, new FormData("100%"));
+		btnAceptar.addStyleName("loginButons");
 		
 		
 		ButtonWithImageAndText closeButton = new ButtonWithImageAndText(new Image("resources/images/icons/eject.png"), "Salir");
-		formulario.add(closeButton, new FormData("50%"));
-		closeButton.setSize("60px", "30px");
-		closeButton.addStyleName("margen-left");
+		right.add(closeButton, new FormData("100%"));
+		closeButton.addStyleName("loginButons");
 		//btnAceptar.addClickHandler(handler);
 	   
 	  
-	    LayoutContainer main = new LayoutContainer();  
-	    main.setLayout(new ColumnLayout());  
-	    main.setStyleAttribute("paddingBottom", "15px");
-	   
+	    
+	    
+	    
 	  //vamos añadiendo todo al formulario
-  		main.add(lblNombre, new ColumnData(.5));
-  		main.add(nameField, new ColumnData(.5));
-  		main.add(lblNewLabel, new ColumnData(.5));
-  		main.add(pswrdtxtbxPrueba, new ColumnData(.5));
-  		main.add(btnAceptar, new ColumnData(.3));
-  		main.add(closeButton, new ColumnData(.3));
-  		FormData formData = new FormData();
+  		main.add(left, new ColumnData(.5));
+  		main.add(right, new ColumnData(.5));
+  		
+  		FormData formData = new FormData("100%");
   		formData.setMargins(new Margins(300,0,0,100));
   		formulario.add(main, formData);
   		
@@ -142,8 +143,9 @@ public class Plantillas implements EntryPoint {
 				//**************************POR AHORA OBVIAMOS LA AUTENTICACION****************************//
 				rootPanel.clear();
 				
+				rootPanel.add(new MenuNavegacion(rootPanel));
 				
-				FormPage frm = new FormPage();
+				FormEntradas frm = new FormEntradas();
 				frm.setBodyBorder(false);
 				frm.setBorders(false);
 				frm.setHeaderVisible(false);
@@ -201,7 +203,7 @@ public class Plantillas implements EntryPoint {
 				// First, we validate the input.
 				errorLabel.setText("");
 				String textToServer = nameField.getText();
-				String passToServer = pswrdtxtbxPrueba.getText();
+				String passToServer = txtPassword.getText();
 //				if (!com.patrimonio.plantillas.shared.FieldVerifier.isValidName(textToServer)) {
 //					errorLabel.setText("Please enter at least four characters");
 //					return;
