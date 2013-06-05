@@ -29,9 +29,10 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.patrimonio.plantillas.client.layouts.LayoutTwoPanels;
+import com.patrimonio.plantillas.client.layouts.LayoutOnePanel;
 import com.patrimonio.plantillas.client.widgets.ButtonWithImageAndText;
 import com.patrimonio.plantillas.client.widgets.forms.FormEntradas;
+import com.patrimonio.plantillas.client.widgets.forms.FormSalidas;
 import com.patrimonio.plantillas.client.widgets.menus.MenuNavegacion;
 import com.allen_sauer.gwt.log.client.Log;
 
@@ -44,7 +45,7 @@ public class Plantillas implements EntryPoint {
 	private final LoginServiceAsync loginService = GWT.create(LoginService.class);
 	private FormPanel formulario;
 	
-	LayoutTwoPanels layoutPrincipal = new LayoutTwoPanels();
+	LayoutOnePanel layoutPrincipal = new LayoutOnePanel();
 
 	@Override
 	public void onModuleLoad() {
@@ -61,7 +62,7 @@ public class Plantillas implements EntryPoint {
 		formulario = new FormPanel();
 		formulario.setLayout(new FormLayout());
 		formulario.setHeaderVisible(false);
-		formulario.setWidth("550px");
+		formulario.setWidth("1024px");
 		formulario.setBodyBorder(false);
 		formulario.setLabelAlign(LabelAlign.TOP);  
 		formulario.setMethod(Method.POST);
@@ -124,8 +125,8 @@ public class Plantillas implements EntryPoint {
   		main.add(left, new ColumnData(.5));
   		main.add(right, new ColumnData(.5));
   		
-  		FormData formData = new FormData("100%");
-  		formData.setMargins(new Margins(300,0,0,100));
+  		FormData formData = new FormData("80%");
+  		formData.setMargins(new Margins(200,0,0,350));
   		formulario.add(main, formData);
   		
 
@@ -145,11 +146,14 @@ public class Plantillas implements EntryPoint {
 				
 				rootPanel.add(new MenuNavegacion(rootPanel));
 				
-				FormEntradas frm = new FormEntradas();
+				//FormEntradas frm = new FormEntradas();
+				FormSalidas frm = new FormSalidas();
 				frm.setBodyBorder(false);
 				frm.setBorders(false);
 				frm.setHeaderVisible(false);
 				Log.debug("Vamos a añadir el formulario al principal");
+				
+				
 				rootPanel.add(frm);	
 				
 		

@@ -9,12 +9,12 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.TabPanel;
 import com.extjs.gxt.ui.client.widget.TabItem;
 
-import com.patrimonio.plantillas.client.utils.LoadUtils;
+import com.patrimonio.plantillas.client.utils.LoadEntradasUtils;
 import com.patrimonio.plantillas.client.widgets.menus.MenuIconos;
 
 public class FormEntradas extends ContentPanel{
 
-	LoadUtils utils = new LoadUtils();
+	LoadEntradasUtils utils = new LoadEntradasUtils();
 
 	@Override
 	protected void onLoad() {

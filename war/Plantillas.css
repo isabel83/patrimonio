@@ -148,7 +148,7 @@ h1 {
 }
 
 .botonesFuncionales{
-	padding: 15px;
+	padding: 15px 5px 15px 0px;
     float: right;
 }
 
@@ -188,8 +188,37 @@ h1 {
 .loginButons{
 	width: 100px !important;
 	height: 30px !important;
-	margin-left: 100px !important;
-	margin-top: 10px !important;
+	margin-top: 30px !important;
+	margin-left: 113px !important;
+}
+
+.noBorder{
+	border: none; 
+}
+
+
+.paginacion{
+	
+}
+
+.paginacion .x-toolbar-ct{
+	padding-top: 18px;
+}
+
+.paginacion .x-toolbar-ct .x-toolbar-left table{
+	border-spacing: 2px;
+}
+
+.paginacion .x-toolbar-ct .x-toolbar-left .x-toolbar-left-row .x-toolbar-cell .x-btn-tl,
+ .paginacion .x-toolbar-ct .x-toolbar-left .x-toolbar-left-row .x-toolbar-cell .x-btn-tr,
+ .paginacion .x-toolbar-ct .x-toolbar-left .x-toolbar-left-row .x-toolbar-cell .x-btn-tc,
+ .paginacion .x-toolbar-ct .x-toolbar-left .x-toolbar-left-row .x-toolbar-cell .x-btn-ml,
+ .paginacion .x-toolbar-ct .x-toolbar-left .x-toolbar-left-row .x-toolbar-cell .x-btn-mr,
+ .paginacion .x-toolbar-ct .x-toolbar-left .x-toolbar-left-row .x-toolbar-cell .x-btn-mc,
+ .paginacion .x-toolbar-ct .x-toolbar-left .x-toolbar-left-row .x-toolbar-cell .x-btn-bl,
+ .paginacion .x-toolbar-ct .x-toolbar-left .x-toolbar-left-row .x-toolbar-cell .x-btn-br, 
+ .paginacion .x-toolbar-ct .x-toolbar-left .x-toolbar-left-row .x-toolbar-cell .x-btn-bc{
+	background-image: none; 
 }
 
 /** ESTILO DEL PANEL DE ENTRADA **/

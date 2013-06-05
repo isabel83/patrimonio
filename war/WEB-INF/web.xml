@@ -39,7 +39,7 @@
  <!-- SPRING SECURITY & SPRING  -->
         
         	<!-- Front Controller for all GWT Spring based servlets -->
-	<servlet>
+	<!--servlet>
 		<servlet-name>gwt</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
@@ -60,7 +60,7 @@
 	<servlet-mapping>
 		<servlet-name>gwt</servlet-name>
 		<url-pattern>/gwtmodule/rpc/*</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping-->
 	
 
         <!--  Esto funciona a la perfeccion para llamadas que no son por AJAX. por ejemplo, para esta aplicacion, esto solo funcionara

@@ -44,7 +44,7 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.patrimonio.plantillas.client.widgets.Stock;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoRecepcionarArticulo;
 
-public class LoadUtils {
+public class LoadEntradasUtils {
 	
 	
 	public void loadFormNuevoPedido(FormPanel panel) {

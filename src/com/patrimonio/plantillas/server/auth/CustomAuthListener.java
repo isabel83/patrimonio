@@ -1,7 +1,7 @@
 package com.patrimonio.plantillas.server.auth;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+//import org.apache.commons.logging.Log;
+//import org.apache.commons.logging.LogFactory;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.access.event.AuthorizationFailureEvent;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomAuthListener implements ApplicationListener<ApplicationEvent> {
 
-        private static final Log logger = LogFactory.getLog(CustomAuthListener.class);
+        //private static final Log logger = LogFactory.getLog(CustomAuthListener.class);
         
         public void onApplicationEvent(ApplicationEvent  event) {
 
