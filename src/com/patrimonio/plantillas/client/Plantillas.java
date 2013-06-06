@@ -31,6 +31,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.patrimonio.plantillas.client.layouts.LayoutOnePanel;
 import com.patrimonio.plantillas.client.widgets.ButtonWithImageAndText;
+import com.patrimonio.plantillas.client.widgets.forms.FormConsultas;
 import com.patrimonio.plantillas.client.widgets.forms.FormEntradas;
 import com.patrimonio.plantillas.client.widgets.forms.FormSalidas;
 import com.patrimonio.plantillas.client.widgets.menus.MenuNavegacion;
@@ -147,7 +148,8 @@ public class Plantillas implements EntryPoint {
 				rootPanel.add(new MenuNavegacion(rootPanel));
 				
 				//FormEntradas frm = new FormEntradas();
-				FormSalidas frm = new FormSalidas();
+				//FormSalidas frm = new FormSalidas();
+				FormConsultas frm = new FormConsultas();
 				frm.setBodyBorder(false);
 				frm.setBorders(false);
 				frm.setHeaderVisible(false);

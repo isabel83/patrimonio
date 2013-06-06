@@ -479,7 +479,7 @@ public class LoadEntradasUtils {
 	    layout.setLabelAlign(LabelAlign.TOP);  
 	    bottom.setLayout(layout); 
 	    bottom.setStyleAttribute("paddingLeft", "10px");
-	    bottom.setStyleAttribute("paddingLRight", "10px");
+	    bottom.setStyleAttribute("paddingRight", "10px");
 	    
 	    
 	   
@@ -695,7 +695,7 @@ public class LoadEntradasUtils {
 	    layout.setLabelAlign(LabelAlign.TOP);  
 	    bottom.setLayout(layout); 
 	    bottom.setStyleAttribute("paddingLeft", "10px");
-	    bottom.setStyleAttribute("paddingLRight", "10px");
+	    bottom.setStyleAttribute("paddingRight", "10px");
 	    
 	    
 	   

@@ -13,6 +13,7 @@ import com.google.gwt.user.client.Element;
 public class DialogoBuscar extends Dialog{
 	
 	ContentPanel cp = new ContentPanel();
+	public String titulo = "Buscar elemento";
 	
 	@Override
 	protected void onRender(Element parent, int pos) {
@@ -20,7 +21,7 @@ public class DialogoBuscar extends Dialog{
 		super.onRender(parent, pos);
 		
 		
-		setHeading("Buscar elemento");
+		setHeading(titulo);
 		setLayout(new BorderLayout());
 		setModal(true);
 		
