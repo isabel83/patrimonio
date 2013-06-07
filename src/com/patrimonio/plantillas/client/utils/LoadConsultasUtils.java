@@ -1,8 +1,6 @@
 package com.patrimonio.plantillas.client.utils;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.allen_sauer.gwt.log.client.Log;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.Orientation;
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
@@ -10,27 +8,20 @@ import com.extjs.gxt.ui.client.data.BeanModelReader;
 import com.extjs.gxt.ui.client.data.DataProxy;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
-import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ButtonGroup;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
-import com.extjs.gxt.ui.client.widget.form.CheckBoxGroup;
 import com.extjs.gxt.ui.client.widget.form.DateField;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.Radio;
 import com.extjs.gxt.ui.client.widget.form.RadioGroup;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
-import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
-import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
-import com.extjs.gxt.ui.client.widget.grid.Grid;
-import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.ColumnData;
 import com.extjs.gxt.ui.client.widget.layout.ColumnLayout;
-import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.layout.RowData;
@@ -39,11 +30,10 @@ import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.patrimonio.plantillas.client.widgets.Stock;
 
 public class LoadConsultasUtils {
 	
-	public String titularPrevisiones = "Prevision de vestuario ";
+	public String titularPrevisiones = "Previsión de vestuario ";
 
 	public void loadFormConsultaPedido(FormPanel frmConsultaPedido) {
 		FormData formData = new FormData("40%"); 
@@ -839,11 +829,6 @@ public class LoadConsultasUtils {
 	    layout = new FormLayout();  
 	    layout.setLabelAlign(LabelAlign.TOP);  
 	    central.setLayout(layout);  
-
-	    Label lblAnyoConsulta = new Label();
-	    lblAnyoConsulta.setText(titularPrevisiones);
-	    lblAnyoConsulta.setStyleName("titular");
-	    
 	    
 	    TextField<String> delegacion = new TextField<String>();  
 	    delegacion.setFieldLabel("Código de Artículo");
@@ -886,7 +871,6 @@ public class LoadConsultasUtils {
 	    gButtons.addStyleName("botonesFuncionales");
 	     
 	       
-	    top.add(lblAnyoConsulta, formData);
 	    top.add(delegacion, formData);
 	    top.add(colectivo, formData);
 	    top.add(nomTrabajador, formData);
@@ -902,6 +886,8 @@ public class LoadConsultasUtils {
 		frmCPrevision.add(main, formData);
 		
 		frmCPrevision.setExpanded(false);
+		
+		Log.debug("TERMINO DE CARGAR EL FORMULARIO");
 	}
 
 	private void loadEntregas(ContentPanel cpEntregas) {

@@ -155,6 +155,16 @@ h1 {
 	padding-left: 70px;
 }
 
+.titular{
+  font-size: 2em;
+  font-weight: bold;
+  color: #777777;
+  margin: 7px 0px 7px;
+  text-align: center;
+  background: none;
+  border: none;	
+}
+
 
 .dlgBusqueda .x-toolbar-left{
 	float: right;
@@ -167,6 +177,10 @@ h1 {
 
 .radioGroup{
 	margin-bottom: 25px !important;
+}
+
+.ultimoListado{
+	margin-bottom: 10px;
 }
 
 .iconoDisabled{

@@ -1,6 +1,7 @@
 package com.patrimonio.plantillas.client.widgets.forms;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.extjs.gxt.ui.client.Style.HideMode;
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
@@ -132,9 +133,10 @@ public class FormConsultas extends ContentPanel{
 		panel.add(tabCArticulos);
 		
 		final FormPanel frmCPrevision = new FormPanel();
-		frmCPrevision.setHeaderVisible(false);
+		frmCPrevision.setHeaderVisible(true);
 		frmCPrevision.setAutoHeight(true);
 		frmCPrevision.setBodyBorder(false);
+		frmCPrevision.getHeader().addStyleName("titular");
 		utils.loadFormConsultaPrevision(frmCPrevision);
 		
 		TabItem tabCprevision = new TabItem("Previsión de vestuario");
@@ -156,8 +158,8 @@ public class FormConsultas extends ContentPanel{
 						Log.debug("Estamos en el OK del dialogo y el valor de año es: " + anio.getValue());
 						Log.debug("El valor del formulario es: " + frmCPrevision);
 						utils.titularPrevisiones += anio.getValue();
+						frmCPrevision.setHeading(utils.titularPrevisiones);
 						frmCPrevision.setExpanded(true);
-						frmCPrevision.recalculate();
 					}
 					
 				});
