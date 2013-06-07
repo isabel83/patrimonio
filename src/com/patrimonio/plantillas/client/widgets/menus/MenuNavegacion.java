@@ -2,6 +2,7 @@ package com.patrimonio.plantillas.client.widgets.menus;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MenuEvent;
@@ -173,16 +174,18 @@ public class MenuNavegacion extends Composite {
 		submnuEspeciales.add(itemPrevisionDeVestuario);
 		
 		MenuBarItem mnuOperacionesEspeciales = new MenuBarItem("Operaciones Especiales", submnuEspeciales);
-		mnuOperacionesEspeciales.addListener(Events.OnClick, new Listener<BaseEvent>(){
+		mnuOperacionesEspeciales.addListener(Events.Select, new SelectionListener<ComponentEvent>(){
 
 			@Override
-			public void handleEvent(BaseEvent be) {
+			public void componentSelected(ComponentEvent ce) {
 				rootPanel.clear();
 				rootPanel.add(new FormOpEspeciales());
+				
 			}
 			
 		});
 		mnuOperacionesEspeciales.addStyleName("mnuFinal");
+		mnuOperacionesEspeciales.disable();
 		menuPrincipal.add(mnuOperacionesEspeciales);
 		
 		menuPrincipal.addStyleName("menu-principal");

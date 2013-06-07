@@ -34,6 +34,7 @@ import com.patrimonio.plantillas.client.widgets.ButtonWithImageAndText;
 import com.patrimonio.plantillas.client.widgets.forms.FormConsultas;
 import com.patrimonio.plantillas.client.widgets.forms.FormEntradas;
 import com.patrimonio.plantillas.client.widgets.forms.FormInformes;
+import com.patrimonio.plantillas.client.widgets.forms.FormMntTablas;
 import com.patrimonio.plantillas.client.widgets.forms.FormSalidas;
 import com.patrimonio.plantillas.client.widgets.menus.MenuNavegacion;
 import com.allen_sauer.gwt.log.client.Log;
@@ -151,7 +152,8 @@ public class Plantillas implements EntryPoint {
 				//FormEntradas frm = new FormEntradas();
 				//FormSalidas frm = new FormSalidas();
 				//FormConsultas frm = new FormConsultas();
-				FormInformes frm = new FormInformes();
+				//FormInformes frm = new FormInformes();
+				FormMntTablas frm = new FormMntTablas();
 				frm.setBodyBorder(false);
 				frm.setBorders(false);
 				frm.setHeaderVisible(false);

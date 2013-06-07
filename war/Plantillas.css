@@ -215,6 +215,10 @@ h1 {
 	margin-right: 5px;
 }
 
+.margenTop{
+	margin-top: 20px !important;
+}
+
 .lblPass{
 	padding-top: 10px !important;
 	padding-bottom: 11px !important;
