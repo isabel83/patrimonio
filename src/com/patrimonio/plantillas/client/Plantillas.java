@@ -140,26 +140,18 @@ public class Plantillas implements EntryPoint {
 			 * Fired when the user clicks on the sendButton.
 			 */
 			public void onClick(ClickEvent event) {
-				Log.debug("Hemos hecho click en el boton");
 				//sendValuesToServer();
 				
 				
 				//**************************POR AHORA OBVIAMOS LA AUTENTICACION****************************//
 				rootPanel.clear();
 				
-				rootPanel.add(new MenuNavegacion(rootPanel));
+				RootPanel.get("menuContainer").add(new MenuNavegacion(rootPanel));
 				
-				//FormEntradas frm = new FormEntradas();
-				//FormSalidas frm = new FormSalidas();
-				//FormConsultas frm = new FormConsultas();
-				//FormInformes frm = new FormInformes();
-				FormMntTablas frm = new FormMntTablas();
+				FormEntradas frm = new FormEntradas();
 				frm.setBodyBorder(false);
 				frm.setBorders(false);
 				frm.setHeaderVisible(false);
-				Log.debug("Vamos a añadir el formulario al principal");
-				
-				
 				rootPanel.add(frm);	
 				
 		
@@ -170,7 +162,6 @@ public class Plantillas implements EntryPoint {
 			 */
 			public void onKeyUp(KeyUpEvent event) {
 				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-					Log.debug("Hemos pulsado el intro");
 					sendValuesToServer();
 				}
 			}
@@ -181,7 +172,6 @@ public class Plantillas implements EntryPoint {
 			private void sendValuesToServer() {
 				
 				final String url = GWT.getHostPageBaseURL() + "/j_spring_security_check";
-				Log.debug("El valor de la base url es: " + url);
 				
 				final RequestBuilder rb = new RequestBuilder(RequestBuilder.POST, url);
 				rb.setCallback(new RequestCallback() {
@@ -193,7 +183,6 @@ public class Plantillas implements EntryPoint {
 							if (response.getText() != null && response.getText().length() > 0) {
 								welcomeMsg = "Welcome: " + response.getText();
 							}
-							Log.debug(welcomeMsg);
 						}
 					}
 
@@ -222,24 +211,18 @@ public class Plantillas implements EntryPoint {
 				// Then, we send the input to the server.
 				//btnAceptar.setEnabled(false);
 				 
-				Log.debug("Estamos en sendValuesToServer, ANTES DE LA LLAMADA AL SERVER");
-				Log.debug("El valor de texto es: " + textToServer);
-				Log.debug("El valor de password es: " + passToServer);
 
 				loginService.loginServer(textToServer, passToServer, new AsyncCallback<String>() {
 							public void onFailure(Throwable caught) {
 								// Show the RPC error message to the user
-								Log.debug("ERROR EN EL SERVIDOR: " + caught.getLocalizedMessage());
 							}
 
 							public void onSuccess(String result) {
-								Log.debug("Estamos en el onSuccess y el usuario es: " + nameField.getText());
 								MessageBox msg = new MessageBox();
 								msg.setMessage(result);
 									msg.show();
 							}
 						});
-				Log.debug("Estamos DESPUES DE LA LLAMADA AL SERVER");
 			}
 		}
 		

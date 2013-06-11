@@ -106,6 +106,14 @@ h1 {
 	padding-bottom: 2px;
 }
 
+.x-border-layout-ct{
+	background: none;
+}
+
+.derecha .x-form-item label{
+	line-height: 22px;
+}
+
 .x-menubar {
   border-color: transparent !important;
   background-color: transparent !important;
@@ -151,6 +159,7 @@ h1 {
 	padding: 15px 5px 15px 0px;
     float: right;
 }
+
 .botones{
 	padding-left: 70px;
 }
@@ -164,6 +173,11 @@ h1 {
   background: none;
   border: none;	
 }
+
+.panelDialogo .x-panel-bwrap .x-panel-body div{
+	float: left;
+}
+
 
 
 .dlgBusqueda .x-toolbar-left{
@@ -236,6 +250,10 @@ h1 {
 	border: none; 
 }
 
+.Left .x-toolbar-ct .x-toolbar-left{
+	float: left !important;
+}
+
 .paginacionFinal .x-toolbar-ct.x-toolbar-left table{
 	border-spacing: 2px;
 }
@@ -250,6 +268,19 @@ h1 {
  .paginacionFinal .x-toolbar-ct .x-toolbar-left .x-toolbar-left-row .x-toolbar-cell .x-btn-br, 
  .paginacionFinal .x-toolbar-ct .x-toolbar-left .x-toolbar-left-row .x-toolbar-cell .x-btn-bc{
 	background-image: none; 
+}
+
+.x-panel-bbar .x-toolbar{
+	border: none;
+}
+
+.dialog{
+	border-width: 0;
+}
+
+.x-toolbar{
+	border-style: none;
+	background: none;
 }
 
 .paginacion .x-toolbar-ct{

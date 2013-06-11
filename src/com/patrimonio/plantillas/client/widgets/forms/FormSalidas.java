@@ -42,7 +42,7 @@ public class FormSalidas extends ContentPanel{
 		GWT.setUncaughtExceptionHandler(new   
 			      GWT.UncaughtExceptionHandler() {  
 			      public void onUncaughtException(Throwable e) {  
-			        Log.debug("EN UNCAUGHT: " + e.getLocalizedMessage()); 
+			        //Log.debug("EN UNCAUGHT: " + e.getLocalizedMessage()); 
 			    }  
 			    // do module loading stuff  
 			  });    
@@ -50,7 +50,7 @@ public class FormSalidas extends ContentPanel{
 		
 	
 		
-		Log.debug("antes de cargar los tab panels del Formulario");
+		//Log.debug("antes de cargar los tab panels del Formulario");
 		
 		TabPanel tabPanel = new TabPanel();
 		tabPanel.setAutoHeight(true);
@@ -61,7 +61,7 @@ public class FormSalidas extends ContentPanel{
 		
 		add(tabPanel);
 		
-		Log.debug("Terminando en el onrender del formPage");
+		//Log.debug("Terminando en el onrender del formPage");
 			
 	}
 	
@@ -111,7 +111,7 @@ public class FormSalidas extends ContentPanel{
 
 			@Override
 			public void handleEvent(BaseEvent be) {
-				Log.debug("EN EL CLICK DEL TAB BAJA");
+				//Log.debug("EN EL CLICK DEL TAB BAJA");
 				frmBajaArticulo.recalculate();
 				frmBajaArticulo.repaint();
 				

@@ -29,7 +29,7 @@ public class FormEntradas extends ContentPanel{
 	protected void onRender(Element parent, int pos) {
 		super.onRender(parent, pos);
 
-		Log.debug("En el onRender del FormPage");
+	//	Log.debug("En el onRender del FormPage");
 
 		
 		setLayout(new BorderLayout());
@@ -41,7 +41,7 @@ public class FormEntradas extends ContentPanel{
 		GWT.setUncaughtExceptionHandler(new   
 			      GWT.UncaughtExceptionHandler() {  
 			      public void onUncaughtException(Throwable e) {  
-			        Log.debug("EN UNCAUGHT: " + e.getLocalizedMessage()); 
+			        //Log.debug("EN UNCAUGHT: " + e.getLocalizedMessage()); 
 			    }  
 			    // do module loading stuff  
 			  });    
@@ -49,7 +49,7 @@ public class FormEntradas extends ContentPanel{
 		
 	
 		
-		Log.debug("antes de cargar los tab panels del Formulario");
+		//Log.debug("antes de cargar los tab panels del Formulario");
 		
 		TabPanel tabPanel = new TabPanel();
 		tabPanel.setAutoHeight(true);
@@ -60,7 +60,7 @@ public class FormEntradas extends ContentPanel{
 		
 		add(tabPanel);
 		
-		Log.debug("Terminando en el onrender del formPage");
+		//Log.debug("Terminando en el onrender del formPage");
 			
 	}
 	
@@ -75,7 +75,7 @@ public class FormEntradas extends ContentPanel{
 		TabItem tabNuevo = new TabItem("Nuevo Pedido");
 		tabNuevo.add(new MenuIconos());
 		tabNuevo.add(frmNuevoPedido);
-		tabNuevo.setIconStyle("tabNuevo");
+		//tabNuevo.setIconStyle("tabNuevo");
 		panel.add(tabNuevo);
 		
 		FormPanel frmRecepcionPedidos = new FormPanel();

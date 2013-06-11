@@ -51,7 +51,7 @@ public class FormConsultas extends ContentPanel{
 		GWT.setUncaughtExceptionHandler(new   
 			      GWT.UncaughtExceptionHandler() {  
 			      public void onUncaughtException(Throwable e) {  
-			        Log.debug("EN UNCAUGHT: " + e.getCause()); 
+			      //  Log.debug("EN UNCAUGHT: " + e.getCause()); 
 			    }  
 			    // do module loading stuff  
 			  });    
@@ -59,7 +59,7 @@ public class FormConsultas extends ContentPanel{
 		
 	
 		
-		Log.debug("antes de cargar los tab panels del Formulario");
+		//Log.debug("antes de cargar los tab panels del Formulario");
 		
 		TabPanel tabPanel = new TabPanel();
 		tabPanel.setAutoHeight(true);
@@ -70,7 +70,7 @@ public class FormConsultas extends ContentPanel{
 		
 		add(tabPanel);
 		
-		Log.debug("Terminando en el onrender del formPage");
+		//Log.debug("Terminando en el onrender del formPage");
 			
 	} 
 	
@@ -155,8 +155,8 @@ public class FormConsultas extends ContentPanel{
 
 					@Override
 					public void componentSelected(ButtonEvent ce) {
-						Log.debug("Estamos en el OK del dialogo y el valor de año es: " + anio.getValue());
-						Log.debug("El valor del formulario es: " + frmCPrevision);
+//						Log.debug("Estamos en el OK del dialogo y el valor de año es: " + anio.getValue());
+//						Log.debug("El valor del formulario es: " + frmCPrevision);
 						utils.titularPrevisiones += anio.getValue();
 						frmCPrevision.setHeading(utils.titularPrevisiones);
 						frmCPrevision.setExpanded(true);
@@ -171,7 +171,6 @@ public class FormConsultas extends ContentPanel{
 		tabCprevision.add(new MenuIconos());
 		tabCprevision.add(frmCPrevision);
 		panel.add(tabCprevision);
-		
 		
 	}
 }

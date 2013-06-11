@@ -63,7 +63,6 @@ public class LoadMantenimientoUtils {
 	    
 	    LayoutContainer right = new LayoutContainer();
 	    right.setStyleAttribute("paddingRight", "10px");
-	    right.setStyleAttribute("paddingLeft", "5px");
 	    layout = new FormLayout();  
 	    layout.setLabelAlign(LabelAlign.TOP);  
 	    right.setLayout(layout);  
@@ -71,6 +70,8 @@ public class LoadMantenimientoUtils {
 	    LayoutContainer bottom = new LayoutContainer();  
 	    layout = new FormLayout();  
 	    layout.setLabelAlign(LabelAlign.TOP);  
+	    bottom.setStyleAttribute("paddingRight", "10px");
+	    bottom.setStyleAttribute("paddingLeft", "10px");
 	    bottom.setLayout(layout); 
 	    
 	    
@@ -135,8 +136,8 @@ public class LoadMantenimientoUtils {
 	    paginacion.bind(entregasLoader);
 	    paginacion.setStyleName("paginacion");
 	    
-	    ButtonGroup gButtons = new ButtonGroup(5);
-	    Button b1  = new Button(), b2 = new Button(), b3 = new Button(), b4 = new Button(), b5 = new Button();
+	    ButtonGroup gButtons = new ButtonGroup(4);
+	    Button b1  = new Button(), b2 = new Button(), b3 = new Button(), b4 = new Button();
 	    b1.setText("Agregar");
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Modificar");
@@ -144,16 +145,11 @@ public class LoadMantenimientoUtils {
 	    b3.setText("Eliminar");
 	    b3.setStyleAttribute("padding-right", "5px");
 	    b4.setText("Buscar");
-	    b4.setStyleAttribute("padding-right", "5px");
-	    b5.setText("Salir");
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
 	    gButtons.add(b3);
 	    gButtons.add(b4);
-	    gButtons.add(b5);
-	    gButtons.setBodyBorder(false);
-	    gButtons.setBorders(false);
 	    gButtons.addStyleName("botonesFuncionales");
 	    
 	    main.add(left, new ColumnData(.5));
@@ -224,17 +220,14 @@ public class LoadMantenimientoUtils {
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Modificar");
 	    b2.setStyleAttribute("padding-right", "5px");
-	    b3.setText("Buscar");
+	    b3.setText("Eliminar");
 	    b3.setStyleAttribute("padding-right", "5px");
-	    b4.setText("Salir");
-	   
+	    b4.setText("Buscar");
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
 	    gButtons.add(b3);
 	    gButtons.add(b4);
-	    gButtons.setBodyBorder(false);
-	    gButtons.setBorders(false);
 	    gButtons.addStyleName("botonesFuncionales");
 	    
 	    main.add(left, new ColumnData(.5));
@@ -321,10 +314,10 @@ public class LoadMantenimientoUtils {
 	    ContentPanel cp = new ContentPanel();  
 	    cp.setBodyBorder(true);  
 	    cp.setHeading("Familias");
-	    cp.getHeader().addStyleName("titular");
 	    cp.setButtonAlign(HorizontalAlignment.CENTER);  
 	    cp.setLayout(new FitLayout());
-	    cp.setHeight("200px");
+	    cp.setHeight("300px");
+	    cp.setFrame(true);
 	    cp.setStyleAttribute("paddingTop", "10px");
 	    	    
 	    cp.add(grid);
@@ -344,16 +337,14 @@ public class LoadMantenimientoUtils {
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Modificar");
 	    b2.setStyleAttribute("padding-right", "5px");
-	    b3.setText("Buscar");
+	    b3.setText("Eliminar");
 	    b3.setStyleAttribute("padding-right", "5px");
-	    b4.setText("Salir");
+	    b4.setText("Buscar");
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
 	    gButtons.add(b3);
 	    gButtons.add(b4);
-	    gButtons.setBodyBorder(false);
-	    gButtons.setBorders(false);
 	    gButtons.addStyleName("botonesFuncionales");
 	    
 	    center.add(nombre, formData);
@@ -450,10 +441,10 @@ public class LoadMantenimientoUtils {
 	    ContentPanel cp = new ContentPanel();  
 	    cp.setBodyBorder(true);  
 	    cp.setHeading("Subfamilias");
-	    cp.getHeader().addStyleName("titular");
 	    cp.setButtonAlign(HorizontalAlignment.CENTER);  
 	    cp.setLayout(new FitLayout());
-	    cp.setHeight("200px");
+	    cp.setHeight("300px");
+	    cp.setFrame(true);
 	    cp.setStyleAttribute("paddingTop", "10px");
 	    	    
 	    cp.add(grid);
@@ -473,16 +464,14 @@ public class LoadMantenimientoUtils {
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Modificar");
 	    b2.setStyleAttribute("padding-right", "5px");
-	    b3.setText("Buscar");
+	    b3.setText("Eliminar");
 	    b3.setStyleAttribute("padding-right", "5px");
-	    b4.setText("Salir");
+	    b4.setText("Buscar");
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
 	    gButtons.add(b3);
 	    gButtons.add(b4);
-	    gButtons.setBodyBorder(false);
-	    gButtons.setBorders(false);
 	    gButtons.addStyleName("botonesFuncionales");
 	    
 	    center.add(codigo, new FormData("40%"));
@@ -499,11 +488,9 @@ public class LoadMantenimientoUtils {
 	}
 
 	public void loadFormSubFamilias(FormPanel frmSubFamilias) {
-		FormData formData = new FormData("100%"); 
-		Margins m = new Margins();
-		m.top = 5;
-		m.left=5;
-		m.right=5;
+		FormData formData = new FormData("100%");
+		Margins m = new Margins(5);
+	
 		formData.setMargins(m);
 		
 		frmSubFamilias.setSize("100%", "100%");  
@@ -541,16 +528,14 @@ public class LoadMantenimientoUtils {
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Modificar");
 	    b2.setStyleAttribute("padding-right", "5px");
-	    b3.setText("Buscar");
+	    b3.setText("Eliminar");
 	    b3.setStyleAttribute("padding-right", "5px");
-	    b4.setText("Salir");
+	    b4.setText("Buscar");
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
 	    gButtons.add(b3);
 	    gButtons.add(b4);
-	    gButtons.setBodyBorder(false);
-	    gButtons.setBorders(false);
 	    gButtons.addStyleName("botonesFuncionales");
 	    
 	    DataProxy entregasPRx = null; 
@@ -566,7 +551,7 @@ public class LoadMantenimientoUtils {
 	    
 	    center.add(lblFamilia, formData);
 	    center.add(lstFamilia, formData);
-	    center.add(codigo, new FormData("40%"));
+	    center.add(codigo, formData);
 	    center.add(nombre, formData);
 	    
 	    main.add(center, new ColumnData(1));
@@ -688,10 +673,10 @@ public class LoadMantenimientoUtils {
 	    ContentPanel cp = new ContentPanel();  
 	    cp.setBodyBorder(true);  
 	    cp.setHeading("Artículos del puesto de trabajo");
-	    cp.getHeader().addStyleName("titular");
 	    cp.setButtonAlign(HorizontalAlignment.CENTER);  
 	    cp.setLayout(new FitLayout());
-	    cp.setHeight("200px");
+	    cp.setHeight("300px");
+	    cp.setFrame(true);
 	    cp.setStyleAttribute("paddingTop", "10px");
 	    	    
 	    cp.add(grid);
@@ -707,8 +692,8 @@ public class LoadMantenimientoUtils {
 	    paginacion.bind(entregasLoader);
 	    paginacion.setStyleName("paginacion");
 	    
-	    ButtonGroup gButtons = new ButtonGroup(5);
-	    Button b1  = new Button(), b2 = new Button(), b3 = new Button(), b4 = new Button(), b5 = new Button();
+	    ButtonGroup gButtons = new ButtonGroup(4);
+	    Button b1  = new Button(), b2 = new Button(), b3 = new Button(), b4 = new Button();
 	    b1.setText("Agregar");
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Modificar");
@@ -716,14 +701,11 @@ public class LoadMantenimientoUtils {
 	    b3.setText("Buscar nombre");
 	    b3.setStyleAttribute("padding-right", "5px");
 	    b4.setText("Buscar delegación");
-	    b4.setStyleAttribute("padding-right", "5px");
-	    b5.setText("Salir");
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
 	    gButtons.add(b3);
 	    gButtons.add(b4);
-	    gButtons.add(b5);
 	    gButtons.setBodyBorder(false);
 	    gButtons.setBorders(false);
 	    gButtons.addStyleName("botonesFuncionales");

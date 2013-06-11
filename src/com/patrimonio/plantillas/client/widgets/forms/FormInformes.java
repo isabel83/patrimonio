@@ -45,7 +45,7 @@ public class FormInformes extends ContentPanel{
 		GWT.setUncaughtExceptionHandler(new   
 			      GWT.UncaughtExceptionHandler() {  
 			      public void onUncaughtException(Throwable e) {  
-			        Log.debug("EN UNCAUGHT: " + e.getLocalizedMessage()); 
+			       // Log.debug("EN UNCAUGHT: " + e.getLocalizedMessage()); 
 			    }  
 			  });    
 		

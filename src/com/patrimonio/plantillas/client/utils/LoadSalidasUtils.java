@@ -42,8 +42,10 @@ import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextArea;
-import com.google.gwt.user.client.ui.TextBox;
 import com.patrimonio.plantillas.client.widgets.Stock;
+import com.patrimonio.plantillas.client.widgets.dialogs.DialogoAlbaranFecha;
+import com.patrimonio.plantillas.client.widgets.dialogs.DialogoBuscar;
+import com.patrimonio.plantillas.client.widgets.dialogs.DialogoNuevoArticulo;
 
 public class LoadSalidasUtils {
 
@@ -163,19 +165,20 @@ public class LoadSalidasUtils {
 	    layout.setLabelAlign(LabelAlign.TOP);  
 	    subBottom.setLayout(layout); 
 	    
-	    TextField<String> articulo = new TextField<String>();
+	    final TextField<String> articulo = new TextField<String>();
 	    articulo.setFieldLabel("Articulo");
 	    articulo.setValue("0016512-653-8569");
 	    articulo.setEnabled(false);
 	    articulo.addInputStyleName("noBorder");
 	    subLeft.add(articulo, new FormData("100%"));
-	    TextField<String> descArticulo = new TextField<String>();
+	    
+	    final TextField<String> descArticulo = new TextField<String>();
 	    descArticulo.setEnabled(false);
 	    descArticulo.setValue("Descripción del tipo de artículo");
 	    descArticulo.setLabelStyle("display: none");
 	    subLeft.add(descArticulo, new FormData("100%")); 
    
-	    TextField<String> marca = new TextField<String>();  
+	    final TextField<String> marca = new TextField<String>();  
 	    marca.setFieldLabel("Marca");
 	    marca.setEnabled(false);
 	    subRight.add(marca, new FormData("100%"));	   
@@ -206,9 +209,9 @@ public class LoadSalidasUtils {
 	    observaciones.setVisibleLines(4);
 	    subBottom.add(observaciones, new FormData("100%"));
 	    
-	    final ButtonGroup btnGrp = new ButtonGroup(4);
+	    final ButtonGroup btnGrp = new ButtonGroup(3);
 	    final Button b1  = new Button();
-		Button b2 = new Button(), b3 = new Button();
+		Button b2 = new Button();
 		final Button b4 = new Button();
 	    b1.setText("Modificar Artículo");
 	    b1.setStyleAttribute("padding-right", "5px");
@@ -216,6 +219,9 @@ public class LoadSalidasUtils {
 
 			@Override
 			public void handleEvent(BaseEvent be) {
+				articulo.setEnabled(true);
+				descArticulo.setEnabled(true);
+				marca.setEnabled(true);
 				b4.setVisible(true);
 				subMain.recalculate();
 				frmArticulos.layout(true);
@@ -225,7 +231,16 @@ public class LoadSalidasUtils {
 	    });
 	    b2.setText("Nuevo Artículo");
 	    b2.setStyleAttribute("padding-right", "5px");
-	    b3.setText("Buscar");
+	    b2.addListener(Events.OnClick, new Listener<BaseEvent>(){
+
+			@Override
+			public void handleEvent(BaseEvent be) {
+				DialogoNuevoArticulo nuevoArticulo = new DialogoNuevoArticulo(3);//nuevo articulo
+				nuevoArticulo.show();
+			}
+	    	
+	    });
+	    
 	    b4.setText("Cancelar Modificación");
 	    b4.setVisible(false);
 	    b4.setStyleAttribute("padding-right", "5px");
@@ -233,6 +248,9 @@ public class LoadSalidasUtils {
 
 			@Override
 			public void handleEvent(BaseEvent be) {
+				articulo.setEnabled(false);
+				descArticulo.setEnabled(false);
+				marca.setEnabled(false);
 				b4.setVisible(false);
 				subMain.recalculate();
 				frmArticulos.layout(true);
@@ -241,7 +259,15 @@ public class LoadSalidasUtils {
 	    	
 	    });
 	    
+	    btnGrp.add(b4);
+	    btnGrp.add(b1);
+	    btnGrp.add(b2);
+	    btnGrp.setStyleAttribute("padding", "15px 0px");
+	    btnGrp.setStyleAttribute("float", "right");
+	    
+	    
 	    DataProxy proxy = null; 
+	    
 		final BasePagingLoader<PagingLoadResult<ModelData>> loader = new BasePagingLoader<PagingLoadResult<ModelData>>(  
 	            proxy, new BeanModelReader());  
 	        loader.setRemoteSort(true); 
@@ -249,19 +275,7 @@ public class LoadSalidasUtils {
 	    final PagingToolBar pagingToolBar = new PagingToolBar(50); 
 	    pagingToolBar.bind(loader);
 	    pagingToolBar.setStyleName("paginacion");
-	   
 	    
-	    
-	    
-	    btnGrp.add(b4);
-	    btnGrp.add(b1);
-	    btnGrp.add(b2);
-	    btnGrp.add(b3);
-	    btnGrp.setBodyBorder(false);
-	    btnGrp.setBorders(false);
-	    btnGrp.addStyleName("botonesFuncionales");
-	    btnGrp.setBodyBorder(false);
-	    btnGrp.setBorders(false);
 	    
 	    subMain.add(subLeft, new ColumnData(.4));
 	    subMain.add(subRight, new ColumnData(.6));
@@ -320,20 +334,16 @@ public class LoadSalidasUtils {
 	    grid.setColumnLines(true);
 	    
 	    
-	    ButtonGroup gButtons = new ButtonGroup(3);
-	    Button bt1  = new Button(), bt2 = new Button(), bt3 = new Button();
+	    ButtonGroup gButtons = new ButtonGroup(2);
+	    Button bt1  = new Button(), bt2 = new Button();
 	    bt1.setText("Grabar");
 	    bt1.setEnabled(false);
 	    bt1.setStyleAttribute("padding-right", "5px");
 	    bt2.setText("Deshacer");
-	    bt2.setStyleAttribute("padding-right", "5px");
-	    bt3.setText("Salir");
-	    bt3.setEnabled(false);
 	   
 	    
 	    gButtons.add(bt1);
 	    gButtons.add(bt2);
-	    gButtons.add(bt3);
 	    gButtons.setBodyBorder(false);
 	    gButtons.setBorders(false);
 	    gButtons.addStyleName("botonesFuncionales");
@@ -483,20 +493,35 @@ public class LoadSalidasUtils {
 	      
 	    bottom.add(cp, formData);
 	    
-	    ButtonGroup gButtons = new ButtonGroup(3);
-	    Button bt1  = new Button(), bt2 = new Button(), bt3 = new Button();
+	    ButtonGroup gButtons = new ButtonGroup(2);
+	    Button bt1  = new Button(), bt2 = new Button();
 	    bt1.setText("Albarán Total");
-	    bt1.setEnabled(false);
 	    bt1.setStyleAttribute("padding-right", "5px");
+	    bt1.addListener(Events.OnClick, new Listener<BaseEvent>(){
+
+			@Override
+			public void handleEvent(BaseEvent be) {
+				DialogoAlbaranFecha dlgAlbaranF = new DialogoAlbaranFecha(1);
+				dlgAlbaranF.show();
+			}
+	    	
+	    });
+	    
+
 	    bt2.setText("Albarán por Artículos");
-	    bt2.setStyleAttribute("padding-right", "5px");
-	    bt3.setText("Salir");
-	    bt3.setEnabled(false);
-	   
+	    bt2.addListener(Events.OnClick, new Listener<BaseEvent>(){
+
+			@Override
+			public void handleEvent(BaseEvent be) {
+				DialogoAlbaranFecha dlgAlbaranF = new DialogoAlbaranFecha(2);
+				dlgAlbaranF.show();
+			}
+	    	
+	    });
+	    
 	    
 	    gButtons.add(bt1);
 	    gButtons.add(bt2);
-	    gButtons.add(bt3);
 	    gButtons.setBodyBorder(false);
 	    gButtons.setBorders(false);
 	    gButtons.addStyleName("botonesFuncionales");
@@ -566,11 +591,7 @@ public class LoadSalidasUtils {
 	    lblSeccion.setStyleName("etiqueta");
 	    ListBox lstSeccion = new ListBox();
 	    lstSeccion.setVisibleItemCount(1);
-	    lstSeccion.addItem("3M España S.A.");
-	    lstSeccion.addItem("ABAISA S.L.");
-	    lstSeccion.addItem("AF STEELCASE S.A.");
-	    lstSeccion.addItem("AGUDEL S.L.");
-	    lstSeccion.addItem("AHOSMA S.L.");
+	    lstSeccion.setWidth("400px");
 	    lstSeccion.addItem("...");
 	    left.add(lblSeccion,formData);
 	    left.add(lstSeccion,formData);
@@ -580,7 +601,6 @@ public class LoadSalidasUtils {
 	    ListBox lstFamilia = new ListBox();
 	    lstFamilia.setVisibleItemCount(1);
 	    lstFamilia.setWidth("400px");
-	    lstFamilia.addItem("AHOSMA S.L.");
 	    lstFamilia.addItem("...");
 	    right.add(lblFamilia,formData);
 	    right.add(lstFamilia,formData);
@@ -590,8 +610,6 @@ public class LoadSalidasUtils {
 	    ListBox lstSubFamilia = new ListBox();
 	    lstSubFamilia.setVisibleItemCount(1);
 	    lstSubFamilia.setWidth("400px");
-	    lstSubFamilia.addItem("3M España S.A.");
-	    lstSubFamilia.addItem("ABAISA S.L.");
 	    lstSubFamilia.addItem("...");
 	    right.add(lblSubFamilia,formData);
 	    right.add(lstSubFamilia,formData);
@@ -620,6 +638,7 @@ public class LoadSalidasUtils {
 	    cpExistencias.setHeading("Existencias");
 	    cpExistencias.setLayout(rgtLayout);  
 	    cpExistencias.setHeight("90px");
+	    cpExistencias.setFrame(true);
 	    cpExistencias.setStyleAttribute("paddingBottom", "10px");
 	    
 	    Label lblMinimas = new Label();
@@ -649,13 +668,21 @@ public class LoadSalidasUtils {
 	    
 	    ButtonGroup gButtons = new ButtonGroup(3);
 	    Button b1  = new Button(), b2 = new Button(), b3 = new Button();
-	    b1.setText("Grabar");
-	    b1.setEnabled(false);
+	    b1.setText("Buscar");
 	    b1.setStyleAttribute("padding-right", "5px");
+	    b1.addListener(Events.OnClick, new Listener<BaseEvent>(){
+
+			@Override
+			public void handleEvent(BaseEvent be) {
+				DialogoNuevoArticulo dlgArticulo = new DialogoNuevoArticulo(1);//damos de baja
+				dlgArticulo.show();
+			}
+	    	
+	    });
+	   
 	    b2.setText("Deshacer");
 	    b2.setStyleAttribute("padding-right", "5px");
 	    b3.setText("Salir");
-	    //b3.setEnabled(false);
 	    b3.addListener(Events.OnClick, new Listener<BaseEvent>(){
 
 			@Override

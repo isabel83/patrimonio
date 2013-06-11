@@ -31,6 +31,7 @@ public class DialogoRecepcionarArticulo extends Dialog {
 	
 	ColumnData cData = new ColumnData();
 	
+	
 	@Override
 	protected void onRender(Element parent, int pos) {
 		// TODO Auto-generated method stub
@@ -39,7 +40,7 @@ public class DialogoRecepcionarArticulo extends Dialog {
 		setHeading("Introduce las cantidades recepcionadas y la fecha para cada artículo");
 		setLayout(new BorderLayout());
 		setModal(true);
-		setSize(875, 595);
+		setSize(875, 50);
 		//setHideOnButtonClick(true);
 		addStyleName("dlgBusqueda");
 		
@@ -125,37 +126,47 @@ public class DialogoRecepcionarArticulo extends Dialog {
 		TextField<String> txtCantidadA = new TextField<String>();  
 		txtCantidadA.setFieldLabel("Cantidad anulada");
 		txtCantidadA.setValue("0");
-		right.add(txtCantidadA,formData);
+		left.add(txtCantidadA,formData);
 		
 				
-	    TextField<String> fechaRecepcion = new TextField<String>();  
+	    final TextField<String> fechaRecepcion = new TextField<String>();  
 	    fechaRecepcion.setFieldLabel("Fecha de recepción");
-	    fechaRecepcion.setEnabled(false);
+	    fechaRecepcion.setVisible(false);
 	    left.add(fechaRecepcion,formData);
 	    
-	    TextField<String> txtCantRecepciona = new TextField<String>();  
+	    final TextField<String> txtCantRecepciona = new TextField<String>();  
 	    txtCantRecepciona.setFieldLabel("Cantidad que se recepciona");
-		right.add(txtCantidadA,formData);
+	    txtCantRecepciona.setVisible(false);
+		left.add(txtCantRecepciona,formData);
 		
-		CheckBox completo = new CheckBox();  
+		final CheckBox completo = new CheckBox();  
 		completo.setFieldLabel("Recepcionado completo");
 		completo.setStyleAttribute("float", "left");
+		completo.setVisible(false);
 		left.add(completo, formData);
 		
 		
-		ButtonGroup btnsRecepcion = new ButtonGroup(4);
-	    Button btnAcepta  = new Button(), btnCancela = new Button();
+		final ButtonGroup btnsRecepcion = new ButtonGroup(2);
+	    Button btnAcepta  = new Button();
+		Button btnCancela = new Button();
 	    btnAcepta.setText("Aceptar recepción de artículo");
-	    btnAcepta.setEnabled(false);
 	    btnAcepta.setStyleAttribute("padding-right", "5px");
 	    btnCancela.setText("Cancelar");	    
-	    btnCancela.setStyleAttribute("padding-right", "5px");
-		btnCancela.setEnabled(false);
-		
+		btnCancela.addListener(Events.OnClick, new Listener<BaseEvent>(){
+
+			@Override
+			public void handleEvent(BaseEvent be) {
+				fechaRecepcion.setVisible(false);
+				txtCantRecepciona.setVisible(false);
+				completo.setVisible(false);
+				btnsRecepcion.setVisible(false);
+			}
+			
+		});
+		btnsRecepcion.setVisible(false);
 		btnsRecepcion.add(btnAcepta);
 		btnsRecepcion.add(btnCancela);
-		btnsRecepcion.setStyleAttribute("float", "right");
-		right.add(btnsRecepcion, formData);
+		left.add(btnsRecepcion, formData);
 	    
 	    midLeft.add(txtArticulo,formData);
 	    midRight.add(lblArticulo, formData);
@@ -165,10 +176,22 @@ public class DialogoRecepcionarArticulo extends Dialog {
 	    top.add(txtMarca,formData);
 	    top.add(txtObservaciones,formData);
 	    
+	    DataProxy proxy = null; 
+	    
+ 		final BasePagingLoader<PagingLoadResult<ModelData>> loader = new BasePagingLoader<PagingLoadResult<ModelData>>(  
+ 	            proxy, new BeanModelReader());  
+ 	        loader.setRemoteSort(true); 
+ 	    
+ 	    final PagingToolBar pagingToolBar = new PagingToolBar(50); 
+ 	    pagingToolBar.bind(loader);
+ 	    pagingToolBar.setStyleName("paginacion");
+	    
+	    
+	    
 	    main.add(top, new ColumnData(1));
 	    main.add(left, new ColumnData(.5));  
 	    main.add(right, new ColumnData(.5));  
-	    
+	    cp.setBottomComponent(pagingToolBar);
 	    
 	    cp.add(main, new FormData("100%"));  
 		add(cp);
@@ -177,8 +200,20 @@ public class DialogoRecepcionarArticulo extends Dialog {
 	    setButtons(Dialog.YESNOCANCEL);
 	    
 	    getButtonById(Dialog.YES).setText("Recepcionar artículos");
-	    getButtonById(Dialog.YES).setEnabled(false);
+		getButtonById(Dialog.YES).setStyleAttribute("padding-right", "5px");
+		getButtonById(Dialog.YES).addListener(Events.OnClick, new Listener<BaseEvent>(){ 
+	    	
+			@Override
+			public void handleEvent(BaseEvent be) {
+				fechaRecepcion.setVisible(true);
+				txtCantRecepciona.setVisible(true);
+				completo.setVisible(true);
+				btnsRecepcion.setVisible(true);
+			}
+	    	
+	    });
 	    getButtonById(Dialog.NO).setText("Salir");
+		getButtonById(Dialog.NO).setStyleAttribute("padding-right", "5px");
 	    getButtonById(Dialog.NO).addListener(Events.OnClick, new Listener<BaseEvent>(){ 
 	    	
 			@Override

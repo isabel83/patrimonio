@@ -8,6 +8,9 @@ import com.extjs.gxt.ui.client.data.BeanModelReader;
 import com.extjs.gxt.ui.client.data.DataProxy;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
+import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
@@ -30,6 +33,11 @@ import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.patrimonio.plantillas.client.widgets.dialogs.DialogoAlbaranTotal;
+import com.patrimonio.plantillas.client.widgets.dialogs.DialogoAlbaranesPedidos;
+import com.patrimonio.plantillas.client.widgets.dialogs.DialogoBuscar;
+import com.patrimonio.plantillas.client.widgets.dialogs.DialogoBuscarPedidos;
+import com.patrimonio.plantillas.client.widgets.dialogs.DialogoNuevoArticulo;
 
 public class LoadConsultasUtils {
 	
@@ -149,20 +157,23 @@ public class LoadConsultasUtils {
 	    bottom.add(lstProveedor,formData);
 	    
 	    
-	    ButtonGroup gButtons = new ButtonGroup(3);
-	    Button b1  = new Button(), b2 = new Button(), b3 = new Button();
-	    b1.setText("Grabar");
-	    b1.setEnabled(false);
+	    ButtonGroup gButtons = new ButtonGroup(2);
+	    Button b1  = new Button(), b2 = new Button();
+	    b1.setText("Buscar");
+	    b1.addListener(Events.OnClick, new Listener<BaseEvent>(){ 
+			@Override
+			public void handleEvent(BaseEvent be) {
+				DialogoBuscarPedidos dlgBuscar = new DialogoBuscarPedidos();
+				dlgBuscar.show();				
+			}
+	    });
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Deshacer");
 	    b2.setStyleAttribute("padding-right", "5px");
-	    b3.setText("Salir");
-	    b3.setEnabled(false);
-	   
+
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
-	    gButtons.add(b3);
 	    gButtons.setBodyBorder(false);
 	    gButtons.setBorders(false);
 	    gButtons.addStyleName("botonesFuncionales");
@@ -305,13 +316,18 @@ public class LoadConsultasUtils {
 	    
 	    ButtonGroup gButtons = new ButtonGroup(3);
 	    Button b1  = new Button(), b2 = new Button(), b3 = new Button();
-	    b1.setText("Grabar");
-	    b1.setEnabled(false);
+	    b1.setText("Buscar");
+	    b1.addListener(Events.OnClick, new Listener<BaseEvent>(){ 
+			@Override
+			public void handleEvent(BaseEvent be) {
+				DialogoAlbaranesPedidos dlgBuscar = new DialogoAlbaranesPedidos(true);
+				dlgBuscar.show();				
+			}
+	    });
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Deshacer");
 	    b2.setStyleAttribute("padding-right", "5px");
 	    b3.setText("Salir");
-	    b3.setEnabled(false);
 	   
 	    
 	    gButtons.add(b1);
@@ -449,13 +465,18 @@ public class LoadConsultasUtils {
 	    ButtonGroup gButtons = new ButtonGroup(3);
 	    Button b1  = new Button(), b2 = new Button(), b3 = new Button();
 	    b1.setText("Grabar");
-	    b1.setEnabled(false);
+	    b1.setText("Buscar");
+	    b1.addListener(Events.OnClick, new Listener<BaseEvent>(){ 
+			@Override
+			public void handleEvent(BaseEvent be) {
+				DialogoAlbaranTotal dlgBuscar = new DialogoAlbaranTotal(true);
+				dlgBuscar.show();				
+			}
+	    });
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Deshacer");
 	    b2.setStyleAttribute("padding-right", "5px");
 	    b3.setText("Salir");
-	    b3.setEnabled(false);
-	   
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
@@ -602,13 +623,18 @@ public class LoadConsultasUtils {
 	    
 	    ButtonGroup gButtons = new ButtonGroup(3);
 	    Button b1  = new Button(), b2 = new Button(), b3 = new Button();
-	    b1.setText("Grabar");
-	    b1.setEnabled(false);
+	    b1.setText("Buscar");
+	    b1.addListener(Events.OnClick, new Listener<BaseEvent>(){ 
+			@Override
+			public void handleEvent(BaseEvent be) {
+				DialogoAlbaranesPedidos dlgBuscar = new DialogoAlbaranesPedidos(false);
+				dlgBuscar.show();				
+			}
+	    });
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Deshacer");
 	    b2.setStyleAttribute("padding-right", "5px");
 	    b3.setText("Salir");
-	    b3.setEnabled(false);
 	   
 	    
 	    gButtons.add(b1);
@@ -672,11 +698,6 @@ public class LoadConsultasUtils {
 	    lblSeccion.setStyleName("etiqueta");
 	    ListBox lstSeccion = new ListBox();
 	    lstSeccion.setVisibleItemCount(1);
-	    lstSeccion.addItem("3M España S.A.");
-	    lstSeccion.addItem("ABAISA S.L.");
-	    lstSeccion.addItem("AF STEELCASE S.A.");
-	    lstSeccion.addItem("AGUDEL S.L.");
-	    lstSeccion.addItem("AHOSMA S.L.");
 	    lstSeccion.addItem("...");
 	    left.add(lblSeccion,formData);
 	    left.add(lstSeccion,formData);
@@ -686,7 +707,6 @@ public class LoadConsultasUtils {
 	    ListBox lstFamilia = new ListBox();
 	    lstFamilia.setVisibleItemCount(1);
 	    lstFamilia.setWidth("400px");
-	    lstFamilia.addItem("AHOSMA S.L.");
 	    lstFamilia.addItem("...");
 	    right.add(lblFamilia,formData);
 	    right.add(lstFamilia,formData);
@@ -696,8 +716,6 @@ public class LoadConsultasUtils {
 	    ListBox lstSubFamilia = new ListBox();
 	    lstSubFamilia.setVisibleItemCount(1);
 	    lstSubFamilia.setWidth("400px");
-	    lstSubFamilia.addItem("3M España S.A.");
-	    lstSubFamilia.addItem("ABAISA S.L.");
 	    lstSubFamilia.addItem("...");
 	    right.add(lblSubFamilia,formData);
 	    right.add(lstSubFamilia,formData);
@@ -725,7 +743,7 @@ public class LoadConsultasUtils {
 	    ContentPanel cpExistencias = new ContentPanel();
 	    cpExistencias.setHeading("Existencias");
 	    cpExistencias.setLayout(rgtLayout);  
-	    cpExistencias.setHeight("90px");
+	    cpExistencias.setAutoHeight(true);
 	    cpExistencias.setStyleAttribute("paddingBottom", "10px");
 	    
 	    Label lblMinimas = new Label();
@@ -772,8 +790,16 @@ public class LoadConsultasUtils {
 	   
 	    ButtonGroup gButtons = new ButtonGroup(3);
 	    Button b1  = new Button(), b2 = new Button(), b3 = new Button();
-	    b1.setText("Grabar");
-	    b1.setEnabled(false);
+	    b1.setText("Buscar");
+	    b1.addListener(Events.OnClick, new Listener<BaseEvent>(){
+
+			@Override
+			public void handleEvent(BaseEvent be) {
+				DialogoNuevoArticulo nuevoArticulo = new DialogoNuevoArticulo(2);//consulta articulo
+				nuevoArticulo.show();
+			}
+	    	
+	    });
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Deshacer");
 	    b2.setStyleAttribute("padding-right", "5px");
@@ -847,25 +873,23 @@ public class LoadConsultasUtils {
 	    cpEntregas.setHeading("Entregas de Vestuario");
 	    cpEntregas.setLayout(new ColumnLayout());  
 	    cpEntregas.setAutoHeight(true);
+	    cpEntregas.setFrame(true);
 	    cpEntregas.setStyleAttribute("paddingBottom", "10px");
 	    cpEntregas.setStyleName("body");
 	    
 	    loadEntregas(cpEntregas);
 	    
-	    ButtonGroup gButtons = new ButtonGroup(3);
-	    Button b1  = new Button(), b2 = new Button(), b3 = new Button();
-	    b1.setText("Grabar");
+	    ButtonGroup gButtons = new ButtonGroup(2);
+	    Button b1  = new Button(), b2 = new Button();
+	    b1.setText("Buscar Trabajador");
 	    b1.setEnabled(false);
 	    b1.setStyleAttribute("padding-right", "5px");
-	    b2.setText("Deshacer");
-	    b2.setStyleAttribute("padding-right", "5px");
-	    b3.setText("Salir");
-	    b3.setEnabled(false);
+	    b2.setText("Salir");
+
 	   
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
-	    gButtons.add(b3);
 	    gButtons.setBodyBorder(false);
 	    gButtons.setBorders(false);
 	    gButtons.addStyleName("botonesFuncionales");
@@ -887,7 +911,7 @@ public class LoadConsultasUtils {
 		
 		frmCPrevision.setExpanded(false);
 		
-		Log.debug("TERMINO DE CARGAR EL FORMULARIO");
+		//Log.debug("TERMINO DE CARGAR EL FORMULARIO");
 	}
 
 	private void loadEntregas(ContentPanel cpEntregas) {
@@ -955,8 +979,27 @@ public class LoadConsultasUtils {
 	    
 	    final PagingToolBar paginacionEntregas = new PagingToolBar(50); 
 	    paginacionEntregas.bind(entregasLoader);
+	    paginacionEntregas.addStyleName("paginacionFinal Left");
 	    
-	    cpEntregas.setBottomComponent(paginacionEntregas);
+	    ButtonGroup gButtons = new ButtonGroup(3);
+	    Button b1  = new Button(), b2 = new Button(), b3 = new Button();
+	    b1.setText("Agregar artículo");
+	    b1.setStyleAttribute("padding-right", "5px");
+	    b2.setText("Modificar artículo");
+	    b2.setEnabled(false);
+	    b2.setStyleAttribute("padding-right", "5px");
+	    b3.setText("Eliminar artículo");
+	    b3.setEnabled(false);
+	   
+	    
+	    gButtons.add(b1);
+	    gButtons.add(b2);
+	    gButtons.add(b3);
+	    
+	    cpEntregas.add(paginacionEntregas, new ColumnData(.68));
+	    cpEntregas.add(gButtons, new ColumnData(.32));
+	    
+	    
 	}
 
 

@@ -43,6 +43,7 @@ public class DialogoBuscar extends Dialog{
 		setHideOnButtonClick(true);
 		setButtons(Dialog.YESNO);
 		getButtonById(Dialog.YES).setText("Buscar");
+		getButtonById(Dialog.YES).setStyleAttribute("padding-right", "5px");
 		getButtonById(Dialog.NO).setText("Cancelar");
 		
 		addStyleName("dlgBusqueda");

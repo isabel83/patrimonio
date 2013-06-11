@@ -26,7 +26,7 @@ public class MenuNavegacion extends Composite {
 	
 	public MenuNavegacion(final RootPanel rootPanel){
 
-		Log.debug("Estamos en el menu navegacion");		
+		//Log.debug("Estamos en el menu navegacion");		
 		/** ENTRADAS DE ALMACEN **/
 		
 		MenuBar menuPrincipal = new MenuBar();
@@ -35,6 +35,19 @@ public class MenuNavegacion extends Composite {
 		Menu submnuEntradas = new Menu();
 				
 		MenuItem itemPedidos = new MenuItem("Nuevo Pedido");
+		itemPedidos.addSelectionListener(new SelectionListener<MenuEvent>(){
+
+			@Override
+			public void componentSelected(MenuEvent ce) {
+				FormEntradas form = new FormEntradas();
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
+			}
+			
+		});
 		submnuEntradas.add(itemPedidos);
 
 		MenuItem itemRecepcionPedido = new MenuItem("Recepcion de Pedidos");
@@ -50,16 +63,6 @@ public class MenuNavegacion extends Composite {
 		submnuEntradas.add(itemRecuperarArticulo);
 		
 		MenuBarItem mnuEntradas = new MenuBarItem("Entradas", submnuEntradas);
-		mnuEntradas.addListener(Events.OnClick, new Listener<BaseEvent>(){
-
-			@Override
-			public void handleEvent(BaseEvent be) {
-				Log.debug("En root tenemos : " + rootPanel.getWidgetCount());
-				rootPanel.clear();
-				rootPanel.add(new FormEntradas());
-			}
-			
-		});
 		menuPrincipal.add(mnuEntradas);
 		
 		/** SALIDAS DE ALMACEN **/
@@ -67,6 +70,19 @@ public class MenuNavegacion extends Composite {
 		Menu submnuSalidas = new Menu();
 		
 		MenuItem itemNuevaSolicitud = new MenuItem("Nueva solicitud");
+		itemNuevaSolicitud.addSelectionListener(new SelectionListener<MenuEvent>(){
+
+			@Override
+			public void componentSelected(MenuEvent ce) {
+				FormSalidas form = new FormSalidas();
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
+			}
+			
+		});
 		submnuSalidas.add(itemNuevaSolicitud);
 		
 		MenuItem itemAlbaranes = new MenuItem("Albaranes de solicitud");
@@ -79,15 +95,6 @@ public class MenuNavegacion extends Composite {
 		submnuSalidas.add(itemBajaArticulos);
 		
 		MenuBarItem menuSalidas = new MenuBarItem("Salida", submnuSalidas);
-		menuSalidas.addListener(Events.OnClick, new Listener<BaseEvent>(){
-
-			@Override
-			public void handleEvent(BaseEvent be) {
-				rootPanel.clear();
-				rootPanel.add(new FormSalidas());
-			}
-			
-		});
 		menuPrincipal.add(menuSalidas);
 		
 		/** CONSULTAS **/
@@ -95,6 +102,19 @@ public class MenuNavegacion extends Composite {
 		Menu submnuConsultas = new Menu();
 		
 		MenuItem itemCnsPedidos = new MenuItem("Pedidos");
+		itemCnsPedidos.addSelectionListener(new SelectionListener<MenuEvent>(){
+
+			@Override
+			public void componentSelected(MenuEvent ce) {
+				FormConsultas form = new FormConsultas();
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
+			}
+			
+		});
 		submnuConsultas.add(itemCnsPedidos);
 		
 		MenuItem itemCnsMaterialSolicitado = new MenuItem("Albaran Material solicitado");
@@ -104,15 +124,6 @@ public class MenuNavegacion extends Composite {
 		submnuConsultas.add(itemCnsMaterialServido);
 		
 		MenuBarItem menuConsultas = new MenuBarItem("Consultas", submnuConsultas);
-		menuConsultas.addListener(Events.OnClick, new Listener<BaseEvent>(){
-
-			@Override
-			public void handleEvent(BaseEvent be) {
-				rootPanel.clear();
-				rootPanel.add(new FormConsultas());
-			}
-			
-		});
 		menuPrincipal.add(menuConsultas);
 		
 		/** INFORMES **/
@@ -120,17 +131,22 @@ public class MenuNavegacion extends Composite {
 		Menu submnuInformes = new Menu();
 		
 		MenuItem itemInPedidos = new MenuItem("Pedidos");
-		submnuInformes.add(itemInPedidos);
-		MenuBarItem mnbrtmInformes = new MenuBarItem("Informes", submnuInformes);
-		mnbrtmInformes.addListener(Events.OnClick, new Listener<BaseEvent>(){
+		itemInPedidos.addSelectionListener(new SelectionListener<MenuEvent>(){
 
 			@Override
-			public void handleEvent(BaseEvent be) {
-				rootPanel.clear();
-				rootPanel.add(new FormInformes());
+			public void componentSelected(MenuEvent ce) {
+				FormInformes form = new FormInformes();
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
 			}
 			
 		});
+		submnuInformes.add(itemInPedidos);
+		
+		MenuBarItem mnbrtmInformes = new MenuBarItem("Informes", submnuInformes);
 		menuPrincipal.add(mnbrtmInformes);
 		
 		
@@ -139,31 +155,26 @@ public class MenuNavegacion extends Composite {
 		Menu submnuMantenimiento = new Menu();
 		
 		MenuItem itemProveedores = new MenuItem("Proveedores");
-		submnuMantenimiento.add(itemProveedores);
-		
-		MenuItem itemDestinatarios = new MenuItem("Destinatarios");
-		itemDestinatarios.addSelectionListener(new SelectionListener<MenuEvent>(){
+		itemProveedores.addSelectionListener(new SelectionListener<MenuEvent>(){
 
 			@Override
 			public void componentSelected(MenuEvent ce) {
-				Log.debug("En el clic de destinatarios");
-				rootPanel.add(new FormMntTablas());
+				FormMntTablas form = new FormMntTablas();
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
 			}
 			
 		});
+		submnuMantenimiento.add(itemProveedores);
+		
+		MenuItem itemDestinatarios = new MenuItem("Destinatarios");
 		submnuMantenimiento.add(itemDestinatarios);
-		MenuBarItem menuMantenimientoTablas = new MenuBarItem("Mantenimiento Tablas", submnuMantenimiento);
-		menuMantenimientoTablas.addListener(Events.OnClick, new Listener<MenuEvent>(){
 
-			@Override
-			public void handleEvent(MenuEvent be) {
-				Log.debug("En el clic de mantenimiento");
-				rootPanel.clear();
-				rootPanel.add(new FormMntTablas());
-				
-			}
-			
-		});
+		
+		MenuBarItem menuMantenimientoTablas = new MenuBarItem("Mantenimiento Tablas", submnuMantenimiento);
 		menuPrincipal.add(menuMantenimientoTablas);
 		
 		/** OPERACIONES ESPECIALES **/
@@ -171,19 +182,23 @@ public class MenuNavegacion extends Composite {
 		Menu submnuEspeciales = new Menu();
 		
 		MenuItem itemPrevisionDeVestuario = new MenuItem("Prevision de vestuario");
-		submnuEspeciales.add(itemPrevisionDeVestuario);
-		
-		MenuBarItem mnuOperacionesEspeciales = new MenuBarItem("Operaciones Especiales", submnuEspeciales);
-		mnuOperacionesEspeciales.addListener(Events.Select, new SelectionListener<ComponentEvent>(){
+		itemPrevisionDeVestuario.addSelectionListener(new SelectionListener<MenuEvent>(){
 
 			@Override
-			public void componentSelected(ComponentEvent ce) {
-				rootPanel.clear();
-				rootPanel.add(new FormOpEspeciales());
-				
+			public void componentSelected(MenuEvent ce) {
+				FormOpEspeciales form = new FormOpEspeciales();
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
 			}
 			
 		});
+		submnuEspeciales.add(itemPrevisionDeVestuario);
+		
+		MenuBarItem mnuOperacionesEspeciales = new MenuBarItem("Operaciones Especiales", submnuEspeciales);
+	
 		mnuOperacionesEspeciales.addStyleName("mnuFinal");
 		mnuOperacionesEspeciales.disable();
 		menuPrincipal.add(mnuOperacionesEspeciales);
@@ -191,7 +206,9 @@ public class MenuNavegacion extends Composite {
 		menuPrincipal.addStyleName("menu-principal");
 		
 		
-		Log.debug("Estamos al final del constructor MenuNavegacion");
+		//Log.debug("Estamos al final del constructor MenuNavegacion");
 		
 	}
+
+	
 }
