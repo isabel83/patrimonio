@@ -39,7 +39,7 @@ public class MenuNavegacion extends Composite {
 
 			@Override
 			public void componentSelected(MenuEvent ce) {
-				FormEntradas form = new FormEntradas();
+				FormEntradas form = new FormEntradas(0);
 				form.setBodyBorder(false);
 				form.setBorders(false);
 				form.setHeaderVisible(false);
@@ -51,16 +51,71 @@ public class MenuNavegacion extends Composite {
 		submnuEntradas.add(itemPedidos);
 
 		MenuItem itemRecepcionPedido = new MenuItem("Recepcion de Pedidos");
+		itemRecepcionPedido.addSelectionListener(new SelectionListener<MenuEvent>(){
+
+			@Override
+			public void componentSelected(MenuEvent ce) {
+				FormEntradas form = new FormEntradas(1);
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
+			}
+			
+		});
 		submnuEntradas.add(itemRecepcionPedido);
 		
 		SeparatorMenuItem separatorMenuItem = new SeparatorMenuItem();
 		submnuEntradas.add(separatorMenuItem);
 		
 		MenuItem itemNuevoArticulo = new MenuItem("Nuevo articulo");
+		itemNuevoArticulo.addSelectionListener(new SelectionListener<MenuEvent>(){
+
+			@Override
+			public void componentSelected(MenuEvent ce) {
+				FormEntradas form = new FormEntradas(2);
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
+			}
+			
+		});
 		submnuEntradas.add(itemNuevoArticulo);
 		
 		MenuItem itemRecuperarArticulo = new MenuItem("Recuperar articulo");
+		itemRecuperarArticulo.addSelectionListener(new SelectionListener<MenuEvent>(){
+
+			@Override
+			public void componentSelected(MenuEvent ce) {
+				FormEntradas form = new FormEntradas(3);
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
+			}
+			
+		});
 		submnuEntradas.add(itemRecuperarArticulo);
+		
+		MenuItem itemNumInv = new MenuItem("Poner Números de inventario");
+		itemNumInv.addSelectionListener(new SelectionListener<MenuEvent>(){
+
+			@Override
+			public void componentSelected(MenuEvent ce) {
+				FormEntradas form = new FormEntradas(4);
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
+			}
+			
+		});
+		submnuEntradas.add(itemNumInv);
 		
 		MenuBarItem mnuEntradas = new MenuBarItem("Entradas", submnuEntradas);
 		menuPrincipal.add(mnuEntradas);
@@ -74,7 +129,7 @@ public class MenuNavegacion extends Composite {
 
 			@Override
 			public void componentSelected(MenuEvent ce) {
-				FormSalidas form = new FormSalidas();
+				FormSalidas form = new FormSalidas(0);
 				form.setBodyBorder(false);
 				form.setBorders(false);
 				form.setHeaderVisible(false);
@@ -86,12 +141,38 @@ public class MenuNavegacion extends Composite {
 		submnuSalidas.add(itemNuevaSolicitud);
 		
 		MenuItem itemAlbaranes = new MenuItem("Albaranes de solicitud");
+		itemAlbaranes.addSelectionListener(new SelectionListener<MenuEvent>(){
+
+			@Override
+			public void componentSelected(MenuEvent ce) {
+				FormSalidas form = new FormSalidas(1);
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
+			}
+			
+		});
 		submnuSalidas.add(itemAlbaranes);
 		
 		SeparatorMenuItem separatorMenuItem_1 = new SeparatorMenuItem();
 		submnuSalidas.add(separatorMenuItem_1);
 		
-		MenuItem itemBajaArticulos = new MenuItem("Baja de art\u00EDculos");
+		MenuItem itemBajaArticulos = new MenuItem("Baja de artículos");
+		itemBajaArticulos.addSelectionListener(new SelectionListener<MenuEvent>(){
+
+			@Override
+			public void componentSelected(MenuEvent ce) {
+				FormSalidas form = new FormSalidas(2);
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
+			}
+			
+		});
 		submnuSalidas.add(itemBajaArticulos);
 		
 		MenuBarItem menuSalidas = new MenuBarItem("Salida", submnuSalidas);
@@ -106,7 +187,7 @@ public class MenuNavegacion extends Composite {
 
 			@Override
 			public void componentSelected(MenuEvent ce) {
-				FormConsultas form = new FormConsultas();
+				FormConsultas form = new FormConsultas(0);
 				form.setBodyBorder(false);
 				form.setBorders(false);
 				form.setHeaderVisible(false);
@@ -117,11 +198,85 @@ public class MenuNavegacion extends Composite {
 		});
 		submnuConsultas.add(itemCnsPedidos);
 		
-		MenuItem itemCnsMaterialSolicitado = new MenuItem("Albaran Material solicitado");
+		MenuItem itemCnsMaterialSolicitado = new MenuItem("Albaranes Material SOLICITADO");
+		itemCnsMaterialSolicitado.addSelectionListener(new SelectionListener<MenuEvent>(){
+
+			@Override
+			public void componentSelected(MenuEvent ce) {
+				FormConsultas form = new FormConsultas(1);
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
+			}
+			
+		});
 		submnuConsultas.add(itemCnsMaterialSolicitado);
 		
-		MenuItem itemCnsMaterialServido = new MenuItem("Albaran Material servido");
+		MenuItem itemCnsMaterialServido = new MenuItem("Albaranes Material SERVIDO");
+		itemCnsMaterialServido.addSelectionListener(new SelectionListener<MenuEvent>(){
+
+			@Override
+			public void componentSelected(MenuEvent ce) {
+				FormConsultas form = new FormConsultas(2);
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
+			}
+			
+		});
 		submnuConsultas.add(itemCnsMaterialServido);
+		
+		MenuItem itemCnsMaterialSerSol = new MenuItem("Control de material SOLICITADO y SERVIDO");
+		itemCnsMaterialSerSol.addSelectionListener(new SelectionListener<MenuEvent>(){
+
+			@Override
+			public void componentSelected(MenuEvent ce) {
+				FormConsultas form = new FormConsultas(3);
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
+			}
+			
+		});
+		submnuConsultas.add(itemCnsMaterialSerSol);
+		
+		MenuItem itemCnsArticulos = new MenuItem("Artículos");
+		itemCnsArticulos.addSelectionListener(new SelectionListener<MenuEvent>(){
+
+			@Override
+			public void componentSelected(MenuEvent ce) {
+				FormConsultas form = new FormConsultas(4);
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
+			}
+			
+		});
+		submnuConsultas.add(itemCnsArticulos);
+		
+		MenuItem itemCnsPrevision = new MenuItem("Previsión de vestuario");
+		itemCnsPrevision.addSelectionListener(new SelectionListener<MenuEvent>(){
+
+			@Override
+			public void componentSelected(MenuEvent ce) {
+				FormConsultas form = new FormConsultas(5);
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
+			}
+			
+		});
+		submnuConsultas.add(itemCnsPrevision);
 		
 		MenuBarItem menuConsultas = new MenuBarItem("Consultas", submnuConsultas);
 		menuPrincipal.add(menuConsultas);
@@ -135,7 +290,7 @@ public class MenuNavegacion extends Composite {
 
 			@Override
 			public void componentSelected(MenuEvent ce) {
-				FormInformes form = new FormInformes();
+				FormInformes form = new FormInformes(0);
 				form.setBodyBorder(false);
 				form.setBorders(false);
 				form.setHeaderVisible(false);
@@ -145,6 +300,87 @@ public class MenuNavegacion extends Composite {
 			
 		});
 		submnuInformes.add(itemInPedidos);
+		
+		MenuItem itemInSolMaterial = new MenuItem("Solicitudes de Material");
+		itemInSolMaterial.addSelectionListener(new SelectionListener<MenuEvent>(){
+
+			@Override
+			public void componentSelected(MenuEvent ce) {
+				FormInformes form = new FormInformes(1);
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
+			}
+			
+		});
+		submnuInformes.add(itemInSolMaterial);
+		
+		MenuItem itemInArticulos = new MenuItem("Artículos");
+		itemInArticulos.addSelectionListener(new SelectionListener<MenuEvent>(){
+
+			@Override
+			public void componentSelected(MenuEvent ce) {
+				FormInformes form = new FormInformes(2);
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
+			}
+			
+		});
+		submnuInformes.add(itemInArticulos);
+		
+		MenuItem itemInProveedores = new MenuItem("Proveedores");
+		itemInProveedores.addSelectionListener(new SelectionListener<MenuEvent>(){
+
+			@Override
+			public void componentSelected(MenuEvent ce) {
+				FormInformes form = new FormInformes(3);
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
+			}
+			
+		});
+		submnuInformes.add(itemInProveedores);
+		
+		MenuItem itemInPuestos = new MenuItem("Puestos de trabajo");
+		itemInPuestos.addSelectionListener(new SelectionListener<MenuEvent>(){
+
+			@Override
+			public void componentSelected(MenuEvent ce) {
+				FormInformes form = new FormInformes(4);
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
+			}
+			
+		});
+		submnuInformes.add(itemInPuestos);
+		
+		MenuItem itemInPrevision = new MenuItem("Previsión de vestuario");
+		itemInPrevision.addSelectionListener(new SelectionListener<MenuEvent>(){
+
+			@Override
+			public void componentSelected(MenuEvent ce) {
+				FormInformes form = new FormInformes(5);
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
+			}
+			
+		});
+		submnuInformes.add(itemInPrevision);
+		
 		
 		MenuBarItem mnbrtmInformes = new MenuBarItem("Informes", submnuInformes);
 		menuPrincipal.add(mnbrtmInformes);
@@ -159,7 +395,7 @@ public class MenuNavegacion extends Composite {
 
 			@Override
 			public void componentSelected(MenuEvent ce) {
-				FormMntTablas form = new FormMntTablas();
+				FormMntTablas form = new FormMntTablas(0);
 				form.setBodyBorder(false);
 				form.setBorders(false);
 				form.setHeaderVisible(false);
@@ -171,8 +407,84 @@ public class MenuNavegacion extends Composite {
 		submnuMantenimiento.add(itemProveedores);
 		
 		MenuItem itemDestinatarios = new MenuItem("Destinatarios");
+		itemDestinatarios.addSelectionListener(new SelectionListener<MenuEvent>(){
+
+			@Override
+			public void componentSelected(MenuEvent ce) {
+				FormMntTablas form = new FormMntTablas(1);
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
+			}
+			
+		});
 		submnuMantenimiento.add(itemDestinatarios);
 
+		MenuItem itemSecciones = new MenuItem("Secciones");
+		itemSecciones.addSelectionListener(new SelectionListener<MenuEvent>(){
+
+			@Override
+			public void componentSelected(MenuEvent ce) {
+				FormMntTablas form = new FormMntTablas(2);
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
+			}
+			
+		});
+		submnuMantenimiento.add(itemSecciones);
+		
+		MenuItem itemFamilias = new MenuItem("Familias");
+		itemFamilias.addSelectionListener(new SelectionListener<MenuEvent>(){
+
+			@Override
+			public void componentSelected(MenuEvent ce) {
+				FormMntTablas form = new FormMntTablas(3);
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
+			}
+			
+		});
+		submnuMantenimiento.add(itemFamilias);
+		
+		MenuItem itemSubFamilias = new MenuItem("Subfamilias");
+		itemSubFamilias.addSelectionListener(new SelectionListener<MenuEvent>(){
+
+			@Override
+			public void componentSelected(MenuEvent ce) {
+				FormMntTablas form = new FormMntTablas(4);
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
+			}
+			
+		});
+		submnuMantenimiento.add(itemSubFamilias);
+		
+		MenuItem itemPuestos = new MenuItem("Puestos de trabajo");
+		itemPuestos.addSelectionListener(new SelectionListener<MenuEvent>(){
+
+			@Override
+			public void componentSelected(MenuEvent ce) {
+				FormMntTablas form = new FormMntTablas(5);
+				form.setBodyBorder(false);
+				form.setBorders(false);
+				form.setHeaderVisible(false);
+				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+				RootPanel.get("principalContainer").add(form);
+			}
+			
+		});
+		submnuMantenimiento.add(itemPuestos);
 		
 		MenuBarItem menuMantenimientoTablas = new MenuBarItem("Mantenimiento Tablas", submnuMantenimiento);
 		menuPrincipal.add(menuMantenimientoTablas);
@@ -195,7 +507,7 @@ public class MenuNavegacion extends Composite {
 			}
 			
 		});
-		submnuEspeciales.add(itemPrevisionDeVestuario);
+		//submnuEspeciales.add(itemPrevisionDeVestuario);
 		
 		MenuBarItem mnuOperacionesEspeciales = new MenuBarItem("Operaciones Especiales", submnuEspeciales);
 	

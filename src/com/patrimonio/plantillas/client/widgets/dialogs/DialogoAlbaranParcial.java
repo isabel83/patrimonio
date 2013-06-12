@@ -42,7 +42,7 @@ public class DialogoAlbaranParcial extends Dialog{
 		setHeading("Nuevo artículo");
 		setLayout(new BorderLayout());
 		setModal(true);
-		setSize(875, 500);
+		setSize(875, 550);
 		//setHideOnButtonClick(true);
 		addStyleName("dlgBusqueda");
 		

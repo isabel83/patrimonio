@@ -69,13 +69,15 @@ public class DialogoNuevoArticulo extends Dialog{
 		}
 		else if(darBaja){
 			setHeading("Baja de artículo");
+			setSize(875, 725);
 		}
 		else{
 			setHeading("Nuevo artículo");
+			setSize(875, 710);
 		}
 		setLayout(new BorderLayout());
 		setModal(true);
-		setSize(875, 710);
+		
 		//setHideOnButtonClick(true);
 		addStyleName("dlgBusqueda");
 		

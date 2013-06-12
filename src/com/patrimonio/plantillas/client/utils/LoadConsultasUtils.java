@@ -293,7 +293,7 @@ public class LoadConsultasUtils {
 	    
 	    
 	    Label lblSeccion = new Label("Sección:");
-	    lblSeccion.setStyleName("etiqueta");
+	    lblSeccion.setStyleName("etiqueta ie5p");
 	    ListBox lstSeccion = new ListBox();
 	    lstSeccion.setVisibleItemCount(1);
 	    left.add(lblSeccion,new FormData("100%"));
@@ -326,13 +326,13 @@ public class LoadConsultasUtils {
 	    });
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Deshacer");
-	    b2.setStyleAttribute("padding-right", "5px");
+	   // b2.setStyleAttribute("padding-right", "5px");
 	    b3.setText("Salir");
 	   
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
-	    gButtons.add(b3);
+	   // gButtons.add(b3);
 	    gButtons.setBodyBorder(false);
 	    gButtons.setBorders(false);
 	    gButtons.addStyleName("botonesFuncionales");
@@ -441,14 +441,14 @@ public class LoadConsultasUtils {
 	   
 	    
 	    Label lblSeccion = new Label("Sección:");
-	    lblSeccion.setStyleName("etiqueta");
+	    lblSeccion.setStyleName("etiqueta ie5p");
 	    ListBox lstSeccion = new ListBox();
 	    lstSeccion.setVisibleItemCount(1);
 	    left.add(lblSeccion,new FormData("100%"));
 	    left.add(lstSeccion,new FormData("100%"));
 	    
 	    Label lblUnidad = new Label("Unidad:");
-	    lblUnidad.setStyleName("etiqueta");
+	    lblUnidad.setStyleName("etiqueta ie3p");
 	    ListBox lstUnidad = new ListBox();
 	    lstUnidad.setVisibleItemCount(1);
 	    center.add(lblUnidad,new FormData("100%"));
@@ -475,12 +475,12 @@ public class LoadConsultasUtils {
 	    });
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Deshacer");
-	    b2.setStyleAttribute("padding-right", "5px");
+	    //b2.setStyleAttribute("padding-right", "5px");
 	    b3.setText("Salir");
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
-	    gButtons.add(b3);
+	   // gButtons.add(b3);
 	    gButtons.setBodyBorder(false);
 	    gButtons.setBorders(false);
 	    gButtons.addStyleName("botonesFuncionales");
@@ -600,7 +600,7 @@ public class LoadConsultasUtils {
 	    
 	    
 	    Label lblSeccion = new Label("Sección:");
-	    lblSeccion.setStyleName("etiqueta");
+	    lblSeccion.setStyleName("etiqueta ie5p");
 	    ListBox lstSeccion = new ListBox();
 	    lstSeccion.setVisibleItemCount(1);
 	    left.add(lblSeccion,new FormData("100%"));
@@ -633,13 +633,13 @@ public class LoadConsultasUtils {
 	    });
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Deshacer");
-	    b2.setStyleAttribute("padding-right", "5px");
+	    //b2.setStyleAttribute("padding-right", "5px");
 	    b3.setText("Salir");
 	   
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
-	    gButtons.add(b3);
+	    //gButtons.add(b3);
 	    gButtons.setBodyBorder(false);
 	    gButtons.setBorders(false);
 	    gButtons.addStyleName("botonesFuncionales");
@@ -743,7 +743,7 @@ public class LoadConsultasUtils {
 	    ContentPanel cpExistencias = new ContentPanel();
 	    cpExistencias.setHeading("Existencias");
 	    cpExistencias.setLayout(rgtLayout);  
-	    cpExistencias.setAutoHeight(true);
+	    cpExistencias.setHeight("90px");
 	    cpExistencias.setStyleAttribute("paddingBottom", "10px");
 	    
 	    Label lblMinimas = new Label();
@@ -802,14 +802,14 @@ public class LoadConsultasUtils {
 	    });
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Deshacer");
-	    b2.setStyleAttribute("padding-right", "5px");
+	   // b2.setStyleAttribute("padding-right", "5px");
 	    b3.setText("Salir");
 	    b3.setEnabled(false);
 	   
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
-	    gButtons.add(b3);
+	    //gButtons.add(b3);
 	    gButtons.setBodyBorder(false);
 	    gButtons.setBorders(false);
 	    gButtons.addStyleName("botonesFuncionales");
@@ -872,7 +872,7 @@ public class LoadConsultasUtils {
 	    ContentPanel cpEntregas = new ContentPanel();
 	    cpEntregas.setHeading("Entregas de Vestuario");
 	    cpEntregas.setLayout(new ColumnLayout());  
-	    cpEntregas.setAutoHeight(true);
+	    cpEntregas.setHeight("300px");
 	    cpEntregas.setFrame(true);
 	    cpEntregas.setStyleAttribute("paddingBottom", "10px");
 	    cpEntregas.setStyleName("body");
@@ -882,16 +882,13 @@ public class LoadConsultasUtils {
 	    ButtonGroup gButtons = new ButtonGroup(2);
 	    Button b1  = new Button(), b2 = new Button();
 	    b1.setText("Buscar Trabajador");
-	    b1.setEnabled(false);
-	    b1.setStyleAttribute("padding-right", "5px");
+	    //b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Salir");
 
 	   
 	    
 	    gButtons.add(b1);
-	    gButtons.add(b2);
-	    gButtons.setBodyBorder(false);
-	    gButtons.setBorders(false);
+	    //gButtons.add(b2);
 	    gButtons.addStyleName("botonesFuncionales");
 	     
 	       
@@ -905,7 +902,7 @@ public class LoadConsultasUtils {
 	    main.add(central, new ColumnData(1));
 	    
 	    ////*************************************************** AQUI LA PAGINACION SERA LA DEL MENU ICONOS //////
-	    main.add(gButtons, new ColumnData(.18));
+	    main.add(b1, new ColumnData(.18));
 	    
 		frmCPrevision.add(main, formData);
 		
@@ -986,10 +983,8 @@ public class LoadConsultasUtils {
 	    b1.setText("Agregar artículo");
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Modificar artículo");
-	    b2.setEnabled(false);
 	    b2.setStyleAttribute("padding-right", "5px");
 	    b3.setText("Eliminar artículo");
-	    b3.setEnabled(false);
 	   
 	    
 	    gButtons.add(b1);

@@ -16,6 +16,13 @@ public class FormEntradas extends ContentPanel{
 
 	LoadEntradasUtils utils = new LoadEntradasUtils();
 
+	int panelActivo = 0;
+	
+	public FormEntradas(int numPanel) {
+		panelActivo = numPanel;
+	}
+
+
 	@Override
 	protected void onLoad() {
 		
@@ -57,7 +64,7 @@ public class FormEntradas extends ContentPanel{
 		tabPanel.setBodyBorder(false);
 		tabPanel.setBorders(false);
 		loadEntradas(tabPanel);
-		
+		tabPanel.setSelection(tabPanel.getItem(panelActivo));
 		add(tabPanel);
 		
 		//Log.debug("Terminando en el onrender del formPage");
@@ -110,7 +117,16 @@ public class FormEntradas extends ContentPanel{
 		tabEliminado.add(frmArticuloEliminado);
 		panel.add(tabEliminado);
 		
-		
+//		FormPanel frmNuevoPedido = new FormPanel();
+//		frmNuevoPedido.setHeaderVisible(false);
+//		frmNuevoPedido.setAutoHeight(true);
+//		utils.loadFormNuevoPedido(frmNuevoPedido);
+//		
+		TabItem tabNumInventario = new TabItem("Poner números de inventario");
+		tabNumInventario.add(new MenuIconos());
+		//tabNumInventario.add(frmNuevoPedido);
+		//tabNuevo.setIconStyle("tabNuevo");
+		panel.add(tabNumInventario);
 	}
 
 //	

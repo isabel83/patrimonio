@@ -47,7 +47,7 @@ public class DialogoEliminados extends Dialog{
 		setHeading("Recuperación de artículos eliminados");
 		setLayout(new BorderLayout());
 		setModal(true);
-		setSize(875, 700);
+		setSize(875, 710);
 		//setHideOnButtonClick(true);
 		addStyleName("dlgBusqueda");
 		

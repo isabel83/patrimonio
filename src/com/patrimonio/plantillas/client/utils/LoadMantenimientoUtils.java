@@ -359,11 +359,13 @@ public class LoadMantenimientoUtils {
 
 	public void loadFormFamilias(FormPanel frmFamilias) {
 		FormData formData = new FormData("100%"); 
+		FormData frmData = new FormData("40%");
 		Margins m = new Margins();
 		m.top = 5;
 		m.left=5;
 		m.right=5;
 		formData.setMargins(m);
+		frmData.setMargins(m);
 		
 		frmFamilias.setSize("100%", "100%");  
 		frmFamilias.setBodyBorder(false);
@@ -474,7 +476,7 @@ public class LoadMantenimientoUtils {
 	    gButtons.add(b4);
 	    gButtons.addStyleName("botonesFuncionales");
 	    
-	    center.add(codigo, new FormData("40%"));
+	    center.add(codigo, frmData);
 	    center.add(lblSeccion, formData);
 	    center.add(lstSeccion, formData);
 	    center.add(nombre, formData);

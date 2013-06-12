@@ -27,6 +27,13 @@ import com.patrimonio.plantillas.client.widgets.menus.MenuIconos;
 public class FormConsultas extends ContentPanel{
 	LoadConsultasUtils utils = new LoadConsultasUtils();
 
+	int panelActivo = 0;
+	
+	public FormConsultas(int posicion) {
+		panelActivo = posicion;
+	}
+
+
 	@Override
 	protected void onLoad() {
 		
@@ -67,7 +74,7 @@ public class FormConsultas extends ContentPanel{
 		tabPanel.setBodyBorder(false);
 		tabPanel.setBorders(false);
 		loadPanelConsultas(tabPanel);
-		
+		tabPanel.setSelection(tabPanel.getItem(panelActivo));
 		add(tabPanel);
 		
 		//Log.debug("Terminando en el onrender del formPage");

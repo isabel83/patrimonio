@@ -42,6 +42,7 @@ import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextArea;
+import com.google.gwt.user.client.ui.TextBox;
 import com.patrimonio.plantillas.client.widgets.Stock;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoAlbaranFecha;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoBuscar;
@@ -131,7 +132,8 @@ public class LoadSalidasUtils {
 	    final ContentPanel cpArticulos = new ContentPanel();
 	    cpArticulos.setHeading("Selecciona los artículos que quieres solicitar");
 	    cpArticulos.setLayout(new BorderLayout());  
-	    cpArticulos.setHeight("390px");
+	    cpArticulos.setAutoHeight(true);
+	    cpArticulos.setFrame(true);
 	    cpArticulos.setStyleAttribute("paddingTop", "10px");
 	    
 	    
@@ -151,7 +153,7 @@ public class LoadSalidasUtils {
 	    LayoutContainer subLeft = new LayoutContainer();  
 	    subLeft.setStyleAttribute("paddingLeft", "10px");
 	    layout = new FormLayout();  
-	    layout.setLabelAlign(LabelAlign.TOP);  
+	    layout.setLabelAlign(LabelAlign.LEFT);  
 	    subLeft.setLayout(layout);  
 	    
 	    LayoutContainer subRight = new LayoutContainer();
@@ -172,10 +174,10 @@ public class LoadSalidasUtils {
 	    articulo.addInputStyleName("noBorder");
 	    subLeft.add(articulo, new FormData("100%"));
 	    
-	    final TextField<String> descArticulo = new TextField<String>();
+	    final TextBox descArticulo = new TextBox();
 	    descArticulo.setEnabled(false);
 	    descArticulo.setValue("Descripción del tipo de artículo");
-	    descArticulo.setLabelStyle("display: none");
+	    descArticulo.addStyleName("x-form-text");
 	    subLeft.add(descArticulo, new FormData("100%")); 
    
 	    final TextField<String> marca = new TextField<String>();  
@@ -219,15 +221,27 @@ public class LoadSalidasUtils {
 
 			@Override
 			public void handleEvent(BaseEvent be) {
-				articulo.setEnabled(true);
-				descArticulo.setEnabled(true);
-				marca.setEnabled(true);
-				b4.setVisible(true);
-				subMain.recalculate();
-				frmArticulos.layout(true);
-				cpArticulos.layout(true);
+				if(b1.getText().equalsIgnoreCase("Modificar Artículo")){
+					b1.setText("Guardar Modificación");
+					articulo.setEnabled(true);
+					descArticulo.setEnabled(true);
+					marca.setEnabled(true);
+					b4.setVisible(true);
+					subMain.recalculate();
+					frmArticulos.layout(true);
+					cpArticulos.layout(true);
+				}
+				else{
+					b1.setText("Modificar Artículo");
+					articulo.setEnabled(false);
+					descArticulo.setEnabled(false);
+					marca.setEnabled(false);
+					b4.setVisible(false);
+					subMain.recalculate();
+					frmArticulos.layout(true);
+					cpArticulos.layout(true);
+				}
 			}
-	    	
 	    });
 	    b2.setText("Nuevo Artículo");
 	    b2.setStyleAttribute("padding-right", "5px");
@@ -248,6 +262,7 @@ public class LoadSalidasUtils {
 
 			@Override
 			public void handleEvent(BaseEvent be) {
+				b1.setText("Modificar Artículo");
 				articulo.setEnabled(false);
 				descArticulo.setEnabled(false);
 				marca.setEnabled(false);

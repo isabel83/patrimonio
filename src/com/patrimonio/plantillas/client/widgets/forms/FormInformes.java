@@ -23,6 +23,13 @@ import com.patrimonio.plantillas.client.widgets.menus.MenuIconos;
 public class FormInformes extends ContentPanel{
 	LoadInformesUtils utils = new LoadInformesUtils();
 
+	int panelActivo = 0;
+	
+	public FormInformes(int posicion) {
+		panelActivo = posicion;
+	}
+
+
 	@Override
 	protected void onLoad() {
 		
@@ -55,7 +62,7 @@ public class FormInformes extends ContentPanel{
 		tabPanel.setBodyBorder(false);
 		tabPanel.setBorders(false);
 		loadInformes(tabPanel);
-		
+		tabPanel.setSelection(tabPanel.getItem(panelActivo));
 		add(tabPanel);
 		
 	}
@@ -136,6 +143,7 @@ public class FormInformes extends ContentPanel{
 				anyo.setHideOnButtonClick(true);
 				anyo.setHeading("Introduce el año sobre el que quieres realizar la consulta de previsión");
 				anyo.setButtons(Dialog.OKCANCEL);
+				anyo.setModal(true);
 				anyo.getButtonById(Dialog.OK).addSelectionListener(new SelectionListener<ButtonEvent>(){
 
 					@Override

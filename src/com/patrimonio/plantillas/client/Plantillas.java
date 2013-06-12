@@ -148,7 +148,7 @@ public class Plantillas implements EntryPoint {
 				
 				RootPanel.get("menuContainer").add(new MenuNavegacion(rootPanel));
 				
-				FormEntradas frm = new FormEntradas();
+				FormEntradas frm = new FormEntradas(0);
 				frm.setBodyBorder(false);
 				frm.setBorders(false);
 				frm.setHeaderVisible(false);

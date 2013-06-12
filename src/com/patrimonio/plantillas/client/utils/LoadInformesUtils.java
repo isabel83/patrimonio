@@ -107,17 +107,15 @@ public class LoadInformesUtils {
 	    ButtonGroup gButtons = new ButtonGroup(3);
 	    Button b1  = new Button(), b2 = new Button(), b3 = new Button();
 	    b1.setText("Imprimir");
-	    b1.setEnabled(false);
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Deshacer");
-	    b2.setStyleAttribute("padding-right", "5px");
+	    //b2.setStyleAttribute("padding-right", "5px");
 	    b3.setText("Salir");
-	    b3.setEnabled(false);
 	   
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
-	    gButtons.add(b3);
+	    //gButtons.add(b3);
 	    gButtons.setBodyBorder(false);
 	    gButtons.setBorders(false);
 	    gButtons.addStyleName("botonesFuncionales");
@@ -218,17 +216,15 @@ public class LoadInformesUtils {
 	    ButtonGroup gButtons = new ButtonGroup(3);
 	    Button b1  = new Button(), b2 = new Button(), b3 = new Button();
 	    b1.setText("Imprimir");
-	    b1.setEnabled(false);
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Deshacer");
-	    b2.setStyleAttribute("padding-right", "5px");
+	    //b2.setStyleAttribute("padding-right", "5px");
 	    b3.setText("Salir");
-	    b3.setEnabled(false);
 	   
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
-	    gButtons.add(b3);
+	    //gButtons.add(b3);
 	    gButtons.setBodyBorder(false);
 	    gButtons.setBorders(false);
 	    gButtons.addStyleName("botonesFuncionales");
@@ -308,17 +304,15 @@ public class LoadInformesUtils {
 	    ButtonGroup gButtons = new ButtonGroup(3);
 	    Button b1  = new Button(), b2 = new Button(), b3 = new Button();
 	    b1.setText("Imprimir");
-	    b1.setEnabled(false);
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Deshacer");
-	    b2.setStyleAttribute("padding-right", "5px");
+	    //b2.setStyleAttribute("padding-right", "5px");
 	    b3.setText("Salir");
-	    b3.setEnabled(false);
 	   
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
-	    gButtons.add(b3);
+	    //gButtons.add(b3);
 	    gButtons.setBodyBorder(false);
 	    gButtons.setBorders(false);
 	    gButtons.addStyleName("botonesFuncionales");
@@ -363,17 +357,15 @@ public class LoadInformesUtils {
 	    ButtonGroup gButtons = new ButtonGroup(3);
 	    Button b1  = new Button(), b2 = new Button(), b3 = new Button();
 	    b1.setText("Imprimir");
-	    b1.setEnabled(false);
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Deshacer");
-	    b2.setStyleAttribute("padding-right", "5px");
+	    //b2.setStyleAttribute("padding-right", "5px");
 	    b3.setText("Salir");
-	    b3.setEnabled(false);
 	   
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
-	    gButtons.add(b3);
+	    //gButtons.add(b3);
 	    gButtons.setBodyBorder(false);
 	    gButtons.setBorders(false);
 	    gButtons.addStyleName("botonesFuncionales");
@@ -434,17 +426,15 @@ public class LoadInformesUtils {
 	    ButtonGroup gButtons = new ButtonGroup(3);
 	    Button b1  = new Button(), b2 = new Button(), b3 = new Button();
 	    b1.setText("Imprimir");
-	    b1.setEnabled(false);
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Deshacer");
-	    b2.setStyleAttribute("padding-right", "5px");
+	    //b2.setStyleAttribute("padding-right", "5px");
 	    b3.setText("Salir");
-	    b3.setEnabled(false);
 	   
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
-	    gButtons.add(b3);
+	    //gButtons.add(b3);
 	    gButtons.setBodyBorder(false);
 	    gButtons.setBorders(false);
 	    gButtons.addStyleName("botonesFuncionales");
@@ -511,17 +501,15 @@ public class LoadInformesUtils {
 	    ButtonGroup gButtons = new ButtonGroup(3);
 	    Button b1  = new Button(), b2 = new Button(), b3 = new Button();
 	    b1.setText("Imprimir");
-	    b1.setEnabled(false);
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Deshacer");
-	    b2.setStyleAttribute("padding-right", "5px");
+	    //b2.setStyleAttribute("padding-right", "5px");
 	    b3.setText("Salir");
-	    b3.setEnabled(false);
 	   
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
-	    gButtons.add(b3);
+	    //gButtons.add(b3);
 	    gButtons.setBodyBorder(false);
 	    gButtons.setBorders(false);
 	    gButtons.addStyleName("botonesFuncionales");

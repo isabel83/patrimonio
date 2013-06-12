@@ -23,6 +23,13 @@ import com.patrimonio.plantillas.client.widgets.menus.MenuIconos;
 public class FormMntTablas extends ContentPanel{
 	LoadMantenimientoUtils utils = new LoadMantenimientoUtils();
 
+	int panelActivo = 0;
+	
+	public FormMntTablas(int posicion) {
+		panelActivo = posicion;
+	}
+
+
 	@Override
 	protected void onLoad() {
 		
@@ -56,7 +63,7 @@ public class FormMntTablas extends ContentPanel{
 		tabPanel.setBodyBorder(false);
 		tabPanel.setBorders(false);
 		loadPanelConsultas(tabPanel);
-		
+		tabPanel.setSelection(tabPanel.getItem(panelActivo));
 		add(tabPanel);
 			
 	} 

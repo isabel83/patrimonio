@@ -103,6 +103,11 @@ public class LoadEntradasUtils {
 	    layout.setLabelAlign(LabelAlign.TOP);  
 	    right.setLayout(layout);  
 	    
+	    LayoutContainer bottom = new LayoutContainer();  
+	    layout = new FormLayout();  
+	    layout.setLabelAlign(LabelAlign.TOP);  
+	    bottom.setLayout(layout);
+	    
 	    
 	    ContentPanel cpRight = new ContentPanel();
 	    RowLayout rgtLayout = new RowLayout();
@@ -191,11 +196,7 @@ public class LoadEntradasUtils {
 	    
 	    right.add(cpRight);
 	    
-	    main.add(left, new ColumnData(.4));  
-	    main.add(right, new ColumnData(.6));  
-	  
-	    panel.add(main, new FormData("100%"));  
-	  
+	    	  
 
 	    List<ColumnConfig> configs = new ArrayList<ColumnConfig>();  
 	    
@@ -241,10 +242,6 @@ public class LoadEntradasUtils {
 	    grid.setColumnReordering(true);  
 	    grid.setColumnLines(true);
 	    
-	    LayoutContainer bottom = new LayoutContainer();  
-	    bottom.setLayout(new FlowLayout()); 
-	    bottom.getAriaSupport().setPresentation(true);  
-	    
 	    
 	    DataProxy proxy = null; 
 		final BasePagingLoader<PagingLoadResult<ModelData>> loader = new BasePagingLoader<PagingLoadResult<ModelData>>(  
@@ -253,19 +250,19 @@ public class LoadEntradasUtils {
 	    
 	    final PagingToolBar toolBar = new PagingToolBar(50); 
 	    toolBar.bind(loader);
+	    toolBar.setStyleName("paginacion");
 	    
 	    ContentPanel cp = new ContentPanel();  
 	    cp.setBodyBorder(true);  
 	    cp.setHeading("Pedido");
+	    cp.setFrame(true);
 	    cp.setButtonAlign(HorizontalAlignment.CENTER);  
 	    cp.setLayout(new FitLayout());
 	    cp.setHeight("200px");
 	    
-	    cp.setBottomComponent(toolBar);
-	    
 	    cp.add(grid);
-	    bottom.add(cp);
-	    panel.add(bottom); 
+	    bottom.add(cp, formData);
+	    
 	    
 	    ButtonGroup gButtons = new ButtonGroup(2);
 	    Button b2 = new Button(), b3 = new Button();
@@ -281,8 +278,13 @@ public class LoadEntradasUtils {
 	    gButtons.setBorders(false);
 	    gButtons.addStyleName("botonesFuncionales");
 	    
+	    main.add(left, new ColumnData(.4));  
+	    main.add(right, new ColumnData(.6));  
+	    main.add(bottom, new ColumnData(1));
+	    main.add(toolBar, new ColumnData(.6));
+	    main.add(gButtons, new ColumnData(.4));
+	    panel.add(main, new FormData("100%"));  
 	    
-	    panel.add(gButtons);  
 	  
 	}
 	
@@ -623,7 +625,7 @@ public class LoadEntradasUtils {
 	    b1.setText("Grabar");
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Deshacer");
-	    b2.setStyleAttribute("padding-right", "5px");
+	    //b2.setStyleAttribute("padding-right", "5px");
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
@@ -796,7 +798,7 @@ public class LoadEntradasUtils {
 	    });
 	    
 	    b2.setText("Deshacer");
-	    b2.setStyleAttribute("padding-right", "5px");
+	   // b2.setStyleAttribute("padding-right", "5px");
 	   	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);

@@ -18,6 +18,13 @@ public class FormSalidas extends ContentPanel{
 
 	LoadSalidasUtils utils = new LoadSalidasUtils();
 
+	int panelActivo = 0;
+	
+	public FormSalidas(int posicion) {
+		panelActivo = posicion;
+	}
+
+
 	@Override
 	protected void onLoad() {
 		
@@ -58,7 +65,7 @@ public class FormSalidas extends ContentPanel{
 		tabPanel.setBodyBorder(false);
 		tabPanel.setBorders(false);
 		loadEntradas(tabPanel);
-		
+		tabPanel.setSelection(tabPanel.getItem(panelActivo));
 		add(tabPanel);
 		
 		//Log.debug("Terminando en el onrender del formPage");
