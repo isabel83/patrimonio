@@ -27,7 +27,7 @@
                  You can also use an annotation-based approach to transaction configuration declaring transaction semantics directly in the Java source 
                  Ver: http://static.springsource.org/spring/docs/2.0.x/reference/transaction.html
                  Ver: http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/transaction.html#transaction-declarative -->                             
-        <tx:annotation-driven />
+        <tx:annotation-driven transaction-manager="transactionManager" /> 
         
         <!-- AOP - para interceptar las llamadas a los metodos del servicio 
         <aop:config>
@@ -39,15 +39,63 @@
         <aop:aspectj-autoproxy/>
 
         <bean id="interfeceptServiceFacade" class="com.patrimonio.plantillas.server.auth.CustomAuthenticationInterceptor" />-->
+        <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+			<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+			<property name="url" value="jdbc:oracle:thin:@128.21.80.56:1521:APEX" />
+			<property name="username" value="almacen" />
+			<property name="password" value="almacen" />
+		</bean>
+         
+    
+        <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+			<property name="dataSource" ref="dataSource" />
+			<property name="exposeTransactionAwareSessionFactory">
+				<value>false</value>
+			</property>
+			 <!-- <property name="hibernateProperties">
+				<props>
+					<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+					<prop key="hibernate.show_sql">true</prop>
+					<prop key="hibernate.current_session_context_class">thread</prop>
+	      			<prop key="hibernate.max_fetch_depth">3</prop>
+				</props>
+			</property>
+			<property name="mappingDirectoryLocations">
+				<value>/</value>
+			</property>
+			<property name="mappingResources">
+				<list>
+					<value>com/patrimonio/plantillas/shared/DTOs/ArticuloDTO.hbm.xml</value>
+					<value>com/patrimonio/plantillas/shared/DTOs/ArticuloProDTO.hbm.xml</value>
+					<value>com/patrimonio/plantillas/shared/DTOs/DestinatarioDTO.hbm.xml</value>
+					<value>com/patrimonio/plantillas/shared/DTOs/EstadoDTO.hbm.xml</value>
+					<value>com/patrimonio/plantillas/shared/DTOs/FamiliaDTO.hbm.xml</value>
+					<value>com/patrimonio/plantillas/shared/DTOs/PerfilDTO.hbm.xml</value>
+					<value>com/patrimonio/plantillas/shared/DTOs/PersonaDTO.hbm.xml</value>
+					<value>com/patrimonio/plantillas/shared/DTOs/ProveedorDTO.hbm.xml</value>
+					<value>com/patrimonio/plantillas/shared/DTOs/PuestoDTO.hbm.xml</value>
+					<value>com/patrimonio/plantillas/shared/DTOs/SeccionDTO.hbm.xml</value>
+					<value>com/patrimonio/plantillas/shared/DTOs/SubfamiliaDTO.hbm.xml</value>
+				</list>
+			</property>-->
+		</bean> 
                 
-        <!-- JPA - Entity manager de JPA && Persistence Unit (persistence.xml) -->
+        <!-- JPA - Entity manager de JPA && Persistence Unit (persistence.xml) 
         <bean class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean" id="entityManagerFactory">
                 <property name="persistenceUnitName" value="patrimonioAppUnit" />
-        </bean>
+        </bean>-->
 
-        <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">
-                <property name="entityManagerFactory" ref="entityManagerFactory" />
-        </bean>
+        <bean class="org.springframework.orm.hibernate3.HibernateTransactionManager" id="transactionManager">
+                <property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
         
 	 
 </beans>

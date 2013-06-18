@@ -75,7 +75,7 @@ public class FormInformes extends ContentPanel{
 		frmPedidos.setAutoHeight(true);
 		utils.loadPedidos(frmPedidos);
 		
-		TabItem tabPedidos = new TabItem("Pedidos");
+		TabItem tabPedidos = new TabItem();
 		tabPedidos.add(new MenuIconos());
 		tabPedidos.add(frmPedidos);
 		panel.add(tabPedidos);
@@ -85,7 +85,7 @@ public class FormInformes extends ContentPanel{
 		frmSolicitudes.setAutoHeight(true);
 		utils.loadSolicitudes(frmSolicitudes);
 		
-		TabItem tabSolicitudes = new TabItem("Solicitudes de Material");
+		TabItem tabSolicitudes = new TabItem();
 		tabSolicitudes.add(new MenuIconos());
 		tabSolicitudes.add(frmSolicitudes);
 		panel.add(tabSolicitudes);
@@ -96,7 +96,7 @@ public class FormInformes extends ContentPanel{
 		utils.loadArticulos(frmArticulos);
 		
 		
-		TabItem tabArticulos = new TabItem("Articulos");
+		TabItem tabArticulos = new TabItem();
 		tabArticulos.add(new MenuIconos());
 		tabArticulos.add(frmArticulos);
 		panel.add(tabArticulos);
@@ -107,7 +107,7 @@ public class FormInformes extends ContentPanel{
 		utils.loadProveedores(frmProveedores);
 		
 		
-		TabItem tabProveedores = new TabItem("Proveedores");
+		TabItem tabProveedores = new TabItem();
 		tabProveedores.add(new MenuIconos());
 		tabProveedores.add(frmProveedores);
 		panel.add(tabProveedores);
@@ -118,7 +118,7 @@ public class FormInformes extends ContentPanel{
 		utils.loadPuestos(frmPuestos);
 		
 		
-		TabItem tabPuestos = new TabItem("Puestos de trabajo");
+		TabItem tabPuestos = new TabItem();
 		tabPuestos.add(new MenuIconos());
 		tabPuestos.add(frmPuestos);
 		panel.add(tabPuestos);
@@ -129,7 +129,7 @@ public class FormInformes extends ContentPanel{
 //		utils.loadPrevision(frmPrevision);
 //		
 		
-		TabItem tabPrevision = new TabItem("Previsión de vestuario");
+		TabItem tabPrevision = new TabItem();
 		tabPrevision.add(new MenuIconos());
 		//tabPrevision.add(frmPrevision);
 		tabPrevision.addListener(Events.Select, new Listener<ComponentEvent>(){

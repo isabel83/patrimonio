@@ -43,6 +43,13 @@ public interface ArticuloServiceAsync
 
 
     /**
+     * GWT-RPC service  asynchronous (client-side) interface
+     * @see com.patrimonio.plantillas.shared.services.ArticuloService
+     */
+    void loadArticulosPro( int idProveedor, AsyncCallback<java.util.List<com.patrimonio.plantillas.shared.DTOs.ArticuloDTO>> callback );
+
+
+    /**
      * Utility class to get the RPC Async interface from client-side code
      */
     public static final class Util 
@@ -54,8 +61,6 @@ public interface ArticuloServiceAsync
             if ( instance == null )
             {
                 instance = (ArticuloServiceAsync) GWT.create( ArticuloService.class );
-                ServiceDefTarget target = (ServiceDefTarget) instance;
-                target.setServiceEntryPoint( GWT.getModuleBaseURL() + "ArticuloService" );
             }
             return instance;
         }

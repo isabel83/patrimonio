@@ -54,8 +54,6 @@ public interface FamiliaServiceAsync
             if ( instance == null )
             {
                 instance = (FamiliaServiceAsync) GWT.create( FamiliaService.class );
-                ServiceDefTarget target = (ServiceDefTarget) instance;
-                target.setServiceEntryPoint( GWT.getModuleBaseURL() + "FamiliaService" );
             }
             return instance;
         }

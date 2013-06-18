@@ -81,7 +81,7 @@ public class FormSalidas extends ContentPanel{
 		frmNuevaSolicitud.setAutoHeight(true);
 		utils.loadFormNuevaSolicitud(frmNuevaSolicitud);
 		
-		TabItem tabNueva = new TabItem("Nueva Solicitud");
+		TabItem tabNueva = new TabItem();
 		tabNueva.add(new MenuIconos());
 		tabNueva.add(frmNuevaSolicitud);
 		panel.add(tabNueva);
@@ -92,7 +92,7 @@ public class FormSalidas extends ContentPanel{
 		frmAlbaranes.setAutoHeight(true);
 		utils.loadFormAlbaranes(frmAlbaranes);
 		
-		TabItem tabAlbaranes = new TabItem("Albaranes de solicitud");
+		TabItem tabAlbaranes = new TabItem();
 		tabAlbaranes.add(new MenuIconos());
 		tabAlbaranes.add(frmAlbaranes);
 		tabAlbaranes.addListener(Events.OnClick, new Listener<BaseEvent>(){
@@ -112,7 +112,7 @@ public class FormSalidas extends ContentPanel{
 		frmBajaArticulo.setAutoHeight(true);
 		utils.loadFormBajaArticulo(frmBajaArticulo);
 		
-		TabItem tabBaja = new TabItem("Baja de artículos");
+		TabItem tabBaja = new TabItem();
 		tabBaja.add(new MenuIconos());
 		tabBaja.addListener(Events.OnClick, new Listener<BaseEvent>(){
 

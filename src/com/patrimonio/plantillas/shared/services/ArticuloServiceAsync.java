@@ -1,5 +1,7 @@
 package com.patrimonio.plantillas.shared.services;
 
+import java.util.List;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.patrimonio.plantillas.shared.DTOs.ArticuloDTO;
 
@@ -23,5 +25,7 @@ public interface ArticuloServiceAsync {
 			int subFamilia, int codigo, String nombre, String marca,
 			int numMin, int numIdeal, String observacion, int estado,
 			AsyncCallback<Void> callback);
+
+	void loadArticulosPro(int idProveedor, AsyncCallback<List<ArticuloDTO>> callback);
 
 }

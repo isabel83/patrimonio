@@ -11,6 +11,13 @@ public interface ProveedorServiceAsync
      * GWT-RPC service  asynchronous (client-side) interface
      * @see com.patrimonio.plantillas.shared.services.ProveedorService
      */
+    void findAll( AsyncCallback<java.util.List<com.patrimonio.plantillas.shared.DTOs.ProveedorDTO>> callback );
+
+
+    /**
+     * GWT-RPC service  asynchronous (client-side) interface
+     * @see com.patrimonio.plantillas.shared.services.ProveedorService
+     */
     void findProveedor( long idProveedor, AsyncCallback<com.patrimonio.plantillas.shared.DTOs.ProveedorDTO> callback );
 
 
@@ -54,8 +61,6 @@ public interface ProveedorServiceAsync
             if ( instance == null )
             {
                 instance = (ProveedorServiceAsync) GWT.create( ProveedorService.class );
-                ServiceDefTarget target = (ServiceDefTarget) instance;
-                target.setServiceEntryPoint( GWT.getModuleBaseURL() + "ProveedorService" );
             }
             return instance;
         }

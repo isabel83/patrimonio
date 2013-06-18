@@ -1,5 +1,7 @@
 package com.patrimonio.plantillas.server.Impl;
 
+import java.util.List;
+
 import com.patrimonio.plantillas.server.DAOs.ProveedorDao;
 import com.patrimonio.plantillas.shared.DTOs.ProveedorDTO;
 import com.patrimonio.plantillas.shared.services.ProveedorService;
@@ -7,6 +9,10 @@ import com.patrimonio.plantillas.shared.services.ProveedorService;
 public class ProveedorServiceImpl implements ProveedorService{
 
 	public ProveedorDao proveedorDao;
+	
+	public List<ProveedorDTO> findAll(){
+		return proveedorDao.findAll(); 
+	}
 	
 	@Override
 	public ProveedorDTO findProveedor(long idProveedor) {

@@ -54,8 +54,6 @@ public interface DestinatarioServiceAsync
             if ( instance == null )
             {
                 instance = (DestinatarioServiceAsync) GWT.create( DestinatarioService.class );
-                ServiceDefTarget target = (ServiceDefTarget) instance;
-                target.setServiceEntryPoint( GWT.getModuleBaseURL() + "DestinatarioService" );
             }
             return instance;
         }

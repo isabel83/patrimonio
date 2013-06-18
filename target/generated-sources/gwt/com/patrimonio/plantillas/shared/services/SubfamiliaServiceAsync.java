@@ -54,8 +54,6 @@ public interface SubfamiliaServiceAsync
             if ( instance == null )
             {
                 instance = (SubfamiliaServiceAsync) GWT.create( SubfamiliaService.class );
-                ServiceDefTarget target = (ServiceDefTarget) instance;
-                target.setServiceEntryPoint( GWT.getModuleBaseURL() + "SubfamiliaService" );
             }
             return instance;
         }

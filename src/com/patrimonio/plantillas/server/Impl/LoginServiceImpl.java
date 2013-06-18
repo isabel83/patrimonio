@@ -5,12 +5,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.patrimonio.plantillas.client.LoginService;
 import com.patrimonio.plantillas.shared.FieldVerifier;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 /**
  * The server side implementation of the RPC service.
  */
 @SuppressWarnings("serial")
+
 public class LoginServiceImpl extends RemoteServiceServlet implements LoginService {
 
 	public String loginServer(String name, String pass) throws IllegalArgumentException {

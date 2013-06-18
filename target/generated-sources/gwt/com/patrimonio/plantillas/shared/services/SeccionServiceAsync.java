@@ -54,8 +54,6 @@ public interface SeccionServiceAsync
             if ( instance == null )
             {
                 instance = (SeccionServiceAsync) GWT.create( SeccionService.class );
-                ServiceDefTarget target = (ServiceDefTarget) instance;
-                target.setServiceEntryPoint( GWT.getModuleBaseURL() + "SeccionService" );
             }
             return instance;
         }

@@ -54,8 +54,6 @@ public interface PersonaServiceAsync
             if ( instance == null )
             {
                 instance = (PersonaServiceAsync) GWT.create( PersonaService.class );
-                ServiceDefTarget target = (ServiceDefTarget) instance;
-                target.setServiceEntryPoint( GWT.getModuleBaseURL() + "PersonaService" );
             }
             return instance;
         }

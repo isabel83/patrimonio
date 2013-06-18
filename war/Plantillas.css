@@ -10,6 +10,10 @@ h1 {
   text-align: center;
 }
 
+.principal{
+	text-align: left!important;
+}
+
 .gwt-PushButton {
   display: block;
   font-size: 10pt;
@@ -203,7 +207,7 @@ h1 {
 }
 
 .etiqueta{
-	font: normal 12px tahoma, arial, helvetica, sans-serif;
+	font: normal 14px tahoma, arial, helvetica, sans-serif;
 }
 
 .ie3p{

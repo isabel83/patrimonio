@@ -1,6 +1,7 @@
 package com.patrimonio.plantillas.client.utils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -37,6 +38,8 @@ import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.layout.RowData;
 import com.extjs.gxt.ui.client.widget.layout.RowLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
@@ -46,11 +49,15 @@ import com.patrimonio.plantillas.client.widgets.dialogs.DialogoBuscar;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoEliminados;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoRecepcionTotal;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoRecepcionarArticulo;
+import com.patrimonio.plantillas.shared.RpcUtils;
 
 public class LoadEntradasUtils {
 	
 	
-	public void loadFormNuevoPedido(FormPanel panel) {
+	private RpcUtils rpcUtils;
+
+
+	public void loadFormNuevoPedido(final FormPanel panel) {
 		
 		FormData formData = new FormData("100%"); 
 		Margins m = new Margins();
@@ -80,6 +87,7 @@ public class LoadEntradasUtils {
 	    DateTimeFormat dtFormat = DateTimeFormat.getFormat("dd-MM-yyyy");
 	    DateField fechaPedido = new DateField();
 	    fechaPedido.getPropertyEditor().setFormat(dtFormat);
+	    fechaPedido.setValue(new Date()); //fecha de hoy por defecto
 	    fechaPedido.setTitle("Seleccione la fecha en la que desea realizar el pedido");
 	    fechaPedido.setFieldLabel("Fecha del pedido");
 	    fechaPedido.setStyleAttribute("paddingBottom", "5px");
@@ -91,16 +99,25 @@ public class LoadEntradasUtils {
 	    
 	    Label lblProveedores = new Label("Proveedor:");
 	    lblProveedores.setStyleName("etiqueta");
-	    ListBox lstProveedores = new ListBox();
+	    final ListBox lstProveedores = new ListBox();
 	    lstProveedores.setVisibleItemCount(1);
-	    lstProveedores.addItem("...");
+	    lstProveedores.addItem("SUMINISTROS COMERCIALES SAN MARTIN S.L.");
+	    //rpcUtils.loadProveedores(lstProveedores); 
 	    left.add(lblProveedores,formData);
 	    left.add(lstProveedores,formData);
 	    
+	    TextField<String> nifProv = new TextField<String>();  
+	    nifProv.setFieldLabel("NIF del proveedor");
+	    nifProv.setValue("B28922490");
+	    nifProv.disable();
+	    left.add(nifProv,formData);
+	    
+	    
 	    // vamos creando el pedido
-	    LayoutContainer right = new LayoutContainer(); 
+	    final LayoutContainer right = new LayoutContainer(); 
 	    layout = new FormLayout();  
 	    layout.setLabelAlign(LabelAlign.TOP);  
+	    //right.setVisible(false);
 	    right.setLayout(layout);  
 	    
 	    LayoutContainer bottom = new LayoutContainer();  
@@ -119,10 +136,8 @@ public class LoadEntradasUtils {
 	    Label lblArticulos = new Label("Artículos:");
 	    lblArticulos.addStyleName("etiqueta");
 	    
-	    ListBox lstArticulos = new ListBox();
+	    final ListBox lstArticulos = new ListBox();
 	    lstArticulos.setVisibleItemCount(1);
-	    lstArticulos.addItem("...");
-	    
 	    cpRight.add(lblArticulos,  new RowData(1, -1, new Margins(4,1,4,4)));
 	    cpRight.add(lstArticulos, new RowData(1, -1, new Margins(1,4,4,4)));
 	    
@@ -285,8 +300,21 @@ public class LoadEntradasUtils {
 	    main.add(gButtons, new ColumnData(.4));
 	    panel.add(main, new FormData("100%"));  
 	    
+	    
+//	    lstProveedores.addChangeHandler(new ChangeHandler(){
+//
+//			@Override
+//			public void onChange(ChangeEvent event) {
+//				int idProveedor = lstProveedores.getSelectedIndex();
+//				rpcUtils.loadArticulosProveedor(lstArticulos, idProveedor);
+//				right.setVisible(true);
+//				panel.layout(true);
+//			}
+//	    	
+//	    });
 	  
 	}
+	
 	
 
 	public void loadFormRecepcion(FormPanel frmRecepcionPedidos) {
@@ -774,14 +802,14 @@ public class LoadEntradasUtils {
 
 	    bottom.add(cpExistencias,formData);
 	    
-	    Label lblProveedor = new Label("Proveedor:");
-	    lblProveedor.setStyleName("etiqueta");
-	    ListBox lstProveedor = new ListBox();
-	    lstProveedor.setVisibleItemCount(1);
-	    bottom.add(lblProveedor,formData);
-	    bottom.add(lstProveedor,formData);
-	    
-	    
+//	    Label lblProveedor = new Label("Proveedor:");
+//	    lblProveedor.setStyleName("etiqueta");
+//	    ListBox lstProveedor = new ListBox();
+//	    lstProveedor.setVisibleItemCount(1);
+//	    bottom.add(lblProveedor,formData);
+//	    bottom.add(lstProveedor,formData);
+//	    
+//	    
 	    
 	    ButtonGroup gButtons = new ButtonGroup(2);
 	    Button b1  = new Button(), b2 = new Button();

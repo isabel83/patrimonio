@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-jun-2013 17:19:33 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.patrimonio.plantillas.shared.DTOs.ArticuloDTO" table="ARTICULODTO">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="seccion" type="int" access="field">
+            <column name="SECCION" />
+        </property>
+        <property name="familia" type="int" access="field">
+            <column name="FAMILIA" />
+        </property>
+        <property name="subFamilia" type="int" access="field">
+            <column name="SUBFAMILIA" />
+        </property>
+        <property name="codigo" type="int">
+            <column name="CODIGO" />
+        </property>
+        <property name="nombre" type="java.lang.String">
+            <column name="NOMBRE" />
+        </property>
+        <property name="marca" type="java.lang.String">
+            <column name="MARCA" />
+        </property>
+        <property name="num_min" type="int" access="field">
+            <column name="NUM_MIN" />
+        </property>
+        <property name="num_id" type="int" access="field">
+            <column name="NUM_ID" />
+        </property>
+        <property name="observaciones" type="java.lang.String">
+            <column name="OBSERVACIONES" />
+        </property>
+        <property name="estado" type="int" access="field">
+            <column name="ESTADO" />
+        </property>
+    </class>
+</hibernate-mapping>

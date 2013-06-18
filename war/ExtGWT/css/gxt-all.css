@@ -1567,7 +1567,7 @@ fieldset.x-panel-collapsed .x-fieldset-bwrap {
 
 .x-form-label {
   padding: 2px 3px 3px 0px;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .x-form-label-top .x-form-item {
@@ -1586,7 +1586,7 @@ fieldset.x-panel-collapsed .x-fieldset-bwrap {
 }
 
 .x-form-group-label,.x-form-cb-label {
-  font: normal 12px tahoma, arial, helvetica, sans-serif;
+  font: normal 14px tahoma, arial, helvetica, sans-serif;
   padding-right: 10px;
 }
 
@@ -2949,7 +2949,7 @@ a.x-grid3-hd-btn:hover {
   vertical-align: top;
   padding-left: 1px;
   padding-right: 1px;
-  font: normal 11px arial, tahoma, helvetica, sans-serif;
+  font: normal 13px arial, tahoma, helvetica, sans-serif;
 }
 
 .ext-ie6 .x-grid3 .x-editor .x-form-text,.ext-ie7 .x-grid3 .x-editor .x-form-text {
@@ -3147,7 +3147,7 @@ a.x-grid3-hd-btn:hover {
 
 .my-tree-item-text span {
 	font-family: arial, tahoma, helvetica, sans-serif;
-	font-size: 12px;
+	font-size: 14px;
 	white-space: nowrap;
 	padding-left: 3px;
 	padding-right: 3px;
@@ -3263,7 +3263,7 @@ a.x-grid3-hd-btn:hover {
 
 .x-ftree-text {
 	color: black;
-	font: normal 11px arial, tahoma, helvetica, sans-serif;
+	font: normal 13px arial, tahoma, helvetica, sans-serif;
 	white-space: nowrap;
 	text-decoration: none;
 	color: black;
@@ -3355,7 +3355,7 @@ a.x-grid3-hd-btn:hover {
 
 .x-ftree2-text span {
 	color: black;
-	font: normal 11px arial, tahoma, helvetica, sans-serif;
+	font: normal 13px arial, tahoma, helvetica, sans-serif;
 	white-space: nowrap;
 	text-decoration: none;
 	color: black;
@@ -3598,7 +3598,7 @@ table.x-date-inner {
 }
 .x-date-mp td {
     padding:2px;
-	font:normal 11px arial, helvetica,tahoma,sans-serif;
+	font:normal 13px arial, helvetica,tahoma,sans-serif;
 }
 td.x-date-mp-month,td.x-date-mp-year,td.x-date-mp-ybtn {
     border: 0 none;
@@ -4062,7 +4062,7 @@ a.x-menu-item {
   border-width: 1px;
   margin:-2px -2px 0;
   color:#15428b;
-  font:bold 10px tahoma,arial,verdana,sans-serif;
+  font:bold 12px tahoma,arial,verdana,sans-serif;
   display:block;
   padding:3px;
 }
@@ -4080,7 +4080,7 @@ a.x-menu-item {
 
 .x-menubar-item {
   padding: 1px 8px;
-  font: 12px arial, verdana, sans-serif;
+  font: 14px arial, verdana, sans-serif;
 }
 
 .x-menubar-item-over {
@@ -5305,7 +5305,7 @@ body.ext-ie6.x-body-masked .x-window select {
   border: 0 none;
   padding: 0;
   margin: 0;
-  font: normal 11px tahoma, arial, helvetica, sans-serif;
+  font: normal 13px tahoma, arial, helvetica, sans-serif;
   background: #dfe8f6;
 }
 
@@ -5346,7 +5346,7 @@ body.ext-ie6.x-body-masked .x-window select {
   zoom: 1;
   color: #555555;
   font-family: tahoma, arial, sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   font-size-adjust: none;
   font-style: normal;
   font-variant: normal;
@@ -5505,7 +5505,7 @@ body.ext-ie6.x-body-masked .x-window select {
 .x-view-item {
   border: 1px solid #FFFFFF;
   font-family: tahoma, arial, helvetica, sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   font-size-adjust: none;
   font-stretch: normal;
   font-style: normal;
@@ -5537,7 +5537,7 @@ body.ext-ie6.x-body-masked .x-window select {
 }
 .x-view-item-check td {
   font-family: tahoma, arial, helvetica, sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   font-size-adjust: none;
   font-stretch: normal;
   font-style: normal;
@@ -5867,7 +5867,7 @@ body.ext-ie6.x-body-masked .x-window select {
 
 .my-treetbl-item-text span {
   font-family: arial, tahoma, helvetica, sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   white-space: nowrap;
   padding-left: 3px;
   padding-right: 3px;
@@ -5957,7 +5957,7 @@ body.ext-ie6.x-body-masked .x-window select {
   display: block;
   white-space: nowrap;
   font-family: arial, tahoma, helvetica, sans-serif;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .my-treetbl-col {
@@ -6014,7 +6014,7 @@ body.ext-ie6.x-body-masked .x-window select {
 .my-treetbl-data .my-treetbl-cell-text {
   padding: 0px 0px;
   font-family: arial, tahoma, helvetica, sans-serif;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .my-treetbl-data tr {
@@ -6079,7 +6079,7 @@ body.ext-ie6.x-body-masked .x-window select {
     background-color: white;
     border-color:#a3bad9;
     color:#222;
-    font:normal 11px tahoma, arial, helvetica, sans-serif;
+    font:normal 13px tahoma, arial, helvetica, sans-serif;
 }
 .x-mask-loading div {
     background-color:#fbfbfb;
@@ -6153,7 +6153,7 @@ ul.x-tab-strip-bottom{
     background-color: #deecfd;
 }
 .x-tab-strip span.x-tab-strip-text {
-	font:normal 11px tahoma,arial,helvetica;
+	font:normal 13px tahoma,arial,helvetica;
 	color:#416aa3;
 }
 .x-tab-strip-over span.x-tab-strip-text {
@@ -6219,7 +6219,7 @@ ul.x-tab-strip-bottom{
     border-color:#99bbe8;
 }
 .x-form-field {
-  font: normal 12px tahoma, arial, helvetica, sans-serif;
+  font: normal 14px tahoma, arial, helvetica, sans-serif;
 }
 
 .x-form-text,textarea.x-form-field {
@@ -6292,16 +6292,16 @@ ul.x-tab-strip-bottom{
 }
 
 .x-form-grow-sizer {
-  font: normal 12px tahoma, arial, helvetica, sans-serif;
+  font: normal 14px tahoma, arial, helvetica, sans-serif;
 }
 
 .x-form-item {
-  font: normal 12px tahoma, arial, helvetica, sans-serif;
+  font: normal 14px tahoma, arial, helvetica, sans-serif;
 }
 
 .x-form-invalid-msg {
   color: #c0272b;
-  font: normal 11px tahoma, arial, helvetica, sans-serif;
+  font: normal 13px tahoma, arial, helvetica, sans-serif;
   background-image: url(../images/default/shared/warning.gif);
 }
 
@@ -6310,11 +6310,11 @@ ul.x-tab-strip-bottom{
 }
 
 .x-small-editor .x-form-field {
-  font: normal 11px arial, tahoma, helvetica, sans-serif;
+  font: normal 13px arial, tahoma, helvetica, sans-serif;
 }
 
 .ext-safari .x-small-editor .x-form-field {
-  font: normal 12px arial, tahoma, helvetica, sans-serif;
+  font: normal 14px arial, tahoma, helvetica, sans-serif;
 }
 
 .x-form-invalid-icon {
@@ -6326,7 +6326,7 @@ ul.x-tab-strip-bottom{
 }
 
 .x-fieldset legend {
-  font: bold 11px tahoma, arial, helvetica, sans-serif;
+  font: bold 13px tahoma, arial, helvetica, sans-serif;
   color: #15428b;
 }
 
@@ -6340,10 +6340,10 @@ ul.x-tab-strip-bottom{
 .x-spinner-field .x-form-spinner-down {
   background-image: url('../images/default/form/spinner.gif');
 }.x-btn{
-	font:normal 11px tahoma, verdana, helvetica;
+	font:normal 13px tahoma, verdana, helvetica;
 }
 .x-btn button{
-    font:normal 11px arial,tahoma,verdana,helvetica;
+    font:normal 13px arial,tahoma,verdana,helvetica;
     color:#333;
 }
 .x-btn em {
@@ -6414,7 +6414,7 @@ ul.x-tab-strip-bottom{
 }
 
 .x-toolbar td,.x-toolbar span,.x-toolbar input,.x-toolbar div,.x-toolbar select,.x-toolbar label {
-  font: normal 11px arial, tahoma, helvetica, sans-serif;
+  font: normal 13px arial, tahoma, helvetica, sans-serif;
 }
 
 .x-toolbar .x-item-disabled {
@@ -6536,7 +6536,7 @@ ul.x-tab-strip-bottom{
 }
 
 .x-grid3-hd-row .x-grid3-hd,.x-grid3-row .x-grid3-cell,.x-grid3-summary-row .x-grid3-cell {
-  font: normal 11px arial, tahoma, helvetica, sans-serif;
+  font: normal 13px arial, tahoma, helvetica, sans-serif;
 }
 
 .x-grid3-hd-row .x-grid3-hd {
@@ -6679,7 +6679,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner,td.sort-desc .x-grid3-hd-inner,td.sort-asc 
 }
 
 .x-grid3-topbar,.x-grid3-bottombar {
-  font: normal 11px arial, tahoma, helvetica, sans-serif;
+  font: normal 13px arial, tahoma, helvetica, sans-serif;
 }
 
 .x-grid3-bottombar .x-toolbar {
@@ -6769,7 +6769,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner,td.sort-desc .x-grid3-hd-inner,td.sort-asc 
 .x-grid-group-hd .x-grid-group-div {
   background-image: url(../images/default/grid/group-expand-sprite.gif);
   color: #3764a0;
-  font: bold 11px tahoma, arial, helvetica, sans-serif;
+  font: bold 13px tahoma, arial, helvetica, sans-serif;
 }
 
 .x-group-by-icon {
@@ -6786,7 +6786,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner,td.sort-desc .x-grid3-hd-inner,td.sort-asc 
 
 .x-grid-empty {
   color: gray;
-  font: normal 11px tahoma, arial, helvetica, sans-serif;
+  font: normal 13px tahoma, arial, helvetica, sans-serif;
 }
 
 .x-grid-with-col-lines .x-grid3-row td.x-grid3-cell {
@@ -6830,7 +6830,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner,td.sort-desc .x-grid3-hd-inner,td.sort-asc 
   background-color: #f7f9cc
 }.x-dd-drag-ghost{
 	color:#000;
-	font: normal 11px arial, helvetica, sans-serif;
+	font: normal 13px arial, helvetica, sans-serif;
     border-color: #ddd #bbb #bbb #ddd;
 	background-color:#fff;
 }
@@ -6868,7 +6868,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner,td.sort-desc .x-grid3-hd-inner,td.sort-asc 
 }
 
 .x-tree3-node-text {
-	font: normal 11px arial, tahoma, helvetica, sans-serif;
+	font: normal 13px arial, tahoma, helvetica, sans-serif;
 	color: black;
 }.x-date-picker {
     border-color: #1b376c;
@@ -6877,7 +6877,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner,td.sort-desc .x-grid3-hd-inner,td.sort-asc 
 .x-date-middle,.x-date-left,.x-date-right {
 	background-image: url(../images/default/shared/hd-sprite.gif);
 	color:#fff;
-	font:bold 11px "sans serif", tahoma, verdana, helvetica;
+	font:bold 13px "sans serif", tahoma, verdana, helvetica;
 }
 .x-date-middle .x-btn .x-btn-text {
     color:#fff;
@@ -6895,14 +6895,14 @@ td.x-grid3-hd-over .x-grid3-hd-inner,td.sort-desc .x-grid3-hd-inner,td.sort-asc 
     background-color:#dfecfb;
     background-image:url(../images/default/shared/glass-bg.gif);
 	border-bottom-color:#a3bad9;
-    font:normal 10px arial, helvetica,tahoma,sans-serif;
+    font:normal 12px arial, helvetica,tahoma,sans-serif;
 	color:#233d6d;
 }
 .x-date-inner td {
     border-color:#fff;
 }
 .x-date-inner a {
-    font:normal 11px arial, helvetica,tahoma,sans-serif;
+    font:normal 13px arial, helvetica,tahoma,sans-serif;
     color:#000;
 }
 .x-date-inner .x-date-active{
@@ -6942,13 +6942,13 @@ td.x-grid3-hd-over .x-grid3-hd-inner,td.sort-desc .x-grid3-hd-inner,td.sort-asc 
 	background-color:#fff;
 }
 .x-date-mp td {
-	font:normal 11px arial, helvetica,tahoma,sans-serif;
+	font:normal 13px arial, helvetica,tahoma,sans-serif;
 }
 .x-date-mp-btns button {
 	background-color:#083772;
 	color:#fff;
 	border-color: #3366cc #000055 #000055 #3366cc;
-	font:normal 11px arial, helvetica,tahoma,sans-serif;
+	font:normal 13px arial, helvetica,tahoma,sans-serif;
 }
 .x-date-mp-btns {
     background-color: #dfecfb;
@@ -6978,17 +6978,17 @@ td.x-date-mp-sep {
 	background-image: url(../images/default/qtip/tip-sprite.gif);
 }
 .x-tip .x-tip-mc {
-    font: normal 11px tahoma,arial,helvetica,sans-serif;
+    font: normal 13px tahoma,arial,helvetica,sans-serif;
 }
 .x-tip .x-tip-ml {
 	background-color: #fff;
 }
 .x-tip .x-tip-header-text {
-    font: bold 11px tahoma,arial,helvetica,sans-serif;
+    font: bold 13px tahoma,arial,helvetica,sans-serif;
     color:#444;
 }
 .x-tip .x-tip-body {
-    font: normal 11px tahoma,arial,helvetica,sans-serif;
+    font: normal 13px tahoma,arial,helvetica,sans-serif;
     color:#444;
 }
 .x-form-invalid-tip .x-tip-tc, .x-form-invalid-tip .x-tip-tl, .x-form-invalid-tip .x-tip-tr, .x-form-invalid-tip .x-tip-bc,
@@ -7011,7 +7011,7 @@ td.x-date-mp-sep {
 	background-image:none;
 }
 .x-menu-list-item{
-	font:normal 11px tahoma,arial, sans-serif;
+	font:normal 13px tahoma,arial, sans-serif;
 }
 .x-menu-item-arrow{
 	background-image:url(../images/default/menu/menu-parent.gif);
@@ -7069,7 +7069,7 @@ a.x-menu-item {
     background-image: url(../images/default/box/tb.gif);
 	font-family: "Myriad Pro","Myriad Web","Tahoma","Helvetica","Arial",sans-serif;
 	color: #393939;
-	font-size: 12px;
+	font-size: 14px;
 }
 .x-box-mc h3 {
 	font-size: 14px;
@@ -7108,7 +7108,7 @@ a.x-menu-item {
 .x-combo-list {
     border-color:#98c0f4;
     background-color:#ddecfe;
-    font:normal 12px tahoma, arial, helvetica, sans-serif;
+    font:normal 14px tahoma, arial, helvetica, sans-serif;
 }
 .x-combo-list-inner {
     background-color:#fff;
@@ -7133,7 +7133,7 @@ a.x-menu-item {
     border-top-color:#98c0f4;
 }
 .x-combo-list-small {
-    font:normal 11px tahoma, arial, helvetica, sans-serif;
+    font:normal 13px tahoma, arial, helvetica, sans-serif;
 }
 .x-panel {
     border-color: #99bbe8;
@@ -7162,7 +7162,7 @@ a.x-menu-item {
 .x-panel-tl .x-panel-header {
     color:#15428b;
 	font-weight:bold; 
-    font-size: 11px;
+    font-size: 13px;
     font-family: tahoma,arial,verdana,sans-serif;
 }
 .x-panel-tc {
@@ -7176,7 +7176,7 @@ a.x-menu-item {
 	background-image: url(../images/default/panel/top-bottom.gif);
 }
 .x-panel-mc {
-    font: normal 11px tahoma,arial,helvetica,sans-serif;
+    font: normal 13px tahoma,arial,helvetica,sans-serif;
     background-color:#dfe8f6;
 }
 .x-panel-ml {
@@ -7199,7 +7199,7 @@ a.x-menu-item {
     border-color:#99bbe8;
 }
 .x-panel-fbar td,.x-panel-fbar span,.x-panel-fbar input,.x-panel-fbar div,.x-panel-fbar select,.x-panel-fbar label{
-    font:normal 11px arial,tahoma, helvetica, sans-serif;
+    font:normal 13px arial,tahoma, helvetica, sans-serif;
 }
 .x-window-proxy {
     background-color:#c7dffc;
@@ -7229,7 +7229,7 @@ a.x-menu-item {
 }
 .x-window-mc {
     border-color:#99bbe8;
-    font: normal 11px tahoma,arial,helvetica,sans-serif;
+    font: normal 13px tahoma,arial,helvetica,sans-serif;
     background-color:#dfe8f6;
 }
 .x-window-ml {
@@ -7429,10 +7429,10 @@ body.x-body-masked .x-window-plain .x-window-mc {
 }
 .x-window-dlg .ext-mb-text,
 .x-window-dlg .x-window-header-text {
-    font-size:12px;
+    font-size:14px;
 }
 .x-window-dlg .ext-mb-textarea {
-    font:normal 12px tahoma,arial,helvetica,sans-serif;
+    font:normal 14px tahoma,arial,helvetica,sans-serif;
 }
 .x-window-dlg .x-msg-box-wait {
     background-image:url(../images/default/grid/loading.gif);

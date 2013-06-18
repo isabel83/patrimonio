@@ -1,8 +1,10 @@
 package com.patrimonio.plantillas.shared.services;
 
 import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.patrimonio.plantillas.shared.DTOs.PuestoDTO;
 
+@RemoteServiceRelativePath("puesto")
 public interface PuestoService extends RemoteService{
 
 	public PuestoDTO findPuesto (long idPuesto);

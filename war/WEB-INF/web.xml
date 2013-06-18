@@ -36,8 +36,90 @@
         <listener>
           <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
         </listener>
- <!-- SPRING SECURITY & SPRING  -->
+ <!-- SPRING SECURITY & SPRING  
+ 
+ 	<servlet>
+		<servlet-name>articuloServlet</servlet-name>
+		<servlet-class>com.patrimonio.plantillas.server.Impl.ArticuloServiceImpl</servlet-class>
+	</servlet>
+	
+ 	<servlet>
+		<servlet-name>destinatarioServlet</servlet-name>
+		<servlet-class>com.patrimonio.plantillas.server.Impl.DestinatarioServiceImpl</servlet-class>
+	</servlet>
+ 
+ 	<servlet>
+		<servlet-name>familiaServlet</servlet-name>
+		<servlet-class>com.patrimonio.plantillas.server.Impl.FamiliaServiceImpl</servlet-class>
+	</servlet>
+	
+ 	<servlet>
+		<servlet-name>personaServlet</servlet-name>
+		<servlet-class>com.patrimonio.plantillas.server.Impl.PersonaServiceImpl</servlet-class>
+	</servlet>
+	 
+ 	<servlet>
+		<servlet-name>proveedorServlet</servlet-name>
+		<servlet-class>com.patrimonio.plantillas.server.Impl.ProveedorServiceImpl</servlet-class>
+	</servlet>
+	
+ 	<servlet>
+		<servlet-name>puestoServlet</servlet-name>
+		<servlet-class>com.patrimonio.plantillas.server.Impl.PuestoServiceImpl</servlet-class>
+	</servlet>
+	
+ 	 
+ 	<servlet>
+		<servlet-name>seccionServlet</servlet-name>
+		<servlet-class>com.patrimonio.plantillas.server.Impl.SeccionServiceImpl</servlet-class>
+	</servlet>
+	
+ 	<servlet>
+		<servlet-name>subfamiliaServlet</servlet-name>
+		<servlet-class>com.patrimonio.plantillas.server.Impl.SubfamiliaServiceImpl</servlet-class>
+	</servlet>
+ 	
+		
+	<servlet-mapping>
+		<servlet-name>articuloServlet</servlet-name>
+		<url-pattern>/plantillas/articulos</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>destinatarioServlet</servlet-name>
+		<url-pattern>/plantillas/destinatario</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>familiaServlet</servlet-name>
+		<url-pattern>/plantillas/familia</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>personaServlet</servlet-name>
+		<url-pattern>/plantillas/persona</url-pattern>
+	</servlet-mapping>
         
+		<servlet-mapping>
+		<servlet-name>proveedorServlet</servlet-name>
+		<url-pattern>/plantillas/proveedor</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>puestoServlet</servlet-name>
+		<url-pattern>/plantillas/puesto</url-pattern>
+	</servlet-mapping>
+        
+		<servlet-mapping>
+		<servlet-name>seccionServlet</servlet-name>
+		<url-pattern>/plantillas/seccion</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>subfamiliaServlet</servlet-name>
+		<url-pattern>/plantillas/subfamilia</url-pattern>
+	</servlet-mapping>
+        -->
+	
         	<!-- Front Controller for all GWT Spring based servlets -->
 	<!--servlet>
 		<servlet-name>gwt</servlet-name>

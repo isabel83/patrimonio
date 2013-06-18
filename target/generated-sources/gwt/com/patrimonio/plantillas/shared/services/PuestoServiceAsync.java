@@ -54,8 +54,6 @@ public interface PuestoServiceAsync
             if ( instance == null )
             {
                 instance = (PuestoServiceAsync) GWT.create( PuestoService.class );
-                ServiceDefTarget target = (ServiceDefTarget) instance;
-                target.setServiceEntryPoint( GWT.getModuleBaseURL() + "PuestoService" );
             }
             return instance;
         }

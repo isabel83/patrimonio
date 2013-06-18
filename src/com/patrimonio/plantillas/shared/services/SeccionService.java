@@ -1,8 +1,10 @@
 package com.patrimonio.plantillas.shared.services;
 
 import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.patrimonio.plantillas.shared.DTOs.SeccionDTO;
 
+@RemoteServiceRelativePath("seccion")
 public interface SeccionService extends RemoteService{
 
 	public SeccionDTO findSeccion (long idSeccion);

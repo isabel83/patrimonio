@@ -1,8 +1,10 @@
 package com.patrimonio.plantillas.shared.services;
 
 import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.patrimonio.plantillas.shared.DTOs.SubfamiliaDTO;
 
+@RemoteServiceRelativePath("subfamilia")
 public interface SubfamiliaService extends RemoteService{
 
 	public SubfamiliaDTO findSubfamilia (long idSubfamilia);

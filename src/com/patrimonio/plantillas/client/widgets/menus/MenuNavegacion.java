@@ -1,10 +1,5 @@
 package com.patrimonio.plantillas.client.widgets.menus;
 
-import com.allen_sauer.gwt.log.client.Log;
-import com.extjs.gxt.ui.client.event.BaseEvent;
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
@@ -14,12 +9,10 @@ import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.menu.SeparatorMenuItem;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.Widget;
 import com.patrimonio.plantillas.client.widgets.forms.FormConsultas;
 import com.patrimonio.plantillas.client.widgets.forms.FormEntradas;
 import com.patrimonio.plantillas.client.widgets.forms.FormInformes;
 import com.patrimonio.plantillas.client.widgets.forms.FormMntTablas;
-import com.patrimonio.plantillas.client.widgets.forms.FormOpEspeciales;
 import com.patrimonio.plantillas.client.widgets.forms.FormSalidas;
 
 public class MenuNavegacion extends Composite {
@@ -140,7 +133,7 @@ public class MenuNavegacion extends Composite {
 		});
 		submnuSalidas.add(itemNuevaSolicitud);
 		
-		MenuItem itemAlbaranes = new MenuItem("Albaranes de solicitud");
+		MenuItem itemAlbaranes = new MenuItem("Control de entregas");
 		itemAlbaranes.addSelectionListener(new SelectionListener<MenuEvent>(){
 
 			@Override
@@ -487,36 +480,37 @@ public class MenuNavegacion extends Composite {
 		submnuMantenimiento.add(itemPuestos);
 		
 		MenuBarItem menuMantenimientoTablas = new MenuBarItem("Mantenimiento Tablas", submnuMantenimiento);
+		menuMantenimientoTablas.addStyleName("mnuFinal");
 		menuPrincipal.add(menuMantenimientoTablas);
 		
 		/** OPERACIONES ESPECIALES **/
 		
-		Menu submnuEspeciales = new Menu();
-		
-		MenuItem itemPrevisionDeVestuario = new MenuItem("Prevision de vestuario");
-		itemPrevisionDeVestuario.addSelectionListener(new SelectionListener<MenuEvent>(){
-
-			@Override
-			public void componentSelected(MenuEvent ce) {
-				FormOpEspeciales form = new FormOpEspeciales();
-				form.setBodyBorder(false);
-				form.setBorders(false);
-				form.setHeaderVisible(false);
-				RootPanel.get("principalContainer").getElement().setInnerHTML("");
-				RootPanel.get("principalContainer").add(form);
-			}
-			
-		});
+//		Menu submnuEspeciales = new Menu();
+//		
+//		MenuItem itemPrevisionDeVestuario = new MenuItem("Prevision de vestuario");
+//		itemPrevisionDeVestuario.addSelectionListener(new SelectionListener<MenuEvent>(){
+//
+//			@Override
+//			public void componentSelected(MenuEvent ce) {
+//				FormOpEspeciales form = new FormOpEspeciales();
+//				form.setBodyBorder(false);
+//				form.setBorders(false);
+//				form.setHeaderVisible(false);
+//				RootPanel.get("principalContainer").getElement().setInnerHTML("");
+//				RootPanel.get("principalContainer").add(form);
+//			}
+//			
+//		});
 		//submnuEspeciales.add(itemPrevisionDeVestuario);
-		
-		MenuBarItem mnuOperacionesEspeciales = new MenuBarItem("Operaciones Especiales", submnuEspeciales);
-	
-		mnuOperacionesEspeciales.addStyleName("mnuFinal");
-		mnuOperacionesEspeciales.disable();
-		menuPrincipal.add(mnuOperacionesEspeciales);
-		
-		menuPrincipal.addStyleName("menu-principal");
-		
+//		
+//		MenuBarItem mnuOperacionesEspeciales = new MenuBarItem("Operaciones Especiales", submnuEspeciales);
+//	
+//		mnuOperacionesEspeciales.addStyleName("mnuFinal");
+//		mnuOperacionesEspeciales.disable();
+//		menuPrincipal.add(mnuOperacionesEspeciales);
+//		
+//		menuPrincipal.addStyleName("menu-principal");
+//		
 		
 		//Log.debug("Estamos al final del constructor MenuNavegacion");
 		

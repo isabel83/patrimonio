@@ -101,7 +101,7 @@ public class FormConsultas extends ContentPanel{
 		frmConsultaAlbaranesMSolicitado.setAutoHeight(true);
 		utils.loadFormConsultaAlbMatSolicitado(frmConsultaAlbaranesMSolicitado);
 		
-		TabItem tabAlbaranesMSolicitado = new TabItem("Albaranes de material SOLICITADO");
+		TabItem tabAlbaranesMSolicitado = new TabItem();
 		tabAlbaranesMSolicitado.add(new MenuIconos());
 		tabAlbaranesMSolicitado.add(frmConsultaAlbaranesMSolicitado);
 		panel.add(tabAlbaranesMSolicitado);
@@ -112,7 +112,7 @@ public class FormConsultas extends ContentPanel{
 		frmConsultaAlbaranesMServido.setAutoHeight(true);
 		utils.loadFormConsultaAlbMatServido(frmConsultaAlbaranesMServido);
 		
-		TabItem tabAlbaranesMServido = new TabItem("Albaranes de material SERVIDO");
+		TabItem tabAlbaranesMServido = new TabItem();
 		tabAlbaranesMServido.add(new MenuIconos());
 		tabAlbaranesMServido.add(frmConsultaAlbaranesMServido);
 		panel.add(tabAlbaranesMServido);
@@ -123,7 +123,7 @@ public class FormConsultas extends ContentPanel{
 		frmControlMaterial.setAutoHeight(true);
 		utils.loadFormConsultaControlMaterial(frmControlMaterial);
 		
-		TabItem tabControlMaterial = new TabItem("Control de material SOLICITADO y SERVIDO");
+		TabItem tabControlMaterial = new TabItem();
 		tabControlMaterial.add(new MenuIconos());
 		tabControlMaterial.add(frmControlMaterial);
 		panel.add(tabControlMaterial);
@@ -134,7 +134,7 @@ public class FormConsultas extends ContentPanel{
 		frmConsultaArticulos.setAutoHeight(true);
 		utils.loadFormConsultaArticulos(frmConsultaArticulos);
 		
-		TabItem tabCArticulos = new TabItem("Artículos");
+		TabItem tabCArticulos = new TabItem();
 		tabCArticulos.add(new MenuIconos());
 		tabCArticulos.add(frmConsultaArticulos);
 		panel.add(tabCArticulos);
@@ -146,7 +146,7 @@ public class FormConsultas extends ContentPanel{
 		frmCPrevision.getHeader().addStyleName("titular");
 		utils.loadFormConsultaPrevision(frmCPrevision);
 		
-		TabItem tabCprevision = new TabItem("Previsión de vestuario");
+		TabItem tabCprevision = new TabItem();
 		tabCprevision.addListener(Events.Select, new Listener<ComponentEvent>(){
  
 			@Override

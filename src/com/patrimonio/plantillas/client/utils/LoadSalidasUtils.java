@@ -132,6 +132,7 @@ public class LoadSalidasUtils {
 	    final ContentPanel cpArticulos = new ContentPanel();
 	    cpArticulos.setHeading("Selecciona los artículos que quieres solicitar");
 	    cpArticulos.setLayout(new BorderLayout());  
+	    cpArticulos.setCollapsible(true);
 	    cpArticulos.setAutoHeight(true);
 	    cpArticulos.setFrame(true);
 	    cpArticulos.setStyleAttribute("paddingTop", "10px");
@@ -294,8 +295,8 @@ public class LoadSalidasUtils {
 	    
 	    subMain.add(subLeft, new ColumnData(.4));
 	    subMain.add(subRight, new ColumnData(.6));
-	    subMain.add(pagingToolBar, new ColumnData(.6));
-	    subMain.add(btnGrp, new ColumnData(.4));
+	    subMain.add(pagingToolBar, new ColumnData(.5));
+	    subMain.add(btnGrp, new ColumnData(.5));
 	    subMain.add(subBottom, new ColumnData(1));
 	    
 	    frmArticulos.add(subMain, new FormData("100%"));
@@ -375,7 +376,7 @@ public class LoadSalidasUtils {
 	    	    
 	    cp.add(grid);
 	      
-	    cp.setVisible(false); //*********************** DE MOMENTO OCULTO *******************************//
+	    //cp.setVisible(false); //*********************** DE MOMENTO OCULTO *******************************//
 	    
 	    main.add(left, new ColumnData(.4));
 	    main.add(right, new ColumnData(.6));
@@ -720,15 +721,15 @@ public class LoadSalidasUtils {
 	    bottom.add(cpExistencias,formData);
 	    
 	    
-	    Label lblProveedor = new Label("Proveedor:");
-	    lblProveedor.setStyleName("etiqueta");
-	    ListBox lstProveedor = new ListBox();
-	    lstProveedor.setVisibleItemCount(1);
-	    lstProveedor.setWidth("400px");
-	    lstProveedor.addItem("...");
-	    bottom.add(lblProveedor,formData);
-	    bottom.add(lstProveedor,formData);
-	    
+//	    Label lblProveedor = new Label("Proveedor:");
+//	    lblProveedor.setStyleName("etiqueta");
+//	    ListBox lstProveedor = new ListBox();
+//	    lstProveedor.setVisibleItemCount(1);
+//	    lstProveedor.setWidth("400px");
+//	    lstProveedor.addItem("...");
+//	    bottom.add(lblProveedor,formData);
+//	    bottom.add(lstProveedor,formData);
+//	    
 	   
 	    main.add(left, new ColumnData(.4));
 	    main.add(right, new ColumnData(.6));

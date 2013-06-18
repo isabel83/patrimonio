@@ -79,9 +79,10 @@ public class FormEntradas extends ContentPanel{
 		frmNuevoPedido.setAutoHeight(true);
 		utils.loadFormNuevoPedido(frmNuevoPedido);
 		
-		TabItem tabNuevo = new TabItem("Nuevo Pedido");
+		TabItem tabNuevo = new TabItem();
 		tabNuevo.add(new MenuIconos());
 		tabNuevo.add(frmNuevoPedido);
+		
 		//tabNuevo.setIconStyle("tabNuevo");
 		panel.add(tabNuevo);
 		
@@ -90,7 +91,7 @@ public class FormEntradas extends ContentPanel{
 		frmRecepcionPedidos.setAutoHeight(true);
 		utils.loadFormRecepcion(frmRecepcionPedidos);
 		
-		TabItem tabRecepcion = new TabItem("Recepcion de Pedidos");
+		TabItem tabRecepcion = new TabItem();
 		tabRecepcion.add(new MenuIconos());
 		tabRecepcion.add(frmRecepcionPedidos);
 		panel.add(tabRecepcion);
@@ -101,7 +102,7 @@ public class FormEntradas extends ContentPanel{
 		utils.loadFormNuevoArticulo(frmNuevoArticulo);
 		
 		
-		TabItem tabArticulo = new TabItem("Nuevo articulo");
+		TabItem tabArticulo = new TabItem();
 		tabArticulo.add(new MenuIconos());
 		tabArticulo.add(frmNuevoArticulo);
 		panel.add(tabArticulo);
@@ -112,7 +113,7 @@ public class FormEntradas extends ContentPanel{
 		utils.loadFormArticuloEliminado(frmArticuloEliminado);
 		
 		
-		TabItem tabEliminado = new TabItem("Recuperar articulo eliminado");
+		TabItem tabEliminado = new TabItem();
 		tabEliminado.add(new MenuIconos());
 		tabEliminado.add(frmArticuloEliminado);
 		panel.add(tabEliminado);
@@ -122,7 +123,7 @@ public class FormEntradas extends ContentPanel{
 //		frmNuevoPedido.setAutoHeight(true);
 //		utils.loadFormNuevoPedido(frmNuevoPedido);
 //		
-		TabItem tabNumInventario = new TabItem("Poner números de inventario");
+		TabItem tabNumInventario = new TabItem();
 		tabNumInventario.add(new MenuIconos());
 		//tabNumInventario.add(frmNuevoPedido);
 		//tabNuevo.setIconStyle("tabNuevo");
