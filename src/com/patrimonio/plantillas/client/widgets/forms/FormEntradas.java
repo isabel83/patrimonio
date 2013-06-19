@@ -18,6 +18,8 @@ public class FormEntradas extends ContentPanel{
 
 	int panelActivo = 0;
 	
+	String[] titulos={"Entradas > Nuevo pedido", "Entradas > Recepción de pedidos", "Entradas > Nuevo artículo", "Entradas > Recuperar artículo eliminado"};
+	
 	public FormEntradas(int numPanel) {
 		panelActivo = numPanel;
 	}
@@ -36,13 +38,13 @@ public class FormEntradas extends ContentPanel{
 	protected void onRender(Element parent, int pos) {
 		super.onRender(parent, pos);
 
-	//	Log.debug("En el onRender del FormPage");
-
-		
 		setLayout(new BorderLayout());
 		setBodyBorder(false);
 		setBorders(false);
-		setHeaderVisible(false);
+		setHeading(titulos[panelActivo]);
+		getHeader().setStyleName("cabecera");
+		setStyleName("migas");
+		
 		setSize(1024, 768);
 		
 		GWT.setUncaughtExceptionHandler(new   
@@ -74,6 +76,7 @@ public class FormEntradas extends ContentPanel{
 	
 	private void loadEntradas(TabPanel panel) {
 		
+		
 		FormPanel frmNuevoPedido = new FormPanel();
 		frmNuevoPedido.setHeaderVisible(false);
 		frmNuevoPedido.setAutoHeight(true);
@@ -82,7 +85,6 @@ public class FormEntradas extends ContentPanel{
 		TabItem tabNuevo = new TabItem();
 		tabNuevo.add(new MenuIconos());
 		tabNuevo.add(frmNuevoPedido);
-		
 		//tabNuevo.setIconStyle("tabNuevo");
 		panel.add(tabNuevo);
 		
@@ -123,11 +125,11 @@ public class FormEntradas extends ContentPanel{
 //		frmNuevoPedido.setAutoHeight(true);
 //		utils.loadFormNuevoPedido(frmNuevoPedido);
 //		
-		TabItem tabNumInventario = new TabItem();
-		tabNumInventario.add(new MenuIconos());
+		//TabItem tabNumInventario = new TabItem();
+		//tabNumInventario.add(new MenuIconos());
 		//tabNumInventario.add(frmNuevoPedido);
 		//tabNuevo.setIconStyle("tabNuevo");
-		panel.add(tabNumInventario);
+		//panel.add(tabNumInventario);
 	}
 
 //	

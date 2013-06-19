@@ -97,6 +97,12 @@ public class LoadEntradasUtils {
 	    numPedido.setFieldLabel("Número de pedido");  
 	    left.add(numPedido,formData);
 	    
+	    TextField<String> nifProv = new TextField<String>();  
+	    nifProv.setFieldLabel("NIF del proveedor");
+	    nifProv.setValue("B28922490");
+	    nifProv.disable();
+	    left.add(nifProv,formData);
+	    
 	    Label lblProveedores = new Label("Proveedor:");
 	    lblProveedores.setStyleName("etiqueta");
 	    final ListBox lstProveedores = new ListBox();
@@ -106,11 +112,7 @@ public class LoadEntradasUtils {
 	    left.add(lblProveedores,formData);
 	    left.add(lstProveedores,formData);
 	    
-	    TextField<String> nifProv = new TextField<String>();  
-	    nifProv.setFieldLabel("NIF del proveedor");
-	    nifProv.setValue("B28922490");
-	    nifProv.disable();
-	    left.add(nifProv,formData);
+	    
 	    
 	    
 	    // vamos creando el pedido
@@ -316,7 +318,6 @@ public class LoadEntradasUtils {
 	}
 	
 	
-
 	public void loadFormRecepcion(FormPanel frmRecepcionPedidos) {
 
 		FormData formData = new FormData("100%"); 
@@ -409,10 +410,9 @@ public class LoadEntradasUtils {
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
 	    Grid<Stock> grid = new Grid<Stock>(store,cm);
-	    grid.setStyleAttribute("borderTop", "none");  
 	    grid.setAutoExpandColumn("articulo");  
 	    grid.setAutoExpandColumn("observaciones");
-	    grid.setBorders(false);  
+	    grid.setBorders(true);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
 	    grid.setColumnReordering(true);  
@@ -420,7 +420,7 @@ public class LoadEntradasUtils {
 	    
 	    
 	    ContentPanel cp = new ContentPanel();  
-	    cp.setBodyBorder(true);  
+	    cp.setBodyBorder(false);  
 	    cp.setHeading("Relación de artículos de la petición");
 	    cp.setButtonAlign(HorizontalAlignment.CENTER);  
 	    cp.setLayout(new FitLayout());
@@ -638,10 +638,9 @@ public class LoadEntradasUtils {
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
 	    Grid<Stock> grid = new Grid<Stock>(store,cm);
-	    grid.setStyleAttribute("borderTop", "none");  
 	    grid.setAutoExpandColumn("articulo");  
 	    grid.setAutoExpandColumn("observaciones");
-	    grid.setBorders(false);  
+	    grid.setBorders(true);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
 	    grid.setColumnReordering(true);  
@@ -664,7 +663,7 @@ public class LoadEntradasUtils {
 	    bottom.add(cpExistencias,formData);
 	    
 	    ContentPanel cp = new ContentPanel();  
-	    cp.setBodyBorder(true);  
+	    cp.setBodyBorder(false);  
 	    cp.setHeaderVisible(false);
 	    cp.setButtonAlign(HorizontalAlignment.CENTER);  
 	    cp.setLayout(new FitLayout());

@@ -58,7 +58,7 @@ public class DialogoAlbaranTotal extends Dialog{
 		if(!consulta)
 			setSize(875, 550);
 		else
-			setSize(875, 600);
+			setSize(875, 610);
 		addStyleName("dlgBusqueda");
 		
 		//CREAMOS EL FORMULARIO CON LOS CAMPOS ADECUADOS
@@ -184,19 +184,17 @@ public class DialogoAlbaranTotal extends Dialog{
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
 	    Grid<Stock> grid = new Grid<Stock>(store,cm);
-	    grid.setStyleAttribute("borderTop", "none");  
 	    grid.setAutoExpandColumn("articulo");  
 	    grid.setAutoExpandColumn("observaciones");
-	    grid.setBorders(false);  
+	    grid.setBorders(true);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
 	    grid.setColumnReordering(true);  
-	    grid.setColumnLines(true);
 	    
 
 	    
 	    ContentPanel cpArticulos = new ContentPanel();  
-	    cpArticulos.setBodyBorder(true);  
+	    cpArticulos.setBodyBorder(false);  
 	    cpArticulos.setHeading("Relación de Artículos Servidos");
 	    cpArticulos.setButtonAlign(HorizontalAlignment.CENTER);  
 	    cpArticulos.setLayout(new FitLayout());
@@ -214,7 +212,7 @@ public class DialogoAlbaranTotal extends Dialog{
  	    
  	    final PagingToolBar pagingToolBar = new PagingToolBar(50); 
  	    pagingToolBar.bind(loader);
- 	    pagingToolBar.setStyleName("paginacion Left");
+ 	    pagingToolBar.setStyleName("paginacion dialog Left");
 	    
 	    
 	    main.add(l1, new ColumnData(.5));

@@ -20,6 +20,8 @@ public class FormSalidas extends ContentPanel{
 
 	int panelActivo = 0;
 	
+	String[] titulos={"Salidas > Nueva solicitud", "Salidas > Control de entregas", "Salidas > Baja de artículos"};
+	
 	public FormSalidas(int posicion) {
 		panelActivo = posicion;
 	}
@@ -38,12 +40,11 @@ public class FormSalidas extends ContentPanel{
 	protected void onRender(Element parent, int pos) {
 		super.onRender(parent, pos);
 
-
-		
 		setLayout(new BorderLayout());
 		setBodyBorder(false);
 		setBorders(false);
-		setHeaderVisible(false);
+		setHeading(titulos[panelActivo]);
+		setStyleName("migas");
 		setSize(1024, 768);
 		
 		GWT.setUncaughtExceptionHandler(new   
@@ -64,7 +65,7 @@ public class FormSalidas extends ContentPanel{
 		tabPanel.setWidth("95%");
 		tabPanel.setBodyBorder(false);
 		tabPanel.setBorders(false);
-		loadEntradas(tabPanel);
+		loadSalidas(tabPanel);
 		tabPanel.setSelection(tabPanel.getItem(panelActivo));
 		add(tabPanel);
 		
@@ -73,7 +74,7 @@ public class FormSalidas extends ContentPanel{
 	}
 	
 	
-	private void loadEntradas(TabPanel panel) {
+	private void loadSalidas(TabPanel panel) {
 		
 		FormPanel frmNuevaSolicitud = new FormPanel();
 		frmNuevaSolicitud.setHeaderVisible(false);
@@ -84,6 +85,7 @@ public class FormSalidas extends ContentPanel{
 		TabItem tabNueva = new TabItem();
 		tabNueva.add(new MenuIconos());
 		tabNueva.add(frmNuevaSolicitud);
+		tabNueva.disableTextSelection(true);
 		panel.add(tabNueva);
 		
 		final FormPanel frmAlbaranes = new FormPanel();

@@ -340,10 +340,9 @@ public class LoadSalidasUtils {
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
 	    Grid<Stock> grid = new Grid<Stock>(store,cm);
-	    grid.setStyleAttribute("borderTop", "none");  
 	    grid.setAutoExpandColumn("articulo");  
 	    grid.setAutoExpandColumn("observaciones");
-	    grid.setBorders(false);  
+	    grid.setBorders(true);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
 	    grid.setColumnReordering(true);  
@@ -367,7 +366,7 @@ public class LoadSalidasUtils {
 	    bottom.add(cpArticulos,formData);
 	    
 	    ContentPanel cp = new ContentPanel();  
-	    cp.setBodyBorder(true);  
+	    cp.setBodyBorder(false);  
 	    cp.setHeaderVisible(false);
 	    cp.setButtonAlign(HorizontalAlignment.CENTER);  
 	    cp.setLayout(new FitLayout());
@@ -488,17 +487,16 @@ public class LoadSalidasUtils {
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
 	    Grid<Stock> grid = new Grid<Stock>(store,cm);
-	    grid.setStyleAttribute("borderTop", "none");  
 	    grid.setAutoExpandColumn("articulo");  
 	    grid.setAutoExpandColumn("observaciones");
-	    grid.setBorders(false);  
+	    grid.setBorders(true);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
 	    grid.setColumnReordering(true);  
 	    grid.setColumnLines(true);
 	    
 	    ContentPanel cp = new ContentPanel();  
-	    cp.setBodyBorder(true);  
+	    cp.setBodyBorder(false);  
 	    cp.setHeaderVisible(false);
 	    cp.setButtonAlign(HorizontalAlignment.CENTER);  
 	    cp.setLayout(new FitLayout());

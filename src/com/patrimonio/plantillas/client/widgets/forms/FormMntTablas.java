@@ -25,6 +25,8 @@ public class FormMntTablas extends ContentPanel{
 
 	int panelActivo = 0;
 	
+	String[] titulos={"Mantenimiento de tablas > Proveedores", "Mantenimiento de tablas > Destinatarios", "Mantenimiento de tablas > Secciones", "Mantenimiento de tablas > Familias", "Mantenimiento de tablas > Subfamilias", "Mantenimiento de tablas > Puestos de trabajo"};
+	
 	public FormMntTablas(int posicion) {
 		panelActivo = posicion;
 	}
@@ -46,7 +48,8 @@ public class FormMntTablas extends ContentPanel{
 		setLayout(new BorderLayout());
 		setBodyBorder(false);
 		setBorders(false);
-		setHeaderVisible(false);
+		setHeading(titulos[panelActivo]);
+		setStyleName("migas");
 		setSize(1024, 768);
 		
 		GWT.setUncaughtExceptionHandler(new   
@@ -77,9 +80,10 @@ public class FormMntTablas extends ContentPanel{
 		frmProveedores.setAutoHeight(true);
 		utils.loadFormProveedores(frmProveedores);
 		
-		TabItem tabProveedores = new TabItem("Proveedores");
+		TabItem tabProveedores = new TabItem();
 		tabProveedores.add(new MenuIconos());
 		tabProveedores.add(frmProveedores);
+		tabProveedores.disableTextSelection(true);
 		panel.add(tabProveedores);
 		
 		final FormPanel frmDestinatarios = new FormPanel();
@@ -88,7 +92,7 @@ public class FormMntTablas extends ContentPanel{
 		frmDestinatarios.setAutoHeight(true);
 		utils.loadFormDestinatarios(frmDestinatarios);
 		
-		TabItem tabDestinatarios = new TabItem("Destinatarios");
+		TabItem tabDestinatarios = new TabItem();
 		tabDestinatarios.add(new MenuIconos());
 		tabDestinatarios.add(frmDestinatarios);
 		panel.add(tabDestinatarios);
@@ -99,7 +103,7 @@ public class FormMntTablas extends ContentPanel{
 		frmSecciones.setAutoHeight(true);
 		utils.loadFormSecciones(frmSecciones);
 		
-		TabItem tabSecciones = new TabItem("Secciones");
+		TabItem tabSecciones = new TabItem();
 		tabSecciones.add(new MenuIconos());
 		tabSecciones.add(frmSecciones);
 		panel.add(tabSecciones);
@@ -110,7 +114,7 @@ public class FormMntTablas extends ContentPanel{
 		frmFamilias.setAutoHeight(true);
 		utils.loadFormFamilias(frmFamilias);
 		
-		TabItem tabFamilias = new TabItem("Familias");
+		TabItem tabFamilias = new TabItem();
 		tabFamilias.add(new MenuIconos());
 		tabFamilias.add(frmFamilias);
 		panel.add(tabFamilias);
@@ -121,7 +125,7 @@ public class FormMntTablas extends ContentPanel{
 		frmSubFamilias.setAutoHeight(true);
 		utils.loadFormSubFamilias(frmSubFamilias);
 		
-		TabItem tabSubFamilias = new TabItem("Subfamilias");
+		TabItem tabSubFamilias = new TabItem();
 		tabSubFamilias.add(new MenuIconos());
 		tabSubFamilias.add(frmSubFamilias);
 		panel.add(tabSubFamilias);
@@ -132,7 +136,7 @@ public class FormMntTablas extends ContentPanel{
 		frmPuestos.setBodyBorder(false);
 		utils.loadFormPuestos(frmPuestos);
 		
-		TabItem tabPuestos = new TabItem("Puestos de trabajo");
+		TabItem tabPuestos = new TabItem();
 		tabPuestos.add(new MenuIconos());
 		tabPuestos.add(frmPuestos);
 		panel.add(tabPuestos);

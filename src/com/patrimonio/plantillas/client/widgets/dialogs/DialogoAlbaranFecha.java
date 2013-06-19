@@ -44,7 +44,7 @@ public class DialogoAlbaranFecha extends Dialog {
 	    fechaSolicitud.setTitle("Seleccione la fecha en la que se realizó la solicitud");
 		
 		BorderLayoutData data = new BorderLayoutData(LayoutRegion.CENTER);
-		data.setMargins(new Margins(10, 2, 10, 2));
+		data.setMargins(new Margins(5, 2, 10, 2));
 		
 		FormPanel cp = new FormPanel();
 		cp.setHeaderVisible(false);

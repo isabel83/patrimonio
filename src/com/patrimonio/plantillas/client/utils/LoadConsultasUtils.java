@@ -744,6 +744,7 @@ public class LoadConsultasUtils {
 	    cpExistencias.setHeading("Existencias");
 	    cpExistencias.setLayout(rgtLayout);  
 	    cpExistencias.setHeight("90px");
+	    cpExistencias.setFrame(true);
 	    cpExistencias.setStyleAttribute("paddingBottom", "10px");
 	    
 	    Label lblMinimas = new Label();
@@ -991,8 +992,8 @@ public class LoadConsultasUtils {
 	    gButtons.add(b2);
 	    gButtons.add(b3);
 	    
-	    cpEntregas.add(paginacionEntregas, new ColumnData(.68));
-	    cpEntregas.add(gButtons, new ColumnData(.32));
+	    cpEntregas.add(paginacionEntregas, new ColumnData(.63));
+	    cpEntregas.add(gButtons, new ColumnData(.37));
 	    
 	    
 	}

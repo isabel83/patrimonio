@@ -47,7 +47,7 @@ public class DialogoEliminados extends Dialog{
 		setHeading("Recuperación de artículos eliminados");
 		setLayout(new BorderLayout());
 		setModal(true);
-		setSize(875, 710);
+		setSize(875, 715);
 		//setHideOnButtonClick(true);
 		addStyleName("dlgBusqueda");
 		
@@ -230,7 +230,7 @@ public class DialogoEliminados extends Dialog{
 	    
 	    final PagingToolBar toolBar = new PagingToolBar(50); 
 	    toolBar.bind(loader);
-	    toolBar.addStyleName("paginacion dialog");
+	    toolBar.addStyleName("paginacion dialog Left");
 
 	    
 	    main.add(left, new ColumnData(.4));

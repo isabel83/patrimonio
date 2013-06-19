@@ -12,6 +12,7 @@ h1 {
 
 .principal{
 	text-align: left!important;
+	padding-bottom: 10px;
 }
 
 .gwt-PushButton {
@@ -110,9 +111,6 @@ h1 {
 	padding-bottom: 2px;
 }
 
-.x-border-layout-ct{
-	background: none;
-}
 
 .derecha .x-form-item label{
 	line-height: 22px;
@@ -182,6 +180,33 @@ h1 {
 	float: left;
 }
 
+.fondo{
+	position: absolute;
+	color: White;
+	margin: 200px 150px;
+	line-height: 20px;
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=40);
+	opacity: .4;
+	-moz-opacity: .4;
+}
+
+.migas .cabecera{
+	font-size: 1em;
+	font-weight: bold;
+	color: #146F00;
+	padding-left: 17px;
+	padding-top: 10px;
+}
+
+.migas .x-panel-header{
+	background: none;
+	border: none;
+}
+
+.migas .x-border-layout-ct{
+	background: none;
+	border: none;
+}
 
 
 .dlgBusqueda .x-toolbar-left{

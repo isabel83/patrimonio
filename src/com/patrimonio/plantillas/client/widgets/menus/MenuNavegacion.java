@@ -35,7 +35,6 @@ public class MenuNavegacion extends Composite {
 				FormEntradas form = new FormEntradas(0);
 				form.setBodyBorder(false);
 				form.setBorders(false);
-				form.setHeaderVisible(false);
 				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 				RootPanel.get("principalContainer").add(form);
 			}
@@ -51,7 +50,6 @@ public class MenuNavegacion extends Composite {
 				FormEntradas form = new FormEntradas(1);
 				form.setBodyBorder(false);
 				form.setBorders(false);
-				form.setHeaderVisible(false);
 				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 				RootPanel.get("principalContainer").add(form);
 			}
@@ -70,7 +68,6 @@ public class MenuNavegacion extends Composite {
 				FormEntradas form = new FormEntradas(2);
 				form.setBodyBorder(false);
 				form.setBorders(false);
-				form.setHeaderVisible(false);
 				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 				RootPanel.get("principalContainer").add(form);
 			}
@@ -86,29 +83,14 @@ public class MenuNavegacion extends Composite {
 				FormEntradas form = new FormEntradas(3);
 				form.setBodyBorder(false);
 				form.setBorders(false);
-				form.setHeaderVisible(false);
+				
 				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 				RootPanel.get("principalContainer").add(form);
 			}
 			
 		});
 		submnuEntradas.add(itemRecuperarArticulo);
-		
-		MenuItem itemNumInv = new MenuItem("Poner Números de inventario");
-		itemNumInv.addSelectionListener(new SelectionListener<MenuEvent>(){
-
-			@Override
-			public void componentSelected(MenuEvent ce) {
-				FormEntradas form = new FormEntradas(4);
-				form.setBodyBorder(false);
-				form.setBorders(false);
-				form.setHeaderVisible(false);
-				RootPanel.get("principalContainer").getElement().setInnerHTML("");
-				RootPanel.get("principalContainer").add(form);
-			}
-			
-		});
-		submnuEntradas.add(itemNumInv);
+				
 		
 		MenuBarItem mnuEntradas = new MenuBarItem("Entradas", submnuEntradas);
 		menuPrincipal.add(mnuEntradas);
@@ -125,7 +107,7 @@ public class MenuNavegacion extends Composite {
 				FormSalidas form = new FormSalidas(0);
 				form.setBodyBorder(false);
 				form.setBorders(false);
-				form.setHeaderVisible(false);
+				
 				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 				RootPanel.get("principalContainer").add(form);
 			}
@@ -141,7 +123,7 @@ public class MenuNavegacion extends Composite {
 				FormSalidas form = new FormSalidas(1);
 				form.setBodyBorder(false);
 				form.setBorders(false);
-				form.setHeaderVisible(false);
+				
 				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 				RootPanel.get("principalContainer").add(form);
 			}
@@ -160,7 +142,7 @@ public class MenuNavegacion extends Composite {
 				FormSalidas form = new FormSalidas(2);
 				form.setBodyBorder(false);
 				form.setBorders(false);
-				form.setHeaderVisible(false);
+				
 				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 				RootPanel.get("principalContainer").add(form);
 			}
@@ -183,7 +165,7 @@ public class MenuNavegacion extends Composite {
 				FormConsultas form = new FormConsultas(0);
 				form.setBodyBorder(false);
 				form.setBorders(false);
-				form.setHeaderVisible(false);
+				
 				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 				RootPanel.get("principalContainer").add(form);
 			}
@@ -199,7 +181,7 @@ public class MenuNavegacion extends Composite {
 				FormConsultas form = new FormConsultas(1);
 				form.setBodyBorder(false);
 				form.setBorders(false);
-				form.setHeaderVisible(false);
+				
 				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 				RootPanel.get("principalContainer").add(form);
 			}
@@ -215,7 +197,7 @@ public class MenuNavegacion extends Composite {
 				FormConsultas form = new FormConsultas(2);
 				form.setBodyBorder(false);
 				form.setBorders(false);
-				form.setHeaderVisible(false);
+				
 				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 				RootPanel.get("principalContainer").add(form);
 			}
@@ -231,7 +213,7 @@ public class MenuNavegacion extends Composite {
 				FormConsultas form = new FormConsultas(3);
 				form.setBodyBorder(false);
 				form.setBorders(false);
-				form.setHeaderVisible(false);
+				
 				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 				RootPanel.get("principalContainer").add(form);
 			}
@@ -247,7 +229,7 @@ public class MenuNavegacion extends Composite {
 				FormConsultas form = new FormConsultas(4);
 				form.setBodyBorder(false);
 				form.setBorders(false);
-				form.setHeaderVisible(false);
+				
 				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 				RootPanel.get("principalContainer").add(form);
 			}
@@ -263,7 +245,7 @@ public class MenuNavegacion extends Composite {
 				FormConsultas form = new FormConsultas(5);
 				form.setBodyBorder(false);
 				form.setBorders(false);
-				form.setHeaderVisible(false);
+				
 				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 				RootPanel.get("principalContainer").add(form);
 			}
@@ -286,7 +268,7 @@ public class MenuNavegacion extends Composite {
 				FormInformes form = new FormInformes(0);
 				form.setBodyBorder(false);
 				form.setBorders(false);
-				form.setHeaderVisible(false);
+				
 				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 				RootPanel.get("principalContainer").add(form);
 			}
@@ -302,7 +284,7 @@ public class MenuNavegacion extends Composite {
 				FormInformes form = new FormInformes(1);
 				form.setBodyBorder(false);
 				form.setBorders(false);
-				form.setHeaderVisible(false);
+				
 				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 				RootPanel.get("principalContainer").add(form);
 			}
@@ -318,7 +300,7 @@ public class MenuNavegacion extends Composite {
 				FormInformes form = new FormInformes(2);
 				form.setBodyBorder(false);
 				form.setBorders(false);
-				form.setHeaderVisible(false);
+				
 				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 				RootPanel.get("principalContainer").add(form);
 			}
@@ -334,7 +316,7 @@ public class MenuNavegacion extends Composite {
 				FormInformes form = new FormInformes(3);
 				form.setBodyBorder(false);
 				form.setBorders(false);
-				form.setHeaderVisible(false);
+				
 				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 				RootPanel.get("principalContainer").add(form);
 			}
@@ -350,7 +332,7 @@ public class MenuNavegacion extends Composite {
 				FormInformes form = new FormInformes(4);
 				form.setBodyBorder(false);
 				form.setBorders(false);
-				form.setHeaderVisible(false);
+				
 				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 				RootPanel.get("principalContainer").add(form);
 			}
@@ -366,7 +348,7 @@ public class MenuNavegacion extends Composite {
 				FormInformes form = new FormInformes(5);
 				form.setBodyBorder(false);
 				form.setBorders(false);
-				form.setHeaderVisible(false);
+				
 				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 				RootPanel.get("principalContainer").add(form);
 			}
@@ -391,7 +373,7 @@ public class MenuNavegacion extends Composite {
 				FormMntTablas form = new FormMntTablas(0);
 				form.setBodyBorder(false);
 				form.setBorders(false);
-				form.setHeaderVisible(false);
+				
 				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 				RootPanel.get("principalContainer").add(form);
 			}
@@ -407,7 +389,7 @@ public class MenuNavegacion extends Composite {
 				FormMntTablas form = new FormMntTablas(1);
 				form.setBodyBorder(false);
 				form.setBorders(false);
-				form.setHeaderVisible(false);
+				
 				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 				RootPanel.get("principalContainer").add(form);
 			}
@@ -423,7 +405,7 @@ public class MenuNavegacion extends Composite {
 				FormMntTablas form = new FormMntTablas(2);
 				form.setBodyBorder(false);
 				form.setBorders(false);
-				form.setHeaderVisible(false);
+				
 				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 				RootPanel.get("principalContainer").add(form);
 			}
@@ -439,7 +421,7 @@ public class MenuNavegacion extends Composite {
 				FormMntTablas form = new FormMntTablas(3);
 				form.setBodyBorder(false);
 				form.setBorders(false);
-				form.setHeaderVisible(false);
+				
 				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 				RootPanel.get("principalContainer").add(form);
 			}
@@ -455,7 +437,7 @@ public class MenuNavegacion extends Composite {
 				FormMntTablas form = new FormMntTablas(4);
 				form.setBodyBorder(false);
 				form.setBorders(false);
-				form.setHeaderVisible(false);
+				
 				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 				RootPanel.get("principalContainer").add(form);
 			}
@@ -471,7 +453,7 @@ public class MenuNavegacion extends Composite {
 				FormMntTablas form = new FormMntTablas(5);
 				form.setBodyBorder(false);
 				form.setBorders(false);
-				form.setHeaderVisible(false);
+				
 				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 				RootPanel.get("principalContainer").add(form);
 			}
@@ -495,7 +477,7 @@ public class MenuNavegacion extends Composite {
 //				FormOpEspeciales form = new FormOpEspeciales();
 //				form.setBodyBorder(false);
 //				form.setBorders(false);
-//				form.setHeaderVisible(false);
+//				
 //				RootPanel.get("principalContainer").getElement().setInnerHTML("");
 //				RootPanel.get("principalContainer").add(form);
 //			}

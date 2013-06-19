@@ -66,10 +66,11 @@ public class DialogoNuevoArticulo extends Dialog{
 		
 		if(consultaArt){
 			setHeading("Consulta artículos");
+			setSize(875, 710);
 		}
 		else if(darBaja){
 			setHeading("Baja de artículo");
-			setSize(875, 725);
+			setSize(875, 730);
 		}
 		else{
 			setHeading("Nuevo artículo");
@@ -273,7 +274,7 @@ public class DialogoNuevoArticulo extends Dialog{
  	    
  	    final PagingToolBar pagingToolBar = new PagingToolBar(50); 
  	    pagingToolBar.bind(loader);
- 	    pagingToolBar.setStyleName("paginacion Left");
+ 	    pagingToolBar.setStyleName("paginacion dialog Left");
  	   
 	    
     

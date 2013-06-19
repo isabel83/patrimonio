@@ -134,10 +134,9 @@ public class DialogoBuscarPedidos extends Dialog {
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
 	    Grid<Stock> grid = new Grid<Stock>(store,cm);
-	    grid.setStyleAttribute("borderTop", "none");  
 	    grid.setAutoExpandColumn("articulo");  
 	    grid.setAutoExpandColumn("observaciones");
-	    grid.setBorders(false);  
+	    grid.setBorders(true);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
 	    grid.setColumnReordering(true);  
@@ -146,11 +145,12 @@ public class DialogoBuscarPedidos extends Dialog {
 
 	    
 	    ContentPanel cpArticulos = new ContentPanel();  
-	    cpArticulos.setBodyBorder(true);  
+	    cpArticulos.setBodyBorder(false);  
 	    cpArticulos.setHeading("Relación de artículos de la petición");
 	    cpArticulos.setButtonAlign(HorizontalAlignment.CENTER);  
 	    cpArticulos.setLayout(new FitLayout());
 	    cpArticulos.setHeight("200px");
+	    cpArticulos.setFrame(true);
 	    cpArticulos.setStyleAttribute("padding", "5px 10px");
 	    
 	    cpArticulos.add(grid);

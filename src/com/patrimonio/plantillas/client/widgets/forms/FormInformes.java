@@ -25,6 +25,8 @@ public class FormInformes extends ContentPanel{
 
 	int panelActivo = 0;
 	
+	String[] titulos={"Informes > Pedidos", "Informes > Solicitudes de material", "Informes > Artículos", "Informes > Proveedores", "Informes > Puestos de trabajo", "Informes > Previsión de vestuario"};
+	
 	public FormInformes(int posicion) {
 		panelActivo = posicion;
 	}
@@ -46,7 +48,8 @@ public class FormInformes extends ContentPanel{
 		setLayout(new BorderLayout());
 		setBodyBorder(false);
 		setBorders(false);
-		setHeaderVisible(false);
+		setHeading(titulos[panelActivo]);
+		setStyleName("migas");
 		setSize(1024, 768);
 		
 		GWT.setUncaughtExceptionHandler(new   
@@ -78,6 +81,7 @@ public class FormInformes extends ContentPanel{
 		TabItem tabPedidos = new TabItem();
 		tabPedidos.add(new MenuIconos());
 		tabPedidos.add(frmPedidos);
+		tabPedidos.disableTextSelection(true);
 		panel.add(tabPedidos);
 		
 		FormPanel frmSolicitudes = new FormPanel();

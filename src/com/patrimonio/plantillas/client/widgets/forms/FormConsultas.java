@@ -29,6 +29,8 @@ public class FormConsultas extends ContentPanel{
 
 	int panelActivo = 0;
 	
+	String[] titulos={"Consultas > Pedidos", "Consultas > Albaranes de material SOLICITADO", "Consultas > Albaranes de material SERVIDO", "Consultas > Control de material SOLICITADO y SERVIDO", "Consultas > Artículos", "Consultas > Previsión de vestuario"};
+	
 	public FormConsultas(int posicion) {
 		panelActivo = posicion;
 	}
@@ -47,12 +49,11 @@ public class FormConsultas extends ContentPanel{
 	protected void onRender(Element parent, int pos) {
 		super.onRender(parent, pos);
 
-
-		
 		setLayout(new BorderLayout());
 		setBodyBorder(false);
 		setBorders(false);
-		setHeaderVisible(false);
+		setHeading(titulos[panelActivo]);
+		setStyleName("migas");
 		setSize(1024, 768);
 		
 		GWT.setUncaughtExceptionHandler(new   
@@ -90,9 +91,10 @@ public class FormConsultas extends ContentPanel{
 		frmConsultaPedido.setAutoHeight(true);
 		utils.loadFormConsultaPedido(frmConsultaPedido);
 		
-		TabItem tabConsultaPedido = new TabItem("Pedidos");
+		TabItem tabConsultaPedido = new TabItem();
 		tabConsultaPedido.add(new MenuIconos());
 		tabConsultaPedido.add(frmConsultaPedido);
+		tabConsultaPedido.disableTextSelection(true);
 		panel.add(tabConsultaPedido);
 		
 		final FormPanel frmConsultaAlbaranesMSolicitado = new FormPanel();

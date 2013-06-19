@@ -301,10 +301,9 @@ public class LoadMantenimientoUtils {
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
 	    Grid<Stock> grid = new Grid<Stock>(store,cm);
-	    grid.setStyleAttribute("borderTop", "none");  
 	    grid.setAutoExpandColumn("articulo");  
 	    grid.setAutoExpandColumn("observaciones");
-	    grid.setBorders(false);  
+	    grid.setBorders(true);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
 	    grid.setColumnReordering(true);  
@@ -312,12 +311,11 @@ public class LoadMantenimientoUtils {
 	    
 	    
 	    ContentPanel cp = new ContentPanel();  
-	    cp.setBodyBorder(true);  
+	    cp.setBodyBorder(false);  
 	    cp.setHeading("Familias");
 	    cp.setButtonAlign(HorizontalAlignment.CENTER);  
 	    cp.setLayout(new FitLayout());
 	    cp.setHeight("300px");
-	    cp.setFrame(true);
 	    cp.setStyleAttribute("paddingTop", "10px");
 	    	    
 	    cp.add(grid);
@@ -430,10 +428,9 @@ public class LoadMantenimientoUtils {
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
 	    Grid<Stock> grid = new Grid<Stock>(store,cm);
-	    grid.setStyleAttribute("borderTop", "none");  
 	    grid.setAutoExpandColumn("articulo");  
 	    grid.setAutoExpandColumn("observaciones");
-	    grid.setBorders(false);  
+	    grid.setBorders(true);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
 	    grid.setColumnReordering(true);  
@@ -441,12 +438,12 @@ public class LoadMantenimientoUtils {
 	    
 	    
 	    ContentPanel cp = new ContentPanel();  
-	    cp.setBodyBorder(true);  
+	    cp.setBodyBorder(false);  
 	    cp.setHeading("Subfamilias");
 	    cp.setButtonAlign(HorizontalAlignment.CENTER);  
 	    cp.setLayout(new FitLayout());
 	    cp.setHeight("300px");
-	    cp.setFrame(true);
+	    
 	    cp.setStyleAttribute("paddingTop", "10px");
 	    	    
 	    cp.add(grid);
@@ -662,10 +659,9 @@ public class LoadMantenimientoUtils {
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
 	    Grid<Stock> grid = new Grid<Stock>(store,cm);
-	    grid.setStyleAttribute("borderTop", "none");  
 	    grid.setAutoExpandColumn("articulo");  
 	    grid.setAutoExpandColumn("observaciones");
-	    grid.setBorders(false);  
+	    grid.setBorders(true);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
 	    grid.setColumnReordering(true);  
@@ -673,12 +669,12 @@ public class LoadMantenimientoUtils {
 	    
 	    
 	    ContentPanel cp = new ContentPanel();  
-	    cp.setBodyBorder(true);  
+	    cp.setBodyBorder(false);  
 	    cp.setHeading("Artículos del puesto de trabajo");
 	    cp.setButtonAlign(HorizontalAlignment.CENTER);  
 	    cp.setLayout(new FitLayout());
 	    cp.setHeight("300px");
-	    cp.setFrame(true);
+	    
 	    cp.setStyleAttribute("paddingTop", "10px");
 	    	    
 	    cp.add(grid);
