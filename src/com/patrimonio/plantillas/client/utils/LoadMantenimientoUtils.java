@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
+import com.extjs.gxt.ui.client.Style.SortDir;
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
 import com.extjs.gxt.ui.client.data.BeanModelReader;
 import com.extjs.gxt.ui.client.data.DataProxy;
@@ -269,31 +270,17 @@ public class LoadMantenimientoUtils {
 	    List<ColumnConfig> configs = new ArrayList<ColumnConfig>();  
 	    
 	    ColumnConfig column = new ColumnConfig();  
-	    column.setId("cantidad");  
-	    column.setHeader("Cantidad");  
+	    column.setId("codigo");  
+	    column.setHeader("Código");  
 	    column.setWidth(200);  
 	    column.setRowHeader(true);  
 	    configs.add(column);  
 	  
 	    column = new ColumnConfig();  
-	    column.setId("codigo");  
-	    column.setHeader("Código");  
-	    column.setWidth(200);  
+	    column.setId("nombre");  
+	    column.setHeader("Nombre");  
 	    configs.add(column);  
-	  
-	    column = new ColumnConfig();  
-	    column.setId("articulo");  
-	    column.setHeader("Artículo");  
-	    column.setWidth(200); 
-	    configs.add(column);  
-	  
-	    column = new ColumnConfig();  
-	    column.setId("observaciones");  
-	    column.setHeader("Observaciones");  
-	    column.setWidth(200); 
-	    configs.add(column);  
-	    
-	      
+      
 	    
 	    ListStore<Stock> store = new ListStore<Stock>();
 	  //  store.add(getStocks()); //(REVISAR ESTO PORQUE DA ERROR EN LA DEMO)
@@ -301,21 +288,20 @@ public class LoadMantenimientoUtils {
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
 	    Grid<Stock> grid = new Grid<Stock>(store,cm);
-	    grid.setAutoExpandColumn("articulo");  
-	    grid.setAutoExpandColumn("observaciones");
-	    grid.setBorders(true);  
+	    grid.setAutoExpandColumn("nombre");  
+	    grid.setBorders(false);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
 	    grid.setColumnReordering(true);  
-	    grid.setColumnLines(true);
 	    
 	    
 	    ContentPanel cp = new ContentPanel();  
-	    cp.setBodyBorder(false);  
+	    cp.setBodyBorder(true);  
 	    cp.setHeading("Familias");
 	    cp.setButtonAlign(HorizontalAlignment.CENTER);  
 	    cp.setLayout(new FitLayout());
 	    cp.setHeight("300px");
+	    cp.setFrame(true);
 	    cp.setStyleAttribute("paddingTop", "10px");
 	    	    
 	    cp.add(grid);
@@ -396,30 +382,19 @@ public class LoadMantenimientoUtils {
 	    List<ColumnConfig> configs = new ArrayList<ColumnConfig>();  
 	    
 	    ColumnConfig column = new ColumnConfig();  
-	    column.setId("cantidad");  
-	    column.setHeader("Cantidad");  
-	    column.setWidth(200);  
+	    column.setId("codigo");  
+	    column.setHeader("Código");  
+	    column.setWidth(300);  
 	    column.setRowHeader(true);  
 	    configs.add(column);  
 	  
 	    column = new ColumnConfig();  
-	    column.setId("codigo");  
-	    column.setHeader("Código");  
-	    column.setWidth(200);  
+	    column.setId("nombre");  
+	    column.setHeader("Nombre");  
+	    column.setWidth(400);  
 	    configs.add(column);  
 	  
-	    column = new ColumnConfig();  
-	    column.setId("articulo");  
-	    column.setHeader("Artículo");  
-	    column.setWidth(200); 
-	    configs.add(column);  
-	  
-	    column = new ColumnConfig();  
-	    column.setId("observaciones");  
-	    column.setHeader("Observaciones");  
-	    column.setWidth(200); 
-	    configs.add(column);  
-	    
+  
 	      
 	    
 	    ListStore<Stock> store = new ListStore<Stock>();
@@ -428,20 +403,18 @@ public class LoadMantenimientoUtils {
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
 	    Grid<Stock> grid = new Grid<Stock>(store,cm);
-	    grid.setAutoExpandColumn("articulo");  
-	    grid.setAutoExpandColumn("observaciones");
-	    grid.setBorders(true);  
+	    grid.setBorders(false);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
 	    grid.setColumnReordering(true);  
-	    grid.setColumnLines(true);
 	    
 	    
 	    ContentPanel cp = new ContentPanel();  
-	    cp.setBodyBorder(false);  
+	    cp.setBodyBorder(true);  
 	    cp.setHeading("Subfamilias");
 	    cp.setButtonAlign(HorizontalAlignment.CENTER);  
 	    cp.setLayout(new FitLayout());
+	    cp.setFrame(true);
 	    cp.setHeight("300px");
 	    
 	    cp.setStyleAttribute("paddingTop", "10px");
@@ -451,7 +424,10 @@ public class LoadMantenimientoUtils {
 	    DataProxy entregasPRx = null; 
 		final BasePagingLoader<PagingLoadResult<ModelData>> entregasLoader = new BasePagingLoader<PagingLoadResult<ModelData>>(  
 				entregasPRx, new BeanModelReader());  
-	        entregasLoader.setRemoteSort(true); 
+	        //entregasLoader.setRemoteSort(true);
+	        entregasLoader.setRemoteSort(false);
+	        entregasLoader.setSortField("id");
+	        entregasLoader.setSortDir(SortDir.ASC);
 	    
 	    final PagingToolBar paginacion = new PagingToolBar(50); 
 	    paginacion.bind(entregasLoader);
@@ -627,28 +603,28 @@ public class LoadMantenimientoUtils {
 	    List<ColumnConfig> configs = new ArrayList<ColumnConfig>();  
 	    
 	    ColumnConfig column = new ColumnConfig();  
-	    column.setId("cantidad");  
-	    column.setHeader("Cantidad");  
+	    column.setId("codigo");  
+	    column.setHeader("Código");  
 	    column.setWidth(200);  
 	    column.setRowHeader(true);  
 	    configs.add(column);  
 	  
 	    column = new ColumnConfig();  
-	    column.setId("codigo");  
-	    column.setHeader("Código");  
-	    column.setWidth(200);  
+	    column.setId("nombre");  
+	    column.setHeader("Nombre");  
+	    column.setWidth(400);  
 	    configs.add(column);  
 	  
 	    column = new ColumnConfig();  
-	    column.setId("articulo");  
-	    column.setHeader("Artículo");  
-	    column.setWidth(200); 
+	    column.setId("cantidad");  
+	    column.setHeader("Cantidad");  
+	    column.setWidth(100); 
 	    configs.add(column);  
 	  
 	    column = new ColumnConfig();  
-	    column.setId("observaciones");  
-	    column.setHeader("Observaciones");  
-	    column.setWidth(200); 
+	    column.setId("anualidad");  
+	    column.setHeader("Anualidad");  
+	    column.setWidth(100); 
 	    configs.add(column);  
 	    
 	      
@@ -659,20 +635,18 @@ public class LoadMantenimientoUtils {
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
 	    Grid<Stock> grid = new Grid<Stock>(store,cm);
-	    grid.setAutoExpandColumn("articulo");  
-	    grid.setAutoExpandColumn("observaciones");
-	    grid.setBorders(true);  
+	    grid.setBorders(false);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
 	    grid.setColumnReordering(true);  
-	    grid.setColumnLines(true);
 	    
 	    
 	    ContentPanel cp = new ContentPanel();  
-	    cp.setBodyBorder(false);  
+	    cp.setBodyBorder(true);  
 	    cp.setHeading("Artículos del puesto de trabajo");
 	    cp.setButtonAlign(HorizontalAlignment.CENTER);  
 	    cp.setLayout(new FitLayout());
+	    cp.setFrame(true);
 	    cp.setHeight("300px");
 	    
 	    cp.setStyleAttribute("paddingTop", "10px");

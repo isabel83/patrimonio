@@ -126,10 +126,28 @@ public class DialogoAlbaranesPedidos extends Dialog{
 	    List<ColumnConfig> configs = new ArrayList<ColumnConfig>();  
 	    
 	    ColumnConfig column = new ColumnConfig();  
-	    column.setId("cantidad");  
-	    column.setHeader("Cantidad");  
-	    column.setWidth(200);  
+	    column.setId("solicitado");  
+	    column.setHeader("Solicitado");  
+	    column.setWidth(100);  
 	    column.setRowHeader(true);  
+	    configs.add(column);  
+	  
+	    column = new ColumnConfig();  
+	    column.setId("servido");  
+	    column.setHeader("Servido");  
+	    column.setWidth(100);  
+	    configs.add(column);
+	  
+	    column = new ColumnConfig();  
+	    column.setId("anulado");  
+	    column.setHeader("Anulado");  
+	    column.setWidth(100);  
+	    configs.add(column);  
+	  
+	    column = new ColumnConfig();  
+	    column.setId("devuelto");  
+	    column.setHeader("Devuelto");  
+	    column.setWidth(100);  
 	    configs.add(column);  
 	  
 	    column = new ColumnConfig();  
@@ -139,9 +157,9 @@ public class DialogoAlbaranesPedidos extends Dialog{
 	    configs.add(column);  
 	  
 	    column = new ColumnConfig();  
-	    column.setId("articulo");  
-	    column.setHeader("Artículo");  
-	    column.setWidth(200); 
+	    column.setId("nombre");  
+	    column.setHeader("Nombre");  
+	    column.setWidth(300); 
 	    configs.add(column);  
 	  
 	    column = new ColumnConfig();  
@@ -158,15 +176,10 @@ public class DialogoAlbaranesPedidos extends Dialog{
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
 	    Grid<Stock> grid = new Grid<Stock>(store,cm);
-	    //grid.setStyleAttribute("borderTop", "none");  
-	    grid.setAutoExpandColumn("articulo");  
-	    grid.setAutoExpandColumn("observaciones");
-	    grid.setBorders(true);  
+	    grid.setBorders(false);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
 	    grid.setColumnReordering(true);  
-	    
-
 	    
 	    ContentPanel cpArticulos = new ContentPanel();  
 	    cpArticulos.setBodyBorder(false);  

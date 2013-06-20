@@ -193,7 +193,7 @@ h1 {
 .migas .cabecera{
 	font-size: 1em;
 	font-weight: bold;
-	color: #146F00;
+	color: #233D6D;
 	padding-left: 17px;
 	padding-top: 10px;
 }
@@ -313,6 +313,10 @@ h1 {
 
 .x-panel-bbar .x-toolbar{
 	border: none;
+}
+
+.bajoMargen{
+	padding: 15px 5px 15px 0px;
 }
 
 .dialog{

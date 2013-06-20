@@ -66,7 +66,7 @@ public class DialogoNuevoArticulo extends Dialog{
 		
 		if(consultaArt){
 			setHeading("Consulta artículos");
-			setSize(875, 710);
+			setSize(875, 730);
 		}
 		else if(darBaja){
 			setHeading("Baja de artículo");
@@ -128,12 +128,6 @@ public class DialogoNuevoArticulo extends Dialog{
 	    lblSeccion.setStyleName("etiqueta");
 	    ListBox lstSeccion = new ListBox();
 	    lstSeccion.setVisibleItemCount(1);
-	    lstSeccion.addItem("3M España S.A.");
-	    lstSeccion.addItem("ABAISA S.L.");
-	    lstSeccion.addItem("AF STEELCASE S.A.");
-	    lstSeccion.addItem("AGUDEL S.L.");
-	    lstSeccion.addItem("AHOSMA S.L.");
-	    lstSeccion.addItem("...");
 	    left.add(lblSeccion,formData);
 	    left.add(lstSeccion,formData);
 
@@ -141,9 +135,6 @@ public class DialogoNuevoArticulo extends Dialog{
 	    lblFamilia.setStyleName("etiqueta");
 	    ListBox lstFamilia = new ListBox();
 	    lstFamilia.setVisibleItemCount(1);
-	    lstFamilia.setWidth("400px");
-	    lstFamilia.addItem("AHOSMA S.L.");
-	    lstFamilia.addItem("...");
 	    right.add(lblFamilia,formData);
 	    right.add(lstFamilia,formData);
 	    
@@ -152,9 +143,6 @@ public class DialogoNuevoArticulo extends Dialog{
 	    ListBox lstSubFamilia = new ListBox();
 	    lstSubFamilia.setVisibleItemCount(1);
 	    lstSubFamilia.setWidth("400px");
-	    lstSubFamilia.addItem("3M España S.A.");
-	    lstSubFamilia.addItem("ABAISA S.L.");
-	    lstSubFamilia.addItem("...");
 	    right.add(lblSubFamilia,formData);
 	    right.add(lstSubFamilia,formData);
 	    
@@ -210,32 +198,54 @@ public class DialogoNuevoArticulo extends Dialog{
 	    
 	    List<ColumnConfig> configs = new ArrayList<ColumnConfig>();  
 	    
-	    ColumnConfig column = new ColumnConfig();  
-	    column.setId("cantidad");  
-	    column.setHeader("Cantidad");  
-	    column.setWidth(200);  
-	    column.setRowHeader(true);  
-	    configs.add(column);  
-	  
-	    column = new ColumnConfig();  
-	    column.setId("codigo");  
-	    column.setHeader("Código");  
-	    column.setWidth(200);  
-	    configs.add(column);  
-	  
-	    column = new ColumnConfig();  
-	    column.setId("articulo");  
-	    column.setHeader("Artículo");  
-	    column.setWidth(200); 
-	    configs.add(column);  
-	  
-	    column = new ColumnConfig();  
-	    column.setId("observaciones");  
-	    column.setHeader("Observaciones");  
-	    column.setWidth(200); 
-	    configs.add(column);  
+	    if(darBaja || consultaArt){
+			ColumnConfig column = new ColumnConfig();  
+		    column.setId("nif");  
+		    column.setHeader("NIF");  
+		    column.setWidth(200);  
+		    column.setRowHeader(true);  
+		    configs.add(column);  
+		  
+		    column = new ColumnConfig();  
+		    column.setId("nombre");  
+		    column.setHeader("Nombre");  
+		    column.setWidth(200);  
+		    configs.add(column);  
+		  
+		    column = new ColumnConfig();  
+		    column.setId("actividad");  
+		    column.setHeader("Actividad");  
+		    column.setWidth(200); 
+		    configs.add(column);  
+		    
+		}
+		else{
+			ColumnConfig column = new ColumnConfig();  
+		    column.setId("marca");  
+		    column.setHeader("Marca");  
+		    column.setWidth(200);  
+		    column.setRowHeader(true);  
+		    configs.add(column);  
+		  
+		    column = new ColumnConfig();  
+		    column.setId("nif");  
+		    column.setHeader("NIF");  
+		    column.setWidth(200);  
+		    configs.add(column);  
+		  
+		    column = new ColumnConfig();  
+		    column.setId("nombre");  
+		    column.setHeader("Nombre");  
+		    column.setWidth(200); 
+		    configs.add(column);  
+		  
+		    column = new ColumnConfig();  
+		    column.setId("actividad");  
+		    column.setHeader("Actividad");  
+		    column.setWidth(200); 
+		    configs.add(column);  
+		}
 	    
-	      
 	    
 	    ListStore<Stock> store = new ListStore<Stock>();
 	  //  store.add(getStocks()); //(REVISAR ESTO PORQUE DA ERROR EN LA DEMO)
@@ -243,22 +253,18 @@ public class DialogoNuevoArticulo extends Dialog{
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
 	    Grid<Stock> grid = new Grid<Stock>(store,cm);
-	    grid.setStyleAttribute("borderTop", "none");  
-	    grid.setAutoExpandColumn("articulo");  
-	    grid.setAutoExpandColumn("observaciones");
 	    grid.setBorders(false);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
 	    grid.setColumnReordering(true);  
-	    grid.setColumnLines(true);
-	    
 
 	    
 	    ContentPanel cpProveedores = new ContentPanel();  
-	    cpProveedores.setBodyBorder(true);  
-	    cpProveedores.setHeaderVisible(false);
+	    cpProveedores.setBodyBorder(false);  
+	    cpProveedores.setHeading("Proveedores");
 	    cpProveedores.setButtonAlign(HorizontalAlignment.CENTER);  
 	    cpProveedores.setLayout(new FitLayout());
+	    cpProveedores.setFrame(true);
 	    cpProveedores.setHeight("200px");
 	    
 	    cpProveedores.add(grid);

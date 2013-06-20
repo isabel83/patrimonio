@@ -1,5 +1,8 @@
 package com.patrimonio.plantillas.client.widgets.menus;
 
+import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
@@ -25,7 +28,8 @@ public class MenuNavegacion extends Composite {
 		MenuBar menuPrincipal = new MenuBar();
 		initWidget(menuPrincipal);
 		
-		Menu submnuEntradas = new Menu();
+		final Menu submnuEntradas = new Menu();
+		
 				
 		MenuItem itemPedidos = new MenuItem("Nuevo Pedido");
 		itemPedidos.addSelectionListener(new SelectionListener<MenuEvent>(){
@@ -60,7 +64,7 @@ public class MenuNavegacion extends Composite {
 		SeparatorMenuItem separatorMenuItem = new SeparatorMenuItem();
 		submnuEntradas.add(separatorMenuItem);
 		
-		MenuItem itemNuevoArticulo = new MenuItem("Nuevo articulo");
+		MenuItem itemNuevoArticulo = new MenuItem("Nuevo artículo");
 		itemNuevoArticulo.addSelectionListener(new SelectionListener<MenuEvent>(){
 
 			@Override
@@ -464,38 +468,7 @@ public class MenuNavegacion extends Composite {
 		MenuBarItem menuMantenimientoTablas = new MenuBarItem("Mantenimiento Tablas", submnuMantenimiento);
 		menuMantenimientoTablas.addStyleName("mnuFinal");
 		menuPrincipal.add(menuMantenimientoTablas);
-		
-		/** OPERACIONES ESPECIALES **/
-		
-//		Menu submnuEspeciales = new Menu();
-//		
-//		MenuItem itemPrevisionDeVestuario = new MenuItem("Prevision de vestuario");
-//		itemPrevisionDeVestuario.addSelectionListener(new SelectionListener<MenuEvent>(){
-//
-//			@Override
-//			public void componentSelected(MenuEvent ce) {
-//				FormOpEspeciales form = new FormOpEspeciales();
-//				form.setBodyBorder(false);
-//				form.setBorders(false);
-//				
-//				RootPanel.get("principalContainer").getElement().setInnerHTML("");
-//				RootPanel.get("principalContainer").add(form);
-//			}
-//			
-//		});
-		//submnuEspeciales.add(itemPrevisionDeVestuario);
-//		
-//		MenuBarItem mnuOperacionesEspeciales = new MenuBarItem("Operaciones Especiales", submnuEspeciales);
-//	
-//		mnuOperacionesEspeciales.addStyleName("mnuFinal");
-//		mnuOperacionesEspeciales.disable();
-//		menuPrincipal.add(mnuOperacionesEspeciales);
-//		
-//		menuPrincipal.addStyleName("menu-principal");
-//		
-		
-		//Log.debug("Estamos al final del constructor MenuNavegacion");
-		
+
 	}
 
 	

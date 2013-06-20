@@ -170,27 +170,21 @@ public class DialogoEliminados extends Dialog{
 	    List<ColumnConfig> configs = new ArrayList<ColumnConfig>();  
 	    
 	    ColumnConfig column = new ColumnConfig();  
-	    column.setId("cantidad");  
-	    column.setHeader("Cantidad");  
-	    column.setWidth(200);  
+	    column.setId("nif");  
+	    column.setHeader("NIF");  
+	    column.setWidth(150);  
 	    column.setRowHeader(true);  
 	    configs.add(column);  
 	  
 	    column = new ColumnConfig();  
-	    column.setId("codigo");  
-	    column.setHeader("Código");  
+	    column.setId("nombre");  
+	    column.setHeader("Nombre");  
 	    column.setWidth(200);  
 	    configs.add(column);  
 	  
 	    column = new ColumnConfig();  
-	    column.setId("articulo");  
-	    column.setHeader("Artículo");  
-	    column.setWidth(200); 
-	    configs.add(column);  
-	  
-	    column = new ColumnConfig();  
-	    column.setId("observaciones");  
-	    column.setHeader("Observaciones");  
+	    column.setId("actividad");  
+	    column.setHeader("Actividad");  
 	    column.setWidth(200); 
 	    configs.add(column);  
 	    
@@ -203,8 +197,8 @@ public class DialogoEliminados extends Dialog{
 	  
 	    Grid<Stock> grid = new Grid<Stock>(store,cm);
 	    grid.setStyleAttribute("borderTop", "none");  
-	    grid.setAutoExpandColumn("articulo");  
-	    grid.setAutoExpandColumn("observaciones");
+	    grid.setAutoExpandColumn("nombre");  
+	    grid.setAutoExpandColumn("actividad");
 	    grid.setBorders(false);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  

@@ -102,30 +102,49 @@ public class DialogoBuscarPedidos extends Dialog {
 	    List<ColumnConfig> configs = new ArrayList<ColumnConfig>();  
 	    
 	    ColumnConfig column = new ColumnConfig();  
-	    column.setId("cantidad");  
-	    column.setHeader("Cantidad");  
-	    column.setWidth(200);  
+	    column.setId("pedido");  
+	    column.setHeader("Pedido");  
+	    column.setWidth(100);  
 	    column.setRowHeader(true);  
 	    configs.add(column);  
 	  
+	    column = new ColumnConfig();  
+	    column.setId("recepcion");  
+	    column.setHeader("Recepción");  
+	    column.setWidth(100);  
+	    configs.add(column);  
+	  
+	    column = new ColumnConfig();  
+	    column.setId("anulado");  
+	    column.setHeader("Anulado");  
+	    column.setWidth(100);  
+	    configs.add(column);  
+	    
 	    column = new ColumnConfig();  
 	    column.setId("codigo");  
 	    column.setHeader("Código");  
 	    column.setWidth(200);  
 	    configs.add(column);  
-	  
+	    
+
 	    column = new ColumnConfig();  
-	    column.setId("articulo");  
-	    column.setHeader("Artículo");  
-	    column.setWidth(200); 
+	    column.setId("nombre");  
+	    column.setHeader("Nombre");  
+	    column.setWidth(300); 
 	    configs.add(column);  
 	  
 	    column = new ColumnConfig();  
 	    column.setId("observaciones");  
 	    column.setHeader("Observaciones");  
-	    column.setWidth(200); 
+	    column.setWidth(300); 
 	    configs.add(column);  
-	    
+	  
+	    column = new ColumnConfig();  
+	    column.setId("marca");  
+	    column.setHeader("Marca");  
+	    column.setWidth(200);  
+	    configs.add(column);  
+	  
 	      
 	    
 	    ListStore<Stock> store = new ListStore<Stock>();
@@ -134,13 +153,10 @@ public class DialogoBuscarPedidos extends Dialog {
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
 	    Grid<Stock> grid = new Grid<Stock>(store,cm);
-	    grid.setAutoExpandColumn("articulo");  
-	    grid.setAutoExpandColumn("observaciones");
-	    grid.setBorders(true);  
+	    grid.setBorders(false);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
 	    grid.setColumnReordering(true);  
-	    grid.setColumnLines(true);
 	    
 
 	    

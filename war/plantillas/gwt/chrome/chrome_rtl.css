@@ -14,11 +14,11 @@
 
 body, table td, select {
   font-family: Arial Unicode MS, Arial, sans-serif;
-  font-size: 14px;
+  font-size: small;
 }
 pre {
   font-family: "courier new", courier;
-  font-size: 14px;
+  font-size: small;
 }
 body {
   color: black;
@@ -48,7 +48,7 @@ a, a:visited, a:hover {
   margin: 0;
   padding: 3px 5px;
   text-decoration: none;
-  font-size: 14px;
+  font-size: small;
   cursor: pointer;
   cursor: hand;
   background: url("images/hborder.png") repeat-x 0px -27px;

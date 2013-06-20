@@ -44,6 +44,7 @@ public class FormSalidas extends ContentPanel{
 		setBodyBorder(false);
 		setBorders(false);
 		setHeading(titulos[panelActivo]);
+		getHeader().setStyleName("cabecera");
 		setStyleName("migas");
 		setSize(1024, 768);
 		

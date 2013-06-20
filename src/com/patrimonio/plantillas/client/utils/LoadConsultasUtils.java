@@ -9,8 +9,10 @@ import com.extjs.gxt.ui.client.data.DataProxy;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
@@ -35,7 +37,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoAlbaranTotal;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoAlbaranesPedidos;
-import com.patrimonio.plantillas.client.widgets.dialogs.DialogoBuscar;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoBuscarPedidos;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoNuevoArticulo;
 
@@ -912,7 +913,7 @@ public class LoadConsultasUtils {
 		//Log.debug("TERMINO DE CARGAR EL FORMULARIO");
 	}
 
-	private void loadEntregas(ContentPanel cpEntregas) {
+	private void loadEntregas(final ContentPanel cpEntregas) {
 		
 			 
 	    LayoutContainer left = new LayoutContainer();  
@@ -977,24 +978,82 @@ public class LoadConsultasUtils {
 	    
 	    final PagingToolBar paginacionEntregas = new PagingToolBar(50); 
 	    paginacionEntregas.bind(entregasLoader);
-	    paginacionEntregas.addStyleName("paginacionFinal Left");
+	    paginacionEntregas.addStyleName("paginacionFinal bajoMargen");
 	    
-	    ButtonGroup gButtons = new ButtonGroup(3);
-	    Button b1  = new Button(), b2 = new Button(), b3 = new Button();
+	    final ButtonGroup gButtons = new ButtonGroup(53);
+	    final Button b1  = new Button(), b2 = new Button(), b3 = new Button(), b4 = new Button(), b5 = new Button();
 	    b1.setText("Agregar artículo");
 	    b1.setStyleAttribute("padding-right", "5px");
+	    b1.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				b1.setVisible(false);
+				b2.setVisible(false);
+				b3.setVisible(false);
+				b4.setVisible(true);
+				b5.setVisible(true);
+				gButtons.layout(true);
+			}
+	    	
+	    });
 	    b2.setText("Modificar artículo");
 	    b2.setStyleAttribute("padding-right", "5px");
+	    b2.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				b1.setVisible(false);
+				b2.setVisible(false);
+				b3.setVisible(false);
+				b4.setVisible(true);
+				b5.setVisible(true);
+				gButtons.layout(true);
+			}
+	    	
+	    });
 	    b3.setText("Eliminar artículo");
-	   
+	    b4.setText("Grabar");
+	    b4.setVisible(false);
+	    b4.setStyleAttribute("padding-right", "5px");
+	    b4.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				b1.setVisible(true);
+				b2.setVisible(true);
+				b3.setVisible(true);
+				b4.setVisible(false);
+				b5.setVisible(false);
+				gButtons.layout(true);
+			}
+	    	
+	    });
+	    b5.setText("Deshacer");
+	    b5.setVisible(false);
+	    b5.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				b1.setVisible(true);
+				b2.setVisible(true);
+				b3.setVisible(true);
+				b4.setVisible(false);
+				b5.setVisible(false);
+				gButtons.layout(true);
+			}
+	    	
+	    });
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
 	    gButtons.add(b3);
+	    gButtons.add(b4);
+	    gButtons.add(b5);
+	    gButtons.addStyleName("botonesFuncionales");
 	    
 	    cpEntregas.add(paginacionEntregas, new ColumnData(.63));
 	    cpEntregas.add(gButtons, new ColumnData(.37));
-	    
 	    
 	}
 

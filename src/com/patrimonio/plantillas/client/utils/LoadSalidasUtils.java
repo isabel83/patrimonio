@@ -212,9 +212,9 @@ public class LoadSalidasUtils {
 	    observaciones.setVisibleLines(4);
 	    subBottom.add(observaciones, new FormData("100%"));
 	    
-	    final ButtonGroup btnGrp = new ButtonGroup(3);
+	    final ButtonGroup btnGrp = new ButtonGroup(4);
 	    final Button b1  = new Button();
-		Button b2 = new Button();
+		Button b2 = new Button(), b3 = new Button();
 		final Button b4 = new Button();
 	    b1.setText("Modificar Artículo");
 	    b1.setStyleAttribute("padding-right", "5px");
@@ -255,7 +255,15 @@ public class LoadSalidasUtils {
 			}
 	    	
 	    });
-	    
+	    b3.setText("Aceptar");
+	    b3.addListener(Events.OnClick, new Listener<BaseEvent>(){
+
+			@Override
+			public void handleEvent(BaseEvent be) {
+				cpArticulos.collapse();
+			}
+	    	
+	    });
 	    b4.setText("Cancelar Modificación");
 	    b4.setVisible(false);
 	    b4.setStyleAttribute("padding-right", "5px");
@@ -278,6 +286,7 @@ public class LoadSalidasUtils {
 	    btnGrp.add(b4);
 	    btnGrp.add(b1);
 	    btnGrp.add(b2);
+	    btnGrp.add(b3);
 	    btnGrp.setStyleAttribute("padding", "15px 0px");
 	    btnGrp.setStyleAttribute("float", "right");
 	    
@@ -310,19 +319,19 @@ public class LoadSalidasUtils {
 	    ColumnConfig column = new ColumnConfig();  
 	    column.setId("cantidad");  
 	    column.setHeader("Cantidad");  
-	    column.setWidth(200);  
+	    column.setWidth(100);  
 	    column.setRowHeader(true);  
 	    configs.add(column);  
 	  
 	    column = new ColumnConfig();  
 	    column.setId("codigo");  
 	    column.setHeader("Código");  
-	    column.setWidth(200);  
+	    column.setWidth(100);  
 	    configs.add(column);  
 	  
 	    column = new ColumnConfig();  
-	    column.setId("articulo");  
-	    column.setHeader("Artículo");  
+	    column.setId("nombre");  
+	    column.setHeader("Nombre");  
 	    column.setWidth(200); 
 	    configs.add(column);  
 	  
@@ -340,8 +349,6 @@ public class LoadSalidasUtils {
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
 	    Grid<Stock> grid = new Grid<Stock>(store,cm);
-	    grid.setAutoExpandColumn("articulo");  
-	    grid.setAutoExpandColumn("observaciones");
 	    grid.setBorders(true);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
@@ -388,8 +395,6 @@ public class LoadSalidasUtils {
 	    frmNuevaSolicitud.add(main, new FormData("100%"));
 		
 	}
-
-	
 
 	public void loadFormAlbaranes(FormPanel frmAlbaranes) {
 		
@@ -455,10 +460,28 @@ public class LoadSalidasUtils {
 	    List<ColumnConfig> configs = new ArrayList<ColumnConfig>();  
 	    
 	    ColumnConfig column = new ColumnConfig();  
-	    column.setId("cantidad");  
-	    column.setHeader("Cantidad");  
-	    column.setWidth(200);  
+	    column.setId("solicitado");  
+	    column.setHeader("Solicitado");  
+	    column.setWidth(100);  
 	    column.setRowHeader(true);  
+	    configs.add(column);
+	    
+	    column = new ColumnConfig();  
+	    column.setId("servido");  
+	    column.setHeader("Servido");  
+	    column.setWidth(100);  
+	    configs.add(column);
+	    
+	    column = new ColumnConfig();  
+	    column.setId("anulado");  
+	    column.setHeader("Anulado");  
+	    column.setWidth(100);  
+	    configs.add(column); 
+	    
+	    column = new ColumnConfig();  
+	    column.setId("devuelto");  
+	    column.setHeader("Devuelto");  
+	    column.setWidth(100);  
 	    configs.add(column);  
 	  
 	    column = new ColumnConfig();  
@@ -468,9 +491,9 @@ public class LoadSalidasUtils {
 	    configs.add(column);  
 	  
 	    column = new ColumnConfig();  
-	    column.setId("articulo");  
-	    column.setHeader("Artículo");  
-	    column.setWidth(200); 
+	    column.setId("nombre");  
+	    column.setHeader("Nombre");  
+	    column.setWidth(400); 
 	    configs.add(column);  
 	  
 	    column = new ColumnConfig();  
@@ -487,8 +510,6 @@ public class LoadSalidasUtils {
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
 	    Grid<Stock> grid = new Grid<Stock>(store,cm);
-	    grid.setAutoExpandColumn("articulo");  
-	    grid.setAutoExpandColumn("observaciones");
 	    grid.setBorders(true);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  

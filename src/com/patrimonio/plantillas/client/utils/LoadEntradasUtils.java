@@ -231,8 +231,8 @@ public class LoadEntradasUtils {
 	    configs.add(column);  
 	  
 	    column = new ColumnConfig();  
-	    column.setId("articulo");  
-	    column.setHeader("Artículo");  
+	    column.setId("nombre");  
+	    column.setHeader("Nombre");  
 	    column.setWidth(200); 
 	    configs.add(column);  
 	  
@@ -242,18 +242,20 @@ public class LoadEntradasUtils {
 	    column.setWidth(200); 
 	    configs.add(column);  
 	    
-	      
+	    column = new ColumnConfig();  
+	    column.setId("marca");  
+	    column.setHeader("Marca");  
+	    column.setWidth(200); 
+	    configs.add(column);  
 	    
 	    ListStore<Stock> store = new ListStore<Stock>();
-	  //  store.add(getStocks()); //(REVISAR ESTO PORQUE DA ERROR EN LA DEMO)
+	  //  store.add(getArticulos()); //(REVISAR ESTO PORQUE DA ERROR EN LA DEMO)
 	    
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
 	    Grid<Stock> grid = new Grid<Stock>(store,cm);
 	    grid.setStyleAttribute("borderTop", "none");  
-	    grid.setAutoExpandColumn("articulo");  
-	    grid.setAutoExpandColumn("observaciones");
-	    grid.setBorders(false);  
+	    grid.setBorders(false);
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
 	    grid.setColumnReordering(true);  
@@ -378,12 +380,24 @@ public class LoadEntradasUtils {
 	    List<ColumnConfig> configs = new ArrayList<ColumnConfig>();  
 	    
 	    ColumnConfig column = new ColumnConfig();  
-	    column.setId("cantidad");  
-	    column.setHeader("Cantidad");  
-	    column.setWidth(200);  
+	    column.setId("pedido");  
+	    column.setHeader("Pedido");  
+	    column.setWidth(100);  
 	    column.setRowHeader(true);  
 	    configs.add(column);  
 	  
+	    column = new ColumnConfig();  
+	    column.setId("recepcion");  
+	    column.setHeader("Recepción");  
+	    column.setWidth(100);  
+	    configs.add(column);  
+	    
+	    column = new ColumnConfig();  
+	    column.setId("anulado");  
+	    column.setHeader("Anulado");  
+	    column.setWidth(100);  
+	    configs.add(column);  
+	    
 	    column = new ColumnConfig();  
 	    column.setId("codigo");  
 	    column.setHeader("Código");  
@@ -391,8 +405,8 @@ public class LoadEntradasUtils {
 	    configs.add(column);  
 	  
 	    column = new ColumnConfig();  
-	    column.setId("articulo");  
-	    column.setHeader("Artículo");  
+	    column.setId("nombre");  
+	    column.setHeader("Nombre");  
 	    column.setWidth(200); 
 	    configs.add(column);  
 	  
@@ -402,6 +416,11 @@ public class LoadEntradasUtils {
 	    column.setWidth(200); 
 	    configs.add(column);  
 	    
+	    column = new ColumnConfig();  
+	    column.setId("marca");  
+	    column.setHeader("Marca");  
+	    column.setWidth(200);  
+	    configs.add(column);  
 	      
 	    
 	    ListStore<Stock> store = new ListStore<Stock>();
@@ -410,22 +429,19 @@ public class LoadEntradasUtils {
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
 	    Grid<Stock> grid = new Grid<Stock>(store,cm);
-	    grid.setAutoExpandColumn("articulo");  
-	    grid.setAutoExpandColumn("observaciones");
-	    grid.setBorders(true);  
+	    grid.setBorders(false);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
 	    grid.setColumnReordering(true);  
-	    grid.setColumnLines(true);
 	    
 	    
 	    ContentPanel cp = new ContentPanel();  
-	    cp.setBodyBorder(false);  
+	    cp.setBodyBorder(true);  
 	    cp.setHeading("Relación de artículos de la petición");
 	    cp.setButtonAlign(HorizontalAlignment.CENTER);  
 	    cp.setLayout(new FitLayout());
+	    cp.setFrame(true);
 	    cp.setHeight("200px");
-	    
 	    
 	    cp.add(grid);
 	    bottom.add(cp, formData);
@@ -606,27 +622,27 @@ public class LoadEntradasUtils {
 	    List<ColumnConfig> configs = new ArrayList<ColumnConfig>();  
 	    
 	    ColumnConfig column = new ColumnConfig();  
-	    column.setId("cantidad");  
-	    column.setHeader("Cantidad");  
-	    column.setWidth(200);  
+	    column.setId("marcar");  
+	    column.setHeader("Marcar");  
+	    column.setWidth(100);  
 	    column.setRowHeader(true);  
 	    configs.add(column);  
 	  
 	    column = new ColumnConfig();  
-	    column.setId("codigo");  
-	    column.setHeader("Código");  
-	    column.setWidth(200);  
+	    column.setId("nif");  
+	    column.setHeader("NIF");  
+	    column.setWidth(150);  
 	    configs.add(column);  
 	  
 	    column = new ColumnConfig();  
-	    column.setId("articulo");  
-	    column.setHeader("Artículo");  
+	    column.setId("nombre");  
+	    column.setHeader("Nombre");  
 	    column.setWidth(200); 
 	    configs.add(column);  
 	  
 	    column = new ColumnConfig();  
-	    column.setId("observaciones");  
-	    column.setHeader("Observaciones");  
+	    column.setId("actividad");  
+	    column.setHeader("Actividad");  
 	    column.setWidth(200); 
 	    configs.add(column);  
 	    
@@ -638,13 +654,12 @@ public class LoadEntradasUtils {
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
 	    Grid<Stock> grid = new Grid<Stock>(store,cm);
-	    grid.setAutoExpandColumn("articulo");  
-	    grid.setAutoExpandColumn("observaciones");
-	    grid.setBorders(true);  
+	    grid.setAutoExpandColumn("nombre");  
+	    grid.setAutoExpandColumn("actividad");
+	    grid.setBorders(false);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
 	    grid.setColumnReordering(true);  
-	    grid.setColumnLines(true);
 	    
 	    
 	    ButtonGroup gButtons = new ButtonGroup(2);
@@ -652,7 +667,6 @@ public class LoadEntradasUtils {
 	    b1.setText("Grabar");
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Deshacer");
-	    //b2.setStyleAttribute("padding-right", "5px");
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
@@ -664,11 +678,13 @@ public class LoadEntradasUtils {
 	    
 	    ContentPanel cp = new ContentPanel();  
 	    cp.setBodyBorder(false);  
-	    cp.setHeaderVisible(false);
+	    cp.setHeading("Proveedores");
 	    cp.setButtonAlign(HorizontalAlignment.CENTER);  
 	    cp.setLayout(new FitLayout());
+	    cp.setFrame(true);
 	    cp.setHeight("200px");
-	    	    
+	    cp.setStyleAttribute("paddingLeft", "10px");
+	    cp.setStyleAttribute("paddingRight", "10px");
 	    cp.add(grid);
 	      
 	    

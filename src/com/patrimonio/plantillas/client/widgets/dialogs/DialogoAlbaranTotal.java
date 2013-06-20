@@ -150,32 +150,64 @@ public class DialogoAlbaranTotal extends Dialog{
 	    
 	    
 	    List<ColumnConfig> configs = new ArrayList<ColumnConfig>();  
-	    
-	    ColumnConfig column = new ColumnConfig();  
-	    column.setId("cantidad");  
-	    column.setHeader("Cantidad");  
-	    column.setWidth(200);  
-	    column.setRowHeader(true);  
-	    configs.add(column);  
-	  
-	    column = new ColumnConfig();  
-	    column.setId("codigo");  
-	    column.setHeader("Código");  
-	    column.setWidth(200);  
-	    configs.add(column);  
-	  
-	    column = new ColumnConfig();  
-	    column.setId("articulo");  
-	    column.setHeader("Artículo");  
-	    column.setWidth(200); 
-	    configs.add(column);  
-	  
-	    column = new ColumnConfig();  
-	    column.setId("observaciones");  
-	    column.setHeader("Observaciones");  
-	    column.setWidth(200); 
-	    configs.add(column);  
-	    
+	    if(!consulta){
+		    ColumnConfig column = new ColumnConfig();  
+		    column.setId("cantidad");  
+		    column.setHeader("Cantidad");  
+		    column.setWidth(200);  
+		    column.setRowHeader(true);  
+		    configs.add(column);  
+		  
+		    column = new ColumnConfig();  
+		    column.setId("codigo");  
+		    column.setHeader("Código");  
+		    column.setWidth(200);  
+		    configs.add(column);  
+		  
+		    column = new ColumnConfig();  
+		    column.setId("articulo");  
+		    column.setHeader("Artículo");  
+		    column.setWidth(200); 
+		    configs.add(column);  
+		  
+		    column = new ColumnConfig();  
+		    column.setId("observaciones");  
+		    column.setHeader("Observaciones");  
+		    column.setWidth(200); 
+		    configs.add(column);  
+	    }
+	    else{
+	    	ColumnConfig column = new ColumnConfig();  
+		    column.setId("servido");  
+		    column.setHeader("Servido");  
+		    column.setWidth(100);  
+		    column.setRowHeader(true);  
+		    configs.add(column);  
+		  
+		    column = new ColumnConfig();  
+		    column.setId("devuelto");  
+		    column.setHeader("Devuelto");  
+		    column.setWidth(100);  
+		    configs.add(column);  
+		  
+		    column = new ColumnConfig();  
+		    column.setId("codigo");  
+		    column.setHeader("Código");  
+		    column.setWidth(200); 
+		    configs.add(column);  
+		    
+		    column = new ColumnConfig();  
+		    column.setId("nombre");  
+		    column.setHeader("Nombre");  
+		    column.setWidth(300); 
+		    configs.add(column);  
+		  
+		    column = new ColumnConfig();  
+		    column.setId("observaciones");  
+		    column.setHeader("Observaciones");  
+		    column.setWidth(200); 
+		    configs.add(column); 
+	    }
 	      
 	    
 	    ListStore<Stock> store = new ListStore<Stock>();
@@ -184,9 +216,7 @@ public class DialogoAlbaranTotal extends Dialog{
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
 	    Grid<Stock> grid = new Grid<Stock>(store,cm);
-	    grid.setAutoExpandColumn("articulo");  
-	    grid.setAutoExpandColumn("observaciones");
-	    grid.setBorders(true);  
+	    grid.setBorders(false);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
 	    grid.setColumnReordering(true);  
