@@ -51,7 +51,8 @@ public class FormInformes extends ContentPanel{
 		setHeading(titulos[panelActivo]);
 		getHeader().setStyleName("cabecera");
 		setStyleName("migas");
-		setSize(1024, 768);
+		setWidth(1024);
+		setAutoHeight(true);
 		
 		GWT.setUncaughtExceptionHandler(new   
 			      GWT.UncaughtExceptionHandler() {  
