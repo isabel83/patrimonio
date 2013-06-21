@@ -52,7 +52,7 @@ public class FormEntradas extends ContentPanel{
 			      public void onUncaughtException(Throwable e) {  
 			        //Log.debug("EN UNCAUGHT: " + e.getLocalizedMessage()); 
 			    }  
-			    // do module loading stuff  
+			    
 			  });    
 		
 		
