@@ -1,15 +1,23 @@
 package com.patrimonio.plantillas.server.Impl;
 
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.patrimonio.plantillas.server.DAOs.FamiliaDao;
-import com.patrimonio.plantillas.shared.DTOs.FamiliaDTO;
-import com.patrimonio.plantillas.shared.services.FamiliaService;
+import com.patrimonio.plantillas.shared.clases.Familia;
+import com.patrimonio.plantillas.client.services.FamiliaService;
 
-public class FamiliaServiceImpl implements FamiliaService{
+public class FamiliaServiceImpl extends RemoteServiceServlet implements FamiliaService{
 	
 	public FamiliaDao familiaDAO;
+	
+	@Override
+	public PagingLoadResult<Familia> findAll(PagingLoadConfig config){
+		return familiaDAO.getFamilias(config);
+	}
 
 	@Override
-	public FamiliaDTO findFamilia(long idFamilia) {
+	public Familia findFamilia(long idFamilia) {
 		
 		return familiaDAO.findById(idFamilia);
 	}
@@ -17,38 +25,39 @@ public class FamiliaServiceImpl implements FamiliaService{
 	@Override
 	public void saveFamilia(long idFamilia, int seccion, int estado,String descripcion, String codigo) throws Exception {
 		
-		FamiliaDTO familiaDTO = familiaDAO.findById(idFamilia);
-		if(familiaDTO==null){
-			familiaDTO = new FamiliaDTO(idFamilia,seccion,estado,descripcion,codigo);
-			familiaDAO.persist(familiaDTO);
+		Familia familia = familiaDAO.findById(idFamilia);
+		if(familia==null){
+			familia = new Familia(idFamilia,seccion,estado,descripcion,codigo);
+			familiaDAO.saveFamilia(familia);
 		}
 		
 	}
 
 	@Override
 	public void updateFamilia(long idFamilia, int seccion, int estado, String descripcion, String codigo) throws Exception {
-		FamiliaDTO familiaDTO = familiaDAO.findById(idFamilia);
-		if(familiaDTO!=null){
-			familiaDTO.setId_seccion(seccion);
-			familiaDTO.setId_estado(estado);
-			familiaDTO.setDescripcion(descripcion);
-			familiaDTO.setCodigo(codigo);
+		Familia familia = familiaDAO.findById(idFamilia);
+		if(familia!=null){
+			familia.setId_seccion(seccion);
+			familia.setId_estado(estado);
+			familia.setDescripcion(descripcion);
+			familia.setCodigo(codigo);
+			familiaDAO.updateFamilia(familia);
 		}
 	}
 
 	@Override
 	public void saveOrUpdateFamilia(long idFamilia, int seccion, int estado, String descripcion, String codigo) throws Exception {
 		
-		FamiliaDTO familiaDTO = new FamiliaDTO(idFamilia,seccion,estado,descripcion,codigo);
-		familiaDAO.merge(familiaDTO);
+		Familia familia = new Familia(idFamilia,seccion,estado,descripcion,codigo);
+		familiaDAO.updateFamilia(familia);
 		
 	}
 
 	@Override
 	public void deleteFamilia(long idFamilia) throws Exception {
-		FamiliaDTO familiaDTO = familiaDAO.findById(idFamilia);
-		if(familiaDTO!=null){
-			familiaDAO.remove(familiaDTO);
+		Familia familia = familiaDAO.findById(idFamilia);
+		if(familia!=null){
+			familiaDAO.removeFamilia(familia);
 		}
 	}
 

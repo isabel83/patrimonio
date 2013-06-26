@@ -47,47 +47,54 @@
 		</bean>
          
     
-        <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-			<property name="dataSource" ref="dataSource" />
-			<property name="exposeTransactionAwareSessionFactory">
-				<value>false</value>
+        <bean id="sessionFactory" class=" org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+			<property name="configLocation">
+			<value>/WEB-INF/hibernate.cfg.xml</value>
 			</property>
-			<property name="hibernateProperties">
-				<props>
-					<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
-					<prop key="hibernate.show_sql">true</prop>
-					<prop key="hibernate.current_session_context_class">thread</prop>
-	      			<prop key="hibernate.max_fetch_depth">3</prop>
-				</props>
-			</property>
-			<property name="mappingDirectoryLocations">
-				<value>/</value>
-			</property>
-			<property name="mappingResources">
-				<list>
-					<value>com/patrimonio/plantillas/shared/DTOs/ArticuloDTO.hbm.xml</value>
-					<value>com/patrimonio/plantillas/shared/DTOs/ArticuloProDTO.hbm.xml</value>
-					<value>com/patrimonio/plantillas/shared/DTOs/DestinatarioDTO.hbm.xml</value>
-					<value>com/patrimonio/plantillas/shared/DTOs/EstadoDTO.hbm.xml</value>
-					<value>com/patrimonio/plantillas/shared/DTOs/FamiliaDTO.hbm.xml</value>
-					<value>com/patrimonio/plantillas/shared/DTOs/PerfilDTO.hbm.xml</value>
-					<value>com/patrimonio/plantillas/shared/DTOs/PersonaDTO.hbm.xml</value>
-					<value>com/patrimonio/plantillas/shared/DTOs/ProveedorDTO.hbm.xml</value>
-					<value>com/patrimonio/plantillas/shared/DTOs/PuestoDTO.hbm.xml</value>
-					<value>com/patrimonio/plantillas/shared/DTOs/SeccionDTO.hbm.xml</value>
-					<value>com/patrimonio/plantillas/shared/DTOs/SubfamiliaDTO.hbm.xml</value>
-				</list>
-			</property>
+			
 		</bean> 
                 
         <!-- JPA - Entity manager de JPA && Persistence Unit (persistence.xml) 
         <bean class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean" id="entityManagerFactory">
                 <property name="persistenceUnitName" value="patrimonioAppUnit" />
         </bean>-->
-
-        <bean class="org.springframework.orm.hibernate3.HibernateTransactionManager" id="transactionManager">
-                <property name="sessionFactory">
-			<ref local="sessionFactory" />
+		<bean id="articuloDao" class="com.patrimonio.plantillas.server.DAOs.ArticuloDao">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		<bean id="articuloProDao" class="com.patrimonio.plantillas.server.DAOs.ArticuloProDao">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		<bean id="destinatarioDao" class="com.patrimonio.plantillas.server.DAOs.DestinatarioDao">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		<bean id="estadoDao" class="com.patrimonio.plantillas.server.DAOs.EstadoDao">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		<bean id="familiaDao" class="com.patrimonio.plantillas.server.DAOs.FamiliaDao">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		<bean id="perfilDao" class="com.patrimonio.plantillas.server.DAOs.PerfilDao">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		<bean id="personaDao" class="com.patrimonio.plantillas.server.DAOs.PersonaDao">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		<bean id="proveedorDao" class="com.patrimonio.plantillas.server.DAOs.ProveedorDao">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		<bean id="puestoDao" class="com.patrimonio.plantillas.server.DAOs.PuestoDao">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		<bean id="seccionDao" class="com.patrimonio.plantillas.server.DAOs.SeccionDao">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		<bean id="subfamiliaDao" class="com.patrimonio.plantillas.server.DAOs.SubfamiliaDao">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
 		</property>
 	</bean>
 

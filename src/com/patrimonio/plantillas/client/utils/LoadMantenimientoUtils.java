@@ -32,9 +32,13 @@ import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.patrimonio.plantillas.client.widgets.Stock;
+import com.patrimonio.plantillas.shared.RpcUtils;
 
 public class LoadMantenimientoUtils {
 
+	private RpcUtils rpcUtils;
+	
+	
 	public void loadFormProveedores(FormPanel frmProveedores) {
 		FormData formDataMid = new FormData("50%");
 		FormData formData = new FormData("90%");
@@ -75,7 +79,7 @@ public class LoadMantenimientoUtils {
 	    bottom.setStyleAttribute("paddingLeft", "10px");
 	    bottom.setLayout(layout); 
 	    
-	    
+	     
 	    TextField<String> nif = new TextField<String>();  
 	    nif.setFieldLabel("N.I.F.");  
 	    left.add(nif,formDataMid);	    

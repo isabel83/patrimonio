@@ -1,23 +1,31 @@
 package com.patrimonio.plantillas.shared;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.allen_sauer.gwt.log.client.Log;
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
-import com.patrimonio.plantillas.shared.DTOs.ArticuloDTO;
-import com.patrimonio.plantillas.shared.DTOs.ProveedorDTO;
-import com.patrimonio.plantillas.shared.services.ArticuloService;
-import com.patrimonio.plantillas.shared.services.ArticuloServiceAsync;
-import com.patrimonio.plantillas.shared.services.ProveedorService;
-import com.patrimonio.plantillas.shared.services.ProveedorServiceAsync;
+import com.patrimonio.plantillas.shared.clases.Articulo;
+import com.patrimonio.plantillas.shared.clases.Proveedor;
+import com.patrimonio.plantillas.client.DTOs.ProveedorDTO;
+import com.patrimonio.plantillas.client.services.ArticuloService;
+import com.patrimonio.plantillas.client.services.ArticuloServiceAsync;
+import com.patrimonio.plantillas.client.services.ProveedorService;
+import com.patrimonio.plantillas.client.services.ProveedorServiceAsync;
 
 public class RpcUtils {
-
-	public void loadProveedores(final ListBox lstProveedores){
-		ProveedorServiceAsync proService = GWT.create(ProveedorService.class);
+	
+	ProveedorServiceAsync proService = GWT.create(ProveedorService.class);
+	ArticuloServiceAsync articuloService = GWT.create(ArticuloService.class);
+	
+	public void loadProveedores(final ListBox lstProveedores,PagingLoadConfig loadConfig){
 		
-		proService.findAll(new AsyncCallback<List<ProveedorDTO>>(){
+		
+		proService.findAll(loadConfig, new AsyncCallback<PagingLoadResult<Proveedor>>(){
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -26,11 +34,11 @@ public class RpcUtils {
 			}
 
 			@Override
-			public void onSuccess(List<ProveedorDTO> result) {
-				for(ProveedorDTO pro: result){
-					//SI QUEDA MUY LARGO PONER EL NIF EN UN CAMPO A PARTE
-					lstProveedores.addItem(pro.getNombre() + " - " + pro.getNif(), pro.getId_proveedor().toString());
-				} 
+			public void onSuccess(PagingLoadResult<Proveedor> result) {
+//				for(Proveedor pro: result){
+//					//SI QUEDA MUY LARGO PONER EL NIF EN UN CAMPO A PARTE
+//					lstProveedores.addItem(pro.getNombre() + " - " + pro.getNif(), pro.getId_proveedor().toString());
+//				} 
 				
 			}
 			
@@ -39,8 +47,8 @@ public class RpcUtils {
 	}
 
 	public void loadArticulosProveedor(final ListBox lstArticulos, int idProveedor) {
-		ArticuloServiceAsync articuloService = GWT.create(ArticuloService.class);
-		articuloService.loadArticulosPro(idProveedor, new AsyncCallback<List<ArticuloDTO>>(){
+		
+		articuloService.loadArticulosPro(idProveedor, new AsyncCallback<List<Articulo>>(){
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -49,14 +57,38 @@ public class RpcUtils {
 			}
 
 			@Override
-			public void onSuccess(List<ArticuloDTO> result) {
-				for(ArticuloDTO articulo: result){
+			public void onSuccess(List<Articulo> result) {
+				for(Articulo articulo: result){
 					lstArticulos.addItem(articulo.getNombre(), articulo.getId_articulo().toString());
 				}
 				
 			}
 			
 		});
+	}
+
+	public List<ProveedorDTO> loadProveedoresCombo() {
+		Log.debug("Estamos en la funcion de load en shared");
+		final List<ProveedorDTO> lista = new ArrayList<ProveedorDTO>();
+		proService.findAllForList(new AsyncCallback<List<ProveedorDTO>>(){
+
+			@Override
+			public void onFailure(Throwable caught) {
+				System.out.println();
+			}
+
+			@Override
+			public void onSuccess(List<ProveedorDTO> result) {
+				Log.debug("Estamos en el on success");
+				for(ProveedorDTO pro: result){
+					lista.add(new ProveedorDTO(pro.getId_proveedor(), pro.getNif(), pro.getNombre()));
+				} 
+				
+			}
+			
+		});
+		
+		return lista;
 	}
 
 

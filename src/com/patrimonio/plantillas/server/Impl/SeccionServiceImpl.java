@@ -1,50 +1,62 @@
 package com.patrimonio.plantillas.server.Impl;
 
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.patrimonio.plantillas.server.DAOs.SeccionDao;
-import com.patrimonio.plantillas.shared.DTOs.SeccionDTO;
-import com.patrimonio.plantillas.shared.services.SeccionService;
+import com.patrimonio.plantillas.shared.clases.Seccion;
+import com.patrimonio.plantillas.client.services.SeccionService;
 
-public class SeccionServiceImpl implements SeccionService{
+public class SeccionServiceImpl extends RemoteServiceServlet implements SeccionService{
 	
 	public SeccionDao seccionDAO;
 
 	@Override
-	public SeccionDTO findSeccion(long idSeccion) {
+	public PagingLoadResult<Seccion> findAll(PagingLoadConfig config) {
+		
+		return seccionDAO.getSecciones(config);
+	}
+	
+	@Override
+	public Seccion findSeccion(long idSeccion) {
 		
 		return seccionDAO.findById(idSeccion);
 	}
 
 	@Override
 	public void saveSeccion(long idSeccion, String descripcion, int estado)	throws Exception {
-		SeccionDTO seccionDto = seccionDAO.findById(idSeccion);
-		if(seccionDto==null){
-			seccionDto = new SeccionDTO(idSeccion, descripcion, estado);
-			seccionDAO.persist(seccionDto);
+		Seccion seccion = seccionDAO.findById(idSeccion);
+		if(seccion==null){
+			seccion = new Seccion(idSeccion, descripcion, estado);
+			seccionDAO.saveSeccion(seccion);
 		}
 		
 	}
 
 	@Override
 	public void updateSeccion(long idSeccion, String descripcion, int estado) throws Exception {
-		SeccionDTO seccionDto = seccionDAO.findById(idSeccion);
-		if(seccionDto!=null){
-			seccionDto.setDescripcion(descripcion);
-			seccionDto.setId_estado(estado);
+		Seccion seccion = seccionDAO.findById(idSeccion);
+		if(seccion!=null){
+			seccion.setDescripcion(descripcion);
+			seccion.setId_estado(estado);
+			seccionDAO.updateSeccion(seccion);
 		}
 		
 	}
 
 	@Override
 	public void saveOrUpdateSeccion(long idSeccion, String descripcion,	int estado) throws Exception {
-		SeccionDTO seccionDto = new SeccionDTO(idSeccion,descripcion,estado);
-		seccionDAO.merge(seccionDto);
+		Seccion seccion = new Seccion(idSeccion,descripcion,estado);
+		seccionDAO.updateSeccion(seccion);
 	}
 
 	@Override
 	public void deleteSeccion(long idSeccion) throws Exception {
-		SeccionDTO seccionDto = seccionDAO.findById(idSeccion);
-		if(seccionDto!=null)
-			seccionDAO.remove(seccionDto);
+		Seccion seccion = seccionDAO.findById(idSeccion);
+		if(seccion!=null)
+			seccionDAO.removeSeccion(seccion);
 	}
+
+	
 
 }

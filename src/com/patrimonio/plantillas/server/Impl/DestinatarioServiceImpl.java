@@ -1,49 +1,51 @@
 package com.patrimonio.plantillas.server.Impl;
 
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.patrimonio.plantillas.server.DAOs.DestinatarioDao;
-import com.patrimonio.plantillas.shared.DTOs.DestinatarioDTO;
-import com.patrimonio.plantillas.shared.services.DestinatarioService;
+import com.patrimonio.plantillas.shared.clases.Destinatario;
+import com.patrimonio.plantillas.client.services.DestinatarioService;
 
-public class DestinatarioServiceImpl implements DestinatarioService{
+public class DestinatarioServiceImpl extends RemoteServiceServlet implements DestinatarioService{
 	
 	public DestinatarioDao destinatarioDAO;
 
 	@Override
-	public DestinatarioDTO findDestinatario(long idDestinatario) {
+	public Destinatario findDestinatario(long idDestinatario) {
 		
 		return destinatarioDAO.findById(idDestinatario);
 	}
 
 	@Override
 	public void saveDestinatario(long idDestinatario, int estado, String descripcion) throws Exception {
-		DestinatarioDTO destinatarioDTO = destinatarioDAO.findById(idDestinatario);
-		if(destinatarioDTO==null){
-			destinatarioDTO = new DestinatarioDTO(idDestinatario,estado,descripcion);
-			destinatarioDAO.persist(destinatarioDTO);
+		Destinatario destinatario = destinatarioDAO.findById(idDestinatario);
+		if(destinatario==null){
+			destinatario = new Destinatario(idDestinatario,estado,descripcion);
+			destinatarioDAO.saveDestinatario(destinatario);
 		}
 		
 	}
 
 	@Override
 	public void updateDestinatario(long idDestinatario, int estado, String descripcion) throws Exception {
-		DestinatarioDTO destinatarioDTO = destinatarioDAO.findById(idDestinatario);
-		if(destinatarioDTO!=null){
-			destinatarioDTO.setDescripcion(descripcion);
-			destinatarioDTO.setId_estado(estado);
+		Destinatario destinatario = destinatarioDAO.findById(idDestinatario);
+		if(destinatario!=null){
+			destinatario.setDescripcion(descripcion);
+			destinatario.setId_estado(estado);
+			destinatarioDAO.updateDestinatario(destinatario);
 		}
 	}
 
 	@Override
 	public void saveOrUpdateDestinatario(long idDestinatario, int estado, String descripcion) throws Exception {
-		DestinatarioDTO destinatarioDTO = new DestinatarioDTO(idDestinatario,estado,descripcion);
-		destinatarioDAO.merge(destinatarioDTO);
+		Destinatario destinatario = new Destinatario(idDestinatario,estado,descripcion);
+		destinatarioDAO.updateDestinatario(destinatario);
 	}
 
 	@Override
 	public void deleteDestinatario(long idDestinatario) throws Exception {
-		DestinatarioDTO destinatarioDTO = destinatarioDAO.findById(idDestinatario);
-		if(destinatarioDTO!=null)
-			destinatarioDAO.remove(destinatarioDTO);
+		Destinatario destinatario = destinatarioDAO.findById(idDestinatario);
+		if(destinatario!=null)
+			destinatarioDAO.removeDestinatario(destinatario);
 	}
 
 }

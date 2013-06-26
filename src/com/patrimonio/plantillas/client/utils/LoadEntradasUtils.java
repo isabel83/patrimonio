@@ -22,6 +22,8 @@ import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ButtonGroup;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
+import com.extjs.gxt.ui.client.widget.form.ComboBox;
+import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.DateField;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
@@ -38,24 +40,32 @@ import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.layout.RowData;
 import com.extjs.gxt.ui.client.widget.layout.RowLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextArea;
+import com.patrimonio.plantillas.client.DTOs.ProveedorDTO;
+import com.patrimonio.plantillas.client.models.Proveedores;
+import com.patrimonio.plantillas.client.services.ProveedorService;
+import com.patrimonio.plantillas.client.services.ProveedorServiceAsync;
 import com.patrimonio.plantillas.client.widgets.Stock;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoBuscar;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoEliminados;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoRecepcionTotal;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoRecepcionarArticulo;
 import com.patrimonio.plantillas.shared.RpcUtils;
+import com.patrimonio.plantillas.shared.clases.Proveedor;
 
 public class LoadEntradasUtils {
 	
 	
 	private RpcUtils rpcUtils;
 
+	
 
 	public void loadFormNuevoPedido(final FormPanel panel) {
 		
@@ -103,14 +113,24 @@ public class LoadEntradasUtils {
 	    nifProv.disable();
 	    left.add(nifProv,formData);
 	    
-	    Label lblProveedores = new Label("Proveedor:");
-	    lblProveedores.setStyleName("etiqueta");
-	    final ListBox lstProveedores = new ListBox();
-	    lstProveedores.setVisibleItemCount(1);
-	    lstProveedores.addItem("SUMINISTROS COMERCIALES SAN MARTIN S.L.");
-	    //rpcUtils.loadProveedores(lstProveedores); 
-	    left.add(lblProveedores,formData);
-	    left.add(lstProveedores,formData);
+//	    Label lblProveedores = new Label("Proveedor:");
+//	    lblProveedores.setStyleName("etiqueta");
+	    Log.debug("Antes de ir a cargar el combo");
+	    ListStore<Proveedores> proveedores = new ListStore<Proveedores>();  
+	    proveedores.add(loadProveedoresCombo());
+	  
+	    ComboBox<Proveedores> combo = new ComboBox<Proveedores>();  
+	    combo.setEmptyText("Selecciona un proveedor");  
+	    combo.setDisplayField("name");  
+	    combo.setFieldLabel("Proveedor");
+	    combo.setWidth(150);  
+	    combo.setStore(proveedores);  
+	    combo.setTypeAhead(true);  
+	    combo.setTriggerAction(TriggerAction.ALL);  
+	    
+	    
+	    //left.add(lblProveedores,formData);
+	    left.add(combo,formData);
 	    
 	    
 	    
@@ -320,6 +340,32 @@ public class LoadEntradasUtils {
 	}
 	
 	
+	private List<Proveedores> loadProveedoresCombo() { 
+		ProveedorServiceAsync proService = GWT.create(ProveedorService.class);
+		Log.debug("Estamos en la funcion");
+		final List<Proveedores> lista = new ArrayList<Proveedores>();
+		proService.findAllForList(new AsyncCallback<List<ProveedorDTO>>(){
+
+			@Override
+			public void onFailure(Throwable caught) {
+				Log.debug("Ha petau bacalau: " + caught.getLocalizedMessage());
+			}
+
+			@Override
+			public void onSuccess(List<ProveedorDTO> result) {
+				Log.debug("Estamos en el on success");
+				for(ProveedorDTO pro: result){
+					lista.add(new Proveedores(pro.getId_proveedor(), pro.getNif(), pro.getNombre()));
+				} 
+				
+			}
+			
+		});
+		
+		return lista;
+	}
+
+
 	public void loadFormRecepcion(FormPanel frmRecepcionPedidos) {
 
 		FormData formData = new FormData("100%"); 

@@ -8,9 +8,7 @@
  <!-- SPRING SECURITY & SPRING -->
         <context-param>
            <param-name>contextConfigLocation</param-name>
-           <param-value>
-                 /WEB-INF/applicationContext.xml    
-                 
+           <param-value>/WEB-INF/applicationContext.xml               
            </param-value>
         </context-param>
         <!-- SPRING SECURITY & SPRING -->
@@ -36,7 +34,7 @@
         <listener>
           <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
         </listener>
- <!-- SPRING SECURITY & SPRING  
+ <!-- SPRING SECURITY & SPRING  -->
  
  	<servlet>
 		<servlet-name>articuloServlet</servlet-name>
@@ -82,43 +80,43 @@
 		
 	<servlet-mapping>
 		<servlet-name>articuloServlet</servlet-name>
-		<url-pattern>/plantillas/articulos</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>
 		<servlet-name>destinatarioServlet</servlet-name>
-		<url-pattern>/plantillas/destinatario</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>familiaServlet</servlet-name>
-		<url-pattern>/plantillas/familia</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>
 		<servlet-name>personaServlet</servlet-name>
-		<url-pattern>/plantillas/persona</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
         
 		<servlet-mapping>
 		<servlet-name>proveedorServlet</servlet-name>
-		<url-pattern>/plantillas/proveedor</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>
 		<servlet-name>puestoServlet</servlet-name>
-		<url-pattern>/plantillas/puesto</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
         
 		<servlet-mapping>
 		<servlet-name>seccionServlet</servlet-name>
-		<url-pattern>/plantillas/seccion</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>
 		<servlet-name>subfamiliaServlet</servlet-name>
-		<url-pattern>/plantillas/subfamilia</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
-        -->
+        
 	
         	<!-- Front Controller for all GWT Spring based servlets -->
 	<!--servlet>

@@ -1,50 +1,59 @@
 package com.patrimonio.plantillas.server.Impl;
 
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.patrimonio.plantillas.server.DAOs.PuestoDao;
-import com.patrimonio.plantillas.shared.DTOs.PuestoDTO;
-import com.patrimonio.plantillas.shared.services.PuestoService;
+import com.patrimonio.plantillas.shared.clases.Puesto;
+import com.patrimonio.plantillas.client.services.PuestoService;
 
-public class PuestoServiceImpl implements PuestoService{
+public class PuestoServiceImpl extends RemoteServiceServlet implements PuestoService{
 	
 	public PuestoDao puestoDAO;
+	
+	@Override
+	public PagingLoadResult<Puesto> findAll(PagingLoadConfig config){
+		return puestoDAO.getPuestos(config);
+	}
 
 	@Override
-	public PuestoDTO findPuesto(long idPuesto) {
+	public Puesto findPuesto(long idPuesto) {
 		return puestoDAO.findById(idPuesto);
 	}
 
 	@Override
 	public void savePuesto(long idPuesto, int estado, String descripcion) throws Exception {
-		PuestoDTO puestoDTO = puestoDAO.findById(idPuesto);
-		if(puestoDTO==null){
-			puestoDTO = new PuestoDTO(idPuesto,estado,descripcion);
-			puestoDAO.persist(puestoDTO);
+		Puesto puesto = puestoDAO.findById(idPuesto);
+		if(puesto==null){
+			puesto = new Puesto(idPuesto,estado,descripcion);
+			puestoDAO.savePuesto(puesto);
 		}
 		
 	}
 
 	@Override
 	public void updatePuesto(long idPuesto, int estado, String descripcion) throws Exception {
-		PuestoDTO puestoDTO = puestoDAO.findById(idPuesto);
-		if(puestoDTO!=null){
-			puestoDTO.setDescripcion(descripcion);
-			puestoDTO.setId_estado(estado);
+		Puesto puesto = puestoDAO.findById(idPuesto);
+		if(puesto!=null){
+			puesto.setDescripcion(descripcion);
+			puesto.setId_estado(estado);
+			puestoDAO.updatePuesto(puesto);
 		}
 		
 	}
 
 	@Override
 	public void saveOrUpdatePuesto(long idPuesto, int estado, String descripcion) throws Exception {
-		PuestoDTO puestoDTO = new PuestoDTO(idPuesto,estado,descripcion);
-		puestoDAO.merge(puestoDTO);
+		Puesto puesto = new Puesto(idPuesto,estado,descripcion);
+		puestoDAO.updatePuesto(puesto);
 		
 	}
 
 	@Override
 	public void deletePuesto(long idPuesto) throws Exception {
-		PuestoDTO puestoDTO = puestoDAO.findById(idPuesto);
-		if(puestoDTO!=null)
-			puestoDAO.remove(puestoDTO);
+		Puesto puesto = puestoDAO.findById(idPuesto);
+		if(puesto!=null)
+			puestoDAO.removePuesto(puesto);
 		
 	}
 

@@ -1,5 +1,2 @@
 # Module plantillas
 # RPC service class, partial path of RPC policy file
-com.patrimonio.plantillas.shared.services.ArticuloService, 4E6EDD7523A5AD2D86EAB18D9E117A38.gwt.rpc
-com.patrimonio.plantillas.client.LoginService, DB88F61C40CAF3836518A58D9D652497.gwt.rpc
-com.patrimonio.plantillas.shared.services.ProveedorService, 2D54FEB99D5EA92CEDEE2E2AF628BF36.gwt.rpc

@@ -1,19 +1,88 @@
 package com.patrimonio.plantillas.server.DAOs;
 
-import javax.annotation.PostConstruct;
-import javax.persistence.EntityManagerFactory;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.hibernate.Hibernate;
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.patrimonio.plantillas.shared.DTOs.ProveedorDTO;
+import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
+import com.patrimonio.plantillas.server.HibernateUtils;
+import com.patrimonio.plantillas.shared.clases.Proveedor;
 
-public class ProveedorDao extends JpaDao<Long, ProveedorDTO>{
+public class ProveedorDao  extends HibernateDaoSupport{
 	@Autowired
-	 EntityManagerFactory entityManagerFactory;
+	SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
+	
 
-	 @PostConstruct
-	 public void init() {
-	  super.setEntityManagerFactory(entityManagerFactory);
-	 }
+	@SuppressWarnings("unchecked")
+	public List<Proveedor> findAll(){
+		System.out.println("La sesion vale: " + sessionFactory.getCurrentSession());
+		return sessionFactory.getCurrentSession().createQuery("from Proveedor").list();
+	}
+	
+	
+	public Proveedor findById(Long id) { 
+		Proveedor proveedor = null;
+        try {
+            proveedor = (Proveedor) sessionFactory.getCurrentSession().get(Proveedor.class, id);
+            Hibernate.initialize(proveedor);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+        return proveedor;
+		
+	}
+	
+
+	@SuppressWarnings("unchecked")
+	public PagingLoadResult<Proveedor> getProveedores(PagingLoadConfig loadConfig){
+		Query query =  sessionFactory.openSession().createQuery("from ProveedorDTO");
+		Integer cuantos=query.list().size();
+		query.setFirstResult(loadConfig.getOffset());
+		query.setMaxResults(loadConfig.getLimit());
+		ArrayList<Proveedor> sublist = (ArrayList<Proveedor>) query.list();
+		return new BasePagingLoadResult<Proveedor>(sublist, loadConfig.getOffset(),cuantos);
+	}
+	
+	@Transactional
+	public boolean saveProveedor(Proveedor proveedor) {
+		try {
+			sessionFactory.getCurrentSession().beginTransaction();
+			sessionFactory.getCurrentSession().save(proveedor); 
+			sessionFactory.getCurrentSession().getTransaction().commit();
+		
+			  return true;
+		} catch (Exception e) {
+			return false;
+		}
+		 
+	}
+
+	public boolean updateProveedor(Proveedor proveedor) {
+
+		sessionFactory.getCurrentSession().beginTransaction();
+		sessionFactory.getCurrentSession().update(proveedor); 
+		sessionFactory.getCurrentSession().getTransaction().commit();
+	
+		  return true;
+	}
+	
+	public boolean removeProveedor(Proveedor proveedor) {
+
+		sessionFactory.getCurrentSession().beginTransaction();
+		sessionFactory.getCurrentSession().delete(proveedor); 
+		sessionFactory.getCurrentSession().getTransaction().commit();
+	
+		  return true;
+	}
+
 
 }
+
