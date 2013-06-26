@@ -2,13 +2,13 @@ package com.patrimonio.plantillas.client.models;
 
 import com.extjs.gxt.ui.client.data.BaseModelData;
 
-public class Proveedores extends BaseModelData{
+public class _Proveedores extends BaseModelData{
 
-	public Proveedores(){
+	public _Proveedores(){
 		
 	}
 	
-	public Proveedores(Long id, String nif, String nombre){
+	public _Proveedores(Long id, String nif, String nombre){
 		setId_proveedor(id);
 		setNif(nif);
 		setNombre(nombre);

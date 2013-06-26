@@ -219,11 +219,6 @@
         	<artifactId>dsl-platform</artifactId>
         	<version>4.1.3</version>
         </dependency>
-        <dependency>
-        	<groupId>org.hibernate</groupId>
-        	<artifactId>hibernate-annotations</artifactId>
-        	<version>3.5.2-Final</version>
-        </dependency>
     </dependencies>
     <build>
         <outputDirectory>war/WEB-INF/classes</outputDirectory>
@@ -241,6 +236,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
+                <version>2.5.1</version>
                 <dependencies>
                     <!-- En caso que se utilice una version de ls SDK de GWT diferente a la que soporta este plugin (2.4.0) agregamos estas dos dependencias -->
                     <dependency>
@@ -281,6 +277,7 @@
             <!-- Copy static web files before executing gwt:run Este se ejecutara cuando se corra el comando mvn compile o mvn package o mvn install. Esto te permite agregar al www los recursos estaticos como ser css y html. -->
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
+                <version>2.5</version>
                 <executions>
                     <execution>
                         <phase>compile</phase>
@@ -313,6 +310,7 @@
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven2-plugin</artifactId>
+                <version>1.4.0</version>
                 <configuration>
                     <!-- When Cargo starts the container, the following tag instructs it to wait for you to kill the session with Crtl-C-->
                     <wait>true</wait>

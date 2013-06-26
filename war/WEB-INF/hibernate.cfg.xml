@@ -8,16 +8,5 @@
   <property name="hibernate.connection.url">jdbc:oracle:thin:@128.21.80.56:1521:APEX</property>
   <property name="hibernate.connection.username">almacen</property>
   <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
-  <mapping class="com.patrimonio.plantillas.shared.DTOs.ArticuloDTO"/>
-  <mapping class="com.patrimonio.plantillas.shared.DTOs.ArticuloProDTO"/>
-  <mapping class="com.patrimonio.plantillas.shared.DTOs.DestinatarioDTO"/>
-  <mapping class="com.patrimonio.plantillas.shared.DTOs.EstadoDTO"/>
-  <mapping class="com.patrimonio.plantillas.shared.DTOs.FamiliaDTO"/>
-  <mapping class="com.patrimonio.plantillas.shared.DTOs.PerfilDTO"/>
-  <mapping class="com.patrimonio.plantillas.shared.DTOs.PersonaDTO"/>
-  <mapping class="com.patrimonio.plantillas.shared.DTOs.ProveedorDTO"/>
-  <mapping class="com.patrimonio.plantillas.shared.DTOs.PuestoDTO"/>
-  <mapping class="com.patrimonio.plantillas.shared.DTOs.SeccionDTO"/>
-  <mapping class="com.patrimonio.plantillas.shared.DTOs.SubfamiliaDTO"/>
  </session-factory>
 </hibernate-configuration>

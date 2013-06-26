@@ -27,7 +27,7 @@
                  You can also use an annotation-based approach to transaction configuration declaring transaction semantics directly in the Java source 
                  Ver: http://static.springsource.org/spring/docs/2.0.x/reference/transaction.html
                  Ver: http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/transaction.html#transaction-declarative -->                             
-        <tx:annotation-driven transaction-manager="transactionManager" /> 
+       <!-- <tx:annotation-driven transaction-manager="transactionManager" />--> 
         
         <!-- AOP - para interceptar las llamadas a los metodos del servicio 
         <aop:config>
@@ -51,7 +51,10 @@
 			<property name="configLocation">
 			<value>/WEB-INF/hibernate.cfg.xml</value>
 			</property>
-			
+			 <property name="packagesToScan" value="com.patrimonio.plantillas.shared.clases" />
+			 <property  name="configurationClass">
+			         <value>org.hibernate.cfg.AnnotationConfiguration</value>
+        	</property>
 		</bean> 
                 
         <!-- JPA - Entity manager de JPA && Persistence Unit (persistence.xml) 

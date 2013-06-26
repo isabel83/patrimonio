@@ -49,7 +49,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextArea;
 import com.patrimonio.plantillas.client.DTOs.ProveedorDTO;
-import com.patrimonio.plantillas.client.models.Proveedores;
 import com.patrimonio.plantillas.client.services.ProveedorService;
 import com.patrimonio.plantillas.client.services.ProveedorServiceAsync;
 import com.patrimonio.plantillas.client.widgets.Stock;
@@ -116,10 +115,10 @@ public class LoadEntradasUtils {
 //	    Label lblProveedores = new Label("Proveedor:");
 //	    lblProveedores.setStyleName("etiqueta");
 	    Log.debug("Antes de ir a cargar el combo");
-	    ListStore<Proveedores> proveedores = new ListStore<Proveedores>();  
+	    ListStore<Proveedor> proveedores = new ListStore<Proveedor>();  
 	    proveedores.add(loadProveedoresCombo());
 	  
-	    ComboBox<Proveedores> combo = new ComboBox<Proveedores>();  
+	    ComboBox<Proveedor> combo = new ComboBox<Proveedor>();  
 	    combo.setEmptyText("Selecciona un proveedor");  
 	    combo.setDisplayField("name");  
 	    combo.setFieldLabel("Proveedor");
@@ -340,10 +339,10 @@ public class LoadEntradasUtils {
 	}
 	
 	
-	private List<Proveedores> loadProveedoresCombo() { 
+	private List<Proveedor> loadProveedoresCombo() { 
 		ProveedorServiceAsync proService = GWT.create(ProveedorService.class);
 		Log.debug("Estamos en la funcion");
-		final List<Proveedores> lista = new ArrayList<Proveedores>();
+		final List<Proveedor> lista = new ArrayList<Proveedor>();
 		proService.findAllForList(new AsyncCallback<List<ProveedorDTO>>(){
 
 			@Override
@@ -355,7 +354,7 @@ public class LoadEntradasUtils {
 			public void onSuccess(List<ProveedorDTO> result) {
 				Log.debug("Estamos en el on success");
 				for(ProveedorDTO pro: result){
-					lista.add(new Proveedores(pro.getId_proveedor(), pro.getNif(), pro.getNombre()));
+					lista.add(new Proveedor(pro.getId_proveedor(), pro.getNif(), pro.getNombre()));
 				} 
 				
 			}
