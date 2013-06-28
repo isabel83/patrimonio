@@ -5,9 +5,11 @@ import java.util.List;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
@@ -16,22 +18,24 @@ import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.patrimonio.plantillas.server.HibernateUtils;
 import com.patrimonio.plantillas.shared.clases.Proveedor;
 
+@Repository
 public class ProveedorDao  extends HibernateDaoSupport{
+	
 	@Autowired
 	SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
-	
+	Session sesion = sessionFactory.openSession();
 
 	@SuppressWarnings("unchecked")
+	@Transactional
 	public List<Proveedor> findAll(){
-		System.out.println("La sesion vale: " + sessionFactory.getCurrentSession());
-		return sessionFactory.getCurrentSession().createQuery("from Proveedor").list();
+		return sesion.createQuery("from Proveedor").list();
 	}
 	
-	
+	@Transactional
 	public Proveedor findById(Long id) { 
 		Proveedor proveedor = null;
         try {
-            proveedor = (Proveedor) sessionFactory.getCurrentSession().get(Proveedor.class, id);
+            proveedor = (Proveedor) sesion.get(Proveedor.class, id);
             Hibernate.initialize(proveedor);
         } catch (Exception e) {
             e.printStackTrace();
@@ -42,6 +46,7 @@ public class ProveedorDao  extends HibernateDaoSupport{
 	
 
 	@SuppressWarnings("unchecked")
+	@Transactional
 	public PagingLoadResult<Proveedor> getProveedores(PagingLoadConfig loadConfig){
 		Query query =  sessionFactory.openSession().createQuery("from ProveedorDTO");
 		Integer cuantos=query.list().size();
@@ -65,6 +70,7 @@ public class ProveedorDao  extends HibernateDaoSupport{
 		 
 	}
 
+	@Transactional
 	public boolean updateProveedor(Proveedor proveedor) {
 
 		sessionFactory.getCurrentSession().beginTransaction();
@@ -74,6 +80,7 @@ public class ProveedorDao  extends HibernateDaoSupport{
 		  return true;
 	}
 	
+	@Transactional
 	public boolean removeProveedor(Proveedor proveedor) {
 
 		sessionFactory.getCurrentSession().beginTransaction();

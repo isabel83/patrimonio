@@ -166,58 +166,58 @@ public class Plantillas implements EntryPoint {
 			 */
 			private void sendValuesToServer() {
 				
-				final String url = GWT.getHostPageBaseURL() + "/j_spring_security_check";
-				
-				final RequestBuilder rb = new RequestBuilder(RequestBuilder.POST, url);
-				rb.setCallback(new RequestCallback() {
-
-					@Override
-					public void onResponseReceived(com.google.gwt.http.client.Request request, Response response) {
-						if (response.getStatusCode() == Response.SC_OK) {
-							String welcomeMsg = "You are not logged";
-							if (response.getText() != null && response.getText().length() > 0) {
-								welcomeMsg = "Welcome: " + response.getText();
-							}
-						}
-					}
-
-					@Override
-					public void onError(com.google.gwt.http.client.Request request, Throwable exception) {
-						//principalLabel.setText("Can't retrieve principal's name");
-					}
-				});
-				try {
-					rb.send();
-				} catch (RequestException e) {
-					e.printStackTrace();
-				}
-				
-				
-				
-				// First, we validate the input.
-				errorLabel.setText("");
-				String textToServer = nameField.getText();
-				String passToServer = txtPassword.getText();
-//				if (!com.patrimonio.plantillas.shared.FieldVerifier.isValidName(textToServer)) {
-//					errorLabel.setText("Please enter at least four characters");
-//					return;
+//				final String url = GWT.getHostPageBaseURL() + "/j_spring_security_check";
+//				
+//				final RequestBuilder rb = new RequestBuilder(RequestBuilder.POST, url);
+//				rb.setCallback(new RequestCallback() {
+//
+//					@Override
+//					public void onResponseReceived(com.google.gwt.http.client.Request request, Response response) {
+//						if (response.getStatusCode() == Response.SC_OK) {
+//							String welcomeMsg = "You are not logged";
+//							if (response.getText() != null && response.getText().length() > 0) {
+//								welcomeMsg = "Welcome: " + response.getText();
+//							}
+//						}
+//					}
+//
+//					@Override
+//					public void onError(com.google.gwt.http.client.Request request, Throwable exception) {
+//						//principalLabel.setText("Can't retrieve principal's name");
+//					}
+//				});
+//				try {
+//					rb.send();
+//				} catch (RequestException e) {
+//					e.printStackTrace();
 //				}
-
-				// Then, we send the input to the server.
-				//btnAceptar.setEnabled(false);
-				 
-
-				loginService.loginServer(textToServer, passToServer, new AsyncCallback<String>() {
-							public void onFailure(Throwable caught) {
-								// Show the RPC error message to the user
-							}
-
-							public void onSuccess(String result) {
-								MessageBox msg = new MessageBox();
-								msg.setMessage(result);
-									msg.show();
-							}
-						});
+//				
+//				
+//				
+//				// First, we validate the input.
+//				errorLabel.setText("");
+//				String textToServer = nameField.getText();
+//				String passToServer = txtPassword.getText();
+////				if (!com.patrimonio.plantillas.shared.FieldVerifier.isValidName(textToServer)) {
+////					errorLabel.setText("Please enter at least four characters");
+////					return;
+////				}
+//
+//				// Then, we send the input to the server.
+//				//btnAceptar.setEnabled(false);
+//				 
+//
+//				loginService.loginServer(textToServer, passToServer, new AsyncCallback<String>() {
+//							public void onFailure(Throwable caught) {
+//								// Show the RPC error message to the user
+//							}
+//
+//							public void onSuccess(String result) {
+//								MessageBox msg = new MessageBox();
+//								msg.setMessage(result);
+//									msg.show();
+//							}
+//						});
 			}
 		}
 		

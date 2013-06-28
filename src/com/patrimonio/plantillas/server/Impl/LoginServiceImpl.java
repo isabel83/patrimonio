@@ -7,7 +7,7 @@ import com.patrimonio.plantillas.client.LoginService;
 import com.patrimonio.plantillas.shared.FieldVerifier;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-
+ 
 /**
  * The server side implementation of the RPC service.
  */

@@ -42,7 +42,7 @@ public class ArticuloDao extends HibernateDaoSupport{
             Hibernate.initialize(art);
         } catch (Exception e) {
             e.printStackTrace();
-        } 
+        }  
         return art;
 		
 	}

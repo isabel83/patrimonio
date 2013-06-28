@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Service;
 
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
@@ -14,6 +15,8 @@ import com.patrimonio.plantillas.client.services.ProveedorService;
 import com.patrimonio.plantillas.server.DAOs.ProveedorDao;
 import com.patrimonio.plantillas.shared.clases.Proveedor;
 
+
+@Service
 public class ProveedorServiceImpl extends RemoteServiceServlet implements ProveedorService{
 
 	/**
@@ -21,15 +24,19 @@ public class ProveedorServiceImpl extends RemoteServiceServlet implements Provee
 	 */
 	private static final long serialVersionUID = 1L; 
 	
-	private ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-	private ProveedorDao sessionFactory = (ProveedorDao) context.getBean("proveedorDao",ProveedorDao.class);
+	//private ApplicationContext context = new ClassPathXmlApplicationContext("classpath:*applicationContext.xml");
+	
+	private ProveedorDao proveedorDao = new ProveedorDao();//sessionFactory = (ProveedorDao) context.getBean("proveedorDao");
+	
+	
 	
 	public PagingLoadResult<Proveedor> findAll(PagingLoadConfig config){
-		return sessionFactory.getProveedores(config);
+		
+		return proveedorDao.getProveedores(config);
 	}
 
 	public Proveedor findProveedor(long idProveedor) {
-		return sessionFactory.findById(idProveedor);
+		return proveedorDao.findById(idProveedor);
 	}
 
 	public void saveProveedor(long id, String nif, String nombre,
@@ -37,10 +44,10 @@ public class ProveedorServiceImpl extends RemoteServiceServlet implements Provee
 			String poblacion, int cp, String provincia, String tf1, String tf2,
 			int mvl, String fax, String mail, int estado) throws Exception {
 
-		Proveedor proveedor = sessionFactory.findById(id);
+		Proveedor proveedor = proveedorDao.findById(id);
 		if(proveedor==null){
 			proveedor = new Proveedor(id,nif,nombre,actividad,contacto,direccion,poblacion,cp,provincia,tf1,tf2,mvl,fax,mail,estado);
-			sessionFactory.saveProveedor(proveedor);
+			proveedorDao.saveProveedor(proveedor);
 		}
 		
 		
@@ -51,7 +58,7 @@ public class ProveedorServiceImpl extends RemoteServiceServlet implements Provee
 			String poblacion, int cp, String provincia, String tf1, String tf2,
 			int mvl, String fax, String mail, int estado) throws Exception {
 		
-		Proveedor proveedor = sessionFactory.findById(id);
+		Proveedor proveedor = proveedorDao.findById(id);
 		if(proveedor!=null){
 			proveedor.setNif(nif);
 			proveedor.setNombre(nombre);
@@ -67,7 +74,7 @@ public class ProveedorServiceImpl extends RemoteServiceServlet implements Provee
 			proveedor.setFax(fax);
 			proveedor.setEmail(mail);
 			proveedor.setId_estado(estado);
-			sessionFactory.updateProveedor(proveedor);
+			proveedorDao.updateProveedor(proveedor);
 		}
 	}
 
@@ -77,20 +84,20 @@ public class ProveedorServiceImpl extends RemoteServiceServlet implements Provee
 			int mvl, String fax, String mail, int estado) throws Exception {
 		
 		Proveedor proveedor = new Proveedor(id,nif,nombre,actividad,contacto,direccion,poblacion,cp,provincia,tf1,tf2,mvl,fax,mail,estado);
-		sessionFactory.updateProveedor(proveedor);
+		proveedorDao.updateProveedor(proveedor);
 		
 	}
 
 	public void deleteProveedor(long idProveedor) throws Exception {
 		
-		Proveedor proveedor = sessionFactory.findById(idProveedor);
+		Proveedor proveedor = proveedorDao.findById(idProveedor);
 		if(proveedor!=null)
-			sessionFactory.removeProveedor(proveedor);
+			proveedorDao.removeProveedor(proveedor);
 	}
 
 	public List<ProveedorDTO> findAllForList() throws Exception {
 		System.out.println("Estoy en la funcion del servicio");
-		List<Proveedor> result = sessionFactory.findAll();
+		List<Proveedor> result = proveedorDao.findAll();
 		List<ProveedorDTO> proveedores = new ArrayList<ProveedorDTO>(result != null ? result.size() : 0);;
 		for(Proveedor pro: result){
 			proveedores.add(createProDTO(pro));

@@ -2,6 +2,8 @@ package com.patrimonio.plantillas.server.auth;
 
 //import org.apache.commons.logging.Log;
 //import org.apache.commons.logging.LogFactory;
+import java.util.List;
+
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.access.event.AuthorizationFailureEvent;
@@ -13,7 +15,7 @@ import org.springframework.security.web.session.HttpSessionDestroyedEvent;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CustomAuthListener implements ApplicationListener<ApplicationEvent> {
+public class CustomAuthListener implements ApplicationListener {
 
         //private static final Log logger = LogFactory.getLog(CustomAuthListener.class);
         
@@ -36,7 +38,7 @@ public class CustomAuthListener implements ApplicationListener<ApplicationEvent>
                 } else if (event instanceof HttpSessionDestroyedEvent) {
                         HttpSessionDestroyedEvent destroyEvent = (HttpSessionDestroyedEvent)event;
                         CustomUserAuthentication authentication2 = (CustomUserAuthentication) SecurityContextHolder.getContext().getAuthentication();
-                        SecurityContext securityContext = destroyEvent.getSecurityContext();
+                        List<SecurityContext> securityContext = destroyEvent.getSecurityContexts();
                         System.out.println("user name: session vencida");
                         System.out.println("SecurityContextHolder context : " + authentication2);
                 }

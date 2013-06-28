@@ -80,41 +80,41 @@
 		
 	<servlet-mapping>
 		<servlet-name>articuloServlet</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/plantillas/articulo</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>
 		<servlet-name>destinatarioServlet</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/plantillas/destinatario</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>familiaServlet</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/plantillas/familia</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>
 		<servlet-name>personaServlet</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/plantillas/persona</url-pattern>
 	</servlet-mapping>
         
 		<servlet-mapping>
 		<servlet-name>proveedorServlet</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/plantillas/proveedor</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>
 		<servlet-name>puestoServlet</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/plantillas/puesto</url-pattern>
 	</servlet-mapping>
         
 		<servlet-mapping>
 		<servlet-name>seccionServlet</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/plantillas/seccion</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>
 		<servlet-name>subfamiliaServlet</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/plantillas/subfamilia</url-pattern>
 	</servlet-mapping>
         
 	

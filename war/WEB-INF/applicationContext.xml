@@ -21,13 +21,13 @@
                  By default, classes annotated with @Component, @Repository, @Service, or @Controller (or classes annotated with a custom annotation 
                  that itself is annotated with @Component) are the only detected candidate component
                  To autodetect these classes and register the corresponding beans requires the inclusion of the following element in XML where 'basePackage' -->
-        <context:component-scan base-package="com.patrimonio.plantillas" />
+        <context:component-scan base-package="com.patrimonio.plantillas.shared.clases" />
         
         <!-- TX - enable the configuration of transactional behavior based on annotations
                  You can also use an annotation-based approach to transaction configuration declaring transaction semantics directly in the Java source 
                  Ver: http://static.springsource.org/spring/docs/2.0.x/reference/transaction.html
                  Ver: http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/transaction.html#transaction-declarative -->                             
-       <!-- <tx:annotation-driven transaction-manager="transactionManager" />--> 
+       <!--<tx:annotation-driven transaction-manager="transactionManager" />-->
         
         <!-- AOP - para interceptar las llamadas a los metodos del servicio 
         <aop:config>
@@ -48,19 +48,10 @@
          
     
         <bean id="sessionFactory" class=" org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-			<property name="configLocation">
-			<value>/WEB-INF/hibernate.cfg.xml</value>
-			</property>
-			 <property name="packagesToScan" value="com.patrimonio.plantillas.shared.clases" />
-			 <property  name="configurationClass">
-			         <value>org.hibernate.cfg.AnnotationConfiguration</value>
-        	</property>
+			<property name="configLocation" value="classpath:hibernate.cfg.xml" /> 
 		</bean> 
                 
-        <!-- JPA - Entity manager de JPA && Persistence Unit (persistence.xml) 
-        <bean class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean" id="entityManagerFactory">
-                <property name="persistenceUnitName" value="patrimonioAppUnit" />
-        </bean>-->
+               
 		<bean id="articuloDao" class="com.patrimonio.plantillas.server.DAOs.ArticuloDao">
 			<property name="sessionFactory" ref="sessionFactory" />
 		</bean>
@@ -80,7 +71,7 @@
 			<property name="sessionFactory" ref="sessionFactory" />
 		</bean>
 		<bean id="personaDao" class="com.patrimonio.plantillas.server.DAOs.PersonaDao">
-			<property name="sessionFactory" ref="sessionFactory" />
+			<property name="sessionFactory" ref="sessionFactory" /> 
 		</bean>
 		<bean id="proveedorDao" class="com.patrimonio.plantillas.server.DAOs.ProveedorDao">
 			<property name="sessionFactory" ref="sessionFactory" />
