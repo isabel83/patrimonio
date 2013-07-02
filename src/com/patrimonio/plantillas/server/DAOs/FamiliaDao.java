@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -18,59 +19,86 @@ import com.patrimonio.plantillas.shared.clases.Familia;
 public class FamiliaDao  extends HibernateDaoSupport{
 	@Autowired
 	SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
+	Session sesion;
 	
-	public Familia findById(Long id) { 
+	public Familia findById(Long id) {
+		sesion = sessionFactory.openSession();
 		Familia familia = null;
         try {
-            familia = (Familia) sessionFactory.getCurrentSession().get(Familia.class, id);
+            familia = (Familia) sesion.get(Familia.class, id);
             Hibernate.initialize(familia);
         } catch (Exception e) {
             e.printStackTrace();
         } 
+        finally{
+        	sesion.close();
+        }
         return familia;
 		
 	}
 
 	@SuppressWarnings("unchecked")
 	public PagingLoadResult<Familia> getFamilias(PagingLoadConfig loadConfig){
-		Query query =  sessionFactory.openSession().createQuery("from Familia");
+		sesion = sessionFactory.openSession();
+		Query query =  sesion.createQuery("from Familia");
 		Integer cuantos=query.list().size();
 		query.setFirstResult(loadConfig.getOffset());
 		query.setMaxResults(loadConfig.getLimit());
 		ArrayList<Familia> sublist = (ArrayList<Familia>) query.list();
+		sesion.close();
 		return new BasePagingLoadResult<Familia>(sublist, loadConfig.getOffset(),cuantos);
 	}
 	
 	@Transactional
 	public boolean saveFamilia(Familia familia) {
+		sesion = sessionFactory.openSession();
 		try {
-			sessionFactory.getCurrentSession().beginTransaction();
-			sessionFactory.getCurrentSession().save(familia); 
-			sessionFactory.getCurrentSession().getTransaction().commit();
+			sesion.beginTransaction();
+			sesion.save(familia); 
+			sesion.getTransaction().commit();
 		
 			  return true;
 		} catch (Exception e) {
 			return false;
+		}
+		finally{
+			sesion.close();
 		}
 		 
 	}
 
 	public boolean updateFamilia(Familia familia) {
 
-		sessionFactory.getCurrentSession().beginTransaction();
-		sessionFactory.getCurrentSession().update(familia); 
-		sessionFactory.getCurrentSession().getTransaction().commit();
-	
-		  return true;
+		sesion = sessionFactory.openSession();
+		try{
+			sesion.beginTransaction();
+			sesion.update(familia); 
+			sesion.getTransaction().commit();
+			return true;
+		}
+		catch(Exception e){
+			return false;
+		}
+		finally{
+			sesion.close();
+		}
 	}
 	
 	public boolean removeFamilia(Familia familia) {
-
-		sessionFactory.getCurrentSession().beginTransaction();
-		sessionFactory.getCurrentSession().delete(familia); 
-		sessionFactory.getCurrentSession().getTransaction().commit();
-	
-		  return true;
+		
+		sesion = sessionFactory.openSession();
+		try{
+			sesion.beginTransaction();
+			sesion.delete(familia); 
+			sesion.getTransaction().commit();
+			return true;
+		} 
+		catch(Exception e){
+			return false;
+		}
+		finally{
+			sesion.close();
+		}
 	}
 
 }

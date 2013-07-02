@@ -42,11 +42,7 @@ public class ArticuloPro extends BaseModel implements Serializable{
 	}
 	
 	public Long getId() {
-		try {
-			return get("id");
-		} catch (Exception e) {
 			return this.id;
-		}
 	}
 
 	public void setId(Long id) {
@@ -54,11 +50,7 @@ public class ArticuloPro extends BaseModel implements Serializable{
 	}
 
 	public int getArticulo() {
-		try {
-			return get("articulo");
-		} catch (Exception e) {
 			return this.articulo;
-		}
 	}
 
 	public void setArticulo(int articulo) {
@@ -66,11 +58,7 @@ public class ArticuloPro extends BaseModel implements Serializable{
 	}
 
 	public int getProveedor() {
-		try {
-			return get("proveedor");
-		} catch (Exception e) {
 			return this.proveedor;
-		}
 	}
 
 	public void setProveedor(int proveedor) {

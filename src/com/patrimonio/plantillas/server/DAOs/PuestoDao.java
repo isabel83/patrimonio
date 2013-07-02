@@ -3,6 +3,7 @@ package com.patrimonio.plantillas.server.DAOs;
 import java.util.ArrayList;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -17,15 +18,20 @@ import com.patrimonio.plantillas.shared.clases.Puesto;
 public class PuestoDao extends HibernateDaoSupport{
 	@Autowired
 	SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
+	Session sesion;
 
 	public Puesto findById(Long id) { 
+		sesion = sessionFactory.openSession();
 		Puesto puesto = null;
         try {
-            puesto = (Puesto) sessionFactory.getCurrentSession().get(Puesto.class, id);
+            puesto = (Puesto) sesion.get(Puesto.class, id);
             Hibernate.initialize(puesto);
         } catch (Exception e) {
             e.printStackTrace();
         } 
+        finally{
+        	sesion.close();
+        }
         return puesto;
 		
 	}
@@ -33,44 +39,65 @@ public class PuestoDao extends HibernateDaoSupport{
 	
 	@SuppressWarnings("unchecked")
 	public PagingLoadResult<Puesto> getPuestos(PagingLoadConfig loadConfig){
-		Query query =  sessionFactory.openSession().createQuery("from Puesto");
+		sesion = sessionFactory.openSession();
+		Query query =  sesion.createQuery("from Puesto");
 		Integer cuantos=query.list().size();
 		query.setFirstResult(loadConfig.getOffset());
 		query.setMaxResults(loadConfig.getLimit());
 		ArrayList<Puesto> sublist = (ArrayList<Puesto>) query.list();
+		sesion.close();
 		return new BasePagingLoadResult<Puesto>(sublist, loadConfig.getOffset(),cuantos);
 	}
 	
 	@Transactional
 	public boolean savePuesto(Puesto puesto) {
+		sesion = sessionFactory.openSession();
 		try {
-			sessionFactory.getCurrentSession().beginTransaction();
-			sessionFactory.getCurrentSession().save(puesto); 
-			sessionFactory.getCurrentSession().getTransaction().commit();
+			sesion.beginTransaction();
+			sesion.save(puesto); 
+			sesion.getTransaction().commit();
 		
 			  return true;
 		} catch (Exception e) {
 			return false;
 		}
+		finally{
+			sesion.close();
+		}
 		 
 	}
 
 	public boolean updatePuesto(Puesto puesto) {
-
-		sessionFactory.getCurrentSession().beginTransaction();
-		sessionFactory.getCurrentSession().update(puesto); 
-		sessionFactory.getCurrentSession().getTransaction().commit();
-	
-		  return true;
+		sesion = sessionFactory.openSession();
+		try{
+			sesion.beginTransaction();
+			sesion.update(puesto); 
+			sesion.getTransaction().commit();
+			return true;
+		}
+		catch(Exception e){
+			return false;
+		}
+		finally{
+			sesion.close();
+		}
 	}
 	
 	public boolean removePuesto(Puesto puesto) {
 
-		sessionFactory.getCurrentSession().beginTransaction();
-		sessionFactory.getCurrentSession().delete(puesto); 
-		sessionFactory.getCurrentSession().getTransaction().commit();
-	
-		  return true;
+		sesion = sessionFactory.openSession();
+		try{
+			sesion.beginTransaction();
+			sesion.delete(puesto); 
+			sesion.getTransaction().commit();
+			return true;
+		}
+		catch(Exception e){
+			return false;
+		}
+		finally{
+			sesion.close();
+		}
 	}
 
 }

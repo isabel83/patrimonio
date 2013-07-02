@@ -67,10 +67,10 @@ public class RpcUtils {
 		});
 	}
 
-	public List<ProveedorDTO> loadProveedoresCombo() {
+	public List<Proveedor> loadProveedoresCombo() {
 		Log.debug("Estamos en la funcion de load en shared");
-		final List<ProveedorDTO> lista = new ArrayList<ProveedorDTO>();
-		proService.findAllForList(new AsyncCallback<List<ProveedorDTO>>(){
+		final List<Proveedor> lista = new ArrayList<Proveedor>();
+		proService.findAllForList(new AsyncCallback<List<Proveedor>>(){
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -78,17 +78,32 @@ public class RpcUtils {
 			}
 
 			@Override
-			public void onSuccess(List<ProveedorDTO> result) {
+			public void onSuccess(List<Proveedor> result) {
 				Log.debug("Estamos en el on success");
-				for(ProveedorDTO pro: result){
-					lista.add(new ProveedorDTO(pro.getId_proveedor(), pro.getNif(), pro.getNombre()));
-				} 
+				lista.addAll(result); 
 				
 			}
 			
 		});
 		
 		return lista;
+	}
+
+	public void guardaProveedor(Proveedor prov) {
+		proService.saveProveedor(prov, new AsyncCallback<Void>(){
+
+			@Override
+			public void onFailure(Throwable caught) {
+				System.out.println("ERROR: " + caught.getLocalizedMessage());
+			}
+
+			@Override
+			public void onSuccess(Void result) {
+				System.out.println("GUARADO");
+				
+			}
+			
+		});
 	}
 
 

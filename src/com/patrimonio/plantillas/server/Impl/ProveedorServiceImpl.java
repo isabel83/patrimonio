@@ -3,8 +3,6 @@ package com.patrimonio.plantillas.server.Impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
@@ -38,6 +36,16 @@ public class ProveedorServiceImpl extends RemoteServiceServlet implements Provee
 	public Proveedor findProveedor(long idProveedor) {
 		return proveedorDao.findById(idProveedor);
 	}
+	
+	public void saveProveedor(Proveedor proveedor) throws Exception{
+		
+		
+		//proveedor.setId_proveedor(proveedorDao.getMaxId()+1);
+	
+		proveedorDao.saveProveedor(proveedor);
+	
+		
+	}
 
 	public void saveProveedor(long id, String nif, String nombre,
 			String actividad, String contacto, String direccion,
@@ -46,7 +54,8 @@ public class ProveedorServiceImpl extends RemoteServiceServlet implements Provee
 
 		Proveedor proveedor = proveedorDao.findById(id);
 		if(proveedor==null){
-			proveedor = new Proveedor(id,nif,nombre,actividad,contacto,direccion,poblacion,cp,provincia,tf1,tf2,mvl,fax,mail,estado);
+			//proveedor = new Proveedor(proveedorDao.getMaxId()+1,nif,nombre,actividad,contacto,direccion,poblacion,cp,provincia,tf1,tf2,mvl,fax,mail,estado);
+			proveedor = new Proveedor(nif,nombre,actividad,contacto,direccion,poblacion,cp,provincia,tf1,tf2,mvl,fax,mail,estado);
 			proveedorDao.saveProveedor(proveedor);
 		}
 		
@@ -78,12 +87,12 @@ public class ProveedorServiceImpl extends RemoteServiceServlet implements Provee
 		}
 	}
 
-	public void saveOrUpdateProveedor(long id, String nif, String nombre,
+	public void saveOrUpdateProveedor(String nif, String nombre,
 			String actividad, String contacto, String direccion,
 			String poblacion, int cp, String provincia, String tf1, String tf2,
 			int mvl, String fax, String mail, int estado) throws Exception {
-		
-		Proveedor proveedor = new Proveedor(id,nif,nombre,actividad,contacto,direccion,poblacion,cp,provincia,tf1,tf2,mvl,fax,mail,estado);
+		//Proveedor proveedor = new Proveedor(id,nif,nombre,actividad,contacto,direccion,poblacion,cp,provincia,tf1,tf2,mvl,fax,mail,estado);
+		Proveedor proveedor = new Proveedor(nif,nombre,actividad,contacto,direccion,poblacion,cp,provincia,tf1,tf2,mvl,fax,mail,estado);
 		proveedorDao.updateProveedor(proveedor);
 		
 	}
@@ -95,14 +104,18 @@ public class ProveedorServiceImpl extends RemoteServiceServlet implements Provee
 			proveedorDao.removeProveedor(proveedor);
 	}
 
-	public List<ProveedorDTO> findAllForList() throws Exception {
+	public List<Proveedor> findAllForList() throws Exception {
 		System.out.println("Estoy en la funcion del servicio");
-		List<Proveedor> result = proveedorDao.findAll();
-		List<ProveedorDTO> proveedores = new ArrayList<ProveedorDTO>(result != null ? result.size() : 0);;
-		for(Proveedor pro: result){
-			proveedores.add(createProDTO(pro));
-		}
-		return proveedores;
+//		List<Proveedor> result = proveedorDao.findAll();
+//		List<Proveedor> todos = new ArrayList<Proveedor>();
+//		for(Proveedor pro: result){
+//			Long id = pro.getId_proveedor();
+//			String nif = pro.getNif();
+//			String nom = pro.getNombre();
+//			Proveedor pdto = new Proveedor(id, nif, nom);
+//			todos.add(pdto);
+//		}
+		return proveedorDao.findAll();
 		
 	}
 

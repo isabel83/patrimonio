@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -16,9 +17,9 @@ import com.patrimonio.plantillas.client.DTOs.ProveedorDTO;
 @Table(name = "PROVEEDORES")
 public class Proveedor extends BaseModel implements Serializable{
 	
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	@Column(name="ID_PROVEEDOR")
+	@Column(name="ID_PROVEEDOR", nullable=false)
 	private Long id;
 
 	@Column(name="NIF")
@@ -67,22 +68,16 @@ public class Proveedor extends BaseModel implements Serializable{
 		
 	}
 	
-	public Proveedor(long id){
-		set("id", id);
-		this.id=id;
-	}
 	
-	public Proveedor(long id, String nif, String nombre){
-		set("id", id);
+	
+	public Proveedor(String nif, String nombre){
 		set("nif", nif);
 		set("nombre", nombre);
-		this.id=id;
 		this.nif=nif;
 		this.nombre=nombre;
 	}
 	
-	public Proveedor(long id, String nif, String nombre, String actividad, String contacto, String direccion, String poblacion, int cp, String provincia, String tf1, String tf2, int mvl, String fax, String mail, int estado){
-		set("id", id);
+	public Proveedor(String nif, String nombre, String actividad, String contacto, String direccion, String poblacion, int cp, String provincia, String tf1, String tf2, int mvl, String fax, String mail, int estado){
 		set("nif", nif);
 		set("nombre", nombre);
 		set("actividad", actividad);
@@ -97,7 +92,6 @@ public class Proveedor extends BaseModel implements Serializable{
 		set("fax", fax);
 		set("mail", mail);
 		set("estado", estado);
-		this.id=id;
 		this.nif=nif;
 		this.nombre=nombre;
 		this.actividad=actividad;
@@ -115,7 +109,21 @@ public class Proveedor extends BaseModel implements Serializable{
 	}
 	
 	public Proveedor (ProveedorDTO proveedor){
-		this.id=proveedor.getId_proveedor();
+		/*set("id", proveedor.getId_proveedor());
+		set("nif", proveedor.getNif());
+		set("nombre", proveedor.getNombre());
+		set("actividad", proveedor.getActividad());
+		set("contacto", proveedor.getContacto());
+		set("direccion", proveedor.getDomicilio());
+		set("poblacion", proveedor.getPoblacion());
+		set("cp", proveedor.getCp());
+		set("provincia", proveedor.getProvincia());
+		set("tel1", proveedor.getTlf1());
+		set("tel2", proveedor.getTlf2());
+		set("mvl", proveedor.getMovil());
+		set("fax", proveedor.getFax());
+		set("mail", proveedor.getEmail());
+		set("estado", proveedor.getId_estado());*/
 		this.nif=proveedor.getNif();
 		this.nombre=proveedor.getNombre();
 		this.actividad=proveedor.getActividad();
@@ -133,34 +141,22 @@ public class Proveedor extends BaseModel implements Serializable{
 	}
 	
 	public Long getId_proveedor() {
-		try {
-			return get("id");
-		} catch (Exception e) {
 			return this.id;
-		}
 	}
 	
-	public void setId_proveedor(Long id_proveedor) {
-		this.id = id_proveedor;
-	}
+//	public void setId_proveedor(Long id_proveedor) {
+//		this.id = id_proveedor;
+//	}
 	
 	public String getNif() {
-		try {
-			return get("nif");
-		} catch (Exception e) {
 			return this.nif;
-		}
 	}
 	public void setNif(String nif) {
 		this.nif = nif;
 	}
 	
 	public String getNombre() {
-		try {
-			return get("nombre");
-		} catch (Exception e) {
 			return this.nombre;
-		}
 	}
 	
 	public void setNombre(String nombre) {
@@ -168,11 +164,7 @@ public class Proveedor extends BaseModel implements Serializable{
 	}
 	
 	public String getActividad() {
-		try {
-			return get("actividad");
-		} catch (Exception e) {
 			return this.actividad;
-		}
 	}
 	
 	public void setActividad(String actividad) {
@@ -180,11 +172,7 @@ public class Proveedor extends BaseModel implements Serializable{
 	}
 	
 	public String getContacto() {
-		try {
-			return get("contacto");
-		} catch (Exception e) {
-			return this.contacto;
-		}
+		return this.contacto;
 	}
 	
 	public void setContacto(String contacto) {
@@ -192,11 +180,7 @@ public class Proveedor extends BaseModel implements Serializable{
 	}
 	
 	public String getDomicilio() {
-		try {
-			return get("direccion");
-		} catch (Exception e) {
 			return this.direccion;
-		}
 	}
 	
 	public void setDomicilio(String domicilio) {
@@ -204,11 +188,7 @@ public class Proveedor extends BaseModel implements Serializable{
 	}
 	
 	public String getPoblacion() {
-		try {
-			return get("poblacion");
-		} catch (Exception e) {
 			return this.poblacion;
-		}
 	}
 	
 	public void setPoblacion(String poblacion) {
@@ -216,11 +196,7 @@ public class Proveedor extends BaseModel implements Serializable{
 	}
 	
 	public int getCp() {
-		try {
-			return get("cp");
-		} catch (Exception e) {
 			return this.cp;
-		}
 	}
 	
 	public void setCp(int cp) {
@@ -228,11 +204,7 @@ public class Proveedor extends BaseModel implements Serializable{
 	}
 	
 	public String getProvincia() {
-		try {
-			return get("provincia");
-		} catch (Exception e) {
 			return this.provincia;
-		}
 	}
 	
 	public void setProvincia(String provincia) {
@@ -240,11 +212,7 @@ public class Proveedor extends BaseModel implements Serializable{
 	}
 	
 	public String getTlf1() {
-		try {
-			return get("tel1");
-		} catch (Exception e) {
 			return this.tel1;
-		}
 	}
 	
 	public void setTlf1(String tlf1) {
@@ -252,11 +220,7 @@ public class Proveedor extends BaseModel implements Serializable{
 	}
 	
 	public String getTlf2() {
-		try {
-			return get("tel2");
-		} catch (Exception e) {
 			return this.tel2;
-		}
 	}
 	
 	public void setTlf2(String tlf2) {
@@ -264,11 +228,7 @@ public class Proveedor extends BaseModel implements Serializable{
 	}
 	
 	public int getMovil() {
-		try {
-			return get("mvl");
-		} catch (Exception e) {
 			return this.mvl;
-		}
 	}
 	
 	public void setMovil(int movil) {
@@ -276,11 +236,7 @@ public class Proveedor extends BaseModel implements Serializable{
 	}
 	
 	public String getFax() {
-		try {
-			return get("fax");
-		} catch (Exception e) {
 			return this.fax;
-		}
 	}
 	
 	public void setFax(String fax) {
@@ -288,11 +244,7 @@ public class Proveedor extends BaseModel implements Serializable{
 	}
 	
 	public String getEmail() {
-		try {
-			return get("mail");
-		} catch (Exception e) {
 			return this.mail;
-		}
 	}
 	
 	public void setEmail(String email) {
@@ -300,11 +252,7 @@ public class Proveedor extends BaseModel implements Serializable{
 	}
 	
 	public int getId_estado() {
-		try {
-			return get("estado");
-		} catch (Exception e) {
 			return this.estado;
-		}
 	}
 	
 	public void setId_estado(int id_estado) {

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -19,15 +20,20 @@ import com.patrimonio.plantillas.shared.clases.Estado;
 public class EstadoDao  extends HibernateDaoSupport{
 	@Autowired
 	SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
+	Session sesion;
 	
-	public Estado findById(Long id) { 
+	public Estado findById(Long id) {
+		sesion = sessionFactory.openSession();
 		Estado estado = null;
         try {
-            estado = (Estado) sessionFactory.getCurrentSession().get(Estado.class, id);
+            estado = (Estado) sesion.get(Estado.class, id);
             Hibernate.initialize(estado);
         } catch (Exception e) {
             e.printStackTrace();
         } 
+        finally{
+        	sesion.close();
+        }
         return estado;
 		
 	}
@@ -35,46 +41,68 @@ public class EstadoDao  extends HibernateDaoSupport{
 
 	@SuppressWarnings("unchecked")
 	public PagingLoadResult<Estado> getEstados(PagingLoadConfig loadConfig){
-		Query query =  sessionFactory.openSession().createQuery("from Estado");
+		sesion = sessionFactory.openSession();
+		Query query =  sesion.createQuery("from Estado");
 		Integer cuantos=query.list().size();
 		query.setFirstResult(loadConfig.getOffset());
 		query.setMaxResults(loadConfig.getLimit());
 		ArrayList<Estado> sublist = (ArrayList<Estado>) query.list();
+		sesion.close();
 		return new BasePagingLoadResult<Estado>(sublist, loadConfig.getOffset(),cuantos);
 	}
 	
 	@Transactional
 	public boolean saveEstado(Estado estado) {
+		sesion = sessionFactory.openSession();
 		try {
-			sessionFactory.getCurrentSession().beginTransaction();
-			sessionFactory.getCurrentSession().save(estado); 
-			sessionFactory.getCurrentSession().getTransaction().commit();
+			sesion.beginTransaction();
+			sesion.save(estado); 
+			sesion.getTransaction().commit();
 		
 			  return true;
 		} catch (Exception e) {
 			return false;
+		}
+		finally{
+			sesion.close();
 		}
 		 
 	}
 
 	public boolean updateEstado(Estado estado) {
 
-		sessionFactory.getCurrentSession().beginTransaction();
-		sessionFactory.getCurrentSession().update(estado); 
-		sessionFactory.getCurrentSession().getTransaction().commit();
-	
-		  return true;
+		sesion = sessionFactory.openSession();
+		try{
+			sesion.beginTransaction();
+			sesion.update(estado); 
+			sesion.getTransaction().commit();
+			return true;
+		}
+		catch(Exception e){
+			return false;
+		}
+		finally{
+			sesion.close();
+		}
 	}
 	
 	public boolean removeEstado(List<Estado> estados) {
 
-		sessionFactory.getCurrentSession().beginTransaction();
-		  for (Estado es : estados) {
-			  getSessionFactory().getCurrentSession().delete(es); 
-		  }
-		  sessionFactory.getCurrentSession().getTransaction().commit();
-	
-		  return true;
+		sesion = sessionFactory.openSession();
+		try{
+			sesion.beginTransaction();
+			for (Estado es : estados) {
+				getSessionFactory().getCurrentSession().delete(es); 
+			}
+			sesion.getTransaction().commit();
+			return true;
+		}
+		catch(Exception e){
+			return false;
+		}
+		finally{
+			sesion = sessionFactory.openSession();
+		}
 	}
 
 }

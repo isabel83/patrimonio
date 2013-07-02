@@ -46,11 +46,7 @@ public class Destinatario extends BaseModel implements Serializable{
 	}
 	
 	public Long getId_destinatario() {
-		try {
-			return get("id");
-		} catch (Exception e) {
 			return this.id;
-		}
 	}
 	
 	public void setId_destinatario(Long id_destinatario) {
@@ -58,11 +54,7 @@ public class Destinatario extends BaseModel implements Serializable{
 	}
 	
 	public int getId_estado() {
-		try {
-			return get("estado");
-		} catch (Exception e) {
 			return this.estado;
-		}
 	}
 	
 	public void setId_estado(int id_estado) {
@@ -70,11 +62,7 @@ public class Destinatario extends BaseModel implements Serializable{
 	}
 	
 	public String getDescripcion() {
-		try {
-			return get("descripcion");
-		} catch (Exception e) {
 			return this.descripcion;
-		}
 	}
 	
 	public void setDescripcion(String descripcion) {

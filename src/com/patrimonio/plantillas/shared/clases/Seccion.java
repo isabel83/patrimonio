@@ -52,11 +52,7 @@ public class Seccion extends BaseModel implements Serializable{
 	}
 		
 	public Long getId_seccion() {
-		try {
-			return get("id");
-		} catch (Exception e) {
-			return this.id;
-		}
+		return this.id;
 	}
 	
 	public void setId_seccion(Long id_seccion) {
@@ -64,11 +60,7 @@ public class Seccion extends BaseModel implements Serializable{
 	}
 	
 	public String getDescripcion() {
-		try {
-			return get("descripcion");
-		} catch (Exception e) {
-			return this.descripcion;
-		}
+		return this.descripcion;
 	}
 	
 	public void setDescripcion(String descripcion) {
@@ -76,11 +68,7 @@ public class Seccion extends BaseModel implements Serializable{
 	}
 	
 	public int getId_estado() {
-		try {
-			return get("estado");
-		} catch (Exception e) {
-			return this.estado;
-		}
+		return this.estado;
 	}
 	
 	public void setId_estado(int id_estado) {

@@ -59,11 +59,7 @@ public class Persona extends BaseModel implements Serializable{
 	}
 	
 	public Long getId_persona() {
-		try {
-			return get("id");
-		} catch (Exception e) {
-			return this.id;
-		}
+		return this.id;
 	}
 	
 	public void setId_persona(Long id_persona) {
@@ -71,11 +67,7 @@ public class Persona extends BaseModel implements Serializable{
 	}
 	
 	public int getId_estado() {
-		try {
-			return get("estado");
-		} catch (Exception e) {
-			return this.estado;
-		}
+		return this.estado;
 	}
 	
 	public void setId_estado(int id_estado) {
@@ -83,11 +75,7 @@ public class Persona extends BaseModel implements Serializable{
 	}
 	
 	public int getId_perfil() {
-		try {
-			return get("perfil");
-		} catch (Exception e) {
-			return this.perfil;
-		}
+		return this.perfil;
 	}
 	
 	public void setId_perfil(int id_perfil) {
@@ -95,11 +83,7 @@ public class Persona extends BaseModel implements Serializable{
 	}
 	
 	public String getDescripcion() {
-		try {
-			return get("descripcion");
-		} catch (Exception e) {
-			return this.descripcion;
-		}
+		return this.descripcion;
 	}
 	
 	public void setDescripcion(String descripcion) {

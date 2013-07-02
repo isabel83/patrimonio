@@ -59,11 +59,7 @@ public class Perfil extends BaseModel implements Serializable{
 	}
 	
 	public Long getId_perfil() {
-		try {
-			return get("id");
-		} catch (Exception e) {
-			return this.id;
-		}
+		return this.id;
 	}
 	
 	public void setId_perfil(Long id_perfil) {
@@ -71,11 +67,7 @@ public class Perfil extends BaseModel implements Serializable{
 	}
 	
 	public int getAdministrador() {
-		try {
-			return get("administrador");
-		} catch (Exception e) {
-			return this.administrador;
-		}
+		return this.administrador;
 	}
 	
 	public void setAdministrador(int administrador) {
@@ -83,11 +75,7 @@ public class Perfil extends BaseModel implements Serializable{
 	}
 	
 	public int getValidador() {
-		try {
-			return get("validador");
-		} catch (Exception e) {
-			return this.validador;
-		}
+		return this.validador;
 	}
 	
 	public void setValidador(int validador) {
@@ -95,11 +83,7 @@ public class Perfil extends BaseModel implements Serializable{
 	}
 	
 	public int getUsuario() {
-		try {
-			return get("usuario");
-		} catch (Exception e) {
-			return this.usuario;
-		}
+		return this.usuario;
 	}
 	
 	public void setUsuario(int usuario) {
@@ -107,11 +91,7 @@ public class Perfil extends BaseModel implements Serializable{
 	}
 	
 	public int getOperario() {
-		try {
-			return get("operario");
-		} catch (Exception e) {
-			return this.operario;
-		}
+		return this.operario;
 	}
 	
 	public void setOperario(int operario) {

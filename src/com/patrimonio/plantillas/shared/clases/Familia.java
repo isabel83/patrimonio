@@ -76,11 +76,7 @@ public class Familia extends BaseModel implements Serializable{
 	}
 	
 	public int getId_seccion() {
-		try {
-			return get("seccion");
-		} catch (Exception e) {
-			return this.seccion;
-		}
+		return this.seccion;
 	}
 	
 	public void setId_seccion(int id_seccion) {
@@ -88,11 +84,7 @@ public class Familia extends BaseModel implements Serializable{
 	}
 	
 	public int getId_estado() {
-		try {
-			return get("estado");
-		} catch (Exception e) {
-			return this.estado;
-		}
+		return this.estado;
 	}
 	
 	public void setId_estado(int id_estado) {
@@ -100,11 +92,7 @@ public class Familia extends BaseModel implements Serializable{
 	}
 	
 	public String getDescripcion() {
-		try {
-			return get("descripcion");
-		} catch (Exception e) {
 			return this.descripcion;
-		}
 	}
 	
 	public void setDescripcion(String descripcion) {
@@ -112,11 +100,7 @@ public class Familia extends BaseModel implements Serializable{
 	}
 	
 	public String getCodigo() {
-		try {
-			return get("codigo");
-		} catch (Exception e) {
 			return this.codigo;
-		}
 	}
 	
 	public void setCodigo(String codigo) {

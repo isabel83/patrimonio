@@ -3,6 +3,7 @@ package com.patrimonio.plantillas.server.DAOs;
 import java.util.ArrayList;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -17,59 +18,86 @@ import com.patrimonio.plantillas.shared.clases.Seccion;
 public class SeccionDao   extends HibernateDaoSupport{
 	@Autowired
 	SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
+	Session sesion;
 	
 	public Seccion findById(Long id) { 
 		Seccion seccion = null;
+		sesion = sessionFactory.openSession();
         try {
-            seccion = (Seccion) sessionFactory.getCurrentSession().get(Seccion.class, id);
+            seccion = (Seccion) sesion.get(Seccion.class, id);
             Hibernate.initialize(seccion);
         } catch (Exception e) {
             e.printStackTrace();
         } 
+        finally{
+        	sesion.close();
+        }
         return seccion;
 		
 	}
 
 	@SuppressWarnings("unchecked")
 	public PagingLoadResult<Seccion> getSecciones(PagingLoadConfig loadConfig){
-		Query query =  sessionFactory.openSession().createQuery("from Seccion");
+		sesion = sessionFactory.openSession();
+		Query query =  sesion.createQuery("from Seccion");
 		Integer cuantos=query.list().size();
 		query.setFirstResult(loadConfig.getOffset());
 		query.setMaxResults(loadConfig.getLimit());
 		ArrayList<Seccion> sublist = (ArrayList<Seccion>) query.list();
+		sesion.close();
 		return new BasePagingLoadResult<Seccion>(sublist, loadConfig.getOffset(),cuantos);
 	}
 	
 	@Transactional
 	public boolean saveSeccion(Seccion seccion) {
+		sesion = sessionFactory.openSession();
 		try {
-			sessionFactory.getCurrentSession().beginTransaction();
-			sessionFactory.getCurrentSession().save(seccion); 
-			sessionFactory.getCurrentSession().getTransaction().commit();
+			sesion.beginTransaction();
+			sesion.save(seccion); 
+			sesion.getTransaction().commit();
 		
 			  return true;
 		} catch (Exception e) {
 			return false;
 		}
+		finally{
+			sesion.close();
+		}
 		 
 	}
 
 	public boolean updateSeccion(Seccion seccion) {
-
-		sessionFactory.getCurrentSession().beginTransaction();
-		sessionFactory.getCurrentSession().update(seccion); 
-		sessionFactory.getCurrentSession().getTransaction().commit();
-	
-		  return true;
+		sesion = sessionFactory.openSession();
+		try{
+			sesion.beginTransaction();
+			sesion.update(seccion); 
+			sesion.getTransaction().commit();
+			return true;
+		}
+		catch(Exception e){
+			return false;
+		}
+		finally{
+			sesion.close();
+		}
+		
 	}
 	
 	public boolean removeSeccion(Seccion seccion) {
 
-		sessionFactory.getCurrentSession().beginTransaction();
-		sessionFactory.getCurrentSession().delete(seccion); 
-		sessionFactory.getCurrentSession().getTransaction().commit();
-	
-		  return true;
+		sesion = sessionFactory.openSession();
+		try{
+			sesion.beginTransaction();
+			sesion.delete(seccion); 
+			sesion.getTransaction().commit();
+			return true;
+		}
+		catch(Exception e){
+			return false;
+		}
+		finally{
+			sesion.close();
+		}
 	}
 
 }

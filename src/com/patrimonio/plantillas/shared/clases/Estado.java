@@ -40,11 +40,7 @@ public class Estado extends BaseModel implements Serializable{
 	}
 	
 	public Long getId_estado() {
-		try {
-			return get("id");
-		} catch (Exception e) {
 			return this.id;
-		}
 	}
 	
 	public void setId_estado(Long id_estado) {
@@ -52,11 +48,7 @@ public class Estado extends BaseModel implements Serializable{
 	}
 	
 	public String getDescripcion() {
-		try {
-			return get("descripcion");
-		} catch (Exception e) {
 			return this.descripcion;
-		}
 	}
 	
 	public void setDescripcion(String descripcion) {

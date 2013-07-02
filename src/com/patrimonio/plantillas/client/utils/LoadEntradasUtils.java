@@ -7,6 +7,7 @@ import java.util.List;
 import com.allen_sauer.gwt.log.client.Log;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.Orientation;
+import com.extjs.gxt.ui.client.data.BaseModel;
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
 import com.extjs.gxt.ui.client.data.BeanModelReader;
 import com.extjs.gxt.ui.client.data.DataProxy;
@@ -57,15 +58,11 @@ import com.patrimonio.plantillas.client.widgets.dialogs.DialogoEliminados;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoRecepcionTotal;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoRecepcionarArticulo;
 import com.patrimonio.plantillas.shared.RpcUtils;
+import com.patrimonio.plantillas.shared.clases.Articulo;
 import com.patrimonio.plantillas.shared.clases.Proveedor;
 
 public class LoadEntradasUtils {
 	
-	
-	private RpcUtils rpcUtils;
-
-	
-
 	public void loadFormNuevoPedido(final FormPanel panel) {
 		
 		FormData formData = new FormData("100%"); 
@@ -112,23 +109,22 @@ public class LoadEntradasUtils {
 	    nifProv.disable();
 	    left.add(nifProv,formData);
 	    
-//	    Label lblProveedores = new Label("Proveedor:");
-//	    lblProveedores.setStyleName("etiqueta");
+
 	    Log.debug("Antes de ir a cargar el combo");
-	    ListStore<Proveedor> proveedores = new ListStore<Proveedor>();  
-	    proveedores.add(loadProveedoresCombo());
+	    ListStore proveedores = new ListStore();  
+	    loadProveedoresCombo(proveedores);
 	  
 	    ComboBox<Proveedor> combo = new ComboBox<Proveedor>();  
 	    combo.setEmptyText("Selecciona un proveedor");  
-	    combo.setDisplayField("name");  
+	    combo.setStore(proveedores);  
+	    combo.setDisplayField("nombre");  
+	    combo.setValueField("id");
 	    combo.setFieldLabel("Proveedor");
 	    combo.setWidth(150);  
-	    combo.setStore(proveedores);  
-	    combo.setTypeAhead(true);  
-	    combo.setTriggerAction(TriggerAction.ALL);  
+	    //combo.setTriggerAction(TriggerAction.ALL);  
 	    
 	    
-	    //left.add(lblProveedores,formData);
+
 	    left.add(combo,formData);
 	    
 	    
@@ -154,13 +150,25 @@ public class LoadEntradasUtils {
 	    cpRight.setHeading("Seleccione los artículos a incluir en el pedido");
 	    cpRight.setBodyBorder(false);
 	    
-	    Label lblArticulos = new Label("Artículos:");
-	    lblArticulos.addStyleName("etiqueta");
+//	    Label lblArticulos = new Label("Artículos:");
+//	    lblArticulos.addStyleName("etiqueta");
+//	    
+//	    final ListBox lstArticulos = new ListBox();
+//	    lstArticulos.setVisibleItemCount(1);
+//	    cpRight.add(lblArticulos,  new RowData(1, -1, new Margins(4,1,4,4)));
+//	    cpRight.add(lstArticulos, new RowData(1, -1, new Margins(1,4,4,4)));
+	    Log.debug("Antes de ir a cargar el combo");
+	    ListStore art = new ListStore();  
 	    
-	    final ListBox lstArticulos = new ListBox();
-	    lstArticulos.setVisibleItemCount(1);
-	    cpRight.add(lblArticulos,  new RowData(1, -1, new Margins(4,1,4,4)));
-	    cpRight.add(lstArticulos, new RowData(1, -1, new Margins(1,4,4,4)));
+	  
+	    ComboBox<Articulo> comboA = new ComboBox<Articulo>();  
+	    comboA.setEmptyText("Selecciona un articulo");  
+	    comboA.setStore(art);  
+	    comboA.setDisplayField("nombre");  
+	    comboA.setValueField("id");
+	    comboA.setFieldLabel("Artículo");
+	    comboA.setWidth(150);  
+	    cpRight.add(comboA, new RowData(1,-1, new Margins(4)));
 	    
 	    Label lblMarca = new Label("Marca:");
 	    lblMarca.addStyleName("etiqueta");
@@ -339,29 +347,32 @@ public class LoadEntradasUtils {
 	}
 	
 	
-	private List<Proveedor> loadProveedoresCombo() { 
+	private void loadProveedoresCombo(final ListStore proveedores) { 
 		ProveedorServiceAsync proService = GWT.create(ProveedorService.class);
 		Log.debug("Estamos en la funcion");
-		final List<Proveedor> lista = new ArrayList<Proveedor>();
-		proService.findAllForList(new AsyncCallback<List<ProveedorDTO>>(){
+		proService.findAllForList(new AsyncCallback<List<Proveedor>>(){
 
 			@Override
 			public void onFailure(Throwable caught) {
-				Log.debug("Ha petau bacalau: " + caught.getLocalizedMessage());
+				Log.debug("Error en carga de proveedores: " + caught.getLocalizedMessage());
 			}
 
 			@Override
-			public void onSuccess(List<ProveedorDTO> result) {
-				Log.debug("Estamos en el on success");
-				for(ProveedorDTO pro: result){
-					lista.add(new Proveedor(pro.getId_proveedor(), pro.getNif(), pro.getNombre()));
+			public void onSuccess(List<Proveedor> result) {
+				Log.debug("Estamos en el on success, hay: " + result.size());
+				for(Proveedor pro: result){
+					Log.debug("Proveedor: " + pro.getId_proveedor() + " , " + pro.getNombre());
+						
+					 BaseModel model = new BaseModel();
+	                 model.set("id",pro.getId_proveedor());
+	                 model.set("nombre", pro.getNombre());
+					 proveedores.add(model);
 				} 
+				
 				
 			}
 			
 		});
-		
-		return lista;
 	}
 
 

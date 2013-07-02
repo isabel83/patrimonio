@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -18,58 +19,83 @@ import com.patrimonio.plantillas.shared.clases.Subfamilia;
 public class SubfamiliaDao extends HibernateDaoSupport{
 	@Autowired
 	SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
+	Session sesion;
 	
 	public Subfamilia findById(Long id) { 
+		sesion = sessionFactory.openSession();
 		Subfamilia sub = null;
         try {
-            sub = (Subfamilia) sessionFactory.getCurrentSession().get(Subfamilia.class, id);
+            sub = (Subfamilia) sesion.get(Subfamilia.class, id);
             Hibernate.initialize(sub);
         } catch (Exception e) {
             e.printStackTrace();
         } 
+        finally{
+        	sesion.close();
+        }
         return sub;
 		
 	}
 
 	@SuppressWarnings("unchecked")
 	public PagingLoadResult<Subfamilia> getSubfamilias(PagingLoadConfig loadConfig){
-		Query query =  sessionFactory.openSession().createQuery("from Subfamilia");
+		sesion = sessionFactory.openSession();
+		Query query =  sesion.createQuery("from Subfamilia");
 		Integer cuantos=query.list().size();
 		query.setFirstResult(loadConfig.getOffset());
 		query.setMaxResults(loadConfig.getLimit());
 		ArrayList<Subfamilia> sublist = (ArrayList<Subfamilia>) query.list();
+		sesion.close();
 		return new BasePagingLoadResult<Subfamilia>(sublist, loadConfig.getOffset(),cuantos);
 	}
 	
 	@Transactional
 	public boolean saveSubfamilia(Subfamilia subfamilia) {
+		sesion = sessionFactory.openSession();
 		try {
-			sessionFactory.getCurrentSession().beginTransaction();
-			sessionFactory.getCurrentSession().save(subfamilia); 
-			sessionFactory.getCurrentSession().getTransaction().commit();
+			sesion.beginTransaction();
+			sesion.save(subfamilia); 
+			sesion.getTransaction().commit();
 		
 			  return true;
 		} catch (Exception e) {
 			return false;
 		}
-		 
+		 finally{
+			 sesion.close();
+		 }
 	}
 
 	public boolean updateSubfamilia(Subfamilia subfamilia) {
-
-		sessionFactory.getCurrentSession().beginTransaction();
-		sessionFactory.getCurrentSession().update(subfamilia); 
-		sessionFactory.getCurrentSession().getTransaction().commit();
-	
-		  return true;
+		sesion = sessionFactory.openSession();
+		try{
+			sesion.beginTransaction();
+			sesion.update(subfamilia); 
+			sesion.getTransaction().commit();
+			return true;
+		}
+		catch(Exception e){
+			return false;
+		}
+		finally{
+			sesion.close();
+		}
 	}
 	
 	public boolean removeSubfamilia(Subfamilia subfamilia) {
-
-		sessionFactory.getCurrentSession().beginTransaction();
-		sessionFactory.getCurrentSession().delete(subfamilia); 
-		sessionFactory.getCurrentSession().getTransaction().commit();
-	    return true;
+		sesion = sessionFactory.openSession();
+		try{
+			sesion.beginTransaction();
+			sesion.delete(subfamilia); 
+			sesion.getTransaction().commit();
+		    return true;
+		}
+		catch(Exception e){
+			return false;
+		}
+		finally{
+			sesion.close();
+		}
 	}
 
 }

@@ -8,28 +8,28 @@
             <column name="ID" />
             <generator class="assigned" />
         </id>
-        <property name="nif" type="java.lang.String">
+        <property name="nif" type="java.lang.String" access="field">
             <column name="NIF" />
         </property>
-        <property name="nombre" type="java.lang.String">
+        <property name="nombre" type="java.lang.String" access="field">
             <column name="NOMBRE" />
         </property>
-        <property name="actividad" type="java.lang.String">
+        <property name="actividad" type="java.lang.String" access="field">
             <column name="ACTIVIDAD" />
         </property>
-        <property name="contacto" type="java.lang.String">
+        <property name="contacto" type="java.lang.String" access="field">
             <column name="CONTACTO" />
         </property>
         <property name="direccion" type="java.lang.String" access="field">
             <column name="DIRECCION" />
         </property>
-        <property name="poblacion" type="java.lang.String">
+        <property name="poblacion" type="java.lang.String" access="field">
             <column name="POBLACION" />
         </property>
-        <property name="cp" type="int">
+        <property name="cp" type="int" access="field">
             <column name="CP" />
         </property>
-        <property name="provincia" type="java.lang.String">
+        <property name="provincia" type="java.lang.String" access="field">
             <column name="PROVINCIA" />
         </property>
         <property name="tel1" type="java.lang.String" access="field">
@@ -41,7 +41,7 @@
         <property name="mvl" type="int" access="field">
             <column name="MVL" />
         </property>
-        <property name="fax" type="java.lang.String">
+        <property name="fax" type="java.lang.String" access="field">
             <column name="FAX" />
         </property>
         <property name="mail" type="java.lang.String" access="field">

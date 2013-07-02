@@ -103,11 +103,11 @@ public class Articulo extends BaseModel implements Serializable{
 		
 		
 	public Long getId_articulo() {
-		try {
-			return get("idArticulo");
-		} catch (Exception e) {
+//		try {
+//			return get("idArticulo");
+//		} catch (Exception e) {
 			return this.id;
-		}
+//		}
 	}
 	
 	public void setId_articulo(Long id_articulo) {
@@ -115,11 +115,11 @@ public class Articulo extends BaseModel implements Serializable{
 	}
 	
 	public int getId_seccion() {
-		try {
-			return get("seccion");
-		} catch (Exception e) {
+//		try {
+//			return get("seccion");
+//		} catch (Exception e) {
 			return this.seccion;
-		}
+//		}
 	}
 	
 	public void setId_seccion(int id_seccion) {
@@ -127,11 +127,11 @@ public class Articulo extends BaseModel implements Serializable{
 	}
 	
 	public int getId_familia() {
-		try {
-			return get("familia");
-		} catch (Exception e) {
+//		try {
+//			return get("familia");
+//		} catch (Exception e) {
 			return this.familia;
-		}
+//		}
 	}
 	
 	public void setId_familia(int id_familia) {
@@ -139,11 +139,11 @@ public class Articulo extends BaseModel implements Serializable{
 	}
 	
 	public int getId_subfamilia() {
-		try {
-			return get("subFamilia");
-		} catch (Exception e) {
+//		try {
+//			return get("subFamilia");
+//		} catch (Exception e) {
 			return this.subFamilia;
-		}
+//		}
 	}
 	
 	public void setId_subfamilia(int id_subfamilia) {
@@ -151,11 +151,11 @@ public class Articulo extends BaseModel implements Serializable{
 	}
 	
 	public int getCodigo() {
-		try {
-			return get("codigo");
-		} catch (Exception e) {
+//		try {
+//			return get("codigo");
+//		} catch (Exception e) {
 			return this.codigo;
-		}
+//		}
 	}
 	
 	public void setCodigo(int codigo) {
@@ -163,11 +163,11 @@ public class Articulo extends BaseModel implements Serializable{
 	}
 	
 	public String getNombre() {
-		try {
-			return get("nombre");
-		} catch (Exception e) {
+//		try {
+//			return get("nombre");
+//		} catch (Exception e) {
 			return this.nombre;
-		}
+//		}
 	}
 	
 	public void setNombre(String nombre) {
@@ -175,11 +175,11 @@ public class Articulo extends BaseModel implements Serializable{
 	}
 	
 	public String getMarca() {
-		try {
-			return get("marca");
-		} catch (Exception e) {
+//		try {
+//			return get("marca");
+//		} catch (Exception e) {
 			return this.marca;
-		}
+//		}
 	}
 	
 	public void setMarca(String marca) {
@@ -187,11 +187,11 @@ public class Articulo extends BaseModel implements Serializable{
 	}
 	
 	public int getN_minimo() {
-		try {
-			return get("num_min");
-		} catch (Exception e) {
+//		try {
+//			return get("num_min");
+//		} catch (Exception e) {
 			return this.num_min;
-		}
+//		}
 	}
 	
 	public void setN_minimo(int n_minimo) {
@@ -199,11 +199,11 @@ public class Articulo extends BaseModel implements Serializable{
 	}
 	
 	public int getN_idoneo() {
-		try {
-			return get("num_id");
-		} catch (Exception e) {
+//		try {
+//			return get("num_id");
+//		} catch (Exception e) {
 			return this.num_id;
-		}
+//		}
 	}
 	
 	public void setN_idoneo(int n_idoneo) {
@@ -211,11 +211,11 @@ public class Articulo extends BaseModel implements Serializable{
 	}
 	
 	public String getObservaciones() {
-		try {
-			return get("observaciones");
-		} catch (Exception e) {
+//		try {
+//			return get("observaciones");
+//		} catch (Exception e) {
 			return this.observaciones;
-		}
+//		}
 	}
 	
 	public void setObservaciones(String observaciones) {
@@ -223,11 +223,11 @@ public class Articulo extends BaseModel implements Serializable{
 	}
 	
 	public int getId_estado() {
-		try {
-			return get("estado");
-		} catch (Exception e) {
+//		try {
+//			return get("estado");
+//		} catch (Exception e) {
 			return this.estado;
-		}
+//		}
 	}
 	
 	public void setId_estado(int id_estado) {

@@ -72,11 +72,7 @@ public class Subfamilia extends BaseModel implements Serializable{
 	}
 	
 	public Long getId_subfamilia() {
-		try {
-			return get("id");
-		} catch (Exception e) {
-			return this.id;
-		}
+		return this.id;
 	}
 	
 	public void setId_subfamilia(Long id_subfamilia) {
@@ -84,11 +80,7 @@ public class Subfamilia extends BaseModel implements Serializable{
 	}
 	
 	public int getId_familia() {
-		try {
-			return get("familia");
-		} catch (Exception e) {
-			return this.familia;
-		}
+		return this.familia;
 	}
 	
 	public void setId_familia(int id_familia) {
@@ -96,11 +88,7 @@ public class Subfamilia extends BaseModel implements Serializable{
 	}
 	
 	public int getId_estado() {
-		try {
-			return get("estado");
-		} catch (Exception e) {
-			return this.estado;
-		}
+		return this.estado;
 	}
 	
 	public void setId_estado(int id_estado) {
@@ -108,11 +96,7 @@ public class Subfamilia extends BaseModel implements Serializable{
 	}
 	
 	public String getDescripcion() {
-		try {
-			return get("descripcion");
-		} catch (Exception e) {
-			return this.descripcion;
-		}
+		return this.descripcion;
 	}
 	
 	public void setDescripcion(String descripcion) {
@@ -120,11 +104,7 @@ public class Subfamilia extends BaseModel implements Serializable{
 	}
 	
 	public String getCodigo() {
-		try {
-			return get("codigo");
-		} catch (Exception e) {
-			return this.codigo;
-		}
+		return this.codigo;
 	}
 	
 	public void setCodigo(String codigo) {

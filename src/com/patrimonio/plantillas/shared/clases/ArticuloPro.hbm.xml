@@ -4,14 +4,14 @@
 <!-- Generated 25-jun-2013 15:32:37 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.patrimonio.plantillas.shared.clases.ArticuloPro" table="ARTI_PROV">
-        <id name="id" type="java.lang.Long">
+        <id name="id" type="java.lang.Long" access="field">
             <column name="ID" />
             <generator class="assigned" />
         </id>
-        <property name="articulo" type="int">
+        <property name="articulo" type="int" access="field">
             <column name="ARTICULO" />
         </property>
-        <property name="proveedor" type="int">
+        <property name="proveedor" type="int" access="field">
             <column name="PROVEEDOR" />
         </property>
     </class>

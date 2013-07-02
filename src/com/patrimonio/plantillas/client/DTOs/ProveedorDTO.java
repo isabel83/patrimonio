@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 
 import com.extjs.gxt.ui.client.data.BaseModel;
+import com.patrimonio.plantillas.shared.clases.Proveedor;
 
 
 public class ProveedorDTO extends BaseModel implements Serializable{

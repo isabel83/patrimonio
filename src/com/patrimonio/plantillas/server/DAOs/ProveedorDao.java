@@ -7,6 +7,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -23,23 +24,33 @@ public class ProveedorDao  extends HibernateDaoSupport{
 	
 	@Autowired
 	SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
-	Session sesion = sessionFactory.openSession();
+	Session sesion;
 
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Proveedor> findAll(){
-		return sesion.createQuery("from Proveedor").list();
+		sesion = sessionFactory.openSession();
+		
+		List<Proveedor> todos = sesion.createQuery("from Proveedor").list();
+		sesion.close();
+		return todos;
 	}
 	
 	@Transactional
 	public Proveedor findById(Long id) { 
+		sesion = sessionFactory.openSession();
 		Proveedor proveedor = null;
         try {
             proveedor = (Proveedor) sesion.get(Proveedor.class, id);
             Hibernate.initialize(proveedor);
+            
         } catch (Exception e) {
             e.printStackTrace();
         } 
+        finally{
+        	sesion.close();
+        }
+
         return proveedor;
 		
 	}
@@ -48,46 +59,88 @@ public class ProveedorDao  extends HibernateDaoSupport{
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public PagingLoadResult<Proveedor> getProveedores(PagingLoadConfig loadConfig){
-		Query query =  sessionFactory.openSession().createQuery("from ProveedorDTO");
+		Query query =  sessionFactory.openSession().createQuery("from Proveedor");
 		Integer cuantos=query.list().size();
 		query.setFirstResult(loadConfig.getOffset());
 		query.setMaxResults(loadConfig.getLimit());
 		ArrayList<Proveedor> sublist = (ArrayList<Proveedor>) query.list();
+		sessionFactory.getCurrentSession().close();
 		return new BasePagingLoadResult<Proveedor>(sublist, loadConfig.getOffset(),cuantos);
 	}
 	
 	@Transactional
 	public boolean saveProveedor(Proveedor proveedor) {
+		sesion = sessionFactory.openSession();
+		Transaction t = sesion.beginTransaction();
 		try {
-			sessionFactory.getCurrentSession().beginTransaction();
-			sessionFactory.getCurrentSession().save(proveedor); 
-			sessionFactory.getCurrentSession().getTransaction().commit();
+			sesion.save(proveedor); 
+			t.commit();
 		
 			  return true;
 		} catch (Exception e) {
 			return false;
+		}
+		finally{
+			sesion.close();
 		}
 		 
 	}
 
 	@Transactional
 	public boolean updateProveedor(Proveedor proveedor) {
+		sesion = sessionFactory.openSession();
+		try{
+			sesion.beginTransaction();
+			sesion.update(proveedor); 
+			sesion.getTransaction().commit();
+			return true;
+		}
+		catch(Exception e){
+			return false;
+		}
+		finally{
+			sesion.close();
+		}
 
-		sessionFactory.getCurrentSession().beginTransaction();
-		sessionFactory.getCurrentSession().update(proveedor); 
-		sessionFactory.getCurrentSession().getTransaction().commit();
-	
-		  return true;
 	}
 	
 	@Transactional
 	public boolean removeProveedor(Proveedor proveedor) {
+		sesion = sessionFactory.openSession();
+		try{
+			sesion.beginTransaction();
+			sesion.delete(proveedor); 
+			sesion.getTransaction().commit();
+		  return true;	
+		}
+		catch(Exception e){
+			return false;
+		}
+		finally{
+			sesion.close();
+		}
+		
+	}
 
-		sessionFactory.getCurrentSession().beginTransaction();
-		sessionFactory.getCurrentSession().delete(proveedor); 
-		sessionFactory.getCurrentSession().getTransaction().commit();
+	@Transactional
+	public long getMaxId() { 
+		long valor = 0;
+		sesion = sessionFactory.openSession();
+		try{
+			Query query =  sesion.createQuery("select max(id) as max from Proveedor");
+			
+			List sublist = query.list();
+			if(sublist.get(0)!=null)
+				valor = (Long) sublist.get(0);
 	
-		  return true;
+			return valor;
+		}
+		catch(Exception e){
+			return valor;
+		}
+		finally{
+			sesion.close();
+		}
 	}
 
 

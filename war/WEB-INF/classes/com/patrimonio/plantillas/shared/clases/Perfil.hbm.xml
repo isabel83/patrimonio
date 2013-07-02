@@ -8,16 +8,16 @@
             <column name="ID" />
             <generator class="assigned" />
         </id>
-        <property name="administrador" type="int">
+        <property name="administrador" type="int" access="field">
             <column name="ADMINISTRADOR" />
         </property>
-        <property name="validador" type="int">
+        <property name="validador" type="int" access="field">
             <column name="VALIDADOR" />
         </property>
-        <property name="usuario" type="int">
+        <property name="usuario" type="int" access="field">
             <column name="USUARIO" />
         </property>
-        <property name="operario" type="int">
+        <property name="operario" type="int" access="field">
             <column name="OPERARIO" />
         </property>
     </class>

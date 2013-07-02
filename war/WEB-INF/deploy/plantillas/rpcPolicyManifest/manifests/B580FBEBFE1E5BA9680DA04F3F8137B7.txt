@@ -1,0 +1,2 @@
+serviceClass: com.patrimonio.plantillas.client.services.ProveedorService
+path: DE250ED0C9703AE8B242EDE5C11AC543.gwt.rpc

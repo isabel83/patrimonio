@@ -57,7 +57,7 @@ public class FormMntTablas extends ContentPanel{
 		GWT.setUncaughtExceptionHandler(new   
 			      GWT.UncaughtExceptionHandler() {  
 			      public void onUncaughtException(Throwable e) {  
-			        Log.debug("EN UNCAUGHT: " + e.getCause()); 
+			        Log.debug("EN UNCAUGHT: " + e.getLocalizedMessage()); 
 			    }  
 			    // do module loading stuff  
 			  });    
