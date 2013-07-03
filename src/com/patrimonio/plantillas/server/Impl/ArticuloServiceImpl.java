@@ -3,19 +3,19 @@ package com.patrimonio.plantillas.server.Impl;
 import java.util.List;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import com.patrimonio.plantillas.server.DAOs.ArticuloDao;
-import com.patrimonio.plantillas.shared.clases.Articulo;
-import com.patrimonio.plantillas.shared.clases.ArticuloPro;
+import com.patrimonio.plantillas.server.DAOs.ArticulosDao;
+import com.patrimonio.plantillas.shared.clases.Articulos;
+import com.patrimonio.plantillas.shared.clases.Arti_Prov;
 import com.patrimonio.plantillas.client.services.ArticuloService;
 
 
 public class ArticuloServiceImpl extends RemoteServiceServlet implements ArticuloService{
 
-	public ArticuloDao articuloDAO;
+	public ArticulosDao articuloDAO;
 
 	
 	@Override
-	public Articulo findArticulo(long idArticulo) {
+	public Articulos findArticulo(long idArticulo) {
 		return articuloDAO.findById(idArticulo);
 
 	}
@@ -24,9 +24,9 @@ public class ArticuloServiceImpl extends RemoteServiceServlet implements Articul
 	public void saveArticulo(long idArticulo, int seccion, int familia,int subFamilia, int codigo, String nombre, String marca,int numMin, int numIdeal, String observacion, int estado)
 			throws Exception {
 		
-		  Articulo articulo = articuloDAO.findById(idArticulo);
+		  Articulos articulo = articuloDAO.findById(idArticulo);
 		  if(articulo == null) {
-			  articulo = new Articulo(idArticulo, seccion, familia, subFamilia, codigo,nombre,marca, numMin, numIdeal, observacion,estado);
+			  articulo = new Articulos(idArticulo, seccion, familia, subFamilia, codigo,nombre,marca, numMin, numIdeal, observacion,estado);
 			 articuloDAO.saveArticulo(articulo);
 		  }
 		
@@ -35,7 +35,7 @@ public class ArticuloServiceImpl extends RemoteServiceServlet implements Articul
 	@Override
 	public void updateArticulo(long idArticulo, int seccion, int familia,int subFamilia, int codigo, String nombre, String marca,int numMin, int numIdeal, String observaciones, int estado)
 			throws Exception {
-		Articulo articulo = articuloDAO.findById(idArticulo); 
+		Articulos articulo = articuloDAO.findById(idArticulo); 
 		   
 		  if(articulo != null) { 
 			   articulo.setId_seccion(seccion);
@@ -57,7 +57,7 @@ public class ArticuloServiceImpl extends RemoteServiceServlet implements Articul
 	public void saveOrUpdateArticulo(long idArticulo, int seccion, int familia,int subFamilia, int codigo, String nombre, String marca,int numMin, int numIdeal, String observacion, int estado)
 			throws Exception {
 		
-		Articulo articulo = new Articulo(idArticulo, seccion, familia, subFamilia, codigo,nombre,marca, numMin, numIdeal, observacion,estado);
+		Articulos articulo = new Articulos(idArticulo, seccion, familia, subFamilia, codigo,nombre,marca, numMin, numIdeal, observacion,estado);
 		articuloDAO.updateArticulo(articulo);
 	
 	}
@@ -65,17 +65,17 @@ public class ArticuloServiceImpl extends RemoteServiceServlet implements Articul
 	@Override
 	public void deleteArticulo(long idArticulo) throws Exception {
 		
-		Articulo articulo = articuloDAO.findById(idArticulo);
+		Articulos articulo = articuloDAO.findById(idArticulo);
 		if(articulo!=null)
 			articuloDAO.removeArticulo(articulo);
 	}
 
 	@Override
-	public List<Articulo> loadArticulosPro(int idProveedor) {
-		List<Articulo> lstArticulos = null;
-		List<ArticuloPro> todos = articuloDAO.findArtProveedor(idProveedor);
-		for(ArticuloPro art: todos){
-			lstArticulos.add(articuloDAO.findById(Long.parseLong(String.valueOf(art.getArticulo()))));
+	public List<Articulos> loadArticulosPro(int idProveedor) {
+		List<Articulos> lstArticulos = null;
+		List<Arti_Prov> todos = articuloDAO.findArtProveedor(idProveedor);
+		for(Arti_Prov art: todos){
+			lstArticulos.add(articuloDAO.findById(Long.parseLong(String.valueOf(art.getID_ARTICULO()))));
 		}
 		return lstArticulos;
 	}

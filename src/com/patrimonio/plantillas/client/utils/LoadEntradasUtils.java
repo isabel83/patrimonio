@@ -49,7 +49,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextArea;
-import com.patrimonio.plantillas.client.DTOs.ProveedorDTO;
+import com.patrimonio.plantillas.client.DTOs.ProveedoresDTO;
 import com.patrimonio.plantillas.client.services.ProveedorService;
 import com.patrimonio.plantillas.client.services.ProveedorServiceAsync;
 import com.patrimonio.plantillas.client.widgets.Stock;
@@ -58,10 +58,12 @@ import com.patrimonio.plantillas.client.widgets.dialogs.DialogoEliminados;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoRecepcionTotal;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoRecepcionarArticulo;
 import com.patrimonio.plantillas.shared.RpcUtils;
-import com.patrimonio.plantillas.shared.clases.Articulo;
-import com.patrimonio.plantillas.shared.clases.Proveedor;
+import com.patrimonio.plantillas.shared.clases.Articulos;
+import com.patrimonio.plantillas.shared.clases.Proveedores;
 
 public class LoadEntradasUtils {
+	
+	RpcUtils rpcUtils = new RpcUtils();
 	
 	public void loadFormNuevoPedido(final FormPanel panel) {
 		
@@ -112,9 +114,9 @@ public class LoadEntradasUtils {
 
 	    Log.debug("Antes de ir a cargar el combo");
 	    ListStore proveedores = new ListStore();  
-	    loadProveedoresCombo(proveedores);
+	    rpcUtils.loadProveedoresCombo(proveedores);
 	  
-	    ComboBox<Proveedor> combo = new ComboBox<Proveedor>();  
+	    ComboBox<Proveedores> combo = new ComboBox<Proveedores>();  
 	    combo.setEmptyText("Selecciona un proveedor");  
 	    combo.setStore(proveedores);  
 	    combo.setDisplayField("nombre");  
@@ -161,7 +163,7 @@ public class LoadEntradasUtils {
 	    ListStore art = new ListStore();  
 	    
 	  
-	    ComboBox<Articulo> comboA = new ComboBox<Articulo>();  
+	    ComboBox<Articulos> comboA = new ComboBox<Articulos>();  
 	    comboA.setEmptyText("Selecciona un articulo");  
 	    comboA.setStore(art);  
 	    comboA.setDisplayField("nombre");  
@@ -331,51 +333,11 @@ public class LoadEntradasUtils {
 	    main.add(gButtons, new ColumnData(.4));
 	    panel.add(main, new FormData("100%"));  
 	    
-	    
-//	    lstProveedores.addChangeHandler(new ChangeHandler(){
-//
-//			@Override
-//			public void onChange(ChangeEvent event) {
-//				int idProveedor = lstProveedores.getSelectedIndex();
-//				rpcUtils.loadArticulosProveedor(lstArticulos, idProveedor);
-//				right.setVisible(true);
-//				panel.layout(true);
-//			}
-//	    	
-//	    });
-	  
+ 
 	}
 	
 	
-	private void loadProveedoresCombo(final ListStore proveedores) { 
-		ProveedorServiceAsync proService = GWT.create(ProveedorService.class);
-		Log.debug("Estamos en la funcion");
-		proService.findAllForList(new AsyncCallback<List<Proveedor>>(){
-
-			@Override
-			public void onFailure(Throwable caught) {
-				Log.debug("Error en carga de proveedores: " + caught.getLocalizedMessage());
-			}
-
-			@Override
-			public void onSuccess(List<Proveedor> result) {
-				Log.debug("Estamos en el on success, hay: " + result.size());
-				for(Proveedor pro: result){
-					Log.debug("Proveedor: " + pro.getId_proveedor() + " , " + pro.getNombre());
-						
-					 BaseModel model = new BaseModel();
-	                 model.set("id",pro.getId_proveedor());
-	                 model.set("nombre", pro.getNombre());
-					 proveedores.add(model);
-				} 
-				
-				
-			}
-			
-		});
-	}
-
-
+	
 	public void loadFormRecepcion(FormPanel frmRecepcionPedidos) {
 
 		FormData formData = new FormData("100%"); 

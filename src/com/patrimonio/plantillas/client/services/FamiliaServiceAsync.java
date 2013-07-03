@@ -3,13 +3,13 @@ package com.patrimonio.plantillas.client.services;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.patrimonio.plantillas.shared.clases.Familia;
+import com.patrimonio.plantillas.shared.clases.Familias;
 
 public interface FamiliaServiceAsync {
 	
-	void findAll(PagingLoadConfig config, AsyncCallback<PagingLoadResult<Familia>> callback);
+	void findAll(PagingLoadConfig config, AsyncCallback<PagingLoadResult<Familias>> callback);
 
-	void findFamilia(long idFamilia, AsyncCallback<Familia> callback);
+	void findFamilia(long idFamilia, AsyncCallback<Familias> callback);
 
 	void saveFamilia(long idFamilia, int seccion, int estado,
 			String descripcion, String codigo, AsyncCallback<Void> callback);

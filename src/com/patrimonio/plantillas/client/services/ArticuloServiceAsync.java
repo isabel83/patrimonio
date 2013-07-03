@@ -3,11 +3,11 @@ package com.patrimonio.plantillas.client.services;
 import java.util.List;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.patrimonio.plantillas.shared.clases.Articulo;
+import com.patrimonio.plantillas.shared.clases.Articulos;
 
 public interface ArticuloServiceAsync {
 
-	void findArticulo(long idArticulo, AsyncCallback<Articulo> callback);
+	void findArticulo(long idArticulo, AsyncCallback<Articulos> callback);
 
 	void deleteArticulo(long idArticulo, AsyncCallback<Void> callback);
 
@@ -26,6 +26,6 @@ public interface ArticuloServiceAsync {
 			int numMin, int numIdeal, String observacion, int estado,
 			AsyncCallback<Void> callback);
 
-	void loadArticulosPro(int idProveedor, AsyncCallback<List<Articulo>> callback);
+	void loadArticulosPro(int idProveedor, AsyncCallback<List<Articulos>> callback);
 
 }

@@ -8,21 +8,23 @@
   <property name="hibernate.connection.url">jdbc:oracle:thin:@128.21.80.56:1521:APEX</property>
   <property name="hibernate.connection.username">almacen</property>
   <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
-  <property name="hibernate.hbm2ddl.auto">create</property>
+  <property name="hibernate.hbm2ddl.auto">validate</property>
   <property name="hibernate.c3p0.min_size">5</property>
   <property name="hibernate.c3p0.max_size">20</property>
   <property name="hibernate.c3p0.timeout">1800</property>
   <property name="hibernate.c3p0.max_statements">50</property>
-  <mapping resource="com/patrimonio/plantillas/shared/clases/Articulo.hbm.xml"/>
-  <mapping resource="com/patrimonio/plantillas/shared/clases/ArticuloPro.hbm.xml"/>
-  <mapping resource="com/patrimonio/plantillas/shared/clases/Destinatario.hbm.xml"/>
-  <mapping resource="com/patrimonio/plantillas/shared/clases/Estado.hbm.xml"/>
-  <mapping resource="com/patrimonio/plantillas/shared/clases/Familia.hbm.xml"/>
-  <mapping resource="com/patrimonio/plantillas/shared/clases/Perfil.hbm.xml"/>
-  <mapping resource="com/patrimonio/plantillas/shared/clases/Persona.hbm.xml"/>
-  <mapping resource="com/patrimonio/plantillas/shared/clases/Proveedor.hbm.xml"/>
-  <mapping resource="com/patrimonio/plantillas/shared/clases/Puesto.hbm.xml"/>
-  <mapping resource="com/patrimonio/plantillas/shared/clases/Seccion.hbm.xml"/>
-  <mapping resource="com/patrimonio/plantillas/shared/clases/Subfamilia.hbm.xml"/>
+  <mapping resource="com/patrimonio/plantillas/shared/clases/Articulos.hbm.xml"/>
+  <mapping resource="com/patrimonio/plantillas/shared/clases/Arti_Prov.hbm.xml"/>
+  <mapping resource="com/patrimonio/plantillas/shared/clases/Destinatarios.hbm.xml"/>
+  <mapping resource="com/patrimonio/plantillas/shared/clases/Estados.hbm.xml"/>
+  <mapping resource="com/patrimonio/plantillas/shared/clases/Expedientes.hbm.xml"/>
+  <mapping resource="com/patrimonio/plantillas/shared/clases/Expedientes_Tipos.hbm.xml"/>
+  <mapping resource="com/patrimonio/plantillas/shared/clases/Familias.hbm.xml"/>
+  <mapping resource="com/patrimonio/plantillas/shared/clases/Perfiles.hbm.xml"/>
+  <mapping resource="com/patrimonio/plantillas/shared/clases/Personas.hbm.xml"/>
+  <mapping resource="com/patrimonio/plantillas/shared/clases/Proveedores.hbm.xml"/>
+  <mapping resource="com/patrimonio/plantillas/shared/clases/Puestos.hbm.xml"/>
+  <mapping resource="com/patrimonio/plantillas/shared/clases/Secciones.hbm.xml"/>
+  <mapping resource="com/patrimonio/plantillas/shared/clases/Subfamilias.hbm.xml"/>
  </session-factory>
 </hibernate-configuration>

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-jul-2013 11:41:22 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.patrimonio.plantillas.shared.clases.Proveedores" table="PROVEEDORES">
+        <id  name="ID_PROVEEDOR" type="java.lang.Long" access="field">
+            <column name="ID_PROVEEDOR" />
+            <generator class="assigned" />
+        </id>
+        <property name="ACTIVIDAD" type="java.lang.String" access="field">
+            <column name="ACTIVIDAD" />
+        </property>
+        <property name="NIF" type="java.lang.String" access="field">
+            <column name="NIF" />
+        </property>
+        <property name="NOMBRE" type="java.lang.String" access="field">
+            <column name="NOMBRE" />
+        </property>
+        <property name="CONTACTO" type="java.lang.String" access="field">
+            <column name="CONTACTO" />
+        </property>
+        <property name="DOMICILIO" type="java.lang.String" access="field">
+            <column name="DOMICILIO" />
+        </property>
+        <property name="POBLACION" type="java.lang.String" access="field">
+            <column name="POBLACION" />
+        </property>
+        <property name="CP" type="int" access="field">
+            <column name="CP" />
+        </property>
+        <property name="PROVINCIA" type="java.lang.String" access="field">
+            <column name="PROVINCIA" />
+        </property>
+        <property name="TLF1" type="java.lang.String" access="field">
+            <column name="TLF1" />
+        </property>
+        <property name="TLF2" type="java.lang.String" access="field">
+            <column name="TLF2" />
+        </property>
+        <property name="MOVIL" type="int" access="field">
+            <column name="MOVIL" />
+        </property>
+        <property name="FAX" type="java.lang.String" access="field">
+            <column name="FAX" />
+        </property>
+        <property name="EMAIL" type="java.lang.String" access="field">
+            <column name="EMAIL" />
+        </property>
+        <property name="ID_ESTADO" type="int" access="field">
+            <column name="ID_ESTADO" />
+        </property>
+    </class>
+</hibernate-mapping>

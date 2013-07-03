@@ -39,12 +39,12 @@
         <aop:aspectj-autoproxy/>
 
         <bean id="interfeceptServiceFacade" class="com.patrimonio.plantillas.server.auth.CustomAuthenticationInterceptor" />-->
-        <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+     <!--  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 			<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
 			<property name="url" value="jdbc:oracle:thin:@128.21.80.56:1521:APEX" />
 			<property name="username" value="almacen" />
 			<property name="password" value="almacen" />
-		</bean>
+		</bean>-->
          
     
         <bean id="sessionFactory" class=" org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
@@ -52,37 +52,43 @@
 		</bean> 
                 
                
-		<bean id="articuloDao" class="com.patrimonio.plantillas.server.DAOs.ArticuloDao">
+		<bean id="articuloDao" class="com.patrimonio.plantillas.server.DAOs.ArticulosDao">
 			<property name="sessionFactory" ref="sessionFactory" />
 		</bean>
-		<bean id="articuloProDao" class="com.patrimonio.plantillas.server.DAOs.ArticuloProDao">
+		<bean id="arti_ProvDao" class="com.patrimonio.plantillas.server.DAOs.Arti_ProvDao">
 			<property name="sessionFactory" ref="sessionFactory" />
 		</bean>
-		<bean id="destinatarioDao" class="com.patrimonio.plantillas.server.DAOs.DestinatarioDao">
+		<bean id="destinatarioDao" class="com.patrimonio.plantillas.server.DAOs.DestinatariosDao">
 			<property name="sessionFactory" ref="sessionFactory" />
 		</bean>
-		<bean id="estadoDao" class="com.patrimonio.plantillas.server.DAOs.EstadoDao">
+		<bean id="estadoDao" class="com.patrimonio.plantillas.server.DAOs.EstadosDao">
 			<property name="sessionFactory" ref="sessionFactory" />
 		</bean>
-		<bean id="familiaDao" class="com.patrimonio.plantillas.server.DAOs.FamiliaDao">
+		<bean id="expedienteDao" class="com.patrimonio.plantillas.server.DAOs.ExpedientesDao">
 			<property name="sessionFactory" ref="sessionFactory" />
 		</bean>
-		<bean id="perfilDao" class="com.patrimonio.plantillas.server.DAOs.PerfilDao">
+		<bean id="espedientes_tiposDao" class="com.patrimonio.plantillas.server.DAOs.Expedientes_TiposDao">
 			<property name="sessionFactory" ref="sessionFactory" />
 		</bean>
-		<bean id="personaDao" class="com.patrimonio.plantillas.server.DAOs.PersonaDao">
+		<bean id="familiaDao" class="com.patrimonio.plantillas.server.DAOs.FamiliasDao">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		<bean id="perfilDao" class="com.patrimonio.plantillas.server.DAOs.PerfilesDao">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		<bean id="personaDao" class="com.patrimonio.plantillas.server.DAOs.PersonasDao">
 			<property name="sessionFactory" ref="sessionFactory" /> 
 		</bean>
-		<bean id="proveedorDao" class="com.patrimonio.plantillas.server.DAOs.ProveedorDao">
+		<bean id="proveedorDao" class="com.patrimonio.plantillas.server.DAOs.ProveedoresDao">
 			<property name="sessionFactory" ref="sessionFactory" />
 		</bean>
-		<bean id="puestoDao" class="com.patrimonio.plantillas.server.DAOs.PuestoDao">
+		<bean id="puestoDao" class="com.patrimonio.plantillas.server.DAOs.PuestosDao">
 			<property name="sessionFactory" ref="sessionFactory" />
 		</bean>
-		<bean id="seccionDao" class="com.patrimonio.plantillas.server.DAOs.SeccionDao">
+		<bean id="seccionDao" class="com.patrimonio.plantillas.server.DAOs.SeccionesDao">
 			<property name="sessionFactory" ref="sessionFactory" />
 		</bean>
-		<bean id="subfamiliaDao" class="com.patrimonio.plantillas.server.DAOs.SubfamiliaDao">
+		<bean id="subfamiliaDao" class="com.patrimonio.plantillas.server.DAOs.SubfamiliasDao">
 			<property name="sessionFactory" ref="sessionFactory" />
 		</bean>
 		

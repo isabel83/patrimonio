@@ -3,13 +3,13 @@ package com.patrimonio.plantillas.client.services;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.patrimonio.plantillas.shared.clases.Persona;
+import com.patrimonio.plantillas.shared.clases.Personas;
 
 public interface PersonaServiceAsync {
 	
-	void findAll(PagingLoadConfig config, AsyncCallback<PagingLoadResult<Persona>> callback);
+	void findAll(PagingLoadConfig config, AsyncCallback<PagingLoadResult<Personas>> callback);
 
-	void findPersona(long idPersona, AsyncCallback<Persona> callback);
+	void findPersona(long idPersona, AsyncCallback<Personas> callback);
 
 	void savePersona(long idPersona, int estado, int perfil, String descripcion, AsyncCallback<Void> callback);
 

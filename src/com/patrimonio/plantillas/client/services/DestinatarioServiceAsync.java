@@ -1,11 +1,11 @@
 package com.patrimonio.plantillas.client.services;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.patrimonio.plantillas.shared.clases.Destinatario;
+import com.patrimonio.plantillas.shared.clases.Destinatarios;
 
 public interface DestinatarioServiceAsync {
 
-	void findDestinatario(long idDestinatario, AsyncCallback<Destinatario> callback);
+	void findDestinatario(long idDestinatario, AsyncCallback<Destinatarios> callback);
 
 	void saveDestinatario(long idDestinatario, int estado, String descripcion, AsyncCallback<Void> callback);
 

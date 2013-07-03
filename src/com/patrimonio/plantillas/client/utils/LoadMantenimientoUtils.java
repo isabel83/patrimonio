@@ -10,7 +10,10 @@ import com.extjs.gxt.ui.client.data.BasePagingLoader;
 import com.extjs.gxt.ui.client.data.BeanModelReader;
 import com.extjs.gxt.ui.client.data.DataProxy;
 import com.extjs.gxt.ui.client.data.ModelData;
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
+import com.extjs.gxt.ui.client.data.PagingLoader;
+import com.extjs.gxt.ui.client.data.RpcProxy;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
@@ -36,17 +39,18 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.patrimonio.plantillas.client.DTOs.ProveedorDTO;
+import com.patrimonio.plantillas.client.DTOs.ProveedoresDTO;
 import com.patrimonio.plantillas.client.services.ProveedorService;
 import com.patrimonio.plantillas.client.services.ProveedorServiceAsync;
 import com.patrimonio.plantillas.client.widgets.Stock;
 import com.patrimonio.plantillas.shared.RpcUtils;
-import com.patrimonio.plantillas.shared.clases.Proveedor;
+import com.patrimonio.plantillas.shared.clases.Proveedores;
 
 public class LoadMantenimientoUtils {
 
 	ProveedorServiceAsync proService = GWT.create(ProveedorService.class);
-	RpcUtils rpcUtils;
+	RpcUtils rpcUtils = new RpcUtils();
+	long idProveedor;
 	
 	public void loadFormProveedores(FormPanel frmProveedores) {
 		FormData formDataMid = new FormData("50%");
@@ -90,69 +94,90 @@ public class LoadMantenimientoUtils {
 	    
 	    final TextField<String> nif = new TextField<String>();  
 	    nif.setFieldLabel("N.I.F.");  
+	    nif.setEnabled(false);
 	    left.add(nif,formDataMid);	    
 	    
 	    final TextField<String> nombre = new TextField<String>();  
 	    nombre.setFieldLabel("Nombre");  
+	    nombre.setEnabled(false);
 	    right.add(nombre,formData);	    
 	    
 	    final TextField<String> actividad = new TextField<String>();  
 	    actividad.setFieldLabel("Actividad");  
+	    actividad.setEnabled(false);
 	    left.add(actividad,formData);	    
 	    
 	    final TextField<String> contacto = new TextField<String>();  
 	    contacto.setFieldLabel("Contacto");  
+	    contacto.setEnabled(false);
 	    right.add(contacto,formData);	    
 	    
 	    final TextField<String> domicilio = new TextField<String>();  
 	    domicilio.setFieldLabel("Domicilio");  
+	    domicilio.setEnabled(false);
 	    left.add(domicilio,formData);	    
 	    
 	    final TextField<String> poblacion = new TextField<String>();  
-	    poblacion.setFieldLabel("Población");  
+	    poblacion.setFieldLabel("Población"); 
+	    poblacion.setEnabled(false);
 	    right.add(poblacion,formData);	    
 	    
 	    final TextField<String> cp = new TextField<String>();  
-	    cp.setFieldLabel("Código Postal");  
+	    cp.setFieldLabel("Código Postal"); 
+	    cp.setEnabled(false);
 	    left.add(cp,formDataMid);	    
 	    
 	    final TextField<String> provincia = new TextField<String>();  
 	    provincia.setFieldLabel("Provincia");  
+	    provincia.setEnabled(false);
 	    right.add(provincia,formData);	    
 	    
 	    final TextField<String> tfno = new TextField<String>();  
 	    tfno.setFieldLabel("Teléfono");  
+	    tfno.setEnabled(false);
 	    left.add(tfno,formDataMid);	    
 	    
 	    final TextField<String> fax = new TextField<String>();  
 	    fax.setFieldLabel("Fax");  
+	    fax.setEnabled(false);
 	    right.add(fax,formDataMid);	    
 	    
 	    final TextField<String> tfno2 = new TextField<String>();  
-	    tfno2.setFieldLabel("Teléfono 2");  
+	    tfno2.setFieldLabel("Teléfono 2"); 
+	    tfno2.setEnabled(false);
 	    left.add(tfno2,formDataMid);	    
 	    
 	    final TextField<String> movil = new TextField<String>();  
-	    movil.setFieldLabel("Teléfono Móvil");  
+	    movil.setFieldLabel("Teléfono Móvil");
+	    movil.setEnabled(false);
 	    right.add(movil,formDataMid);	
 	    
 	    final CheckBox estado = new CheckBox();  
 	    estado.addStyleName("margenTop");
 	    estado.setFieldLabel("Activo");
+	    estado.setEnabled(false);
 	    right.addStyleName("check");
 	    right.add(estado, formData);
 	    
 	    final TextField<String> correo = new TextField<String>();  
 	    correo.setFieldLabel("Correo electrónico");  
+	    correo.setEnabled(false);
 	    bottom.add(correo,new FormData("100%"));	
 	    
-	    DataProxy entregasPRx = null; 
-		final BasePagingLoader<PagingLoadResult<ModelData>> entregasLoader = new BasePagingLoader<PagingLoadResult<ModelData>>(  
-				entregasPRx, new BeanModelReader());  
-	        entregasLoader.setRemoteSort(true); 
 	    
-	    final PagingToolBar paginacion = new PagingToolBar(50); 
-	    paginacion.bind(entregasLoader);
+	    RpcProxy<PagingLoadResult<Proveedores>> proxy = new RpcProxy<PagingLoadResult<Proveedores>>() {
+			@Override
+			public void load(Object loadConfig,
+					AsyncCallback<PagingLoadResult<Proveedores>> callback) {
+				proService.findAll((PagingLoadConfig) loadConfig,callback);
+			}
+		};
+
+		// loader
+		final PagingLoader<PagingLoadResult<ModelData>> loader = new BasePagingLoader<PagingLoadResult<ModelData>>(proxy);
+
+	    final PagingToolBar paginacion = new PagingToolBar(rpcUtils.countAll()); 
+	    paginacion.bind(loader);
 	    paginacion.setStyleName("paginacion");
 	    
 	    ButtonGroup gButtons = new ButtonGroup(4);
@@ -165,92 +190,90 @@ public class LoadMantenimientoUtils {
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-//				if(b1.getText().equalsIgnoreCase("Agregar")){
-//					b1.setText("Guardar");
-//					b2.setText("Deshacer");
-//					b3.setVisible(false);
-//					b4.setVisible(false);
-//					habilitaTodo(true);
-//				}
-//				else{
-//					checkValuesAndSaveProveedor(nif.getValue(),nombre.getValue(),actividad.getValue(),contacto.getValue(),domicilio.getValue(),poblacion.getValue(),
-//							cp.getValue(),provincia.getValue(),tfno.getValue(),tfno2.getValue(),fax.getValue(),movil.getValue(),correo.getValue(), estado.getValue());
-//					b1.setText("Agregar");
-//					b2.setText("Modificar");
-//					b3.setVisible(true);
-//					b4.setVisible(true);
-//					habilitaTodo(false);
-//				}
 				
-//			}
-//
-//			private void habilitaTodo(boolean que) {
-//				nif.setEnabled(que);
-//				nombre.setEnabled(que);
-//				actividad.setEnabled(que);
-//				contacto.setEnabled(que);
-//				domicilio.setEnabled(que);
-//				poblacion.setEnabled(que);
-//				cp.setEnabled(que);
-//				provincia.setEnabled(que);
-//				tfno.setEnabled(que);
-//				tfno2.setEnabled(que);
-//				fax.setEnabled(que);
-//				movil.setEnabled(que);
-//				correo.setEnabled(que);
-//			}
-				Proveedor prov = loadProveedor();
-				Log.debug("Vamos a guardar los datos de : " + prov);
-				rpcUtils.guardaProveedor(prov);
-//				proService.saveProveedor(prov, new AsyncCallback<Void>(){
-//
-//					@Override
-//					public void onFailure(Throwable caught) {
-//						System.out.println("ERROR: " + caught.getLocalizedMessage());
-//					}
-//
-//					@Override
-//					public void onSuccess(Void result) {
-//						System.out.println("GUARADO");
-//						
-//					}
-//					
-//				});
+				if(b1.getText().equalsIgnoreCase("Agregar")){
+					b1.setText("Guardar");
+					b2.setText("Deshacer");
+					b3.setVisible(false);
+					b4.setVisible(false);
+					habilitaTodo(true);
+				}
+				else{
+					Log.debug("Estamos en el caso de guardar y vamos a llamar a la funcion en rpcUtils");
+					rpcUtils.checkValuesAndSaveProveedor(nif.getValue(),nombre.getValue(),actividad.getValue(),contacto.getValue(),domicilio.getValue(),poblacion.getValue(),
+							Integer.parseInt(cp.getValue()),provincia.getValue(),tfno.getValue(),tfno2.getValue(),fax.getValue(),Integer.parseInt(movil.getValue()),correo.getValue(), estado.getValue());
+					
+					b1.setText("Agregar");
+					b2.setText("Modificar");
+					b3.setVisible(true);
+					b4.setVisible(true);
+					habilitaTodo(false);
+				}
 				
 			}
 
-			private Proveedor loadProveedor() {
-				Log.debug("En la funcion de loadProveedor para crear un dto");
-				Proveedor proveedor = new Proveedor();
-				proveedor.setNif(nif.getValue());
-				proveedor.setNombre(nombre.getValue());
-				proveedor.setActividad(actividad.getValue());
-				proveedor.setContacto(contacto.getValue());
-				proveedor.setDomicilio(domicilio.getValue());
-				proveedor.setPoblacion(poblacion.getValue());
-				proveedor.setCp(Integer.parseInt(cp.getValue()));
-				proveedor.setProvincia(provincia.getValue());
-				proveedor.setTlf1(tfno.getValue());
-				proveedor.setTlf2(tfno2.getValue());
-				proveedor.setMovil(Integer.parseInt(movil.getValue()));
-				proveedor.setFax(fax.getValue());
-				proveedor.setEmail(correo.getValue());
-				return proveedor;
+			public void habilitaTodo(boolean que) {
+				nif.setEnabled(que);
+				nombre.setEnabled(que);
+				actividad.setEnabled(que);
+				contacto.setEnabled(que);
+				domicilio.setEnabled(que);
+				poblacion.setEnabled(que);
+				cp.setEnabled(que);
+				provincia.setEnabled(que);
+				tfno.setEnabled(que);
+				tfno2.setEnabled(que);
+				fax.setEnabled(que);
+				movil.setEnabled(que);
+				correo.setEnabled(que);
+				estado.setEnabled(que);
 			}
 		
 	    });
+	    
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Modificar");
+	    b2.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				rpcUtils.deleteProveedor(idProveedor);
+				
+			}
+	    	
+	    });
 	    b2.setStyleAttribute("padding-right", "5px");
 	    b3.setText("Eliminar");
+	    b3.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				// TODO Auto-generated method stub
+				
+			}
+	    	
+	    });
 	    b3.setStyleAttribute("padding-right", "5px");
 	    b4.setText("Buscar");
+	    b4.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				// TODO Auto-generated method stub
+				
+			}
+	    	
+	    });
+	    
+	   
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
 	    gButtons.add(b3);
 	    gButtons.add(b4);
 	    gButtons.addStyleName("botonesFuncionales");
+	    
+	    
 	    
 	    main.add(left, new ColumnData(.5));
 	    main.add(right, new ColumnData(.5));
@@ -261,38 +284,7 @@ public class LoadMantenimientoUtils {
 	    frmProveedores.add(main, new FormData("100%"));
 	}
 
-
-
 	
-
-
-
-	protected void checkValuesAndSaveProveedor(String nif, String nombre, String actividad, String contacto, String domicilio, 
-			String poblacion, int cp, String provincia, String tfno, String tfno2, String fax, int movil, String correo, boolean estado) {
-		int est=0;
-		if(estado) est=1; else est = 0;
-		
-		
-		proService.saveOrUpdateProveedor(nif, nombre, actividad, contacto, domicilio, poblacion, cp,
-				provincia, tfno, tfno2, movil, fax, correo, est, new AsyncCallback<Void>(){
-
-					@Override
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					@Override
-					public void onSuccess(Void result) {
-						// TODO Auto-generated method stub
-						
-					}
-					
-				});
-	}
-
-
-
 
 
 

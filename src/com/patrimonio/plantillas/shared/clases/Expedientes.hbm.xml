@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-jul-2013 11:41:22 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.patrimonio.plantillas.shared.clases.Expedientes" table="EXPEDIENTES">
+        <id name="ID_EXPEDIENTE" type="java.lang.Long" access="field">
+            <column name="ID_EXPEDIENTE" />
+            <generator class="assigned" />
+        </id>
+        <property name="ANO" type="int" access="field">
+            <column name="ANO" />
+        </property>
+        <property name="EXPEDIENTE" type="java.lang.String" access="field">
+            <column name="EXPEDIENTE" />
+        </property>
+        <property name="DESCRIPCION" type="java.lang.String" access="field">
+            <column name="DESCRIPCION" />
+        </property>
+        <property name="ID_EXPEDIENTE_TIPO" type="int" access="field">
+            <column name="ID_EXPEDIENTE_TIPO" />
+        </property>
+    </class>
+</hibernate-mapping>
