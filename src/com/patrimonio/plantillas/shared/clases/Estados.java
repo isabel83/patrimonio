@@ -22,8 +22,6 @@ public class Estados extends BaseModel implements Serializable{
 	}
 	
 	public Estados(long id, String descripcion){
-		set("id", id);
-		set("descripcion", descripcion);
 		this.ID_ESTADO= id;
 		this.DESCRIPCION=descripcion;
 	}

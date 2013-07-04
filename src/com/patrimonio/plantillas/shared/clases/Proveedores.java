@@ -52,27 +52,11 @@ public class Proveedores extends BaseModel implements Serializable{
 	
 	
 	public Proveedores(String nif, String nombre){
-		set("nif", nif);
-		set("nombre", nombre);
 		this.NIF=nif;
 		this.NOMBRE=nombre;
 	}
 	
 	public Proveedores(String nif, String nombre, String actividad, String contacto, String direccion, String poblacion, int cp, String provincia, String tf1, String tf2, int mvl, String fax, String mail, int estado){
-		set("nif", nif);
-		set("nombre", nombre);
-		set("actividad", actividad);
-		set("contacto", contacto);
-		set("direccion", direccion);
-		set("poblacion", poblacion);
-		set("cp", cp);
-		set("provincia", provincia);
-		set("tel1", TLF1);
-		set("tel2", TLF2);
-		set("mvl", mvl);
-		set("fax", fax);
-		set("mail", mail);
-		set("estado", estado);
 		this.NIF=nif;
 		this.NOMBRE=nombre;
 		this.ACTIVIDAD=actividad;

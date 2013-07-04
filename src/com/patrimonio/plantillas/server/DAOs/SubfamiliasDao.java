@@ -1,6 +1,7 @@
 package com.patrimonio.plantillas.server.DAOs;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
@@ -14,6 +15,7 @@ import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.patrimonio.plantillas.server.HibernateUtils;
+import com.patrimonio.plantillas.shared.clases.Secciones;
 import com.patrimonio.plantillas.shared.clases.Subfamilias;
 
 public class SubfamiliasDao extends HibernateDaoSupport{
@@ -96,6 +98,14 @@ public class SubfamiliasDao extends HibernateDaoSupport{
 		finally{
 			sesion.close();
 		}
+	}
+
+	public List<Subfamilias> findAll() {
+		sesion = sessionFactory.openSession();
+		
+		List<Subfamilias> todos = sesion.createQuery("from Subfamilias").list();
+		sesion.close();
+		return todos;
 	}
 
 }

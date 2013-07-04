@@ -1,6 +1,7 @@
 package com.patrimonio.plantillas.server.DAOs;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
@@ -15,6 +16,7 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.patrimonio.plantillas.server.HibernateUtils;
 import com.patrimonio.plantillas.shared.clases.Familias;
+import com.patrimonio.plantillas.shared.clases.Secciones;
 
 public class FamiliasDao  extends HibernateDaoSupport{
 	@Autowired
@@ -35,6 +37,14 @@ public class FamiliasDao  extends HibernateDaoSupport{
         }
         return familia;
 		
+	}
+	
+	public List<Familias> findAll() {
+		sesion = sessionFactory.openSession();
+		
+		List<Familias> todos = sesion.createQuery("from Familias").list();
+		sesion.close();
+		return todos;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -100,5 +110,7 @@ public class FamiliasDao  extends HibernateDaoSupport{
 			sesion.close();
 		}
 	}
+
+	
 
 }

@@ -1,5 +1,7 @@
 package com.patrimonio.plantillas.client.services;
 
+import java.util.List;
+
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -12,9 +14,6 @@ public interface SubfamiliaServiceAsync {
 	
 	void findSubfamilia(long idSubfamilia, AsyncCallback<Subfamilias> callback);
 
-	void saveSubfamilia(long idSubfamilia, int familia, int estado,
-			String descripcion, String codigo, AsyncCallback<Void> callback);
-
 	void updateSubfamilia(long idSubfamilia, int familia, int estado,
 			String descripcion, String codigo, AsyncCallback<Void> callback);
 
@@ -22,6 +21,10 @@ public interface SubfamiliaServiceAsync {
 			String descripcion, String codigo, AsyncCallback<Void> callback);
 
 	void deleteSubfamilia(long idSubfamilia, AsyncCallback<Void> callback);
+
+	void saveSubfamilia(Subfamilias subF, AsyncCallback<Void> asyncCallback);
+
+	void findAllForList(AsyncCallback<List<Subfamilias>> asyncCallback);
 
 	
 

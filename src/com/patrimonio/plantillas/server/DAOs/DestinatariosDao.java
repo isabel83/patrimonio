@@ -1,6 +1,8 @@
 package com.patrimonio.plantillas.server.DAOs;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -94,6 +96,27 @@ public class DestinatariosDao  extends HibernateDaoSupport{
 		}
 		catch(Exception e){
 			return false;
+		}
+		finally{
+			sesion.close();
+		}
+	}
+
+	@Transactional
+	public long getMaxId() { 
+		long valor = 0;
+		sesion = sessionFactory.openSession();
+		try{
+			Query query =  sesion.createQuery("select max(id) as max from Destinatarios");
+			
+			List sublist = query.list();
+			if(sublist.get(0)!=null)
+				valor = (Long) sublist.get(0);
+	
+			return valor;
+		}
+		catch(Exception e){
+			return valor;
 		}
 		finally{
 			sesion.close();

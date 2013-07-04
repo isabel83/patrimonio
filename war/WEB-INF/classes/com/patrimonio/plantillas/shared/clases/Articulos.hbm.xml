@@ -6,7 +6,7 @@
     <class name="com.patrimonio.plantillas.shared.clases.Articulos" table="ARTICULOS">
         <id name="ID_ARTICULO" type="java.lang.Long" access="field">
             <column name="ID_ARTICULO" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <property name="N_IDONEO" type="int" access="field">
             <column name="N_IDONEO" />

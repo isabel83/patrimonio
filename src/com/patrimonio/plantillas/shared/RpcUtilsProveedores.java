@@ -1,6 +1,5 @@
 package com.patrimonio.plantillas.shared;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -14,16 +13,25 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import com.patrimonio.plantillas.shared.clases.Articulos;
 import com.patrimonio.plantillas.shared.clases.Proveedores;
-import com.patrimonio.plantillas.client.DTOs.ProveedoresDTO;
 import com.patrimonio.plantillas.client.services.ArticuloService;
 import com.patrimonio.plantillas.client.services.ArticuloServiceAsync;
+import com.patrimonio.plantillas.client.services.DestinatarioService;
+import com.patrimonio.plantillas.client.services.DestinatarioServiceAsync;
+import com.patrimonio.plantillas.client.services.FamiliaService;
+import com.patrimonio.plantillas.client.services.FamiliaServiceAsync;
 import com.patrimonio.plantillas.client.services.ProveedorService;
 import com.patrimonio.plantillas.client.services.ProveedorServiceAsync;
+import com.patrimonio.plantillas.client.services.SeccionService;
+import com.patrimonio.plantillas.client.services.SeccionServiceAsync;
+import com.patrimonio.plantillas.client.services.SubfamiliaService;
+import com.patrimonio.plantillas.client.services.SubfamiliaServiceAsync;
 
-public class RpcUtils {
+public class RpcUtilsProveedores {
 	
 	ProveedorServiceAsync proService = GWT.create(ProveedorService.class);
 	ArticuloServiceAsync articuloService = GWT.create(ArticuloService.class);
+	
+	
 	protected int total;
 	
 	public void loadProveedores(final ListBox lstProveedores,PagingLoadConfig loadConfig){
@@ -56,8 +64,11 @@ public class RpcUtils {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
+				MessageBox guardado = new MessageBox();
+				guardado.setMessage("Ha habido un error guardando los datos, revise los campos");
+				guardado.setIcon(MessageBox.ERROR);
+				guardado.setTitle("Atención");
+				guardado.show();
 			}
 
 			@Override
@@ -99,7 +110,7 @@ public class RpcUtils {
 	}
 	
 	//VALIDAMOS QUE LOS CAMPOS ESTEN CORRECTOS  
-		public void checkValuesAndSaveProveedor(String nif, String nombre, String actividad, String contacto, String domicilio, 
+	public void checkValuesAndSaveProveedor(String nif, String nombre, String actividad, String contacto, String domicilio, 
 				String poblacion, int cp, String provincia, String tfno, String tfno2, String fax, int movil, String correo, boolean estado) {
 			Log.debug("En la funcion de check");
 			
@@ -123,7 +134,7 @@ public class RpcUtils {
 		}
 
 		//AQUI LOS CAMPOS YA SE HAN VALIDADO, GUARDAMOS LOS VALORES Y ENVIAMOS A LA BBDD
-		public Proveedores loadProveedor(String nif, String nombre, String actividad, String contacto, String domicilio, 
+	public Proveedores loadProveedor(String nif, String nombre, String actividad, String contacto, String domicilio, 
 				String poblacion, int cp, String provincia, String tfno, String tfno2, String fax, int movil, String correo, int estado) {
 			
 			Proveedores proveedor = new Proveedores();
@@ -146,8 +157,6 @@ public class RpcUtils {
 			
 			return proveedor;
 		}
-
-	
 
 	public void guardaProveedor(Proveedores prov) {
 		Log.debug("Ya tenemos el proveedor vamso a guardarlo");
@@ -212,7 +221,7 @@ public class RpcUtils {
 		return total;
 	}
 
-	
+	 
 
 	
 }

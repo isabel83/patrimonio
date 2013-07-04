@@ -7,7 +7,7 @@
         
         <id name="ID_SECCION" type="java.lang.Long" access="field">
             <column name="ID_SECCION" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <property name="ID_ESTADO" type="int" access="field">
             <column name="ID_ESTADO" />

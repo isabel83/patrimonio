@@ -45,10 +45,9 @@ public class Articulos extends BaseModel implements Serializable{
 	}
 	
 	
-	public Articulos(long idArticulo, int seccion, int familia, int subFamilia, int codigo, String nombre, String marca,
+	public Articulos(int seccion, int familia, int subFamilia, int codigo, String nombre, String marca,
 			int numMin, int numIdeal, String observaciones, int estado) {
 		
-		this.ID_ARTICULO=idArticulo;
 		this.ID_SECCION=seccion;
 		this.ID_FAMILIA=familia;
 		this.ID_SUBFAMILIA=subFamilia;
@@ -76,6 +75,7 @@ public class Articulos extends BaseModel implements Serializable{
 	}
 		
 		
+
 	public Long getId_articulo() {
 //		try {
 //			return get("idArticulo");

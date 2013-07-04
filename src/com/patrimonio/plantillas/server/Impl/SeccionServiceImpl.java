@@ -1,5 +1,7 @@
 package com.patrimonio.plantillas.server.Impl;
 
+import java.util.List;
+
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -9,7 +11,7 @@ import com.patrimonio.plantillas.client.services.SeccionService;
 
 public class SeccionServiceImpl extends RemoteServiceServlet implements SeccionService{
 	
-	public SeccionesDao seccionDAO;
+	public SeccionesDao seccionDAO = new SeccionesDao();
 
 	@Override
 	public PagingLoadResult<Secciones> findAll(PagingLoadConfig config) {
@@ -24,13 +26,8 @@ public class SeccionServiceImpl extends RemoteServiceServlet implements SeccionS
 	}
 
 	@Override
-	public void saveSeccion(long idSeccion, String descripcion, int estado)	throws Exception {
-		Secciones seccion = seccionDAO.findById(idSeccion);
-		if(seccion==null){
-			seccion = new Secciones(idSeccion, descripcion, estado);
+	public void saveSeccion(Secciones seccion)	throws Exception {
 			seccionDAO.saveSeccion(seccion);
-		}
-		
 	}
 
 	@Override
@@ -46,8 +43,8 @@ public class SeccionServiceImpl extends RemoteServiceServlet implements SeccionS
 
 	@Override
 	public void saveOrUpdateSeccion(long idSeccion, String descripcion,	int estado) throws Exception {
-		Secciones seccion = new Secciones(idSeccion,descripcion,estado);
-		seccionDAO.updateSeccion(seccion);
+//		Secciones seccion = new Secciones(idSeccion,descripcion,estado);
+//		seccionDAO.updateSeccion(seccion);
 	}
 
 	@Override
@@ -55,6 +52,12 @@ public class SeccionServiceImpl extends RemoteServiceServlet implements SeccionS
 		Secciones seccion = seccionDAO.findById(idSeccion);
 		if(seccion!=null)
 			seccionDAO.removeSeccion(seccion);
+	}
+
+	@Override
+	public List<Secciones> findAllForList() throws Exception {
+		// TODO Auto-generated method stub
+		return seccionDAO.findAll();
 	}
 
 	

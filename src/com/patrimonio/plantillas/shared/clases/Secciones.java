@@ -24,16 +24,10 @@ public class Secciones extends BaseModel implements Serializable{
 		
 	}
 	
-	public Secciones(Long id){
-		set("id",id);
-		this.ID_SECCION = id;
-	}
 	
-	public Secciones(Long id, String descripcion, int estado){
-		set("id", id);
+	public Secciones(String descripcion, int estado){
 		set("descripcion", descripcion);
 		set("estado", estado);
-		this.ID_SECCION = id;
 		this.DESCRIPCION=descripcion;
 		this.ID_ESTADO=estado;
 	}

@@ -6,7 +6,7 @@
     <class name="com.patrimonio.plantillas.shared.clases.Familias" table="FAMILIAS">
         <id name="ID_FAMILIA" type="java.lang.Long" access="field">
             <column name="ID_FAMILIA" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <property name="ID_ESTADO" type="int" access="field">
             <column name="ID_ESTADO" />

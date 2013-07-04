@@ -14,8 +14,12 @@ import com.extjs.gxt.ui.client.data.DataProxy;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedListener;
+import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
@@ -24,7 +28,6 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ButtonGroup;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
-import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.DateField;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
@@ -35,35 +38,39 @@ import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.layout.ColumnData;
 import com.extjs.gxt.ui.client.widget.layout.ColumnLayout;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
-import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.layout.RowData;
 import com.extjs.gxt.ui.client.widget.layout.RowLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextArea;
-import com.patrimonio.plantillas.client.DTOs.ProveedoresDTO;
-import com.patrimonio.plantillas.client.services.ProveedorService;
-import com.patrimonio.plantillas.client.services.ProveedorServiceAsync;
 import com.patrimonio.plantillas.client.widgets.Stock;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoBuscar;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoEliminados;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoRecepcionTotal;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoRecepcionarArticulo;
-import com.patrimonio.plantillas.shared.RpcUtils;
+import com.patrimonio.plantillas.shared.RpcUtilsArticulos;
+import com.patrimonio.plantillas.shared.RpcUtilsFamilias;
+import com.patrimonio.plantillas.shared.RpcUtilsProveedores;
+import com.patrimonio.plantillas.shared.RpcUtilsSecciones;
+import com.patrimonio.plantillas.shared.RpcUtilsSubfamilias;
 import com.patrimonio.plantillas.shared.clases.Articulos;
 import com.patrimonio.plantillas.shared.clases.Proveedores;
 
 public class LoadEntradasUtils {
 	
-	RpcUtils rpcUtils = new RpcUtils();
+	RpcUtilsArticulos artiUtils = new RpcUtilsArticulos();
+	RpcUtilsProveedores provUtils = new RpcUtilsProveedores();
+	RpcUtilsSecciones secUtils = new RpcUtilsSecciones();
+	RpcUtilsFamilias famiUtils = new RpcUtilsFamilias();
+	RpcUtilsSubfamilias subUtils = new RpcUtilsSubfamilias();
+	protected long seccion=0;
+	protected long familia=0;
+	protected long subfamilia=0;
+	
 	
 	public void loadFormNuevoPedido(final FormPanel panel) {
 		
@@ -114,7 +121,7 @@ public class LoadEntradasUtils {
 
 	    Log.debug("Antes de ir a cargar el combo");
 	    ListStore proveedores = new ListStore();  
-	    rpcUtils.loadProveedoresCombo(proveedores);
+	    provUtils.loadProveedoresCombo(proveedores);
 	  
 	    ComboBox<Proveedores> combo = new ComboBox<Proveedores>();  
 	    combo.setEmptyText("Selecciona un proveedor");  
@@ -337,7 +344,6 @@ public class LoadEntradasUtils {
 	}
 	
 	
-	
 	public void loadFormRecepcion(FormPanel frmRecepcionPedidos) {
 
 		FormData formData = new FormData("100%"); 
@@ -557,46 +563,59 @@ public class LoadEntradasUtils {
 	    
 	    
 	   
-	    Label lblSeccion = new Label("Sección:");
-	    lblSeccion.setStyleName("etiqueta");
-	    ListBox lstSeccion = new ListBox();
-	    lstSeccion.setVisibleItemCount(1);
-	    lstSeccion.addItem("...");
-	    left.add(lblSeccion,formData);
-	    left.add(lstSeccion,formData);
+	    ListStore secciones = new ListStore();  
+	    secUtils.loadSeccionesCombo(secciones);
+	  
+	    final ComboBox<BaseModel> comboSeccion = new ComboBox<BaseModel>();  
+	    comboSeccion.setEmptyText("Selecciona una sección");  
+	    comboSeccion.setStore(secciones);  
+	    comboSeccion.setDisplayField("nombre");  
+	    comboSeccion.setValueField("id");
+	    comboSeccion.setFieldLabel("Secciones");
+	    comboSeccion.setWidth(150);  
+	    comboSeccion.setEnabled(true);
+	    
+	    
+	    left.add(comboSeccion, formData);
 
-	    Label lblFamilia = new Label("Familia:");
-	    lblFamilia.setStyleName("etiqueta");
-	    ListBox lstFamilia = new ListBox();
-	    lstFamilia.setVisibleItemCount(1);
-	    lstFamilia.setWidth("400px");
-	    lstFamilia.addItem("...");
-	    right.add(lblFamilia,formData);
-	    right.add(lstFamilia,formData);
+	    final ListStore familias = new ListStore();  
+	    final ComboBox<BaseModel> comboFamilia = new ComboBox<BaseModel>();  
+	    comboFamilia.setEmptyText("Selecciona una familia");  
+	    comboFamilia.setStore(familias);  
+	    comboFamilia.setDisplayField("nombre");  
+	    comboFamilia.setValueField("id");
+	    comboFamilia.setFieldLabel("Familias");
+	    comboFamilia.setWidth(150);  
+	    comboFamilia.setEnabled(false);
 	    
-	    Label lblSubFamilia = new Label("Subfamilia:");
-	    lblSubFamilia.setStyleName("etiqueta");
-	    ListBox lstSubFamilia = new ListBox();
-	    lstSubFamilia.setVisibleItemCount(1);
-	    lstSubFamilia.setWidth("400px");
-	    lstSubFamilia.addItem("...");
-	    right.add(lblSubFamilia,formData);
-	    right.add(lstSubFamilia,formData);
+	    right.add(comboFamilia,formData);
+	    
+	    final ListStore subFamilia = new ListStore();  
+	    final ComboBox<BaseModel> comboSubFamilia = new ComboBox<BaseModel>();  
+	    comboSubFamilia.setEmptyText("Selecciona una subfamilia");  
+	    comboSubFamilia.setStore(subFamilia);  
+	    comboSubFamilia.setDisplayField("nombre");  
+	    comboSubFamilia.setValueField("id");
+	    comboSubFamilia.setFieldLabel("Subfamilias");
+	    comboSubFamilia.setWidth(150);  
+	    comboSubFamilia.setEnabled(false);
+	    
+	    right.add(comboSubFamilia,formData);
 	    
 	    
-	    TextField<String> codigoArt = new TextField<String>();  
+	    final TextField<String> codigoArt = new TextField<String>();  
 	    codigoArt.setFieldLabel("Código de Artículo");
 	    bottom.add(codigoArt,formData);
 	    
-	    TextField<String> nombreArt = new TextField<String>();  
+	    final TextField<String> nombreArt = new TextField<String>();  
 	    nombreArt.setFieldLabel("Nombre del artículo");
 	    bottom.add(nombreArt,formData);
 	    
-	    TextField<String> marcaArt = new TextField<String>();  
+	    final TextField<String> marcaArt = new TextField<String>();  
 	    marcaArt.setFieldLabel("Marca del artículo");
 	    bottom.add(marcaArt,formData);
 	    
-	    TextField<String> obsArt = new TextField<String>();  
+	    final TextField<String> obsArt = new TextField<String>();  
 	    obsArt.setFieldLabel("Observaciones");
 	    bottom.add(obsArt,formData);
 	    
@@ -613,7 +632,7 @@ public class LoadEntradasUtils {
 	    Label lblMinimas = new Label();
 	    lblMinimas.setText("Mínimas");
 	    
-	    TextField<String> minimas = new TextField<String>();  
+	    final TextField<String> minimas = new TextField<String>();  
 	    cpExistencias.add(lblMinimas, new RowData(-1, -1, new Margins(20)));
 	    cpExistencias.add(minimas, new RowData(-1, -1, new Margins(20,20,20,0)));
 	    
@@ -621,7 +640,7 @@ public class LoadEntradasUtils {
 	    Label lblIdoneas = new Label();
 	    lblIdoneas.setText("Idoneas");
 	    
-	    TextField<String> idoneas = new TextField<String>();  
+	    final TextField<String> idoneas = new TextField<String>();  
 
 	    cpExistencias.add(lblIdoneas, new RowData(-1, -1, new Margins(20)));
 	    cpExistencias.add(idoneas, new RowData(-1, -1, new Margins(20)));
@@ -630,7 +649,7 @@ public class LoadEntradasUtils {
 	    Label lblReales = new Label();
 	    lblReales.setText("Reales");
 	    
-	    TextField<String> reales = new TextField<String>();  
+	    final TextField<String> reales = new TextField<String>();  
 
 	    cpExistencias.add(lblReales, new RowData(-1, -1, new Margins(20)));
 	    cpExistencias.add(reales, new RowData(-1, -1, new Margins(20,20,20,0)));
@@ -684,8 +703,32 @@ public class LoadEntradasUtils {
 	    Button b1  = new Button(), b2 = new Button();
 	    b1.setText("Grabar");
 	    b1.setStyleAttribute("padding-right", "5px");
+	    b1.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				artiUtils.checkValuesAndSaveArticulo((int)seccion,(int)familia,(int)subfamilia,Integer.parseInt(codigoArt.getValue()),nombreArt.getValue(),
+						marcaArt.getValue(),obsArt.getValue(),Integer.parseInt(minimas.getValue()),Integer.parseInt(idoneas.getValue()));
+			}
+	    });
 	    b2.setText("Deshacer");
-	    
+	    b2.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				comboSeccion.reset();
+				comboFamilia.reset();
+				comboSubFamilia.reset();
+				codigoArt.clear();
+				nombreArt.clear();
+				marcaArt.clear();
+				obsArt.clear();
+				minimas.clear();
+				idoneas.clear();
+				reales.clear();
+			}
+	    	
+	    });
 	    gButtons.add(b1);
 	    gButtons.add(b2);
 	    gButtons.setBodyBorder(false);
@@ -704,7 +747,44 @@ public class LoadEntradasUtils {
 	    cp.setStyleAttribute("paddingLeft", "10px");
 	    cp.setStyleAttribute("paddingRight", "10px");
 	    cp.add(grid);
-	      
+	    
+	    /*LE DAMOS A LOS COMBOS EL LISTENER*/
+	    comboSeccion.addSelectionChangedListener(new SelectionChangedListener<BaseModel>(){
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent<BaseModel> se) {
+				Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
+				seccion = se.getSelectedItem().get("id");
+				famiUtils.loadFamiliasComboFiltrado(familias, seccion);
+				comboFamilia.setEnabled(true);
+				comboFamilia.recalculate();
+			}
+	    	
+	    });
+	    
+	    comboFamilia.addSelectionChangedListener(new SelectionChangedListener<BaseModel>(){
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent<BaseModel> se) {
+				Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
+				familia = se.getSelectedItem().get("id");
+				subUtils.loadSubFamiliasComboFiltrado(subFamilia, familia);
+				comboSubFamilia.setEnabled(true);
+				comboSubFamilia.recalculate();
+			}
+	    	
+	    });
+	    
+	    comboSubFamilia.addSelectionChangedListener(new SelectionChangedListener<BaseModel>(){
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent<BaseModel> se) {
+				Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
+				subfamilia = se.getSelectedItem().get("id");
+			}
+	    	
+	    });
+	    
 	    
 	    main.add(left, new ColumnData(.4));
 	    main.add(right, new ColumnData(.6));
@@ -758,43 +838,59 @@ public class LoadEntradasUtils {
 	    bottom.setStyleAttribute("paddingLeft", "10px");
 	    bottom.setStyleAttribute("paddingRight", "10px");
 	    
+	    ListStore secciones = new ListStore();  
+	    secUtils.loadSeccionesCombo(secciones);
+	  
+	    final ComboBox<BaseModel> comboSeccion = new ComboBox<BaseModel>();  
+	    comboSeccion.setEmptyText("Selecciona una sección");  
+	    comboSeccion.setStore(secciones);  
+	    comboSeccion.setDisplayField("nombre");  
+	    comboSeccion.setValueField("id");
+	    comboSeccion.setFieldLabel("Secciones");
+	    comboSeccion.setWidth(150);  
+	    comboSeccion.setEnabled(true);
 	    
-	   
-	    Label lblSeccion = new Label("Sección:");
-	    lblSeccion.setStyleName("etiqueta");
-	    ListBox lstSeccion = new ListBox();
-	    lstSeccion.setVisibleItemCount(1);
-	    left.add(lblSeccion,formData);
-	    left.add(lstSeccion,formData);
+	    
+	    left.add(comboSeccion, formData);
 
-	    Label lblFamilia = new Label("Familia:");
-	    lblFamilia.setStyleName("etiqueta");
-	    ListBox lstFamilia = new ListBox();
-	    lstFamilia.setVisibleItemCount(1);
-	    right.add(lblFamilia,formData);
-	    right.add(lstFamilia,formData);
+	    final ListStore familias = new ListStore();  
+	    final ComboBox<BaseModel> comboFamilia = new ComboBox<BaseModel>();  
+	    comboFamilia.setEmptyText("Selecciona una familia");  
+	    comboFamilia.setStore(familias);  
+	    comboFamilia.setDisplayField("nombre");  
+	    comboFamilia.setValueField("id");
+	    comboFamilia.setFieldLabel("Familias");
+	    comboFamilia.setWidth(150);  
+	    comboFamilia.setEnabled(false);
 	    
-	    Label lblSubFamilia = new Label("Subfamilia:");
-	    lblSubFamilia.setStyleName("etiqueta");
-	    ListBox lstSubFamilia = new ListBox();
-	    lstSubFamilia.setVisibleItemCount(1);
-	    right.add(lblSubFamilia,formData);
-	    right.add(lstSubFamilia,formData);
+	    right.add(comboFamilia,formData);
+	    
+	    final ListStore subFamilia = new ListStore();  
+	    final ComboBox<BaseModel> comboSubFamilia = new ComboBox<BaseModel>();  
+	    comboSubFamilia.setEmptyText("Selecciona una subfamilia");  
+	    comboSubFamilia.setStore(subFamilia);  
+	    comboSubFamilia.setDisplayField("nombre");  
+	    comboSubFamilia.setValueField("id");
+	    comboSubFamilia.setFieldLabel("Subfamilias");
+	    comboSubFamilia.setWidth(150);  
+	    comboSubFamilia.setEnabled(false);
+	    
+	    right.add(comboSubFamilia,formData);
 	    
 	    
-	    TextField<String> codigoArt = new TextField<String>();  
+	    final TextField<String> codigoArt = new TextField<String>();  
 	    codigoArt.setFieldLabel("Código de Artículo");
 	    bottom.add(codigoArt,formData);
 	    
-	    TextField<String> nombreArt = new TextField<String>();  
+	    final TextField<String> nombreArt = new TextField<String>();  
 	    nombreArt.setFieldLabel("Nombre del artículo");
 	    bottom.add(nombreArt,formData);
 	    
-	    TextField<String> marcaArt = new TextField<String>();  
+	    final TextField<String> marcaArt = new TextField<String>();  
 	    marcaArt.setFieldLabel("Marca del artículo");
 	    bottom.add(marcaArt,formData);
 	    
-	    TextField<String> obsArt = new TextField<String>();  
+	    final TextField<String> obsArt = new TextField<String>();  
 	    obsArt.setFieldLabel("Observaciones");
 	    bottom.add(obsArt,formData);
 	    
@@ -811,7 +907,7 @@ public class LoadEntradasUtils {
 	    Label lblMinimas = new Label();
 	    lblMinimas.setText("Mínimas");
 	    
-	    TextField<String> minimas = new TextField<String>();  
+	    final TextField<String> minimas = new TextField<String>();  
 	    cpExistencias.add(lblMinimas, new RowData(-1, -1, new Margins(20)));
 	    cpExistencias.add(minimas, new RowData(-1, -1, new Margins(20,20,20,0)));
 	    
@@ -819,7 +915,7 @@ public class LoadEntradasUtils {
 	    Label lblIdoneas = new Label();
 	    lblIdoneas.setText("Idoneas");
 	    
-	    TextField<String> idoneas = new TextField<String>();  
+	    final TextField<String> idoneas = new TextField<String>();  
 
 	    cpExistencias.add(lblIdoneas, new RowData(-1, -1, new Margins(20)));
 	    cpExistencias.add(idoneas, new RowData(-1, -1, new Margins(20)));
@@ -828,21 +924,49 @@ public class LoadEntradasUtils {
 	    Label lblReales = new Label();
 	    lblReales.setText("Reales");
 	    
-	    TextField<String> reales = new TextField<String>();  
+	    final TextField<String> reales = new TextField<String>();  
 
 	    cpExistencias.add(lblReales, new RowData(-1, -1, new Margins(20)));
 	    cpExistencias.add(reales, new RowData(-1, -1, new Margins(20,20,20,0)));
 
 	    bottom.add(cpExistencias,formData);
 	    
-//	    Label lblProveedor = new Label("Proveedor:");
-//	    lblProveedor.setStyleName("etiqueta");
-//	    ListBox lstProveedor = new ListBox();
-//	    lstProveedor.setVisibleItemCount(1);
-//	    bottom.add(lblProveedor,formData);
-//	    bottom.add(lstProveedor,formData);
-//	    
-//	    
+	    /*LE DAMOS A LOS COMBOS EL LISTENER*/
+	    comboSeccion.addSelectionChangedListener(new SelectionChangedListener<BaseModel>(){
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent<BaseModel> se) {
+				Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
+				seccion = se.getSelectedItem().get("id");
+				famiUtils.loadFamiliasComboFiltrado(familias, seccion);
+				comboFamilia.setEnabled(true);
+				comboFamilia.recalculate();
+			}
+	    	
+	    });
+	    
+	    comboFamilia.addSelectionChangedListener(new SelectionChangedListener<BaseModel>(){
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent<BaseModel> se) {
+				Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
+				familia = se.getSelectedItem().get("id");
+				subUtils.loadSubFamiliasComboFiltrado(subFamilia, familia);
+				comboSubFamilia.setEnabled(true);
+				comboSubFamilia.recalculate();
+			}
+	    	
+	    });
+	    
+	    comboSubFamilia.addSelectionChangedListener(new SelectionChangedListener<BaseModel>(){
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent<BaseModel> se) {
+				Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
+				subfamilia = se.getSelectedItem().get("id");
+			}
+	    	
+	    });
 	    
 	    ButtonGroup gButtons = new ButtonGroup(2);
 	    Button b1  = new Button(), b2 = new Button();
@@ -852,14 +976,31 @@ public class LoadEntradasUtils {
 
 			@Override
 			public void handleEvent(BaseEvent be) {
-				DialogoEliminados eliminados = new DialogoEliminados();
+				Articulos articuloBusqueda = new Articulos();
+				DialogoEliminados eliminados = new DialogoEliminados(articuloBusqueda);
 				eliminados.show();
 			}
 	    	
 	    });
 	    
 	    b2.setText("Deshacer");
-	   // b2.setStyleAttribute("padding-right", "5px");
+	    b2.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				comboSeccion.reset();
+				comboFamilia.reset();
+				comboSubFamilia.reset();
+				codigoArt.clear();
+				nombreArt.clear();
+				marcaArt.clear();
+				obsArt.clear();
+				minimas.clear();
+				idoneas.clear();
+				reales.clear();
+			}
+	    	
+	    });
 	   	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);

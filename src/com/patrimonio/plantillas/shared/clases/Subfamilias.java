@@ -29,24 +29,15 @@ public class Subfamilias extends BaseModel implements Serializable{
 	}
 	
 	public Subfamilias(Long id){
-		set("id", id);
 		this.ID_SUBFAMILIA=id;
 	}
 	
 	public Subfamilias(Long id, int id_f){
-		set("id", id);
-		set("familia", id_f);
 		this.ID_SUBFAMILIA=id;
 		this.ID_FAMILIA = id_f;
 	}
 	
-	public Subfamilias(Long id, int familia, int estado, String descripcion, String codigo){
-		set("id", id);
-		set("familia", familia);
-		set("estado", estado);
-		set("descripcion", descripcion);
-		set("codigo", codigo);
-		this.ID_SUBFAMILIA=id;
+	public Subfamilias(int familia, int estado, String descripcion, String codigo){
 		this.ID_FAMILIA=familia;
 		this.ID_ESTADO=estado;
 		this.DESCRIPCION=descripcion;

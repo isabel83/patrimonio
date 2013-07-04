@@ -29,25 +29,16 @@ public class Familias extends BaseModel implements Serializable{
 	}
 	
 	public Familias(Long id){
-		set("id", id);
 		this.ID_FAMILIA=id;
 	}
 	
 	public Familias(Long id, int id_s){
-		set("id", id);
-		set("seccion", id_s);
 		this.ID_FAMILIA = id;
 		this.ID_SECCION = id_s;
 	}
 	
 	
-	public Familias(long idFamilia, int seccion, int estado,String descripcion, String codigo) {
-		set("id", ID_FAMILIA);
-		set("seccion", seccion);
-		set("estado", estado);
-		set("descripcion", descripcion);
-		set("codigo", codigo);
-		this.ID_FAMILIA=idFamilia;
+	public Familias(int seccion, int estado,String descripcion, String codigo) {
 		this.ID_SECCION=seccion;
 		this.ID_ESTADO=estado;
 		this.DESCRIPCION=descripcion;
@@ -55,11 +46,7 @@ public class Familias extends BaseModel implements Serializable{
 	}
 
 	public Long getId_familia() {
-		try {
-			return get("id");
-		} catch (Exception e) {
-			return this.ID_FAMILIA;
-		}
+		return this.ID_FAMILIA;
 	}
 	
 	public void setId_familia(Long id_familia) {

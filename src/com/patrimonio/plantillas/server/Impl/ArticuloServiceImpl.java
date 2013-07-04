@@ -11,7 +11,7 @@ import com.patrimonio.plantillas.client.services.ArticuloService;
 
 public class ArticuloServiceImpl extends RemoteServiceServlet implements ArticuloService{
 
-	public ArticulosDao articuloDAO;
+	public ArticulosDao articuloDAO = new ArticulosDao();
 
 	
 	@Override
@@ -21,14 +21,9 @@ public class ArticuloServiceImpl extends RemoteServiceServlet implements Articul
 	}
 
 	@Override
-	public void saveArticulo(long idArticulo, int seccion, int familia,int subFamilia, int codigo, String nombre, String marca,int numMin, int numIdeal, String observacion, int estado)
-			throws Exception {
+	public void saveArticulo(Articulos articulo) throws Exception {
 		
-		  Articulos articulo = articuloDAO.findById(idArticulo);
-		  if(articulo == null) {
-			  articulo = new Articulos(idArticulo, seccion, familia, subFamilia, codigo,nombre,marca, numMin, numIdeal, observacion,estado);
 			 articuloDAO.saveArticulo(articulo);
-		  }
 		
 	}
 
@@ -57,8 +52,8 @@ public class ArticuloServiceImpl extends RemoteServiceServlet implements Articul
 	public void saveOrUpdateArticulo(long idArticulo, int seccion, int familia,int subFamilia, int codigo, String nombre, String marca,int numMin, int numIdeal, String observacion, int estado)
 			throws Exception {
 		
-		Articulos articulo = new Articulos(idArticulo, seccion, familia, subFamilia, codigo,nombre,marca, numMin, numIdeal, observacion,estado);
-		articuloDAO.updateArticulo(articulo);
+//		Articulos articulo = new Articulos(idArticulo, seccion, familia, subFamilia, codigo,nombre,marca, numMin, numIdeal, observacion,estado);
+//		articuloDAO.updateArticulo(articulo);
 	
 	}
 
@@ -78,6 +73,12 @@ public class ArticuloServiceImpl extends RemoteServiceServlet implements Articul
 			lstArticulos.add(articuloDAO.findById(Long.parseLong(String.valueOf(art.getID_ARTICULO()))));
 		}
 		return lstArticulos;
+	}
+
+	@Override
+	public List<Articulos> findByCriterios(Articulos articuloBusqueda) throws Exception {
+		
+		return articuloDAO.findByCriterios(articuloBusqueda);
 	}
 	
 

@@ -9,7 +9,7 @@ import com.patrimonio.plantillas.client.services.PersonaService;
 
 public class PersonaServiceImpl extends RemoteServiceServlet implements PersonaService{
 	
-	public PersonasDao personaDao;
+	public PersonasDao personaDao = new PersonasDao();
 
 	@Override
 	public PagingLoadResult<Personas> findAll(PagingLoadConfig config){

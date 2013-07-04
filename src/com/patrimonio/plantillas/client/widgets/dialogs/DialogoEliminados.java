@@ -3,6 +3,8 @@ package com.patrimonio.plantillas.client.widgets.dialogs;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.Iterator;
+
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.Orientation;
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
@@ -37,9 +39,18 @@ import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.patrimonio.plantillas.client.widgets.Stock;
+import com.patrimonio.plantillas.shared.RpcUtilsArticulos;
+import com.patrimonio.plantillas.shared.clases.Articulos;
 
 public class DialogoEliminados extends Dialog{
 	
+	RpcUtilsArticulos artiUtils = new RpcUtilsArticulos();
+	List<Articulos> carga = null;
+	
+	public DialogoEliminados(Articulos articuloBusqueda) {
+		carga = artiUtils.findByCriterio(articuloBusqueda);
+	}
+
 	@Override
 	protected void onRender(Element parent, int pos) {
 		super.onRender(parent, pos);
@@ -225,6 +236,13 @@ public class DialogoEliminados extends Dialog{
 	    final PagingToolBar toolBar = new PagingToolBar(50); 
 	    toolBar.bind(loader);
 	    toolBar.addStyleName("paginacion dialog Left");
+	    
+	    /**HAY QUE VER COMO METER EL ITERADOR DE CARGA EN LA PAGINACION O HACER UNA CHAMA
+	     * 
+	     * for(Iterator<Articulos> it = carga.iterator(); it.hasNext();){
+			aqui cargamos cada articulo segun paginamos
+		}
+	     */
 
 	    
 	    main.add(left, new ColumnData(.4));

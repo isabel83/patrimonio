@@ -40,7 +40,7 @@ public class ProveedorServiceImpl extends RemoteServiceServlet implements Provee
 	public void saveProveedor(Proveedores proveedor) throws Exception{
 		
 		
-		proveedor.setId_proveedor(proveedorDao.getMaxId()+1);
+		//proveedor.setId_proveedor(proveedorDao.getMaxId()+1);
 	
 		proveedorDao.saveProveedor(proveedor);
 	

@@ -24,9 +24,6 @@ public class Destinatarios extends BaseModel implements Serializable{
 	}
 	
 	public Destinatarios(long id, int estado, String descripcion){
-		set("id", id);
-		set("estado", estado);
-		set("descripcion", descripcion);
 		this.ID_DESTINATARIO=id;
 		this.ID_ESTADO=estado;
 		this.DESCRIPCION=descripcion;

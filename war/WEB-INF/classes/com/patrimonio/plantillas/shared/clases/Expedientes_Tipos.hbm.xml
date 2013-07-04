@@ -6,7 +6,7 @@
     <class name="com.patrimonio.plantillas.shared.clases.Expedientes_Tipos" table="EXPEDIENTES_TIPOS">
         <id name="ID_EXPEDIENTE_TIPO" type="java.lang.Long" access="field">
             <column name="ID_EXPEDIENTE_TIPO" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <property name="DESCRIPCION" type="java.lang.String" access="field">
             <column name="DESCRIPCION" />

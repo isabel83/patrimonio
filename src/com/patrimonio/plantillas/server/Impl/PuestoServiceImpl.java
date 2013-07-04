@@ -9,7 +9,7 @@ import com.patrimonio.plantillas.client.services.PuestoService;
 
 public class PuestoServiceImpl extends RemoteServiceServlet implements PuestoService{
 	
-	public PuestosDao puestoDAO;
+	public PuestosDao puestoDAO = new PuestosDao();
 	
 	@Override
 	public PagingLoadResult<Puestos> findAll(PagingLoadConfig config){

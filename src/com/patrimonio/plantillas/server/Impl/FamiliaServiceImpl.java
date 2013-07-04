@@ -1,5 +1,7 @@
 package com.patrimonio.plantillas.server.Impl;
 
+import java.util.List;
+
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -9,7 +11,7 @@ import com.patrimonio.plantillas.client.services.FamiliaService;
 
 public class FamiliaServiceImpl extends RemoteServiceServlet implements FamiliaService{
 	
-	public FamiliasDao familiaDAO;
+	public FamiliasDao familiaDAO = new FamiliasDao();
 	
 	@Override
 	public PagingLoadResult<Familias> findAll(PagingLoadConfig config){
@@ -23,13 +25,9 @@ public class FamiliaServiceImpl extends RemoteServiceServlet implements FamiliaS
 	}
 
 	@Override
-	public void saveFamilia(long idFamilia, int seccion, int estado,String descripcion, String codigo) throws Exception {
+	public void saveFamilia(Familias familia) throws Exception {
 		
-		Familias familia = familiaDAO.findById(idFamilia);
-		if(familia==null){
-			familia = new Familias(idFamilia,seccion,estado,descripcion,codigo);
-			familiaDAO.saveFamilia(familia);
-		}
+		familiaDAO.saveFamilia(familia);
 		
 	}
 
@@ -48,9 +46,9 @@ public class FamiliaServiceImpl extends RemoteServiceServlet implements FamiliaS
 	@Override
 	public void saveOrUpdateFamilia(long idFamilia, int seccion, int estado, String descripcion, String codigo) throws Exception {
 		
-		Familias familia = new Familias(idFamilia,seccion,estado,descripcion,codigo);
-		familiaDAO.updateFamilia(familia);
-		
+//		Familias familia = new Familias(idFamilia,seccion,estado,descripcion,codigo);
+//		familiaDAO.updateFamilia(familia);
+//		
 	}
 
 	@Override
@@ -59,6 +57,11 @@ public class FamiliaServiceImpl extends RemoteServiceServlet implements FamiliaS
 		if(familia!=null){
 			familiaDAO.removeFamilia(familia);
 		}
+	}
+
+	@Override
+	public List<Familias> findAllForList() throws Exception {
+		return familiaDAO.findAll();
 	}
 
 }

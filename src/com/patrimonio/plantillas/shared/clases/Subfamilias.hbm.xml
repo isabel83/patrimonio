@@ -4,12 +4,12 @@
 <!-- Generated 03-jul-2013 11:41:22 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.patrimonio.plantillas.shared.clases.Subfamilias" table="SUBFAMILIAS">
-        <id name="ID_ESTADO" type="int" access="field">
-            <column name="ID_ESTADO" />
-            <generator class="assigned" />
-        </id>
-        <property name="ID_SUBFAMILIA" type="java.lang.Long" access="field">
+        <id name="ID_SUBFAMILIA" type="java.lang.Long" access="field">
             <column name="ID_SUBFAMILIA" />
+            <generator class="native" />
+        </id>
+        <property name="ID_ESTADO" type="int" access="field">
+            <column name="ID_ESTADO" />
         </property>
         <property name="ID_FAMILIA" type="int" access="field">
             <column name="ID_FAMILIA" />

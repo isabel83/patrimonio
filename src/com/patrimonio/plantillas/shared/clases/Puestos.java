@@ -24,14 +24,10 @@ public class Puestos extends BaseModel implements Serializable{
 	}
 	
 	public Puestos(long id){
-		set("id", id);
 		this.ID_PUESTO=id;
 	}
 	
 	public Puestos(long id, int estado, String descripcion){
-		set("id",id);
-		set("estado",estado);
-		set("descripcion",descripcion);	
 		this.ID_PUESTO=id;
 		this.ID_ESTADO=estado;
 		this.DESCRIPCION=descripcion;

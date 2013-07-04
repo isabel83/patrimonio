@@ -6,7 +6,7 @@
     <class name="com.patrimonio.plantillas.shared.clases.Arti_Prov" table="ARTI_PROV">
         <id name="ID_ARTI_PROV" type="java.lang.Long"  access="field">
             <column name="ID_ARTI_PROV" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <property name="ID_ARTICULO" type="int"  access="field">
             <column name="ID_ARTICULO" /> 

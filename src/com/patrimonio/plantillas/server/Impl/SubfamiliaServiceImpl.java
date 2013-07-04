@@ -1,5 +1,7 @@
 package com.patrimonio.plantillas.server.Impl;
 
+import java.util.List;
+
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -9,7 +11,7 @@ import com.patrimonio.plantillas.shared.clases.Subfamilias;
 import com.patrimonio.plantillas.client.services.SubfamiliaService;
 
 public class SubfamiliaServiceImpl extends RemoteServiceServlet implements SubfamiliaService{
-	public SubfamiliasDao subfamiliaDAO;
+	public SubfamiliasDao subfamiliaDAO = new SubfamiliasDao();
 	
 	@Override
 	public PagingLoadResult<Subfamilias> findAll(PagingLoadConfig config){
@@ -24,14 +26,9 @@ public class SubfamiliaServiceImpl extends RemoteServiceServlet implements Subfa
 	}
 
 	@Override
-	public void saveSubfamilia(long idSubfamilia, int familia, int estado,String descripcion, String codigo) throws Exception {
+	public void saveSubfamilia(Subfamilias subfamilia) throws Exception {
 		
-		Subfamilias subfamilia = subfamiliaDAO.findById(idSubfamilia);
-		if(subfamilia==null){
-			subfamilia = new Subfamilias(idSubfamilia,familia,estado,descripcion,codigo);
 			subfamiliaDAO.saveSubfamilia(subfamilia);
-		}
-		
 	}
 
 	@Override
@@ -49,8 +46,8 @@ public class SubfamiliaServiceImpl extends RemoteServiceServlet implements Subfa
 	@Override
 	public void saveOrUpdateSubfamilia(long idSubfamilia, int familia, int estado, String descripcion, String codigo) throws Exception {
 		
-		Subfamilias subfamilia = new Subfamilias(idSubfamilia,familia,estado,descripcion,codigo);
-		subfamiliaDAO.updateSubfamilia(subfamilia);
+//		Subfamilias subfamilia = new Subfamilias(idSubfamilia,familia,estado,descripcion,codigo);
+//		subfamiliaDAO.updateSubfamilia(subfamilia);
 		
 	}
 
@@ -60,5 +57,11 @@ public class SubfamiliaServiceImpl extends RemoteServiceServlet implements Subfa
 		if(subfamilia!=null){
 			subfamiliaDAO.removeSubfamilia(subfamilia);
 		}
+	}
+
+	@Override
+	public List<Subfamilias> findAllForList() throws Exception {
+		
+		return subfamiliaDAO.findAll();
 	}
 }

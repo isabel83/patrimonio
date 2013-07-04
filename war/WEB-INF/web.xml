@@ -80,7 +80,7 @@
 		
 	<servlet-mapping>
 		<servlet-name>articuloServlet</servlet-name>
-		<url-pattern>/plantillas/articulo</url-pattern>
+		<url-pattern>/plantillas/articulos</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>

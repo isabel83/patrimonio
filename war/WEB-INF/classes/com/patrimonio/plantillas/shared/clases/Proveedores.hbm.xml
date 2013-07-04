@@ -4,9 +4,9 @@
 <!-- Generated 03-jul-2013 11:41:22 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.patrimonio.plantillas.shared.clases.Proveedores" table="PROVEEDORES">
-        <id  name="ID_PROVEEDOR" type="java.lang.Long" access="field">
+       <!--  --> <id  name="ID_PROVEEDOR" type="java.lang.Long" access="field">
             <column name="ID_PROVEEDOR" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <property name="ACTIVIDAD" type="java.lang.String" access="field">
             <column name="ACTIVIDAD" />

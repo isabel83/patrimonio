@@ -6,15 +6,15 @@ import java.util.List;
 import com.allen_sauer.gwt.log.client.Log;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.SortDir;
+import com.extjs.gxt.ui.client.data.BaseModel;
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
 import com.extjs.gxt.ui.client.data.BeanModelReader;
 import com.extjs.gxt.ui.client.data.DataProxy;
 import com.extjs.gxt.ui.client.data.ModelData;
-import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
-import com.extjs.gxt.ui.client.data.PagingLoader;
-import com.extjs.gxt.ui.client.data.RpcProxy;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.util.Margins;
@@ -23,6 +23,7 @@ import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ButtonGroup;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
+import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
@@ -35,22 +36,31 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.patrimonio.plantillas.client.DTOs.ProveedoresDTO;
-import com.patrimonio.plantillas.client.services.ProveedorService;
-import com.patrimonio.plantillas.client.services.ProveedorServiceAsync;
 import com.patrimonio.plantillas.client.widgets.Stock;
-import com.patrimonio.plantillas.shared.RpcUtils;
+import com.patrimonio.plantillas.shared.RpcUtilsDestinatarios;
+import com.patrimonio.plantillas.shared.RpcUtilsFamilias;
+import com.patrimonio.plantillas.shared.RpcUtilsProveedores;
+import com.patrimonio.plantillas.shared.RpcUtilsSecciones;
+import com.patrimonio.plantillas.shared.RpcUtilsSubfamilias;
 import com.patrimonio.plantillas.shared.clases.Proveedores;
+import com.patrimonio.plantillas.shared.clases.Secciones;
 
 public class LoadMantenimientoUtils {
 
-	ProveedorServiceAsync proService = GWT.create(ProveedorService.class);
-	RpcUtils rpcUtils = new RpcUtils();
+	RpcUtilsProveedores provUtils = new RpcUtilsProveedores();
+	RpcUtilsDestinatarios destiUtils = new RpcUtilsDestinatarios();
+	RpcUtilsSecciones secUtils = new RpcUtilsSecciones();
+	RpcUtilsFamilias famiUtils = new RpcUtilsFamilias();
+	RpcUtilsSubfamilias subUtils = new RpcUtilsSubfamilias();
+	RpcUtilsDestinatarios puestosUtils = new RpcUtilsDestinatarios();
+	
+	
 	long idProveedor;
+	protected long idDestinatario;
+	protected long seccion;
+	protected long familia;
 	
 	public void loadFormProveedores(FormPanel frmProveedores) {
 		FormData formDataMid = new FormData("50%");
@@ -94,6 +104,7 @@ public class LoadMantenimientoUtils {
 	    
 	    final TextField<String> nif = new TextField<String>();  
 	    nif.setFieldLabel("N.I.F.");  
+	    nif.setValue("X111111111");
 	    nif.setEnabled(false);
 	    left.add(nif,formDataMid);	    
 	    
@@ -165,19 +176,19 @@ public class LoadMantenimientoUtils {
 	    bottom.add(correo,new FormData("100%"));	
 	    
 	    
-	    RpcProxy<PagingLoadResult<Proveedores>> proxy = new RpcProxy<PagingLoadResult<Proveedores>>() {
-			@Override
-			public void load(Object loadConfig,
-					AsyncCallback<PagingLoadResult<Proveedores>> callback) {
-				proService.findAll((PagingLoadConfig) loadConfig,callback);
-			}
-		};
+//	    RpcProxy<PagingLoadResult<Proveedores>> proxy = new RpcProxy<PagingLoadResult<Proveedores>>() {
+//			@Override
+//			public void load(Object loadConfig,
+//					AsyncCallback<PagingLoadResult<Proveedores>> callback) {
+//				proService.findAll((PagingLoadConfig) loadConfig,callback);
+//			}
+//		};
 
 		// loader
-		final PagingLoader<PagingLoadResult<ModelData>> loader = new BasePagingLoader<PagingLoadResult<ModelData>>(proxy);
+//		final PagingLoader<PagingLoadResult<ModelData>> loader = new BasePagingLoader<PagingLoadResult<ModelData>>(proxy);
 
-	    final PagingToolBar paginacion = new PagingToolBar(rpcUtils.countAll()); 
-	    paginacion.bind(loader);
+	    final PagingToolBar paginacion = new PagingToolBar(provUtils.countAll()); 
+	    //paginacion.bind(loader);
 	    paginacion.setStyleName("paginacion");
 	    
 	    ButtonGroup gButtons = new ButtonGroup(4);
@@ -185,6 +196,8 @@ public class LoadMantenimientoUtils {
 	    final Button b2 = new Button();
 	    final Button b3 = new Button();
 	    final Button b4 = new Button();
+	    
+	    
 	    b1.setText("Agregar");
 	    b1.addSelectionListener(new SelectionListener<ButtonEvent>(){
 
@@ -199,8 +212,8 @@ public class LoadMantenimientoUtils {
 					habilitaTodo(true);
 				}
 				else{
-					Log.debug("Estamos en el caso de guardar y vamos a llamar a la funcion en rpcUtils");
-					rpcUtils.checkValuesAndSaveProveedor(nif.getValue(),nombre.getValue(),actividad.getValue(),contacto.getValue(),domicilio.getValue(),poblacion.getValue(),
+					Log.debug("Estamos en el caso de guardar y vamos a llamar a la funcion en provUtils");
+					provUtils.checkValuesAndSaveProveedor(nif.getValue(),nombre.getValue(),actividad.getValue(),contacto.getValue(),domicilio.getValue(),poblacion.getValue(),
 							Integer.parseInt(cp.getValue()),provincia.getValue(),tfno.getValue(),tfno2.getValue(),fax.getValue(),Integer.parseInt(movil.getValue()),correo.getValue(), estado.getValue());
 					
 					b1.setText("Agregar");
@@ -237,7 +250,7 @@ public class LoadMantenimientoUtils {
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				rpcUtils.deleteProveedor(idProveedor);
+				provUtils.deleteProveedor(idProveedor);
 				
 			}
 	    	
@@ -265,8 +278,6 @@ public class LoadMantenimientoUtils {
 	    	
 	    });
 	    
-	   
-	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
 	    gButtons.add(b3);
@@ -282,13 +293,11 @@ public class LoadMantenimientoUtils {
 	    main.add(gButtons, new ColumnData(.4));
 	    
 	    frmProveedores.add(main, new FormData("100%"));
+	    
+	   
 	}
 
 	
-
-
-
-
 	public void loadFormDestinatarios(FormPanel frmDestinatarios) {
 		FormData formData = new FormData("50%"); 
 		Margins m = new Margins();
@@ -322,12 +331,14 @@ public class LoadMantenimientoUtils {
 	    right.setLayout(layout);  
 	    
 	    
-	    TextField<String> nombre = new TextField<String>();  
+	    final TextField<String> nombre = new TextField<String>();  
 	    nombre.setFieldLabel("Nombre");  
+	    nombre.setEnabled(false);
 	    left.add(nombre,formData);	
 	    
-	    CheckBox tienePuesto = new CheckBox();  
+	    final CheckBox tienePuesto = new CheckBox();  
 	    tienePuesto.addStyleName("margenTop");
+	    tienePuesto.setEnabled(false);
 	    tienePuesto.setFieldLabel("¿Tiene puestos de trabajo que dependen de esta unidad para la entrega de vestuario?(Si/No)");
 	    right.addStyleName("check");
 	    right.add(tienePuesto, formData);
@@ -343,14 +354,78 @@ public class LoadMantenimientoUtils {
 	    
 	    
 	    ButtonGroup gButtons = new ButtonGroup(4);
-	    Button b1  = new Button(), b2 = new Button(), b3 = new Button(), b4 = new Button();
+	    final Button b1  = new Button();
+	    final Button b2 = new Button();
+	    final Button b3 = new Button();
+	    final Button b4 = new Button();
+	    
+	    
 	    b1.setText("Agregar");
+	    b1.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				
+				if(b1.getText().equalsIgnoreCase("Agregar")){
+					b1.setText("Guardar");
+					b2.setText("Deshacer");
+					b3.setVisible(false);
+					b4.setVisible(false);
+					habilitaTodo(true);
+				}
+				else{
+					Log.debug("Estamos en el caso de guardar y vamos a llamar a la funcion en provUtils");
+					destiUtils.checkValuesAndSaveDestinatario(nombre.getValue(), tienePuesto.getValue());
+					
+					b1.setText("Agregar");
+					b2.setText("Modificar");
+					b3.setVisible(true);
+					b4.setVisible(true);
+					habilitaTodo(false);
+				}
+				
+			}
+
+			public void habilitaTodo(boolean que) {
+				nombre.setEnabled(que);
+				tienePuesto.setEnabled(que);
+			}
+		
+	    });
+	    
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Modificar");
+	    b2.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				destiUtils.deleteDestinatario(idDestinatario);
+				
+			}
+	    	
+	    });
 	    b2.setStyleAttribute("padding-right", "5px");
 	    b3.setText("Eliminar");
+	    b3.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				// TODO Auto-generated method stub
+				
+			}
+	    	
+	    });
 	    b3.setStyleAttribute("padding-right", "5px");
 	    b4.setText("Buscar");
+	    b4.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				// TODO Auto-generated method stub
+				
+			}
+	    	
+	    });
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
@@ -391,8 +466,9 @@ public class LoadMantenimientoUtils {
 	    center.setLayout(layout);  
 	    
 	  
-	    TextField<String> nombre = new TextField<String>();  
+	    final TextField<String> nombre = new TextField<String>();   
 	    nombre.setFieldLabel("Nombre");  
+	    nombre.setEnabled(false);
 	    
 	    List<ColumnConfig> configs = new ArrayList<ColumnConfig>();  
 	    
@@ -420,7 +496,7 @@ public class LoadMantenimientoUtils {
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
 	    grid.setColumnReordering(true);  
-	    
+	    grid.setEnabled(false); //no es editable desde aqui con lo cual solo mostramos los datos
 	    
 	    ContentPanel cp = new ContentPanel();  
 	    cp.setBodyBorder(true);  
@@ -443,14 +519,77 @@ public class LoadMantenimientoUtils {
 	    paginacion.setStyleName("paginacion");
 	    
 	    ButtonGroup gButtons = new ButtonGroup(4);
-	    Button b1  = new Button(), b2 = new Button(), b3 = new Button(), b4 = new Button();
+	    final Button b1  = new Button();
+	    final Button b2 = new Button();
+	    final Button b3 = new Button();
+	    final Button b4 = new Button();
+	    
+	    
 	    b1.setText("Agregar");
+	    b1.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				
+				if(b1.getText().equalsIgnoreCase("Agregar")){
+					b1.setText("Guardar");
+					b2.setText("Deshacer");
+					b3.setVisible(false);
+					b4.setVisible(false);
+					habilitaTodo(true);
+				}
+				else{
+					Log.debug("Estamos en el caso de guardar y vamos a llamar a la funcion en secciones");
+					secUtils.checkValuesAndSaveSecciones(nombre.getValue());
+					
+					b1.setText("Agregar");
+					b2.setText("Modificar");
+					b3.setVisible(true);
+					b4.setVisible(true);
+					habilitaTodo(false);
+				}
+				
+			}
+
+			public void habilitaTodo(boolean que) {
+				nombre.setEnabled(que);
+			}
+		
+	    });
+	    
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Modificar");
+	    b2.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				secUtils.deleteSeccion(seccion);
+				
+			}
+	    	
+	    });
 	    b2.setStyleAttribute("padding-right", "5px");
 	    b3.setText("Eliminar");
+	    b3.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				// TODO Auto-generated method stub
+				
+			}
+	    	
+	    });
 	    b3.setStyleAttribute("padding-right", "5px");
 	    b4.setText("Buscar");
+	    b4.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				// TODO Auto-generated method stub
+				
+			}
+	    	
+	    });
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
@@ -494,17 +633,36 @@ public class LoadMantenimientoUtils {
 	    layout.setLabelAlign(LabelAlign.TOP);  
 	    center.setLayout(layout);  
 	    
-	    TextField<String> codigo = new TextField<String>();  
-	    codigo.setFieldLabel("Código"); 
 	    
-	    Label lblSeccion = new Label("Sección:");
-	    lblSeccion.setStyleName("etiqueta margen");
-	    ListBox lstSeccion = new ListBox();
-	    lstSeccion.setVisibleItemCount(1);
-	    lstSeccion.addItem("...");
+	    
+	    final TextField<String> codigo = new TextField<String>();  
+	    codigo.setFieldLabel("Código");
+	    codigo.setEnabled(false);
+	    
+	    ListStore secciones = new ListStore();  
+	    secUtils.loadSeccionesCombo(secciones);
 	  
-	    TextField<String> nombre = new TextField<String>();  
-	    nombre.setFieldLabel("Nombre");  
+	    final ComboBox<BaseModel> combo = new ComboBox<BaseModel>();  
+	    combo.setEmptyText("Selecciona una sección");  
+	    combo.setStore(secciones);  
+	    combo.setDisplayField("nombre");  
+	    combo.setValueField("id");
+	    combo.setFieldLabel("Secciones");
+	    combo.setWidth(150);  
+	    combo.setEnabled(false);
+	    combo.addSelectionChangedListener(new SelectionChangedListener<BaseModel>(){
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent<BaseModel> se) {
+				Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
+				seccion = se.getSelectedItem().get("id");
+			}
+	    	
+	    });
+	  
+	    final TextField<String> nombre = new TextField<String>();  
+	    nombre.setFieldLabel("Nombre"); 
+	    nombre.setEnabled(false);
 	    
 	    List<ColumnConfig> configs = new ArrayList<ColumnConfig>();  
 	    
@@ -561,14 +719,78 @@ public class LoadMantenimientoUtils {
 	    paginacion.setStyleName("paginacion");
 	    
 	    ButtonGroup gButtons = new ButtonGroup(4);
-	    Button b1  = new Button(), b2 = new Button(), b3 = new Button(), b4 = new Button();
+	    final Button b1  = new Button();
+	    final Button b2 = new Button();
+	    final Button b3 = new Button();
+	    final Button b4 = new Button();
+	    
 	    b1.setText("Agregar");
+	    b1.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				if(b1.getText().equalsIgnoreCase("Agregar")){
+					b1.setText("Guardar");
+					b2.setText("Deshacer");
+					b3.setVisible(false);
+					b4.setVisible(false);
+					habilitaTodo(true);
+				}
+				else{
+					Log.debug("Estamos en el caso de guardar y vamos a llamar a la funcion en familias");
+					Log.debug("El valor del combo es: " + seccion);
+					famiUtils.checkValuesAndSaveFamilia(nombre.getValue(), codigo.getValue(), (int)seccion );
+					
+					b1.setText("Agregar");
+					b2.setText("Modificar");
+					b3.setVisible(true);
+					b4.setVisible(true);
+					habilitaTodo(false);
+				}
+				
+			}
+
+			public void habilitaTodo(boolean que) {
+				nombre.setEnabled(que);
+				codigo.setEnabled(que);
+				combo.setEnabled(que);
+			}
+		
+	    });
+	    
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Modificar");
+	    b2.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				famiUtils.deleteFamilia(familia);
+				
+			}
+	    	
+	    });
 	    b2.setStyleAttribute("padding-right", "5px");
 	    b3.setText("Eliminar");
+	    b3.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				// TODO Auto-generated method stub
+				
+			}
+	    	
+	    });
 	    b3.setStyleAttribute("padding-right", "5px");
 	    b4.setText("Buscar");
+	    b4.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				// TODO Auto-generated method stub
+				
+			}
+	    	
+	    });
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
@@ -577,8 +799,7 @@ public class LoadMantenimientoUtils {
 	    gButtons.addStyleName("botonesFuncionales");
 	    
 	    center.add(codigo, frmData);
-	    center.add(lblSeccion, formData);
-	    center.add(lstSeccion, formData);
+	    center.add(combo, formData);
 	    center.add(nombre, formData);
 	    center.add(cp, formData);
 	    
@@ -612,27 +833,107 @@ public class LoadMantenimientoUtils {
 	    layout.setLabelAlign(LabelAlign.TOP);  
 	    center.setLayout(layout);  
 	    
-	    TextField<String> codigo = new TextField<String>();  
+	    final TextField<String> codigo = new TextField<String>();  
 	    codigo.setFieldLabel("Código"); 
+	    codigo.setEnabled(false);
 	    
-	    Label lblFamilia = new Label("Familia:");
-	    lblFamilia.setStyleName("etiqueta");
-	    ListBox lstFamilia = new ListBox();
-	    lstFamilia.setVisibleItemCount(1);
-	    lstFamilia.addItem("...");
+	    ListStore familias = new ListStore();  
+	    famiUtils.loadFamiliasCombo(familias);
 	  
-	    TextField<String> nombre = new TextField<String>();  
+	    final ComboBox<BaseModel> combo = new ComboBox<BaseModel>();  
+	    combo.setEmptyText("Selecciona una familia");  
+	    combo.setStore(familias);  
+	    combo.setDisplayField("nombre");  
+	    combo.setValueField("id");
+	    combo.setFieldLabel("Familias");
+	    combo.setWidth(150);  
+	    combo.setEnabled(false);
+	    combo.addSelectionChangedListener(new SelectionChangedListener<BaseModel>(){
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent<BaseModel> se) {
+				Log.debug("El id seleccionado es: " + se.getSelectedItem().get("nombre"));
+				familia = se.getSelectedItem().get("id");
+			}
+	    	
+	    });
+	  
+	    final TextField<String> nombre = new TextField<String>();  
 	    nombre.setFieldLabel("Nombre");  
+	    nombre.setEnabled(false);
 	    
 	    ButtonGroup gButtons = new ButtonGroup(4);
-	    Button b1  = new Button(), b2 = new Button(), b3 = new Button(), b4 = new Button();
+	    final Button b1  = new Button();
+	    final Button b2 = new Button();
+	    final Button b3 = new Button();
+	    final Button b4 = new Button();
+	    
 	    b1.setText("Agregar");
+	    b1.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				if(b1.getText().equalsIgnoreCase("Agregar")){
+					b1.setText("Guardar");
+					b2.setText("Deshacer");
+					b3.setVisible(false);
+					b4.setVisible(false);
+					habilitaTodo(true);
+				}
+				else{
+					Log.debug("El valor del combo es: " + familia);
+					subUtils.checkValuesAndSaveSubFamilia(nombre.getValue(), codigo.getValue(), (int)familia );
+					
+					b1.setText("Agregar");
+					b2.setText("Modificar");
+					b3.setVisible(true);
+					b4.setVisible(true);
+					habilitaTodo(false);
+				}
+				
+			}
+
+			public void habilitaTodo(boolean que) {
+				nombre.setEnabled(que);
+				codigo.setEnabled(que);
+				combo.setEnabled(que);
+			}
+		
+	    });
+	    
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Modificar");
+	    b2.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				//subUtils.deleteSubfamilia(subfamilia);
+				
+			}
+	    	
+	    });
 	    b2.setStyleAttribute("padding-right", "5px");
 	    b3.setText("Eliminar");
+	    b3.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				// TODO Auto-generated method stub
+				
+			}
+	    	
+	    });
 	    b3.setStyleAttribute("padding-right", "5px");
 	    b4.setText("Buscar");
+	    b4.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				// TODO Auto-generated method stub
+				
+			}
+	    	
+	    });
 	    
 	    gButtons.add(b1);
 	    gButtons.add(b2);
@@ -651,8 +952,8 @@ public class LoadMantenimientoUtils {
 	     
 	    
 	    
-	    center.add(lblFamilia, formData);
-	    center.add(lstFamilia, formData);
+	    
+	    center.add(combo, formData);
 	    center.add(codigo, formData);
 	    center.add(nombre, formData);
 	    

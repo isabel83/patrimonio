@@ -27,16 +27,11 @@ public class Personas extends BaseModel implements Serializable{
 	}
 	
 	public Personas(Long id, int id_p){
-		set("id",id);
 		this.ID_PERSONA = id;
 	}
 	
 
 	public Personas(Long id, int id_e, int id_p, String descripcion){
-		set("id", id);
-		set("estado", id_e);
-		set("perfil", id_p);
-		set("descripcion", descripcion);
 		this.ID_PERSONA = id;
 		this.ID_ESTADO = id_e;
 		this.ID_PERFIL = id_p;

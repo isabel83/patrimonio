@@ -11,11 +11,6 @@ public interface ArticuloServiceAsync {
 
 	void deleteArticulo(long idArticulo, AsyncCallback<Void> callback);
 
-	void saveArticulo(long idArticulo, int seccion, int familia,
-			int subFamilia, int codigo, String nombre, String marca,
-			int numMin, int numIdeal, String observacion, int estado,
-			AsyncCallback<Void> callback);
-
 	void saveOrUpdateArticulo(long idArticulo, int seccion, int familia,
 			int subFamilia, int codigo, String nombre, String marca,
 			int numMin, int numIdeal, String observacion, int estado,
@@ -27,5 +22,9 @@ public interface ArticuloServiceAsync {
 			AsyncCallback<Void> callback);
 
 	void loadArticulosPro(int idProveedor, AsyncCallback<List<Articulos>> callback);
+
+	void saveArticulo(Articulos articulo, AsyncCallback<Void> asyncCallback);
+
+	void findByCriterios(Articulos articuloBusqueda, AsyncCallback<List<Articulos>> asyncCallback);
 
 }

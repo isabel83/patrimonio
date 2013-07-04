@@ -127,7 +127,7 @@ public class ProveedoresDao  extends HibernateDaoSupport{
 		long valor = 0;
 		sesion = sessionFactory.openSession();
 		try{
-			Query query =  sesion.createQuery("select max(id) as max from Proveedor");
+			Query query =  sesion.createQuery("select max(id) as max from Proveedores");
 			
 			List sublist = query.list();
 			if(sublist.get(0)!=null)

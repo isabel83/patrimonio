@@ -7,7 +7,7 @@ import com.patrimonio.plantillas.client.services.DestinatarioService;
 
 public class DestinatarioServiceImpl extends RemoteServiceServlet implements DestinatarioService{
 	
-	public DestinatariosDao destinatarioDAO;
+	public DestinatariosDao destinatarioDAO = new DestinatariosDao();
 
 	@Override
 	public Destinatarios findDestinatario(long idDestinatario) {
@@ -16,13 +16,14 @@ public class DestinatarioServiceImpl extends RemoteServiceServlet implements Des
 	}
 
 	@Override
-	public void saveDestinatario(long idDestinatario, int estado, String descripcion) throws Exception {
-		Destinatarios destinatario = destinatarioDAO.findById(idDestinatario);
-		if(destinatario==null){
-			destinatario = new Destinatarios(idDestinatario,estado,descripcion);
-			destinatarioDAO.saveDestinatario(destinatario);
-		}
+	public void saveDestinatario(Destinatarios destinatario) throws Exception {
+//		Destinatarios destinatario = destinatarioDAO.findById(idDestinatario);
+//		if(destinatario==null){
+//			destinatario = new Destinatarios(idDestinatario,estado,descripcion);
+//			destinatarioDAO.saveDestinatario(destinatario);
+//		}
 		
+		destinatarioDAO.saveDestinatario(destinatario);
 	}
 
 	@Override

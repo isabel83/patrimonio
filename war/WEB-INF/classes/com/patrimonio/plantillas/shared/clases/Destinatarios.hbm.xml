@@ -6,7 +6,7 @@
     <class name="com.patrimonio.plantillas.shared.clases.Destinatarios" table="DESTINATARIOS">
         <id name="ID_DESTINATARIO" type="java.lang.Long" access="field">
             <column name="ID_DESTINATARIO" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <property name="ID_ESTADO" type="int" access="field">
             <column name="ID_ESTADO" />

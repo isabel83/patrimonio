@@ -7,7 +7,7 @@ public interface DestinatarioServiceAsync {
 
 	void findDestinatario(long idDestinatario, AsyncCallback<Destinatarios> callback);
 
-	void saveDestinatario(long idDestinatario, int estado, String descripcion, AsyncCallback<Void> callback);
+	void saveDestinatario(Destinatarios destinatario, AsyncCallback<Void> callback);
 
 	void updateDestinatario(long idDestinatario, int estado, String descripcion, AsyncCallback<Void> callback);
 

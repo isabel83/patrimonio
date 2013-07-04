@@ -3,6 +3,7 @@ package com.patrimonio.plantillas.server.DAOs;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -24,6 +25,16 @@ public class ArticulosDao extends HibernateDaoSupport{
 	@Autowired
 	SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
 	Session sesion;
+	
+	private int idSeccion;
+	private int idFamilia;
+	private int idSubFamilia;
+	private int codigo;
+	private String nombre;
+	private String marca;
+	private int minimo;
+	private int idoneo;
+	private String observ;
 	
 	@SuppressWarnings("unchecked")
 	public List<Arti_Prov> findArtProveedor(int idProveedor) {
@@ -117,6 +128,49 @@ public class ArticulosDao extends HibernateDaoSupport{
 			sesion.close();
 		}
 		
+	}
+
+	public List<Articulos> findByCriterios(Articulos articuloBusqueda) {
+		
+		cargaDatos(articuloBusqueda);
+		
+		List<Articulos> resultado = null;
+		sesion = sessionFactory.openSession();
+		try{
+			sesion.beginTransaction();
+			Criteria cr = sesion.createCriteria(Articulos.class);
+			if(idSeccion!=0) cr.add(Restrictions.eq("ID_SECCION", idSeccion));
+			if(idFamilia!=0) cr.add(Restrictions.eq("ID_FAMILIA", idFamilia));
+			if(idSubFamilia!=0) cr.add(Restrictions.eq("ID_SUBFAMILIA", idSubFamilia));
+			if(codigo!=0) cr.add(Restrictions.eq("CODIGO", codigo));
+			if(nombre!=null) cr.add(Restrictions.eq("NOMBRE", nombre));
+			if(marca!=null) cr.add(Restrictions.eq("MARCA", marca));
+			if(minimo!=0) cr.add(Restrictions.eq("N_MINIMO", minimo));
+			if(idoneo!=0) cr.add(Restrictions.eq("N_IDONEO", idoneo));
+			if(observ!=null) cr.add(Restrictions.eq("OBSERVACIONES", observ));
+			cr.add(Restrictions.eq("ID_ESTADO", 0));
+			resultado = cr.list();
+			sesion.getTransaction().commit();
+		}
+		catch(Exception e){
+			return null;
+		}
+		finally{
+			sesion.close();
+		}
+		return resultado;
+	}
+
+	private void cargaDatos(Articulos articuloBusqueda) {
+		idSeccion=articuloBusqueda.getId_seccion();
+		idFamilia=articuloBusqueda.getId_familia();
+		idSubFamilia=articuloBusqueda.getId_subfamilia();
+		codigo=articuloBusqueda.getCodigo();
+		nombre=articuloBusqueda.getNombre();
+		marca=articuloBusqueda.getMarca();
+		minimo=articuloBusqueda.getN_minimo();
+		idoneo=articuloBusqueda.getN_idoneo();
+		observ=articuloBusqueda.getObservaciones();
 	}
 	
 
