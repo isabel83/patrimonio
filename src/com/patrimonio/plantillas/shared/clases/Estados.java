@@ -13,7 +13,7 @@ import com.patrimonio.plantillas.client.DTOs.EstadosDTO;
 
 public class Estados extends BaseModel implements Serializable{
 
-	private Long ID_ESTADO;
+	private Long ID_ESTADO; //requeridos
 	
 	private String DESCRIPCION;
 	

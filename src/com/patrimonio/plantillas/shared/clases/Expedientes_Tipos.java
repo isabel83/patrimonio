@@ -6,7 +6,7 @@ import com.extjs.gxt.ui.client.data.BaseModel;
 
 public class Expedientes_Tipos implements Serializable {
 
-	private Long ID_EXPEDIENTE_TIPO;
+	private Long ID_EXPEDIENTE_TIPO; //todos requeridos
 	private String DESCRIPCION;
 	
 	public Expedientes_Tipos(){

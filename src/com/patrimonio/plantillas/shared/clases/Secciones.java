@@ -14,7 +14,7 @@ import com.patrimonio.plantillas.client.DTOs.SeccionesDTO;
 
 public class Secciones extends BaseModel implements Serializable{
 
-	private Long ID_SECCION;
+	private Long ID_SECCION; //todos requeridos
 
 	private String DESCRIPCION;
 

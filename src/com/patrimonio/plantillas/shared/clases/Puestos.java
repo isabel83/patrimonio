@@ -13,7 +13,7 @@ import com.patrimonio.plantillas.client.DTOs.PuestosDTO;
 
 public class Puestos extends BaseModel implements Serializable{
 
-	private Long ID_PUESTO;
+	private Long ID_PUESTO; //todos requeridos
 
 	private int ID_ESTADO;
 	

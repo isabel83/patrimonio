@@ -20,6 +20,7 @@ import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.patrimonio.plantillas.server.HibernateUtils;
 import com.patrimonio.plantillas.shared.clases.Articulos;
 import com.patrimonio.plantillas.shared.clases.Arti_Prov;
+import com.patrimonio.plantillas.shared.clases.Destinatarios;
 
 public class ArticulosDao extends HibernateDaoSupport{
 	@Autowired
@@ -171,6 +172,14 @@ public class ArticulosDao extends HibernateDaoSupport{
 		minimo=articuloBusqueda.getN_minimo();
 		idoneo=articuloBusqueda.getN_idoneo();
 		observ=articuloBusqueda.getObservaciones();
+	}
+
+	public List<Articulos> findAll() {
+		sesion = sessionFactory.openSession();
+		
+		List<Articulos> todos = sesion.createQuery("from Articulos").list();
+		sesion.close();
+		return todos;
 	}
 	
 

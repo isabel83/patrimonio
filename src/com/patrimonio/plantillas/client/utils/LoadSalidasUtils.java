@@ -6,10 +6,12 @@ import java.util.List;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.Style.Orientation;
+import com.extjs.gxt.ui.client.data.BaseModel;
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
 import com.extjs.gxt.ui.client.data.BeanModelReader;
 import com.extjs.gxt.ui.client.data.DataProxy;
 import com.extjs.gxt.ui.client.data.ModelData;
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.Events;
@@ -21,6 +23,7 @@ import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ButtonGroup;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
+import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.DateField;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
@@ -47,8 +50,15 @@ import com.patrimonio.plantillas.client.widgets.Stock;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoAlbaranFecha;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoBuscar;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoNuevoArticulo;
+import com.patrimonio.plantillas.shared.RpcUtilsDestinatarios;
+import com.patrimonio.plantillas.shared.RpcUtilsPersonas;
+import com.patrimonio.plantillas.shared.RpcUtilsSecciones;
 
 public class LoadSalidasUtils {
+	
+	RpcUtilsSecciones secUtils = new RpcUtilsSecciones();
+	RpcUtilsDestinatarios destiUtils = new RpcUtilsDestinatarios();
+	RpcUtilsPersonas personUtils = new RpcUtilsPersonas();
 
 	public void loadFormNuevaSolicitud(FormPanel frmNuevaSolicitud) {
 
@@ -101,29 +111,45 @@ public class LoadSalidasUtils {
 	    numSolicitud.setFieldLabel("Número de solicitud");
 	    right.add(numSolicitud,formData);
 
-	    Label lblSeccion = new Label("Sección:");
-	    lblSeccion.setStyleName("etiqueta");
-	    ListBox lstSeccion = new ListBox();
-	    lstSeccion.setVisibleItemCount(1);
-	    lstSeccion.addItem("...");
-	    bottom.add(lblSeccion,formData);
-	    bottom.add(lstSeccion,formData);
-
-	    Label lblDestinatario = new Label("Destinatario:");
-	    lblDestinatario.setStyleName("etiqueta");
-	    ListBox lstDestinatario = new ListBox();
-	    lstDestinatario.setVisibleItemCount(1);
-	    lstDestinatario.addItem("...");
-	    bottom.add(lblDestinatario,formData);
-	    bottom.add(lstDestinatario,formData);
+	    ListStore<BaseModel> secciones = new ListStore<BaseModel>();  
+	    secUtils.loadSeccionesCombo(secciones);
+	  
+	    final ComboBox<BaseModel> comboSeccion = new ComboBox<BaseModel>();  
+	    comboSeccion.setEmptyText("Selecciona una sección");  
+	    comboSeccion.setStore(secciones);  
+	    comboSeccion.setDisplayField("nombre");  
+	    comboSeccion.setValueField("id");
+	    comboSeccion.setFieldLabel("Secciones");
+	    comboSeccion.setWidth(150);  
+	    comboSeccion.setEnabled(true);
+	    bottom.add(comboSeccion, new FormData("100%"));
 	    
-	    Label lblPersona = new Label("Persona:");
-	    lblPersona.setStyleName("etiqueta");
-	    ListBox lstPersona = new ListBox();
-	    lstPersona.setVisibleItemCount(1);
-	    lstPersona.addItem("...");
-	    bottom.add(lblPersona,formData);
-	    bottom.add(lstPersona,formData);
+
+	    ListStore<BaseModel> unidades = new ListStore<BaseModel>();  
+	    destiUtils.loadUnidadCombo(unidades);
+	  
+	    final ComboBox<BaseModel> comboUnidad = new ComboBox<BaseModel>();  
+	    comboUnidad.setEmptyText("Destinatario");  
+	    comboUnidad.setStore(unidades);  
+	    comboUnidad.setDisplayField("nombre");  
+	    comboUnidad.setValueField("id");
+	    comboUnidad.setFieldLabel("Destinatario");
+	    comboUnidad.setWidth(150);  
+	    comboUnidad.setEnabled(true);
+	    bottom.add(comboUnidad, new FormData("100%"));
+	    
+	    ListStore<BaseModel> personas = new ListStore<BaseModel>();  
+	    personUtils.loadPersonasCombo(personas);
+	  
+	    final ComboBox<BaseModel> comboPersonas = new ComboBox<BaseModel>();  
+	    comboPersonas.setEmptyText("Persona");  
+	    comboPersonas.setStore(personas);  
+	    comboPersonas.setDisplayField("nombre");  
+	    comboPersonas.setValueField("id");
+	    comboPersonas.setFieldLabel("Secciones");
+	    comboPersonas.setWidth(150);  
+	    comboPersonas.setEnabled(true);
+	    bottom.add(comboPersonas, new FormData("100%"));
 	    
 	    
 	     //****************************** CARGAMOS EL PANEL CON LA ENTRADA DE ARTICULOS *****************//
@@ -291,10 +317,16 @@ public class LoadSalidasUtils {
 	    btnGrp.setStyleAttribute("float", "right");
 	    
 	    
-	    DataProxy proxy = null; 
-	    
+DataProxy proxy = null;
+//	    RpcProxy<PagingLoadResult<ModelData>> proxy = new RpcProxy<PagingLoadResult<ModelData>>() {  
+//	        @Override  
+//	        public void load(Object loadConfig, AsyncCallback<PagingLoadResult<ModelData>> callback) {  
+//	          service.getPosts((PagingLoadConfig) loadConfig, callback);  
+//	        }  
+//	      };  
+//	    
 		final BasePagingLoader<PagingLoadResult<ModelData>> loader = new BasePagingLoader<PagingLoadResult<ModelData>>(  
-	            proxy, new BeanModelReader());  
+	            proxy , new BeanModelReader());  
 	        loader.setRemoteSort(true); 
 	    
 	    final PagingToolBar pagingToolBar = new PagingToolBar(50); 

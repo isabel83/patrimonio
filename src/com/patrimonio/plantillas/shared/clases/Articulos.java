@@ -25,13 +25,13 @@ public class Articulos extends BaseModel implements Serializable{
 	
 	private String NOMBRE;
 	
-	private String MARCA;	
+	private String MARCA;	//no requerido
 	
-	private int N_MINIMO;	
+	private int N_MINIMO;	//no requerido 
 	
-	private int N_IDONEO;		
+	private int N_IDONEO;		//no requerido
 	
-	private String OBSERVACIONES;
+	private String OBSERVACIONES; //no requerido
 	
 	private int ID_ESTADO;
 	

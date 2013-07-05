@@ -1,20 +1,11 @@
 package com.patrimonio.plantillas.client.widgets.forms;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.extjs.gxt.ui.client.Style.LayoutRegion;
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.TabItem;
 import com.extjs.gxt.ui.client.widget.TabPanel;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
-import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
-import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Element;
 import com.patrimonio.plantillas.client.utils.LoadMantenimientoUtils;
@@ -36,7 +27,7 @@ public class FormMntTablas extends ContentPanel{
 	protected void onLoad() {
 		
 		super.onLoad();
-
+Log.debug("EL ON LOAD");
 		recalculate();
 	}
 	
@@ -44,7 +35,7 @@ public class FormMntTablas extends ContentPanel{
 	@Override
 	protected void onRender(Element parent, int pos) {
 		super.onRender(parent, pos);
-		
+		Log.debug("EL ON RENDER");
 		setLayout(new BorderLayout());
 		setBodyBorder(false);
 		setBorders(false);
@@ -59,7 +50,6 @@ public class FormMntTablas extends ContentPanel{
 			      public void onUncaughtException(Throwable e) {  
 			        Log.debug("EN UNCAUGHT: " + e.getLocalizedMessage()); 
 			    }  
-			    // do module loading stuff  
 			  });    
 		
 		TabPanel tabPanel = new TabPanel();
@@ -70,6 +60,7 @@ public class FormMntTablas extends ContentPanel{
 		loadPanelConsultas(tabPanel);
 		tabPanel.setSelection(tabPanel.getItem(panelActivo));
 		add(tabPanel);
+		
 			
 	} 
 	

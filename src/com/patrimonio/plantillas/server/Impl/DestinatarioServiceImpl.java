@@ -1,5 +1,7 @@
 package com.patrimonio.plantillas.server.Impl;
 
+import java.util.List;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.patrimonio.plantillas.server.DAOs.DestinatariosDao;
 import com.patrimonio.plantillas.shared.clases.Destinatarios;
@@ -47,6 +49,12 @@ public class DestinatarioServiceImpl extends RemoteServiceServlet implements Des
 		Destinatarios destinatario = destinatarioDAO.findById(idDestinatario);
 		if(destinatario!=null)
 			destinatarioDAO.removeDestinatario(destinatario);
+	}
+
+	@Override
+	public List<Destinatarios> findAllForList() throws Exception {
+		// TODO Auto-generated method stub
+		return destinatarioDAO.findAll();
 	}
 
 }

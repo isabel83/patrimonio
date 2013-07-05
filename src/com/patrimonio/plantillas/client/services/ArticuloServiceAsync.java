@@ -27,4 +27,6 @@ public interface ArticuloServiceAsync {
 
 	void findByCriterios(Articulos articuloBusqueda, AsyncCallback<List<Articulos>> asyncCallback);
 
+	void findAllForList(AsyncCallback<List<Articulos>> asyncCallback);
+
 }

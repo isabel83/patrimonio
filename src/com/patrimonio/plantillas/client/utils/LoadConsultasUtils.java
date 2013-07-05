@@ -3,6 +3,7 @@ package com.patrimonio.plantillas.client.utils;
 import com.allen_sauer.gwt.log.client.Log;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.Orientation;
+import com.extjs.gxt.ui.client.data.BaseModel;
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
 import com.extjs.gxt.ui.client.data.BeanModelReader;
 import com.extjs.gxt.ui.client.data.DataProxy;
@@ -12,13 +13,17 @@ import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ButtonGroup;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
+import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.DateField;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.Radio;
@@ -39,10 +44,33 @@ import com.patrimonio.plantillas.client.widgets.dialogs.DialogoAlbaranTotal;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoAlbaranesPedidos;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoBuscarPedidos;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoNuevoArticulo;
+import com.patrimonio.plantillas.shared.RpcUtilsArticulos;
+import com.patrimonio.plantillas.shared.RpcUtilsDestinatarios;
+import com.patrimonio.plantillas.shared.RpcUtilsFamilias;
+import com.patrimonio.plantillas.shared.RpcUtilsPersonas;
+import com.patrimonio.plantillas.shared.RpcUtilsProveedores;
+import com.patrimonio.plantillas.shared.RpcUtilsSecciones;
+import com.patrimonio.plantillas.shared.RpcUtilsSubfamilias;
+import com.patrimonio.plantillas.shared.clases.Proveedores;
 
 public class LoadConsultasUtils {
 	
 	public String titularPrevisiones = "Previsión de vestuario ";
+	
+	
+	RpcUtilsArticulos artiUtils = new RpcUtilsArticulos();
+	RpcUtilsProveedores provUtils = new RpcUtilsProveedores();
+	RpcUtilsSecciones secUtils = new RpcUtilsSecciones();
+	RpcUtilsDestinatarios destiUtils = new RpcUtilsDestinatarios();
+	RpcUtilsPersonas personUtils = new RpcUtilsPersonas();
+	RpcUtilsFamilias famiUtils = new RpcUtilsFamilias();
+	RpcUtilsSubfamilias subUtils = new RpcUtilsSubfamilias();
+	protected long seccion=0;
+	protected long familia=0;
+	protected long subfamilia=0;
+	
+	
+	
 
 	public void loadFormConsultaPedido(FormPanel frmConsultaPedido) {
 		FormData formData = new FormData("40%"); 
@@ -150,12 +178,20 @@ public class LoadConsultasUtils {
 	    
 	    
 	    
-	    Label lblProveedor = new Label("Proveedor:");
-	    lblProveedor.setStyleName("etiqueta");
-	    ListBox lstProveedor = new ListBox();
-	    lstProveedor.setVisibleItemCount(1);
-	    bottom.add(lblProveedor,formData);
-	    bottom.add(lstProveedor,formData);
+	    ListStore<BaseModel> proveedores = new ListStore<BaseModel>();  
+	    provUtils.loadProveedoresCombo(proveedores);
+	  
+	    ComboBox<BaseModel> combo = new ComboBox<BaseModel>();  
+	    combo.setEmptyText("Selecciona un proveedor");  
+	    combo.setStore(proveedores);  
+	    combo.setDisplayField("nombre");  
+	    combo.setValueField("id");
+	    combo.setFieldLabel("Proveedor");
+	    combo.setWidth(150);  
+	    
+	    
+
+	    bottom.add(combo,new FormData("100%"));
 	    
 	    
 	    ButtonGroup gButtons = new ButtonGroup(2);
@@ -187,7 +223,6 @@ public class LoadConsultasUtils {
 	    main.add(gButtons, new ColumnData(1));
 	    
 	    frmConsultaPedido.add(main, new FormData("100%"));
-		
 	}
 
 	public void loadFormConsultaAlbMatSolicitado(FormPanel frmConsultaAlbaranesMSolicitado) {
@@ -291,28 +326,45 @@ public class LoadConsultasUtils {
 	    numHasta.setStyleName("margenB");
 	    right.add(numHasta,formData);	
 	    
+	    ListStore<BaseModel> secciones = new ListStore<BaseModel>();  
+	    secUtils.loadSeccionesCombo(secciones);
+	  
+	    final ComboBox<BaseModel> comboSeccion = new ComboBox<BaseModel>();  
+	    comboSeccion.setEmptyText("Selecciona una sección");  
+	    comboSeccion.setStore(secciones);  
+	    comboSeccion.setDisplayField("nombre");  
+	    comboSeccion.setValueField("id");
+	    comboSeccion.setFieldLabel("Secciones");
+	    comboSeccion.setWidth(150);  
+	    comboSeccion.setEnabled(true);
+	    left.add(comboSeccion, new FormData("100%"));
 	    
+
+	    ListStore<BaseModel> unidades = new ListStore<BaseModel>();  
+	    destiUtils.loadUnidadCombo(unidades);
+	  
+	    final ComboBox<BaseModel> comboUnidad = new ComboBox<BaseModel>();  
+	    comboUnidad.setEmptyText("Unidad");  
+	    comboUnidad.setStore(unidades);  
+	    comboUnidad.setDisplayField("nombre");  
+	    comboUnidad.setValueField("id");
+	    comboUnidad.setFieldLabel("Secciones");
+	    comboUnidad.setWidth(150);  
+	    comboUnidad.setEnabled(true);
+	    center.add(comboUnidad, new FormData("100%"));
 	    
-	    Label lblSeccion = new Label("Sección:");
-	    lblSeccion.setStyleName("etiqueta ie5p");
-	    ListBox lstSeccion = new ListBox();
-	    lstSeccion.setVisibleItemCount(1);
-	    left.add(lblSeccion,new FormData("100%"));
-	    left.add(lstSeccion,new FormData("100%"));
-	    
-	    Label lblUnidad = new Label("Unidad:");
-	    lblUnidad.setStyleName("etiqueta");
-	    ListBox lstUnidad = new ListBox();
-	    lstUnidad.setVisibleItemCount(1);
-	    center.add(lblUnidad,new FormData("100%"));
-	    center.add(lstUnidad,new FormData("100%"));
-	    
-	    Label lblPersona = new Label("Persona:");
-	    lblPersona.setStyleName("etiqueta");
-	    ListBox lstPersona = new ListBox();
-	    lstPersona.setVisibleItemCount(1);
-	    right.add(lblPersona,new FormData("100%"));
-	    right.add(lstPersona,new FormData("100%"));
+	    ListStore<BaseModel> personas = new ListStore<BaseModel>();  
+	    personUtils.loadPersonasCombo(personas);
+	  
+	    final ComboBox<BaseModel> comboPersonas = new ComboBox<BaseModel>();  
+	    comboPersonas.setEmptyText("Persona");  
+	    comboPersonas.setStore(personas);  
+	    comboPersonas.setDisplayField("nombre");  
+	    comboPersonas.setValueField("id");
+	    comboPersonas.setFieldLabel("Secciones");
+	    comboPersonas.setWidth(150);  
+	    comboPersonas.setEnabled(true);
+	    right.add(comboPersonas, new FormData("100%"));
 	    
 	    
 	    ButtonGroup gButtons = new ButtonGroup(3);
@@ -438,29 +490,45 @@ public class LoadConsultasUtils {
 	    rGrpDev.add(rdNoDev);
 	    right.add(rGrpDev, formData);
     
+	    ListStore<BaseModel> secciones = new ListStore<BaseModel>();  
+	    secUtils.loadSeccionesCombo(secciones);
+	  
+	    final ComboBox<BaseModel> comboSeccion = new ComboBox<BaseModel>();  
+	    comboSeccion.setEmptyText("Selecciona una sección");  
+	    comboSeccion.setStore(secciones);  
+	    comboSeccion.setDisplayField("nombre");  
+	    comboSeccion.setValueField("id");
+	    comboSeccion.setFieldLabel("Secciones");
+	    comboSeccion.setWidth(150);  
+	    comboSeccion.setEnabled(true);
+	    left.add(comboSeccion, new FormData("100%"));
+	    
 
-	   
+	    ListStore<BaseModel> unidades = new ListStore<BaseModel>();  
+	    destiUtils.loadUnidadCombo(unidades);
+	  
+	    final ComboBox<BaseModel> comboUnidad = new ComboBox<BaseModel>();  
+	    comboUnidad.setEmptyText("Unidad");  
+	    comboUnidad.setStore(unidades);  
+	    comboUnidad.setDisplayField("nombre");  
+	    comboUnidad.setValueField("id");
+	    comboUnidad.setFieldLabel("Secciones");
+	    comboUnidad.setWidth(150);  
+	    comboUnidad.setEnabled(true);
+	    center.add(comboUnidad, new FormData("100%"));
 	    
-	    Label lblSeccion = new Label("Sección:");
-	    lblSeccion.setStyleName("etiqueta ie5p");
-	    ListBox lstSeccion = new ListBox();
-	    lstSeccion.setVisibleItemCount(1);
-	    left.add(lblSeccion,new FormData("100%"));
-	    left.add(lstSeccion,new FormData("100%"));
-	    
-	    Label lblUnidad = new Label("Unidad:");
-	    lblUnidad.setStyleName("etiqueta ie3p");
-	    ListBox lstUnidad = new ListBox();
-	    lstUnidad.setVisibleItemCount(1);
-	    center.add(lblUnidad,new FormData("100%"));
-	    center.add(lstUnidad,new FormData("100%"));
-	    
-	    Label lblPersona = new Label("Persona:");
-	    lblPersona.setStyleName("etiqueta");
-	    ListBox lstPersona = new ListBox();
-	    lstPersona.setVisibleItemCount(1);
-	    right.add(lblPersona,new FormData("100%"));
-	    right.add(lstPersona,new FormData("100%"));
+	    ListStore<BaseModel> personas = new ListStore<BaseModel>();  
+	    personUtils.loadPersonasCombo(personas);
+	  
+	    final ComboBox<BaseModel> comboPersonas = new ComboBox<BaseModel>();  
+	    comboPersonas.setEmptyText("Persona");  
+	    comboPersonas.setStore(personas);  
+	    comboPersonas.setDisplayField("nombre");  
+	    comboPersonas.setValueField("id");
+	    comboPersonas.setFieldLabel("Secciones");
+	    comboPersonas.setWidth(150);  
+	    comboPersonas.setEnabled(true);
+	    right.add(comboPersonas, new FormData("100%"));
 	    
 	    
 	    ButtonGroup gButtons = new ButtonGroup(3);
@@ -598,28 +666,45 @@ public class LoadConsultasUtils {
 	    numHasta.setStyleName("margenB");
 	    right.add(numHasta,formData);	
 	    
+	    ListStore<BaseModel> secciones = new ListStore<BaseModel>();  
+	    secUtils.loadSeccionesCombo(secciones);
+	  
+	    final ComboBox<BaseModel> comboSeccion = new ComboBox<BaseModel>();  
+	    comboSeccion.setEmptyText("Selecciona una sección");  
+	    comboSeccion.setStore(secciones);  
+	    comboSeccion.setDisplayField("nombre");  
+	    comboSeccion.setValueField("id");
+	    comboSeccion.setFieldLabel("Secciones");
+	    comboSeccion.setWidth(150);  
+	    comboSeccion.setEnabled(true);
+	    left.add(comboSeccion, new FormData("100%"));
 	    
+
+	    ListStore<BaseModel> unidades = new ListStore<BaseModel>();  
+	    destiUtils.loadUnidadCombo(unidades);
+	  
+	    final ComboBox<BaseModel> comboUnidad = new ComboBox<BaseModel>();  
+	    comboUnidad.setEmptyText("Unidad");  
+	    comboUnidad.setStore(unidades);  
+	    comboUnidad.setDisplayField("nombre");  
+	    comboUnidad.setValueField("id");
+	    comboUnidad.setFieldLabel("Secciones");
+	    comboUnidad.setWidth(150);  
+	    comboUnidad.setEnabled(true);
+	    center.add(comboUnidad, new FormData("100%"));
 	    
-	    Label lblSeccion = new Label("Sección:");
-	    lblSeccion.setStyleName("etiqueta ie5p");
-	    ListBox lstSeccion = new ListBox();
-	    lstSeccion.setVisibleItemCount(1);
-	    left.add(lblSeccion,new FormData("100%"));
-	    left.add(lstSeccion,new FormData("100%"));
-	    
-	    Label lblUnidad = new Label("Unidad:");
-	    lblUnidad.setStyleName("etiqueta");
-	    ListBox lstUnidad = new ListBox();
-	    lstUnidad.setVisibleItemCount(1);
-	    center.add(lblUnidad,new FormData("100%"));
-	    center.add(lstUnidad,new FormData("100%"));
-	    
-	    Label lblPersona = new Label("Persona:");
-	    lblPersona.setStyleName("etiqueta");
-	    ListBox lstPersona = new ListBox();
-	    lstPersona.setVisibleItemCount(1);
-	    right.add(lblPersona,new FormData("100%"));
-	    right.add(lstPersona,new FormData("100%"));
+	    ListStore<BaseModel> personas = new ListStore<BaseModel>();  
+	    personUtils.loadPersonasCombo(personas);
+	  
+	    final ComboBox<BaseModel> comboPersonas = new ComboBox<BaseModel>();  
+	    comboPersonas.setEmptyText("Persona");  
+	    comboPersonas.setStore(personas);  
+	    comboPersonas.setDisplayField("nombre");  
+	    comboPersonas.setValueField("id");
+	    comboPersonas.setFieldLabel("Secciones");
+	    comboPersonas.setWidth(150);  
+	    comboPersonas.setEnabled(true);
+	    right.add(comboPersonas, new FormData("100%"));
 	    
 	    
 	    ButtonGroup gButtons = new ButtonGroup(3);
@@ -693,34 +778,82 @@ public class LoadConsultasUtils {
 	    bottom.setStyleAttribute("paddingLeft", "10px");
 	    bottom.setStyleAttribute("paddingRight", "10px");
 	    
+	    ListStore<BaseModel> secciones = new ListStore<BaseModel>();  
+	    secUtils.loadSeccionesCombo(secciones);
+	  
+	    final ComboBox<BaseModel> comboSeccion = new ComboBox<BaseModel>();  
+	    comboSeccion.setEmptyText("Selecciona una sección");  
+	    comboSeccion.setStore(secciones);  
+	    comboSeccion.setDisplayField("nombre");  
+	    comboSeccion.setValueField("id");
+	    comboSeccion.setFieldLabel("Secciones");
+	    comboSeccion.setWidth(150);  
+	    comboSeccion.setEnabled(true);
 	    
-	   
-	    Label lblSeccion = new Label("Sección:");
-	    lblSeccion.setStyleName("etiqueta");
-	    ListBox lstSeccion = new ListBox();
-	    lstSeccion.setVisibleItemCount(1);
-	    lstSeccion.addItem("...");
-	    left.add(lblSeccion,formData);
-	    left.add(lstSeccion,formData);
+	    
+	    left.add(comboSeccion, formData);
 
-	    Label lblFamilia = new Label("Familia:");
-	    lblFamilia.setStyleName("etiqueta");
-	    ListBox lstFamilia = new ListBox();
-	    lstFamilia.setVisibleItemCount(1);
-	    lstFamilia.setWidth("400px");
-	    lstFamilia.addItem("...");
-	    right.add(lblFamilia,formData);
-	    right.add(lstFamilia,formData);
+	    final ListStore<BaseModel> familias = new ListStore<BaseModel>();  
+	    final ComboBox<BaseModel> comboFamilia = new ComboBox<BaseModel>();  
+	    comboFamilia.setEmptyText("Selecciona una familia");  
+	    comboFamilia.setStore(familias);  
+	    comboFamilia.setDisplayField("nombre");  
+	    comboFamilia.setValueField("id");
+	    comboFamilia.setFieldLabel("Familias");
+	    comboFamilia.setWidth(150);  
+	    comboFamilia.setEnabled(false);
 	    
-	    Label lblSubFamilia = new Label("Subfamilia:");
-	    lblSubFamilia.setStyleName("etiqueta");
-	    ListBox lstSubFamilia = new ListBox();
-	    lstSubFamilia.setVisibleItemCount(1);
-	    lstSubFamilia.setWidth("400px");
-	    lstSubFamilia.addItem("...");
-	    right.add(lblSubFamilia,formData);
-	    right.add(lstSubFamilia,formData);
+	    right.add(comboFamilia,formData);
 	    
+	    final ListStore<BaseModel> subFamilia = new ListStore<BaseModel>();  
+	    final ComboBox<BaseModel> comboSubFamilia = new ComboBox<BaseModel>();  
+	    comboSubFamilia.setEmptyText("Selecciona una subfamilia");  
+	    comboSubFamilia.setStore(subFamilia);  
+	    comboSubFamilia.setDisplayField("nombre");  
+	    comboSubFamilia.setValueField("id");
+	    comboSubFamilia.setFieldLabel("Subfamilias");
+	    comboSubFamilia.setWidth(150);  
+	    comboSubFamilia.setEnabled(false);
+	    
+	    right.add(comboSubFamilia,formData);
+	    
+	    
+	    /*LE DAMOS A LOS COMBOS EL LISTENER*/
+	    comboSeccion.addSelectionChangedListener(new SelectionChangedListener<BaseModel>(){
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent<BaseModel> se) {
+				Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
+				seccion = se.getSelectedItem().get("id");
+				famiUtils.loadFamiliasComboFiltrado(familias, seccion);
+				comboFamilia.setEnabled(true);
+				comboFamilia.recalculate();
+			}
+	    	
+	    });
+	    
+	    comboFamilia.addSelectionChangedListener(new SelectionChangedListener<BaseModel>(){
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent<BaseModel> se) {
+				Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
+				familia = se.getSelectedItem().get("id");
+				subUtils.loadSubFamiliasComboFiltrado(subFamilia, familia);
+				comboSubFamilia.setEnabled(true);
+				comboSubFamilia.recalculate();
+			}
+	    	
+	    });
+	    
+	    comboSubFamilia.addSelectionChangedListener(new SelectionChangedListener<BaseModel>(){
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent<BaseModel> se) {
+				Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
+				subfamilia = se.getSelectedItem().get("id");
+			}
+	    	
+	    });
 	    
 	    TextField<String> codigoArt = new TextField<String>();  
 	    codigoArt.setFieldLabel("Código de Artículo");
@@ -928,14 +1061,18 @@ public class LoadConsultasUtils {
 	    right.setLayout(layout);  
 	    right.setStyleAttribute("paddingTop", "5px");
 	    
-	    Label lblArticulo = new Label("Articulo:");
-	    lblArticulo.setStyleName("etiqueta");
-	    ListBox lstArticulo = new ListBox();
-	    lstArticulo.setVisibleItemCount(1);
-	    lstArticulo.setWidth("400px");
-	    lstArticulo.addItem("...");
-	    cpEntregas.add(lblArticulo,new ColumnData(.2));
-	    cpEntregas.add(lstArticulo,new ColumnData(.8));
+	    ListStore<BaseModel> articulos = new ListStore<BaseModel>();  
+	    artiUtils.loadArticulosCombo(articulos);
+	  
+	    final ComboBox<BaseModel> comboArticulo = new ComboBox<BaseModel>();  
+	    comboArticulo.setEmptyText("Selecciona un artículo");  
+	    comboArticulo.setStore(articulos);  
+	    comboArticulo.setDisplayField("nombre");  
+	    comboArticulo.setValueField("id");
+	    comboArticulo.setFieldLabel("Articulos");
+	    comboArticulo.setWidth(150);  
+	    comboArticulo.setEnabled(true);
+	    cpEntregas.add(comboArticulo,new ColumnData(1));
 	    
 	    DateTimeFormat dtFormat = DateTimeFormat.getFormat("dd-MM-yyyy");
 	    DateField fechaCancelacion = new DateField();

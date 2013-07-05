@@ -17,7 +17,7 @@ public class Destinatarios extends BaseModel implements Serializable{
 	
 	private int ID_ESTADO;
 	
-	private String DESCRIPCION;
+	private String DESCRIPCION; //todos requeridos
 	
 	public Destinatarios(){
 		

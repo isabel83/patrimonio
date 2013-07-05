@@ -9,6 +9,7 @@ import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.Orientation;
 import com.extjs.gxt.ui.client.data.BaseModel;
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
+import com.extjs.gxt.ui.client.data.BeanModel;
 import com.extjs.gxt.ui.client.data.BeanModelReader;
 import com.extjs.gxt.ui.client.data.DataProxy;
 import com.extjs.gxt.ui.client.data.ModelData;
@@ -16,6 +17,7 @@ import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.GridEvent;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
@@ -28,6 +30,7 @@ import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ButtonGroup;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
+import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.DateField;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
@@ -45,9 +48,7 @@ import com.extjs.gxt.ui.client.widget.layout.RowLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextArea;
-import com.patrimonio.plantillas.client.widgets.Stock;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoBuscar;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoEliminados;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoRecepcionTotal;
@@ -58,7 +59,6 @@ import com.patrimonio.plantillas.shared.RpcUtilsProveedores;
 import com.patrimonio.plantillas.shared.RpcUtilsSecciones;
 import com.patrimonio.plantillas.shared.RpcUtilsSubfamilias;
 import com.patrimonio.plantillas.shared.clases.Articulos;
-import com.patrimonio.plantillas.shared.clases.Proveedores;
 
 public class LoadEntradasUtils {
 	
@@ -120,20 +120,18 @@ public class LoadEntradasUtils {
 	    
 
 	    Log.debug("Antes de ir a cargar el combo");
-	    ListStore proveedores = new ListStore();  
+	    ListStore<BaseModel> proveedores = new ListStore<BaseModel>();  
 	    provUtils.loadProveedoresCombo(proveedores);
 	  
-	    ComboBox<Proveedores> combo = new ComboBox<Proveedores>();  
+	    ComboBox<BaseModel> combo = new ComboBox<BaseModel>();  
 	    combo.setEmptyText("Selecciona un proveedor");  
 	    combo.setStore(proveedores);  
 	    combo.setDisplayField("nombre");  
 	    combo.setValueField("id");
 	    combo.setFieldLabel("Proveedor");
 	    combo.setWidth(150);  
-	    //combo.setTriggerAction(TriggerAction.ALL);  
+	    combo.setTriggerAction(TriggerAction.ALL);  
 	    
-	    
-
 	    left.add(combo,formData);
 	    
 	    
@@ -159,18 +157,11 @@ public class LoadEntradasUtils {
 	    cpRight.setHeading("Seleccione los artículos a incluir en el pedido");
 	    cpRight.setBodyBorder(false);
 	    
-//	    Label lblArticulos = new Label("Artículos:");
-//	    lblArticulos.addStyleName("etiqueta");
-//	    
-//	    final ListBox lstArticulos = new ListBox();
-//	    lstArticulos.setVisibleItemCount(1);
-//	    cpRight.add(lblArticulos,  new RowData(1, -1, new Margins(4,1,4,4)));
-//	    cpRight.add(lstArticulos, new RowData(1, -1, new Margins(1,4,4,4)));
 	    Log.debug("Antes de ir a cargar el combo");
-	    ListStore art = new ListStore();  
+	    ListStore<BaseModel> art = new ListStore<BaseModel>();  
+	    artiUtils.loadArticulosCombo(art);
 	    
-	  
-	    ComboBox<Articulos> comboA = new ComboBox<Articulos>();  
+	    ComboBox<BaseModel> comboA = new ComboBox<BaseModel>();  
 	    comboA.setEmptyText("Selecciona un articulo");  
 	    comboA.setStore(art);  
 	    comboA.setDisplayField("nombre");  
@@ -284,24 +275,27 @@ public class LoadEntradasUtils {
 	    column.setWidth(200); 
 	    configs.add(column);  
 	    
-	    ListStore<Stock> store = new ListStore<Stock>();
+	    ListStore<BeanModel> store = new ListStore<BeanModel>();
 	  //  store.add(getArticulos()); //(REVISAR ESTO PORQUE DA ERROR EN LA DEMO)
 	    
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
-	    Grid<Stock> grid = new Grid<Stock>(store,cm);
+	    DataProxy proxy = null; 
+		final BasePagingLoader<PagingLoadResult<ModelData>> loader = new BasePagingLoader<PagingLoadResult<ModelData>>(  
+	            proxy, new BeanModelReader());  
+	        loader.setRemoteSort(true);
+	    
+	    
+	    Grid<BeanModel> grid = new Grid<BeanModel>(store,cm);
 	    grid.setStyleAttribute("borderTop", "none");  
 	    grid.setBorders(false);
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
 	    grid.setColumnReordering(true);  
 	    grid.setColumnLines(true);
+	      
 	    
-	    
-	    DataProxy proxy = null; 
-		final BasePagingLoader<PagingLoadResult<ModelData>> loader = new BasePagingLoader<PagingLoadResult<ModelData>>(  
-	            proxy, new BeanModelReader());  
-	        loader.setRemoteSort(true); 
+	     
 	    
 	    final PagingToolBar toolBar = new PagingToolBar(50); 
 	    toolBar.bind(loader);
@@ -447,12 +441,12 @@ public class LoadEntradasUtils {
 	    configs.add(column);  
 	      
 	    
-	    ListStore<Stock> store = new ListStore<Stock>();
+	    ListStore<BeanModel> store = new ListStore<BeanModel>();
 	  //  store.add(getStocks()); //(REVISAR ESTO PORQUE DA ERROR EN LA DEMO)
 	    
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
-	    Grid<Stock> grid = new Grid<Stock>(store,cm);
+	    Grid<BeanModel> grid = new Grid<BeanModel>(store,cm);
 	    grid.setBorders(false);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
@@ -563,7 +557,7 @@ public class LoadEntradasUtils {
 	    
 	    
 	   
-	    ListStore secciones = new ListStore();  
+	    ListStore<BaseModel> secciones = new ListStore<BaseModel>();  
 	    secUtils.loadSeccionesCombo(secciones);
 	  
 	    final ComboBox<BaseModel> comboSeccion = new ComboBox<BaseModel>();  
@@ -578,7 +572,7 @@ public class LoadEntradasUtils {
 	    
 	    left.add(comboSeccion, formData);
 
-	    final ListStore familias = new ListStore();  
+	    final ListStore<BaseModel> familias = new ListStore<BaseModel>();  
 	    final ComboBox<BaseModel> comboFamilia = new ComboBox<BaseModel>();  
 	    comboFamilia.setEmptyText("Selecciona una familia");  
 	    comboFamilia.setStore(familias);  
@@ -590,7 +584,7 @@ public class LoadEntradasUtils {
 	    
 	    right.add(comboFamilia,formData);
 	    
-	    final ListStore subFamilia = new ListStore();  
+	    final ListStore<BaseModel> subFamilia = new ListStore<BaseModel>();  
 	    final ComboBox<BaseModel> comboSubFamilia = new ComboBox<BaseModel>();  
 	    comboSubFamilia.setEmptyText("Selecciona una subfamilia");  
 	    comboSubFamilia.setStore(subFamilia);  
@@ -685,19 +679,23 @@ public class LoadEntradasUtils {
 	    
 	      
 	    
-	    ListStore<Stock> store = new ListStore<Stock>();
+	    ListStore<BeanModel> store = new ListStore<BeanModel>();
 	  //  store.add(getStocks()); //(REVISAR ESTO PORQUE DA ERROR EN LA DEMO)
 	    
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
-	    Grid<Stock> grid = new Grid<Stock>(store,cm);
+	    Grid<BeanModel> grid = new Grid<BeanModel>(store,cm);
 	    grid.setAutoExpandColumn("nombre");  
 	    grid.setAutoExpandColumn("actividad");
 	    grid.setBorders(false);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
 	    grid.setColumnReordering(true);  
-	    
+//	    grid.addListener(Events.Attach, new Listener<GridEvent<BeanModel>>() {  
+//	        public void handleEvent(GridEvent<BeanModel> be) {  
+//	          loader.load(0, 50);  
+//	        }  
+//	      });  
 	    
 	    ButtonGroup gButtons = new ButtonGroup(2);
 	    Button b1  = new Button(), b2 = new Button();
@@ -838,7 +836,7 @@ public class LoadEntradasUtils {
 	    bottom.setStyleAttribute("paddingLeft", "10px");
 	    bottom.setStyleAttribute("paddingRight", "10px");
 	    
-	    ListStore secciones = new ListStore();  
+	    ListStore<BaseModel> secciones = new ListStore<BaseModel>();  
 	    secUtils.loadSeccionesCombo(secciones);
 	  
 	    final ComboBox<BaseModel> comboSeccion = new ComboBox<BaseModel>();  
@@ -853,7 +851,7 @@ public class LoadEntradasUtils {
 	    
 	    left.add(comboSeccion, formData);
 
-	    final ListStore familias = new ListStore();  
+	    final ListStore<BaseModel> familias = new ListStore<BaseModel>();  
 	    final ComboBox<BaseModel> comboFamilia = new ComboBox<BaseModel>();  
 	    comboFamilia.setEmptyText("Selecciona una familia");  
 	    comboFamilia.setStore(familias);  
@@ -865,7 +863,7 @@ public class LoadEntradasUtils {
 	    
 	    right.add(comboFamilia,formData);
 	    
-	    final ListStore subFamilia = new ListStore();  
+	    final ListStore<BaseModel> subFamilia = new ListStore<BaseModel>();  
 	    final ComboBox<BaseModel> comboSubFamilia = new ComboBox<BaseModel>();  
 	    comboSubFamilia.setEmptyText("Selecciona una subfamilia");  
 	    comboSubFamilia.setStore(subFamilia);  

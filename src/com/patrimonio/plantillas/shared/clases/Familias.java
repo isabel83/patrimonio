@@ -14,7 +14,7 @@ import com.extjs.gxt.ui.client.data.BaseModel;
 public class Familias extends BaseModel implements Serializable{
 
 	
-	private Long ID_FAMILIA;
+	private Long ID_FAMILIA; //todos requeridos
 	
 	private int ID_SECCION;
 	

@@ -1,9 +1,12 @@
 package com.patrimonio.plantillas.server.Impl;
 
+import java.util.List;
+
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.patrimonio.plantillas.server.DAOs.PersonasDao;
+import com.patrimonio.plantillas.shared.clases.Familias;
 import com.patrimonio.plantillas.shared.clases.Personas;
 import com.patrimonio.plantillas.client.services.PersonaService;
 
@@ -21,14 +24,15 @@ public class PersonaServiceImpl extends RemoteServiceServlet implements PersonaS
 		
 		return personaDao.findById(idPersona);
 	}
+	
+	@Override
+	public List<Personas> findAllForList() throws Exception {
+		return personaDao.findAll();
+	}
 
 	@Override
-	public void savePersona(long idPersona, int estado, int perfil, String descripcion) throws Exception {
-		Personas persona = personaDao.findById(idPersona);
-		if(persona==null){
-			persona = new Personas(idPersona, estado, perfil, descripcion);
-			personaDao.savePersona(persona);
-		}
+	public void savePersona(Personas persona) throws Exception {
+		personaDao.savePersona(persona);
 	}
 
 	@Override

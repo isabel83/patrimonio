@@ -21,27 +21,27 @@ public class Proveedores extends BaseModel implements Serializable{
 
     private String NOMBRE;
 
-    private String ACTIVIDAD;
+    private String ACTIVIDAD; //no requerido
 
-    private String CONTACTO;
+    private String CONTACTO; //no requerido
 
-    private String DOMICILIO;
+    private String DOMICILIO; //no requerido
 
-    private String POBLACION;
+    private String POBLACION; //no requerido
 
-    private int CP;
+    private int CP; //no requerido
 
-    private String PROVINCIA;
+    private String PROVINCIA; //no requerido
 
-    private String TLF1;
+    private String TLF1; //no requerido
 
-    private String TLF2;
+    private String TLF2; //no requerido
 
-    private int MOVIL;
+    private int MOVIL; //no requerido
 
-    private String FAX;
+    private String FAX; //no requerido
 
-    private String EMAIL;
+    private String EMAIL; //no requerido
 
     private int ID_ESTADO;
     

@@ -80,6 +80,12 @@ public class ArticuloServiceImpl extends RemoteServiceServlet implements Articul
 		
 		return articuloDAO.findByCriterios(articuloBusqueda);
 	}
+
+	@Override
+	public List<Articulos> findAllForList() throws Exception {
+		// TODO Auto-generated method stub
+		return articuloDAO.findAll();
+	}
 	
 
 }

@@ -14,7 +14,7 @@ import com.patrimonio.plantillas.client.DTOs.SubfamiliasDTO;
 
 public class Subfamilias extends BaseModel implements Serializable{
 
-	private Long ID_SUBFAMILIA;
+	private Long ID_SUBFAMILIA; //todos requeridos
 
 	private int ID_FAMILIA;
 

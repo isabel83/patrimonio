@@ -17,4 +17,5 @@ public interface ArticuloService extends RemoteService{
 	public void deleteArticulo(long idArticulo) throws Exception;
 	public List<Articulos> loadArticulosPro(int idProveedor);
 	public List<Articulos> findByCriterios(Articulos articuloBusqueda) throws Exception;
+	public List<Articulos> findAllForList() throws Exception;
 }

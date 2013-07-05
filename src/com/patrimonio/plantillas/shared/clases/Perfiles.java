@@ -14,7 +14,7 @@ import com.patrimonio.plantillas.client.DTOs.PerfilesDTO;
 
 public class Perfiles extends BaseModel implements Serializable{
 
-	private Long ID_PERFIL;
+	private Long ID_PERFIL; //requeridos
 	
 	private String DESCRIPCION;
 	

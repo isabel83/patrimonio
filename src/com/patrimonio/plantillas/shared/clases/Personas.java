@@ -14,7 +14,7 @@ import com.patrimonio.plantillas.client.DTOs.PersonasDTO;
 
 public class Personas extends BaseModel implements Serializable{
 	
-	private Long ID_PERSONA;
+	private Long ID_PERSONA; //todos requeridos
 
 	private int ID_ESTADO;
 
@@ -45,6 +45,12 @@ public class Personas extends BaseModel implements Serializable{
 		this.DESCRIPCION=persona.getDescripcion();
 	}
 	
+	public Personas(String nombre, int perfil, int estado) { 
+		this.ID_ESTADO = estado;
+		this.ID_PERFIL=perfil;
+		this.DESCRIPCION=nombre;
+	}
+
 	public Long getId_persona() {
 		return this.ID_PERSONA;
 	}

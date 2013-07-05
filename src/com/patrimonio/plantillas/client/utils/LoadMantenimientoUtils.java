@@ -36,16 +36,13 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.ListBox;
 import com.patrimonio.plantillas.client.widgets.Stock;
 import com.patrimonio.plantillas.shared.RpcUtilsDestinatarios;
 import com.patrimonio.plantillas.shared.RpcUtilsFamilias;
 import com.patrimonio.plantillas.shared.RpcUtilsProveedores;
 import com.patrimonio.plantillas.shared.RpcUtilsSecciones;
 import com.patrimonio.plantillas.shared.RpcUtilsSubfamilias;
-import com.patrimonio.plantillas.shared.clases.Proveedores;
-import com.patrimonio.plantillas.shared.clases.Secciones;
+import com.patrimonio.plantillas.shared.clases.Destinatarios;
 
 public class LoadMantenimientoUtils {
 
@@ -54,7 +51,6 @@ public class LoadMantenimientoUtils {
 	RpcUtilsSecciones secUtils = new RpcUtilsSecciones();
 	RpcUtilsFamilias famiUtils = new RpcUtilsFamilias();
 	RpcUtilsSubfamilias subUtils = new RpcUtilsSubfamilias();
-	RpcUtilsDestinatarios puestosUtils = new RpcUtilsDestinatarios();
 	
 	
 	long idProveedor;
@@ -639,7 +635,7 @@ public class LoadMantenimientoUtils {
 	    codigo.setFieldLabel("Código");
 	    codigo.setEnabled(false);
 	    
-	    ListStore secciones = new ListStore();  
+	    ListStore<BaseModel> secciones = new ListStore<BaseModel>();  
 	    secUtils.loadSeccionesCombo(secciones);
 	  
 	    final ComboBox<BaseModel> combo = new ComboBox<BaseModel>();  
@@ -837,7 +833,7 @@ public class LoadMantenimientoUtils {
 	    codigo.setFieldLabel("Código"); 
 	    codigo.setEnabled(false);
 	    
-	    ListStore familias = new ListStore();  
+	    ListStore<BaseModel> familias = new ListStore<BaseModel>();  
 	    famiUtils.loadFamiliasCombo(familias);
 	  
 	    final ComboBox<BaseModel> combo = new ComboBox<BaseModel>();  
@@ -1005,13 +1001,18 @@ public class LoadMantenimientoUtils {
 	    bottom.setStyleAttribute("paddingRight", "10px");
 	    
 	    
-	    Label lblDelegacion = new Label("Delegación / Destinatario:");
-	    lblDelegacion.setStyleName("etiqueta");
-	    ListBox lstColectivo = new ListBox();
-	    lstColectivo.setVisibleItemCount(1);
-	    lstColectivo.addItem("...");
-	    left.add(lblDelegacion, formData);
-	    left.add(lstColectivo, formData);
+	    ListStore<BaseModel> unidades = new ListStore<BaseModel>();  
+	    destiUtils.loadUnidadCombo(unidades);
+	  
+	    final ComboBox<BaseModel> comboUnidad = new ComboBox<BaseModel>();  
+	    comboUnidad.setEmptyText("Delegación / Destinatario");  
+	    comboUnidad.setStore(unidades);  
+	    comboUnidad.setDisplayField("nombre");  
+	    comboUnidad.setValueField("id");
+	    comboUnidad.setFieldLabel("Secciones");
+	    comboUnidad.setWidth(150);  
+	    comboUnidad.setEnabled(true);
+	    left.add(comboUnidad, formData);
 	  
 	    TextField<String> grupo = new TextField<String>();  
 	    grupo.setFieldLabel("Grupo profesional / Colectivo");

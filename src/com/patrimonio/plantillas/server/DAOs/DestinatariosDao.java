@@ -16,6 +16,7 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.patrimonio.plantillas.server.HibernateUtils;
 import com.patrimonio.plantillas.shared.clases.Destinatarios;
+import com.patrimonio.plantillas.shared.clases.Proveedores;
 
 public class DestinatariosDao  extends HibernateDaoSupport{
 	@Autowired
@@ -121,6 +122,14 @@ public class DestinatariosDao  extends HibernateDaoSupport{
 		finally{
 			sesion.close();
 		}
+	}
+
+	public List<Destinatarios> findAll() {
+		sesion = sessionFactory.openSession();
+		
+		List<Destinatarios> todos = sesion.createQuery("from Destinatarios").list();
+		sesion.close();
+		return todos;
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.patrimonio.plantillas.server.DAOs;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
@@ -14,6 +15,7 @@ import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.patrimonio.plantillas.server.HibernateUtils;
+import com.patrimonio.plantillas.shared.clases.Destinatarios;
 import com.patrimonio.plantillas.shared.clases.Personas;
 
 public class PersonasDao extends HibernateDaoSupport{
@@ -36,6 +38,15 @@ public class PersonasDao extends HibernateDaoSupport{
         return persona;
 		
 	}
+	
+	public List<Personas> findAll() {
+		sesion = sessionFactory.openSession();
+		
+		List<Personas> todos = sesion.createQuery("from Personas").list();
+		sesion.close();
+		return todos;
+	}
+	
 
 	@SuppressWarnings("unchecked")
 	public PagingLoadResult<Personas> getPersonas(PagingLoadConfig loadConfig){
