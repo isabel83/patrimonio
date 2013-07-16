@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
+import com.extjs.gxt.ui.client.data.BaseModel;
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
 import com.extjs.gxt.ui.client.data.BeanModelReader;
 import com.extjs.gxt.ui.client.data.DataProxy;
@@ -31,7 +32,6 @@ import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.user.client.Element;
-import com.patrimonio.plantillas.client.widgets.Stock;
 
 public class DialogoAlbaranesPedidos extends Dialog{
 
@@ -170,12 +170,12 @@ public class DialogoAlbaranesPedidos extends Dialog{
 	    
 	      
 	    
-	    ListStore<Stock> store = new ListStore<Stock>();
+	    ListStore<BaseModel> store = new ListStore<BaseModel>();
 	  //  store.add(getStocks()); //(REVISAR ESTO PORQUE DA ERROR EN LA DEMO)
 	    
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
-	    Grid<Stock> grid = new Grid<Stock>(store,cm);
+	    Grid<BaseModel> grid = new Grid<BaseModel>(store,cm);
 	    grid.setBorders(false);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  

@@ -1,2 +1,0 @@
-serviceClass: com.patrimonio.plantillas.shared.services.ProveedorService
-path: 8E8E516BFF88BA19F7D13338985B6995.gwt.rpc

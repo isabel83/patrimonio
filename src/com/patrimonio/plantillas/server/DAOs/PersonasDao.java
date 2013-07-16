@@ -96,20 +96,8 @@ public class PersonasDao extends HibernateDaoSupport{
 	}
 	
 	public boolean removePersona(Personas persona) {
-
-		sesion = sessionFactory.openSession();
-		try{
-			sesion.beginTransaction();
-			sesion.delete(persona); 
-			sesion.getTransaction().commit();
-			return true;
-		}
-		catch(Exception e){
-			return false;
-		}
-		finally{
-			sesion.close();
-		}
+		persona.setId_estado(0);
+		return updatePersona(persona);
 	}
 
 }

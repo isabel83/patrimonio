@@ -46,7 +46,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
-import com.patrimonio.plantillas.client.widgets.Stock;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoAlbaranFecha;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoBuscar;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoNuevoArticulo;
@@ -129,7 +128,7 @@ public class LoadSalidasUtils {
 	    destiUtils.loadUnidadCombo(unidades);
 	  
 	    final ComboBox<BaseModel> comboUnidad = new ComboBox<BaseModel>();  
-	    comboUnidad.setEmptyText("Destinatario");  
+	    comboUnidad.setEmptyText("Selecciona un destinatario");  
 	    comboUnidad.setStore(unidades);  
 	    comboUnidad.setDisplayField("nombre");  
 	    comboUnidad.setValueField("id");
@@ -142,11 +141,11 @@ public class LoadSalidasUtils {
 	    personUtils.loadPersonasCombo(personas);
 	  
 	    final ComboBox<BaseModel> comboPersonas = new ComboBox<BaseModel>();  
-	    comboPersonas.setEmptyText("Persona");  
+	    comboPersonas.setEmptyText("Selecciona una persona");  
 	    comboPersonas.setStore(personas);  
 	    comboPersonas.setDisplayField("nombre");  
 	    comboPersonas.setValueField("id");
-	    comboPersonas.setFieldLabel("Secciones");
+	    comboPersonas.setFieldLabel("Persona");
 	    comboPersonas.setWidth(150);  
 	    comboPersonas.setEnabled(true);
 	    bottom.add(comboPersonas, new FormData("100%"));
@@ -375,12 +374,12 @@ DataProxy proxy = null;
 	    
 	      
 	    
-	    ListStore<Stock> store = new ListStore<Stock>();
+	    ListStore<BaseModel> store = new ListStore<BaseModel>();
 	  //  store.add(getStocks()); //(REVISAR ESTO PORQUE DA ERROR EN LA DEMO)
 	    
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
-	    Grid<Stock> grid = new Grid<Stock>(store,cm);
+	    Grid<BaseModel> grid = new Grid<BaseModel>(store,cm);
 	    grid.setBorders(true);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
@@ -536,12 +535,12 @@ DataProxy proxy = null;
 	    
 	      
 	    
-	    ListStore<Stock> store = new ListStore<Stock>();
+	    ListStore<BaseModel> store = new ListStore<BaseModel>();
 	  //  store.add(getStocks()); //(REVISAR ESTO PORQUE DA ERROR EN LA DEMO)
 	    
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
-	    Grid<Stock> grid = new Grid<Stock>(store,cm);
+	    Grid<BaseModel> grid = new Grid<BaseModel>(store,cm);
 	    grid.setBorders(true);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  

@@ -22,16 +22,6 @@ public class FormMntTablas extends ContentPanel{
 		panelActivo = posicion;
 	}
 
-
-	@Override
-	protected void onLoad() {
-		
-		super.onLoad();
-Log.debug("EL ON LOAD");
-		recalculate();
-	}
-	
-
 	@Override
 	protected void onRender(Element parent, int pos) {
 		super.onRender(parent, pos);
@@ -52,88 +42,28 @@ Log.debug("EL ON LOAD");
 			    }  
 			  });    
 		
-		TabPanel tabPanel = new TabPanel();
-		tabPanel.setAutoHeight(true);
-		tabPanel.setWidth("95%");
-		tabPanel.setBodyBorder(false);
-		tabPanel.setBorders(false);
-		loadPanelConsultas(tabPanel);
-		tabPanel.setSelection(tabPanel.getItem(panelActivo));
-		add(tabPanel);
+		FormPanel form = new FormPanel();
+		form.setHeaderVisible(false);
+		form.setExpanded(true);
+		form.setAutoHeight(true);
+		form.setBodyBorder(false);
+		form.setBorders(false);
+		loadMantenimientos(form, panelActivo);
+		add(form);
 		
 			
 	} 
 	
 	
-	private void loadPanelConsultas(TabPanel panel) {
-		
-		FormPanel frmProveedores = new FormPanel();
-		frmProveedores.setHeaderVisible(false);
-		frmProveedores.setExpanded(true);
-		frmProveedores.setAutoHeight(true);
-		utils.loadFormProveedores(frmProveedores);
-		
-		TabItem tabProveedores = new TabItem();
-		tabProveedores.add(new MenuIconos());
-		tabProveedores.add(frmProveedores);
-		tabProveedores.disableTextSelection(true);
-		panel.add(tabProveedores);
-		
-		final FormPanel frmDestinatarios = new FormPanel();
-		frmDestinatarios.setHeaderVisible(false);
-		frmDestinatarios.setExpanded(true);
-		frmDestinatarios.setAutoHeight(true);
-		utils.loadFormDestinatarios(frmDestinatarios);
-		
-		TabItem tabDestinatarios = new TabItem();
-		tabDestinatarios.add(new MenuIconos());
-		tabDestinatarios.add(frmDestinatarios);
-		panel.add(tabDestinatarios);
-		
-		final FormPanel frmSecciones = new FormPanel();
-		frmSecciones.setHeaderVisible(false);
-		frmSecciones.setExpanded(true);
-		frmSecciones.setAutoHeight(true);
-		utils.loadFormSecciones(frmSecciones);
-		
-		TabItem tabSecciones = new TabItem();
-		tabSecciones.add(new MenuIconos());
-		tabSecciones.add(frmSecciones);
-		panel.add(tabSecciones);
-		
-		final FormPanel frmFamilias = new FormPanel();
-		frmFamilias.setHeaderVisible(false);
-		frmFamilias.setExpanded(true);
-		frmFamilias.setAutoHeight(true);
-		utils.loadFormFamilias(frmFamilias);
-		
-		TabItem tabFamilias = new TabItem();
-		tabFamilias.add(new MenuIconos());
-		tabFamilias.add(frmFamilias);
-		panel.add(tabFamilias);
-		
-		final FormPanel frmSubFamilias = new FormPanel();
-		frmSubFamilias.setHeaderVisible(false);
-		frmSubFamilias.setExpanded(true);
-		frmSubFamilias.setAutoHeight(true);
-		utils.loadFormSubFamilias(frmSubFamilias);
-		
-		TabItem tabSubFamilias = new TabItem();
-		tabSubFamilias.add(new MenuIconos());
-		tabSubFamilias.add(frmSubFamilias);
-		panel.add(tabSubFamilias);
-		
-		final FormPanel frmPuestos = new FormPanel();
-		frmPuestos.setHeaderVisible(false);
-		frmPuestos.setAutoHeight(true);
-		frmPuestos.setBodyBorder(false);
-		utils.loadFormPuestos(frmPuestos);
-		
-		TabItem tabPuestos = new TabItem();
-		tabPuestos.add(new MenuIconos());
-		tabPuestos.add(frmPuestos);
-		panel.add(tabPuestos);
-		
-		
+	private void loadMantenimientos(FormPanel form, int activo) {
+		switch(activo){
+			case 0: utils.loadFormProveedores(form); break;
+			case 1: utils.loadFormDestinatarios(form); break; 
+			case 2: utils.loadFormSecciones(form);break;
+			case 3: utils.loadFormFamilias(form);break;
+			case 4: utils.loadFormSubFamilias(form);break;
+			case 5: utils.loadFormPuestos(form);break;
+		}
 	}
+
 }

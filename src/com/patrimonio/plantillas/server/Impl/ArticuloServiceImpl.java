@@ -22,9 +22,7 @@ public class ArticuloServiceImpl extends RemoteServiceServlet implements Articul
 
 	@Override
 	public void saveArticulo(Articulos articulo) throws Exception {
-		
 			 articuloDAO.saveArticulo(articulo);
-		
 	}
 
 	@Override
@@ -59,7 +57,6 @@ public class ArticuloServiceImpl extends RemoteServiceServlet implements Articul
 
 	@Override
 	public void deleteArticulo(long idArticulo) throws Exception {
-		
 		Articulos articulo = articuloDAO.findById(idArticulo);
 		if(articulo!=null)
 			articuloDAO.removeArticulo(articulo);
@@ -77,13 +74,11 @@ public class ArticuloServiceImpl extends RemoteServiceServlet implements Articul
 
 	@Override
 	public List<Articulos> findByCriterios(Articulos articuloBusqueda) throws Exception {
-		
 		return articuloDAO.findByCriterios(articuloBusqueda);
 	}
 
 	@Override
 	public List<Articulos> findAllForList() throws Exception {
-		// TODO Auto-generated method stub
 		return articuloDAO.findAll();
 	}
 	

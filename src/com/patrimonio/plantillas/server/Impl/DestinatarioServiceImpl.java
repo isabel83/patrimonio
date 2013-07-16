@@ -13,18 +13,11 @@ public class DestinatarioServiceImpl extends RemoteServiceServlet implements Des
 
 	@Override
 	public Destinatarios findDestinatario(long idDestinatario) {
-		
 		return destinatarioDAO.findById(idDestinatario);
 	}
 
 	@Override
 	public void saveDestinatario(Destinatarios destinatario) throws Exception {
-//		Destinatarios destinatario = destinatarioDAO.findById(idDestinatario);
-//		if(destinatario==null){
-//			destinatario = new Destinatarios(idDestinatario,estado,descripcion);
-//			destinatarioDAO.saveDestinatario(destinatario);
-//		}
-		
 		destinatarioDAO.saveDestinatario(destinatario);
 	}
 
@@ -53,7 +46,6 @@ public class DestinatarioServiceImpl extends RemoteServiceServlet implements Des
 
 	@Override
 	public List<Destinatarios> findAllForList() throws Exception {
-		// TODO Auto-generated method stub
 		return destinatarioDAO.findAll();
 	}
 

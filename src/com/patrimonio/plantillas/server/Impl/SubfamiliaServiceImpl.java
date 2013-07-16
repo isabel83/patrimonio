@@ -15,19 +15,16 @@ public class SubfamiliaServiceImpl extends RemoteServiceServlet implements Subfa
 	
 	@Override
 	public PagingLoadResult<Subfamilias> findAll(PagingLoadConfig config){
-		
 		return subfamiliaDAO.getSubfamilias(config);
 	}
 
 	@Override
 	public Subfamilias findSubfamilia(long idSubfamilia) {
-		
 		return subfamiliaDAO.findById(idSubfamilia);
 	}
 
 	@Override
 	public void saveSubfamilia(Subfamilias subfamilia) throws Exception {
-		
 			subfamiliaDAO.saveSubfamilia(subfamilia);
 	}
 
@@ -61,7 +58,6 @@ public class SubfamiliaServiceImpl extends RemoteServiceServlet implements Subfa
 
 	@Override
 	public List<Subfamilias> findAllForList() throws Exception {
-		
 		return subfamiliaDAO.findAll();
 	}
 }

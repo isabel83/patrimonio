@@ -1,2 +1,0 @@
-serviceClass: com.patrimonio.plantillas.client.services.FamiliaService
-path: F1E6479CBC59DB86AF89E0FCBE509BA1.gwt.rpc

@@ -114,12 +114,10 @@ public class LoadEntradasUtils {
 	    
 	    TextField<String> nifProv = new TextField<String>();  
 	    nifProv.setFieldLabel("NIF del proveedor");
-	    nifProv.setValue("B28922490");
 	    nifProv.disable();
 	    left.add(nifProv,formData);
 	    
 
-	    Log.debug("Antes de ir a cargar el combo");
 	    ListStore<BaseModel> proveedores = new ListStore<BaseModel>();  
 	    provUtils.loadProveedoresCombo(proveedores);
 	  
@@ -275,7 +273,7 @@ public class LoadEntradasUtils {
 	    column.setWidth(200); 
 	    configs.add(column);  
 	    
-	    ListStore<BeanModel> store = new ListStore<BeanModel>();
+	    ListStore<BaseModel> store = new ListStore<BaseModel>();
 	  //  store.add(getArticulos()); //(REVISAR ESTO PORQUE DA ERROR EN LA DEMO)
 	    
 	    ColumnModel cm = new ColumnModel(configs);  
@@ -286,7 +284,7 @@ public class LoadEntradasUtils {
 	        loader.setRemoteSort(true);
 	    
 	    
-	    Grid<BeanModel> grid = new Grid<BeanModel>(store,cm);
+	    Grid<BaseModel> grid = new Grid<BaseModel>(store,cm);
 	    grid.setStyleAttribute("borderTop", "none");  
 	    grid.setBorders(false);
 	    grid.setStripeRows(true);  
@@ -441,12 +439,12 @@ public class LoadEntradasUtils {
 	    configs.add(column);  
 	      
 	    
-	    ListStore<BeanModel> store = new ListStore<BeanModel>();
+	    ListStore<BaseModel> store = new ListStore<BaseModel>();
 	  //  store.add(getStocks()); //(REVISAR ESTO PORQUE DA ERROR EN LA DEMO)
 	    
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
-	    Grid<BeanModel> grid = new Grid<BeanModel>(store,cm);
+	    Grid<BaseModel> grid = new Grid<BaseModel>(store,cm);
 	    grid.setBorders(false);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
@@ -565,7 +563,7 @@ public class LoadEntradasUtils {
 	    comboSeccion.setStore(secciones);  
 	    comboSeccion.setDisplayField("nombre");  
 	    comboSeccion.setValueField("id");
-	    comboSeccion.setFieldLabel("Secciones");
+	    comboSeccion.setFieldLabel("Sección");
 	    comboSeccion.setWidth(150);  
 	    comboSeccion.setEnabled(true);
 	    
@@ -578,7 +576,7 @@ public class LoadEntradasUtils {
 	    comboFamilia.setStore(familias);  
 	    comboFamilia.setDisplayField("nombre");  
 	    comboFamilia.setValueField("id");
-	    comboFamilia.setFieldLabel("Familias");
+	    comboFamilia.setFieldLabel("Familia");
 	    comboFamilia.setWidth(150);  
 	    comboFamilia.setEnabled(false);
 	    
@@ -590,7 +588,7 @@ public class LoadEntradasUtils {
 	    comboSubFamilia.setStore(subFamilia);  
 	    comboSubFamilia.setDisplayField("nombre");  
 	    comboSubFamilia.setValueField("id");
-	    comboSubFamilia.setFieldLabel("Subfamilias");
+	    comboSubFamilia.setFieldLabel("Subfamilia");
 	    comboSubFamilia.setWidth(150);  
 	    comboSubFamilia.setEnabled(false);
 	    
@@ -679,12 +677,12 @@ public class LoadEntradasUtils {
 	    
 	      
 	    
-	    ListStore<BeanModel> store = new ListStore<BeanModel>();
+	    ListStore<BaseModel> store = new ListStore<BaseModel>();
 	  //  store.add(getStocks()); //(REVISAR ESTO PORQUE DA ERROR EN LA DEMO)
 	    
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
-	    Grid<BeanModel> grid = new Grid<BeanModel>(store,cm);
+	    Grid<BaseModel> grid = new Grid<BaseModel>(store,cm);
 	    grid.setAutoExpandColumn("nombre");  
 	    grid.setAutoExpandColumn("actividad");
 	    grid.setBorders(false);  

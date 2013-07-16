@@ -334,7 +334,7 @@ public class LoadConsultasUtils {
 	    comboSeccion.setStore(secciones);  
 	    comboSeccion.setDisplayField("nombre");  
 	    comboSeccion.setValueField("id");
-	    comboSeccion.setFieldLabel("Secciones");
+	    comboSeccion.setFieldLabel("Sección");
 	    comboSeccion.setWidth(150);  
 	    comboSeccion.setEnabled(true);
 	    left.add(comboSeccion, new FormData("100%"));
@@ -344,11 +344,11 @@ public class LoadConsultasUtils {
 	    destiUtils.loadUnidadCombo(unidades);
 	  
 	    final ComboBox<BaseModel> comboUnidad = new ComboBox<BaseModel>();  
-	    comboUnidad.setEmptyText("Unidad");  
+	    comboUnidad.setEmptyText("Selecciona una unidad");  
 	    comboUnidad.setStore(unidades);  
 	    comboUnidad.setDisplayField("nombre");  
 	    comboUnidad.setValueField("id");
-	    comboUnidad.setFieldLabel("Secciones");
+	    comboUnidad.setFieldLabel("Unidad");
 	    comboUnidad.setWidth(150);  
 	    comboUnidad.setEnabled(true);
 	    center.add(comboUnidad, new FormData("100%"));
@@ -357,11 +357,11 @@ public class LoadConsultasUtils {
 	    personUtils.loadPersonasCombo(personas);
 	  
 	    final ComboBox<BaseModel> comboPersonas = new ComboBox<BaseModel>();  
-	    comboPersonas.setEmptyText("Persona");  
+	    comboPersonas.setEmptyText("Selecciona una persona");  
 	    comboPersonas.setStore(personas);  
 	    comboPersonas.setDisplayField("nombre");  
 	    comboPersonas.setValueField("id");
-	    comboPersonas.setFieldLabel("Secciones");
+	    comboPersonas.setFieldLabel("Persona");
 	    comboPersonas.setWidth(150);  
 	    comboPersonas.setEnabled(true);
 	    right.add(comboPersonas, new FormData("100%"));
@@ -498,7 +498,7 @@ public class LoadConsultasUtils {
 	    comboSeccion.setStore(secciones);  
 	    comboSeccion.setDisplayField("nombre");  
 	    comboSeccion.setValueField("id");
-	    comboSeccion.setFieldLabel("Secciones");
+	    comboSeccion.setFieldLabel("Sección");
 	    comboSeccion.setWidth(150);  
 	    comboSeccion.setEnabled(true);
 	    left.add(comboSeccion, new FormData("100%"));
@@ -508,11 +508,11 @@ public class LoadConsultasUtils {
 	    destiUtils.loadUnidadCombo(unidades);
 	  
 	    final ComboBox<BaseModel> comboUnidad = new ComboBox<BaseModel>();  
-	    comboUnidad.setEmptyText("Unidad");  
+	    comboUnidad.setEmptyText("Selecciona una unidad");  
 	    comboUnidad.setStore(unidades);  
 	    comboUnidad.setDisplayField("nombre");  
 	    comboUnidad.setValueField("id");
-	    comboUnidad.setFieldLabel("Secciones");
+	    comboUnidad.setFieldLabel("Unidad");
 	    comboUnidad.setWidth(150);  
 	    comboUnidad.setEnabled(true);
 	    center.add(comboUnidad, new FormData("100%"));
@@ -521,11 +521,11 @@ public class LoadConsultasUtils {
 	    personUtils.loadPersonasCombo(personas);
 	  
 	    final ComboBox<BaseModel> comboPersonas = new ComboBox<BaseModel>();  
-	    comboPersonas.setEmptyText("Persona");  
+	    comboPersonas.setEmptyText("selecciona una persona");  
 	    comboPersonas.setStore(personas);  
 	    comboPersonas.setDisplayField("nombre");  
 	    comboPersonas.setValueField("id");
-	    comboPersonas.setFieldLabel("Secciones");
+	    comboPersonas.setFieldLabel("Persona");
 	    comboPersonas.setWidth(150);  
 	    comboPersonas.setEnabled(true);
 	    right.add(comboPersonas, new FormData("100%"));
@@ -674,7 +674,7 @@ public class LoadConsultasUtils {
 	    comboSeccion.setStore(secciones);  
 	    comboSeccion.setDisplayField("nombre");  
 	    comboSeccion.setValueField("id");
-	    comboSeccion.setFieldLabel("Secciones");
+	    comboSeccion.setFieldLabel("Sección");
 	    comboSeccion.setWidth(150);  
 	    comboSeccion.setEnabled(true);
 	    left.add(comboSeccion, new FormData("100%"));
@@ -684,11 +684,11 @@ public class LoadConsultasUtils {
 	    destiUtils.loadUnidadCombo(unidades);
 	  
 	    final ComboBox<BaseModel> comboUnidad = new ComboBox<BaseModel>();  
-	    comboUnidad.setEmptyText("Unidad");  
+	    comboUnidad.setEmptyText("Selecciona una unidad");  
 	    comboUnidad.setStore(unidades);  
 	    comboUnidad.setDisplayField("nombre");  
 	    comboUnidad.setValueField("id");
-	    comboUnidad.setFieldLabel("Secciones");
+	    comboUnidad.setFieldLabel("Unidad");
 	    comboUnidad.setWidth(150);  
 	    comboUnidad.setEnabled(true);
 	    center.add(comboUnidad, new FormData("100%"));
@@ -697,11 +697,11 @@ public class LoadConsultasUtils {
 	    personUtils.loadPersonasCombo(personas);
 	  
 	    final ComboBox<BaseModel> comboPersonas = new ComboBox<BaseModel>();  
-	    comboPersonas.setEmptyText("Persona");  
+	    comboPersonas.setEmptyText("Selecciona una persona");  
 	    comboPersonas.setStore(personas);  
 	    comboPersonas.setDisplayField("nombre");  
 	    comboPersonas.setValueField("id");
-	    comboPersonas.setFieldLabel("Secciones");
+	    comboPersonas.setFieldLabel("Persona");
 	    comboPersonas.setWidth(150);  
 	    comboPersonas.setEnabled(true);
 	    right.add(comboPersonas, new FormData("100%"));
@@ -786,7 +786,7 @@ public class LoadConsultasUtils {
 	    comboSeccion.setStore(secciones);  
 	    comboSeccion.setDisplayField("nombre");  
 	    comboSeccion.setValueField("id");
-	    comboSeccion.setFieldLabel("Secciones");
+	    comboSeccion.setFieldLabel("Sección");
 	    comboSeccion.setWidth(150);  
 	    comboSeccion.setEnabled(true);
 	    
@@ -799,7 +799,7 @@ public class LoadConsultasUtils {
 	    comboFamilia.setStore(familias);  
 	    comboFamilia.setDisplayField("nombre");  
 	    comboFamilia.setValueField("id");
-	    comboFamilia.setFieldLabel("Familias");
+	    comboFamilia.setFieldLabel("Familia");
 	    comboFamilia.setWidth(150);  
 	    comboFamilia.setEnabled(false);
 	    
@@ -811,7 +811,7 @@ public class LoadConsultasUtils {
 	    comboSubFamilia.setStore(subFamilia);  
 	    comboSubFamilia.setDisplayField("nombre");  
 	    comboSubFamilia.setValueField("id");
-	    comboSubFamilia.setFieldLabel("Subfamilias");
+	    comboSubFamilia.setFieldLabel("Subfamilia");
 	    comboSubFamilia.setWidth(150);  
 	    comboSubFamilia.setEnabled(false);
 	    
@@ -1062,14 +1062,14 @@ public class LoadConsultasUtils {
 	    right.setStyleAttribute("paddingTop", "5px");
 	    
 	    ListStore<BaseModel> articulos = new ListStore<BaseModel>();  
-	    artiUtils.loadArticulosCombo(articulos);
+	    //artiUtils.loadArticulosCombo(articulos);
 	  
 	    final ComboBox<BaseModel> comboArticulo = new ComboBox<BaseModel>();  
 	    comboArticulo.setEmptyText("Selecciona un artículo");  
 	    comboArticulo.setStore(articulos);  
 	    comboArticulo.setDisplayField("nombre");  
 	    comboArticulo.setValueField("id");
-	    comboArticulo.setFieldLabel("Articulos");
+	    comboArticulo.setFieldLabel("Artículo");
 	    comboArticulo.setWidth(150);  
 	    comboArticulo.setEnabled(true);
 	    cpEntregas.add(comboArticulo,new ColumnData(1));

@@ -1,19 +1,16 @@
 package com.patrimonio.plantillas.shared;
 
-import java.util.Iterator;
 import java.util.List;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.extjs.gxt.ui.client.data.BaseModel;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.MessageBox;
-import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.patrimonio.plantillas.client.services.ArticuloService;
 import com.patrimonio.plantillas.client.services.ArticuloServiceAsync;
 import com.patrimonio.plantillas.shared.clases.Articulos;
-import com.patrimonio.plantillas.shared.clases.Destinatarios;
 
 public class RpcUtilsArticulos {
 	ArticuloServiceAsync articuloService = GWT.create(ArticuloService.class);
@@ -21,6 +18,7 @@ public class RpcUtilsArticulos {
 
 	public void checkValuesAndSaveArticulo(int seccion, int familia, int subfamilia, int codigoArt, String nombreArt, String marcaArt,
 			String obsArt, int minimas,int idoneas) {
+				
 		Articulos articulo = new Articulos(seccion,familia,subfamilia,codigoArt,nombreArt,marcaArt,minimas,idoneas,obsArt,1);
 		guardaArticulo(articulo);
 		
@@ -73,29 +71,29 @@ public class RpcUtilsArticulos {
 		return filtrados;
 	}
 
-	public void loadArticulosCombo(final ListStore articulos) {
-		articuloService.findAllForList(new AsyncCallback<List<Articulos>>(){
-
-			@Override
-			public void onFailure(Throwable caught) {
-				Log.debug("Error en carga de proveedores: " + caught.getLocalizedMessage());
-			}
-
-			@Override
-			public void onSuccess(List<Articulos> result) {
-				Log.debug("Estamos en el on success, hay: " + result.size());
-				for(Articulos arti: result){
-						
-					 BaseModel model = new BaseModel();
-	                 model.set("id",arti.getId_articulo());
-	                 model.set("nombre", arti.getNombre());
-					 articulos.add(model);
-				} 
-				
-				
-			}
-			
-		});
+	public void loadArticulosCombo(final ListStore<BaseModel> articulos) {
+//		articuloService.findAllForList(new AsyncCallback<List<Articulos>>(){
+//
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				Log.debug("Error en carga de proveedores: " + caught.getLocalizedMessage());
+//			}
+//
+//			@Override
+//			public void onSuccess(List<Articulos> result) {
+//				Log.debug("Estamos en el on success, hay: " + result.size());
+//				for(Articulos arti: result){
+//						
+//					 BaseModel model = new BaseModel();
+//	                 model.set("id",arti.getId_articulo());
+//	                 model.set("nombre", arti.getNombre());
+//					 articulos.add(model);
+//				} 
+//				
+//				
+//			}
+//			
+//		});
 		
 	}
 }

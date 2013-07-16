@@ -87,41 +87,9 @@ public class DestinatariosDao  extends HibernateDaoSupport{
 	}
 	
 	public boolean removeDestinatario(Destinatarios destinatario) {
-
-		sesion = sessionFactory.openSession();
-		try{
-			sesion.beginTransaction();
-			sesion.delete(destinatario); 
-			sesion.getTransaction().commit();
-			return true;
-		}
-		catch(Exception e){
-			return false;
-		}
-		finally{
-			sesion.close();
-		}
-	}
-
-	@Transactional
-	public long getMaxId() { 
-		long valor = 0;
-		sesion = sessionFactory.openSession();
-		try{
-			Query query =  sesion.createQuery("select max(id) as max from Destinatarios");
-			
-			List sublist = query.list();
-			if(sublist.get(0)!=null)
-				valor = (Long) sublist.get(0);
-	
-			return valor;
-		}
-		catch(Exception e){
-			return valor;
-		}
-		finally{
-			sesion.close();
-		}
+		//ponemos estado inactivo
+		destinatario.setId_estado(0);
+		return updateDestinatario(destinatario);
 	}
 
 	public List<Destinatarios> findAll() {

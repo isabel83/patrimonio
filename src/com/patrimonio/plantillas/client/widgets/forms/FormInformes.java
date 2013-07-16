@@ -33,15 +33,6 @@ public class FormInformes extends ContentPanel{
 
 
 	@Override
-	protected void onLoad() {
-		
-		super.onLoad();
-
-		recalculate();
-	}
-	
-
-	@Override
 	protected void onRender(Element parent, int pos) {
 		super.onRender(parent, pos);
 
@@ -61,88 +52,26 @@ public class FormInformes extends ContentPanel{
 			    }  
 			  });    
 		
-		TabPanel tabPanel = new TabPanel();
-		tabPanel.setAutoHeight(true);
-		tabPanel.setWidth("95%");
-		tabPanel.setBodyBorder(false);
-		tabPanel.setBorders(false);
-		loadInformes(tabPanel);
-		tabPanel.setSelection(tabPanel.getItem(panelActivo));
-		add(tabPanel);
+		FormPanel form = new FormPanel();
+		form.setHeaderVisible(false);
+		form.setExpanded(true);
+		form.setAutoHeight(true);
+		form.setBodyBorder(false);
+		form.setBorders(false);
+		loadInformes(form, panelActivo);
+		add(form);
 		
 	}
 	
 	
-	private void loadInformes(TabPanel panel) {
-		
-		FormPanel frmPedidos = new FormPanel();
-		frmPedidos.setHeaderVisible(false);
-		frmPedidos.setAutoHeight(true);
-		utils.loadPedidos(frmPedidos);
-		
-		TabItem tabPedidos = new TabItem();
-		tabPedidos.add(new MenuIconos());
-		tabPedidos.add(frmPedidos);
-		tabPedidos.disableTextSelection(true);
-		panel.add(tabPedidos);
-		
-		FormPanel frmSolicitudes = new FormPanel();
-		frmSolicitudes.setHeaderVisible(false);
-		frmSolicitudes.setAutoHeight(true);
-		utils.loadSolicitudes(frmSolicitudes);
-		
-		TabItem tabSolicitudes = new TabItem();
-		tabSolicitudes.add(new MenuIconos());
-		tabSolicitudes.add(frmSolicitudes);
-		panel.add(tabSolicitudes);
-		
-		FormPanel frmArticulos = new FormPanel();
-		frmArticulos.setHeaderVisible(false);
-		frmArticulos.setAutoHeight(true);
-		utils.loadArticulos(frmArticulos);
-		
-		
-		TabItem tabArticulos = new TabItem();
-		tabArticulos.add(new MenuIconos());
-		tabArticulos.add(frmArticulos);
-		panel.add(tabArticulos);
-		
-		FormPanel frmProveedores = new FormPanel();
-		frmProveedores.setHeaderVisible(false);
-		frmProveedores.setAutoHeight(true);
-		utils.loadProveedores(frmProveedores);
-		
-		
-		TabItem tabProveedores = new TabItem();
-		tabProveedores.add(new MenuIconos());
-		tabProveedores.add(frmProveedores);
-		panel.add(tabProveedores);
-		
-		FormPanel frmPuestos = new FormPanel();
-		frmPuestos.setHeaderVisible(false);
-		frmPuestos.setAutoHeight(true);
-		utils.loadPuestos(frmPuestos);
-		
-		
-		TabItem tabPuestos = new TabItem();
-		tabPuestos.add(new MenuIconos());
-		tabPuestos.add(frmPuestos);
-		panel.add(tabPuestos);
-		
-//		FormPanel frmPrevision = new FormPanel();
-//		frmPrevision.setHeaderVisible(false);
-//		frmPrevision.setAutoHeight(true);
-//		utils.loadPrevision(frmPrevision);
-//		
-		
-		TabItem tabPrevision = new TabItem();
-		tabPrevision.add(new MenuIconos());
-		//tabPrevision.add(frmPrevision);
-		tabPrevision.addListener(Events.Select, new Listener<ComponentEvent>(){
- 
-			@Override
-			public void handleEvent(ComponentEvent be) {
-				final TextField<String> anio = new TextField<String>();  
+	private void loadInformes(FormPanel form, int activo) {
+		switch(activo){
+		case 0: utils.loadPedidos(form); break;
+		case 1: utils.loadSolicitudes(form); break;
+		case 2: utils.loadArticulos(form); break;
+		case 3: utils.loadProveedores(form); break;
+		case 4: utils.loadPuestos(form); break;
+		case 5: final TextField<String> anio = new TextField<String>();  
 				anio.setStyleAttribute("margin", "10px 2px 10px 2px");
 				anio.setWidth("272px");
 				Dialog anyo = new Dialog();
@@ -151,7 +80,7 @@ public class FormInformes extends ContentPanel{
 				anyo.setButtons(Dialog.OKCANCEL);
 				anyo.setModal(true);
 				anyo.getButtonById(Dialog.OK).addSelectionListener(new SelectionListener<ButtonEvent>(){
-
+		
 					@Override
 					public void componentSelected(ButtonEvent ce) {
 						//Aqui iria el generar informe
@@ -160,10 +89,8 @@ public class FormInformes extends ContentPanel{
 				});
 				anyo.add(anio, new BorderLayoutData(LayoutRegion.CENTER));
 				anyo.show();
-			}
-			
-		});
+				}
 		
-		panel.add(tabPrevision);
 	}
+
 }

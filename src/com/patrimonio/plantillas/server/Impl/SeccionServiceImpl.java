@@ -15,13 +15,11 @@ public class SeccionServiceImpl extends RemoteServiceServlet implements SeccionS
 
 	@Override
 	public PagingLoadResult<Secciones> findAll(PagingLoadConfig config) {
-		
 		return seccionDAO.getSecciones(config);
 	}
 	
 	@Override
 	public Secciones findSeccion(long idSeccion) {
-		
 		return seccionDAO.findById(idSeccion);
 	}
 
@@ -56,7 +54,6 @@ public class SeccionServiceImpl extends RemoteServiceServlet implements SeccionS
 
 	@Override
 	public List<Secciones> findAllForList() throws Exception {
-		// TODO Auto-generated method stub
 		return seccionDAO.findAll();
 	}
 

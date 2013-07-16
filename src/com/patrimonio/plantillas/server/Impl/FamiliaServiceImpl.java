@@ -20,15 +20,12 @@ public class FamiliaServiceImpl extends RemoteServiceServlet implements FamiliaS
 
 	@Override
 	public Familias findFamilia(long idFamilia) {
-		
 		return familiaDAO.findById(idFamilia);
 	}
 
 	@Override
 	public void saveFamilia(Familias familia) throws Exception {
-		
 		familiaDAO.saveFamilia(familia);
-		
 	}
 
 	@Override

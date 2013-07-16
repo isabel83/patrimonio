@@ -11,7 +11,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.patrimonio.plantillas.client.services.FamiliaService;
 import com.patrimonio.plantillas.client.services.FamiliaServiceAsync;
 import com.patrimonio.plantillas.shared.clases.Familias;
-import com.patrimonio.plantillas.shared.clases.Secciones;
 
 public class RpcUtilsFamilias {
 	
@@ -48,7 +47,7 @@ public class RpcUtilsFamilias {
 		
 	}
 
-	public void loadFamiliasCombo(final ListStore familias) {
+	public void loadFamiliasCombo(final ListStore<BaseModel> familias) {
 		familiasService.findAllForList(new AsyncCallback<List<Familias>>(){
 
 			@Override
@@ -74,11 +73,30 @@ public class RpcUtilsFamilias {
 	}
 
 	public void deleteFamilia(long familia) {
-		// TODO Auto-generated method stub
+		familiasService.deleteFamilia(familia, new AsyncCallback<Void>(){
+			@Override
+			public void onFailure(Throwable caught) {
+				MessageBox guardado = new MessageBox();
+				guardado.setMessage("Ha habido un error eliminando esta familia");
+				guardado.setIcon(MessageBox.ERROR);
+				guardado.setTitle("Atención");
+				guardado.show();
+			}
+
+			@Override
+			public void onSuccess(Void result) {
+				System.out.println("GUARADO");
+				MessageBox guardado = new MessageBox();
+				guardado.setMessage("La familia ha sido eliminada");
+				guardado.setIcon(MessageBox.INFO);
+				guardado.setTitle("Eliminado");
+				guardado.show();
+			}
+		});
 		
 	}
 
-	public void loadFamiliasComboFiltrado(final ListStore familias, final long seccion) {
+	public void loadFamiliasComboFiltrado(final ListStore<BaseModel> familias, final long seccion) {
 		familiasService.findAllForList(new AsyncCallback<List<Familias>>(){
 
 			@Override

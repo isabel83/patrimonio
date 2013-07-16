@@ -26,15 +26,6 @@ public class FormEntradas extends ContentPanel{
 
 
 	@Override
-	protected void onLoad() {
-		
-		super.onLoad();
-
-		recalculate();
-	}
-	
-
-	@Override
 	protected void onRender(Element parent, int pos) {
 		super.onRender(parent, pos);
 
@@ -55,98 +46,25 @@ public class FormEntradas extends ContentPanel{
 			    
 			  });    
 		
-		
-	
-		
-		//Log.debug("antes de cargar los tab panels del Formulario");
-		
-		TabPanel tabPanel = new TabPanel();
-		tabPanel.setAutoHeight(true);
-		tabPanel.setWidth("95%");
-		tabPanel.setBodyBorder(false);
-		tabPanel.setBorders(false);
-		loadEntradas(tabPanel);
-		tabPanel.setSelection(tabPanel.getItem(panelActivo));
-		add(tabPanel);
-		
-		//Log.debug("Terminando en el onrender del formPage");
-			
+		FormPanel form = new FormPanel();
+		form.setHeaderVisible(false);
+		form.setExpanded(true);
+		form.setAutoHeight(true);
+		form.setBodyBorder(false);
+		form.setBorders(false);
+		loadEntradas(form, panelActivo);
+		add(form);
 	}
 	
 	
-	private void loadEntradas(TabPanel panel) {
-		
-		
-		FormPanel frmNuevoPedido = new FormPanel();
-		frmNuevoPedido.setHeaderVisible(false);
-		frmNuevoPedido.setAutoHeight(true);
-		utils.loadFormNuevoPedido(frmNuevoPedido);
-		
-		TabItem tabNuevo = new TabItem();
-		tabNuevo.add(new MenuIconos());
-		tabNuevo.add(frmNuevoPedido);
-		//tabNuevo.setIconStyle("tabNuevo");
-		panel.add(tabNuevo);
-		
-		FormPanel frmRecepcionPedidos = new FormPanel();
-		frmRecepcionPedidos.setHeaderVisible(false);
-		frmRecepcionPedidos.setAutoHeight(true);
-		utils.loadFormRecepcion(frmRecepcionPedidos);
-		
-		TabItem tabRecepcion = new TabItem();
-		tabRecepcion.add(new MenuIconos());
-		tabRecepcion.add(frmRecepcionPedidos);
-		panel.add(tabRecepcion);
-		
-		FormPanel frmNuevoArticulo = new FormPanel();
-		frmNuevoArticulo.setHeaderVisible(false);
-		frmNuevoArticulo.setAutoHeight(true);
-		utils.loadFormNuevoArticulo(frmNuevoArticulo);
-		
-		
-		TabItem tabArticulo = new TabItem();
-		tabArticulo.add(new MenuIconos());
-		tabArticulo.add(frmNuevoArticulo);
-		panel.add(tabArticulo);
-		
-		FormPanel frmArticuloEliminado = new FormPanel();
-		frmArticuloEliminado.setHeaderVisible(false);
-		frmArticuloEliminado.setAutoHeight(true);
-		utils.loadFormArticuloEliminado(frmArticuloEliminado);
-		
-		
-		TabItem tabEliminado = new TabItem();
-		tabEliminado.add(new MenuIconos());
-		tabEliminado.add(frmArticuloEliminado);
-		panel.add(tabEliminado);
-		
-//		FormPanel frmNuevoPedido = new FormPanel();
-//		frmNuevoPedido.setHeaderVisible(false);
-//		frmNuevoPedido.setAutoHeight(true);
-//		utils.loadFormNuevoPedido(frmNuevoPedido);
-//		
-		//TabItem tabNumInventario = new TabItem();
-		//tabNumInventario.add(new MenuIconos());
-		//tabNumInventario.add(frmNuevoPedido);
-		//tabNuevo.setIconStyle("tabNuevo");
-		//panel.add(tabNumInventario);
+	private void loadEntradas(FormPanel form, int activo) {
+		switch(activo) {
+			case 0: utils.loadFormNuevoPedido(form); break;
+			case 1: utils.loadFormRecepcion(form);break;
+			case 2: utils.loadFormNuevoArticulo(form);break;
+			case 3: utils.loadFormArticuloEliminado(form);break;
+		}
 	}
 
-//	
-//
-//
-//	private  List<Stock> getStocks() {  
-//		List<Stock> stocks = new ArrayList<Stock>();
-//		
-//		 stocks.add(new Stock(12, "AAPL", "2344dqd", "sdffsdf"));
-//		 stocks.add(new Stock(250, "AAPL", "dgyt 656bn ff", "sdffsf"));
-//		 stocks.add(new Stock(13, "AAPL", "6yhb ", ""));
-//		 stocks.add(new Stock(6, "AAPL", "2344fdgdqd", ""));
-//		
-//		 return stocks;
-//	}
-//	
-	
-	
-	
+
 }

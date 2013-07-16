@@ -95,20 +95,8 @@ public class FamiliasDao  extends HibernateDaoSupport{
 	}
 	
 	public boolean removeFamilia(Familias familia) {
-		
-		sesion = sessionFactory.openSession();
-		try{
-			sesion.beginTransaction();
-			sesion.delete(familia); 
-			sesion.getTransaction().commit();
-			return true;
-		} 
-		catch(Exception e){
-			return false;
-		}
-		finally{
-			sesion.close();
-		}
+		familia.setId_estado(0);
+		return updateFamilia(familia);
 	}
 
 	

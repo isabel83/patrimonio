@@ -36,13 +36,17 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
-import com.patrimonio.plantillas.client.widgets.Stock;
+import com.patrimonio.plantillas.client.widgets.dialogs.DialogoBuscar;
 import com.patrimonio.plantillas.shared.RpcUtilsDestinatarios;
 import com.patrimonio.plantillas.shared.RpcUtilsFamilias;
 import com.patrimonio.plantillas.shared.RpcUtilsProveedores;
 import com.patrimonio.plantillas.shared.RpcUtilsSecciones;
 import com.patrimonio.plantillas.shared.RpcUtilsSubfamilias;
 import com.patrimonio.plantillas.shared.clases.Destinatarios;
+import com.patrimonio.plantillas.shared.clases.Familias;
+import com.patrimonio.plantillas.shared.clases.Proveedores;
+import com.patrimonio.plantillas.shared.clases.Secciones;
+import com.patrimonio.plantillas.shared.clases.Subfamilias;
 
 public class LoadMantenimientoUtils {
 
@@ -53,10 +57,18 @@ public class LoadMantenimientoUtils {
 	RpcUtilsSubfamilias subUtils = new RpcUtilsSubfamilias();
 	
 	
-	long idProveedor;
+	protected long idProveedor;
 	protected long idDestinatario;
-	protected long seccion;
-	protected long familia;
+	protected long idSeccion;
+	protected long idFamilia;
+	protected long idSubfamilia;
+	protected Destinatarios destinatario = new Destinatarios();
+	protected Proveedores proveedor = new Proveedores();
+	protected Secciones seccion = new Secciones();
+	protected Familias familia = new Familias();
+	protected Subfamilias subfamilia = new Subfamilias();
+	
+	
 	
 	public void loadFormProveedores(FormPanel frmProveedores) {
 		FormData formDataMid = new FormData("50%");
@@ -91,16 +103,9 @@ public class LoadMantenimientoUtils {
 	    layout.setLabelAlign(LabelAlign.TOP);  
 	    right.setLayout(layout);  
 	    
-	    LayoutContainer bottom = new LayoutContainer();  
-	    layout = new FormLayout();  
-	    layout.setLabelAlign(LabelAlign.TOP);  
-	    bottom.setStyleAttribute("paddingRight", "10px");
-	    bottom.setStyleAttribute("paddingLeft", "10px");
-	    bottom.setLayout(layout); 
 	    
 	    final TextField<String> nif = new TextField<String>();  
 	    nif.setFieldLabel("N.I.F.");  
-	    nif.setValue("X111111111");
 	    nif.setEnabled(false);
 	    left.add(nif,formDataMid);	    
 	    
@@ -158,18 +163,17 @@ public class LoadMantenimientoUtils {
 	    movil.setFieldLabel("Teléfono Móvil");
 	    movil.setEnabled(false);
 	    right.add(movil,formDataMid);	
-	    
-	    final CheckBox estado = new CheckBox();  
-	    estado.addStyleName("margenTop");
-	    estado.setFieldLabel("Activo");
-	    estado.setEnabled(false);
-	    right.addStyleName("check");
-	    right.add(estado, formData);
+	    	   
 	    
 	    final TextField<String> correo = new TextField<String>();  
 	    correo.setFieldLabel("Correo electrónico");  
 	    correo.setEnabled(false);
-	    bottom.add(correo,new FormData("100%"));	
+	    left.add(correo,formData);	
+	    
+	    final CheckBox estado = new CheckBox();  
+	    estado.setFieldLabel("Activo");
+	    estado.setEnabled(false);
+	    right.add(estado, new FormData("10%"));
 	    
 	    
 //	    RpcProxy<PagingLoadResult<Proveedores>> proxy = new RpcProxy<PagingLoadResult<Proveedores>>() {
@@ -246,9 +250,64 @@ public class LoadMantenimientoUtils {
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				provUtils.deleteProveedor(idProveedor);
+				if(b2.getText().equalsIgnoreCase("Modificar")){
+					b1.setText("Guardar");
+					b2.setText("Deshacer");
+					b3.setVisible(false);
+					b4.setVisible(false);
+					habilita(true);
+				}
+				else{
+					atras();
+					b1.setText("Agregar");
+					b2.setText("Modificar");
+					b3.setVisible(true);
+					b4.setVisible(true);
+				}
 				
 			}
+			
+			private void atras() {
+				nif.setValue(proveedor.getNif());
+				nombre.setValue(proveedor.getNombre());
+				actividad.setValue(proveedor.getActividad());
+				contacto.setValue(proveedor.getContacto());
+				domicilio.setValue(proveedor.getDomicilio());
+				poblacion.setValue(proveedor.getPoblacion());
+				cp.setValue(String.valueOf(proveedor.getCp()));
+				provincia.setValue(proveedor.getProvincia());
+				tfno.setValue(proveedor.getTlf1());
+				tfno2.setValue(proveedor.getTlf2());
+				fax.setValue(proveedor.getFax());
+				movil.setValue(String.valueOf(proveedor.getMovil()));
+				correo.setValue(proveedor.getEmail());
+				if(proveedor.getId_estado()==1)
+				estado.setValue(true);
+				else estado.setValue(false);
+				
+				
+				habilita(false);
+			}
+
+			private void habilita(boolean que) {
+				nif.setEnabled(que);
+				nombre.setEnabled(que);
+				actividad.setEnabled(que);
+				contacto.setEnabled(que);
+				domicilio.setEnabled(que);
+				poblacion.setEnabled(que);
+				cp.setEnabled(que);
+				provincia.setEnabled(que);
+				tfno.setEnabled(que);
+				tfno2.setEnabled(que);
+				fax.setEnabled(que);
+				movil.setEnabled(que);
+				correo.setEnabled(que);
+				estado.setEnabled(que);
+				
+			}
+
+			
 	    	
 	    });
 	    b2.setStyleAttribute("padding-right", "5px");
@@ -257,8 +316,7 @@ public class LoadMantenimientoUtils {
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				// TODO Auto-generated method stub
-				
+				provUtils.deleteProveedor(idProveedor);
 			}
 	    	
 	    });
@@ -268,8 +326,8 @@ public class LoadMantenimientoUtils {
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				// TODO Auto-generated method stub
-				
+				DialogoBuscar busqueda = new DialogoBuscar();
+				busqueda.show();
 			}
 	    	
 	    });
@@ -284,7 +342,6 @@ public class LoadMantenimientoUtils {
 	    
 	    main.add(left, new ColumnData(.5));
 	    main.add(right, new ColumnData(.5));
-	    main.add(bottom, new ColumnData(1));
 	    main.add(paginacion, new ColumnData(.6));
 	    main.add(gButtons, new ColumnData(.4));
 	    
@@ -295,6 +352,7 @@ public class LoadMantenimientoUtils {
 
 	
 	public void loadFormDestinatarios(FormPanel frmDestinatarios) {
+		
 		FormData formData = new FormData("50%"); 
 		Margins m = new Margins();
 		m.top = 5;
@@ -328,7 +386,8 @@ public class LoadMantenimientoUtils {
 	    
 	    
 	    final TextField<String> nombre = new TextField<String>();  
-	    nombre.setFieldLabel("Nombre");  
+	    nombre.setFieldLabel("Nombre"); 
+	    nombre.setAutoValidate(true);
 	    nombre.setEnabled(false);
 	    left.add(nombre,formData);	
 	    
@@ -370,7 +429,6 @@ public class LoadMantenimientoUtils {
 					habilitaTodo(true);
 				}
 				else{
-					Log.debug("Estamos en el caso de guardar y vamos a llamar a la funcion en provUtils");
 					destiUtils.checkValuesAndSaveDestinatario(nombre.getValue(), tienePuesto.getValue());
 					
 					b1.setText("Agregar");
@@ -392,11 +450,36 @@ public class LoadMantenimientoUtils {
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Modificar");
 	    b2.addSelectionListener(new SelectionListener<ButtonEvent>(){
-
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				destiUtils.deleteDestinatario(idDestinatario);
+				if(b2.getText().equalsIgnoreCase("Modificar")){
+					b1.setText("Guardar");
+					b2.setText("Deshacer");
+					b3.setVisible(false);
+					b4.setVisible(false);
+					habilita();
+				}
+				else{
+					atras();
+					b1.setText("Agregar");
+					b2.setText("Modificar");
+					b3.setVisible(true);
+					b4.setVisible(true);
+				}
 				
+			}
+
+			private void habilita() {
+				nombre.setEnabled(true);
+				tienePuesto.setEnabled(true);
+				
+			}
+
+			private void atras() {
+				nombre.setValue(destinatario.getDescripcion());
+				nombre.setEnabled(false);
+				tienePuesto.setValue(false);
+				tienePuesto.setEnabled(false);
 			}
 	    	
 	    });
@@ -406,7 +489,7 @@ public class LoadMantenimientoUtils {
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				// TODO Auto-generated method stub
+				destiUtils.deleteDestinatario(idDestinatario);
 				
 			}
 	    	
@@ -417,7 +500,8 @@ public class LoadMantenimientoUtils {
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				// TODO Auto-generated method stub
+				DialogoBuscar busqueda = new DialogoBuscar();
+				busqueda.show();
 				
 			}
 	    	
@@ -481,12 +565,12 @@ public class LoadMantenimientoUtils {
 	    configs.add(column);  
       
 	    
-	    ListStore<Stock> store = new ListStore<Stock>();
+	    ListStore<BaseModel> store = new ListStore<BaseModel>();
 	  //  store.add(getStocks()); //(REVISAR ESTO PORQUE DA ERROR EN LA DEMO)
 	    
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
-	    Grid<Stock> grid = new Grid<Stock>(store,cm);
+	    Grid<BaseModel> grid = new Grid<BaseModel>(store,cm);
 	    grid.setAutoExpandColumn("nombre");  
 	    grid.setBorders(false);  
 	    grid.setStripeRows(true);  
@@ -559,10 +643,32 @@ public class LoadMantenimientoUtils {
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				secUtils.deleteSeccion(seccion);
+				if(b2.getText().equalsIgnoreCase("Modificar")){
+					b1.setText("Guardar");
+					b2.setText("Deshacer");
+					b3.setVisible(false);
+					b4.setVisible(false);
+					habilita();
+				}
+				else{
+					atras();
+					b1.setText("Agregar");
+					b2.setText("Modificar");
+					b3.setVisible(true);
+					b4.setVisible(true);
+				}
 				
 			}
-	    	
+
+			private void habilita() {
+				nombre.setEnabled(true);
+				
+			}
+
+			private void atras() {
+				nombre.setValue(seccion.getDescripcion());
+				nombre.setEnabled(false);
+			}
 	    });
 	    b2.setStyleAttribute("padding-right", "5px");
 	    b3.setText("Eliminar");
@@ -570,8 +676,7 @@ public class LoadMantenimientoUtils {
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				// TODO Auto-generated method stub
-				
+				secUtils.deleteSeccion(idSeccion);
 			}
 	    	
 	    });
@@ -581,8 +686,8 @@ public class LoadMantenimientoUtils {
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				// TODO Auto-generated method stub
-				
+				DialogoBuscar busqueda = new DialogoBuscar();
+				busqueda.show();
 			}
 	    	
 	    });
@@ -643,7 +748,7 @@ public class LoadMantenimientoUtils {
 	    combo.setStore(secciones);  
 	    combo.setDisplayField("nombre");  
 	    combo.setValueField("id");
-	    combo.setFieldLabel("Secciones");
+	    combo.setFieldLabel("Sección");
 	    combo.setWidth(150);  
 	    combo.setEnabled(false);
 	    combo.addSelectionChangedListener(new SelectionChangedListener<BaseModel>(){
@@ -651,7 +756,7 @@ public class LoadMantenimientoUtils {
 			@Override
 			public void selectionChanged(SelectionChangedEvent<BaseModel> se) {
 				Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
-				seccion = se.getSelectedItem().get("id");
+				idSeccion = se.getSelectedItem().get("id");
 			}
 	    	
 	    });
@@ -678,12 +783,12 @@ public class LoadMantenimientoUtils {
   
 	      
 	    
-	    ListStore<Stock> store = new ListStore<Stock>();
+	    ListStore<BaseModel> store = new ListStore<BaseModel>();
 	  //  store.add(getStocks()); //(REVISAR ESTO PORQUE DA ERROR EN LA DEMO)
 	    
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
-	    Grid<Stock> grid = new Grid<Stock>(store,cm);
+	    Grid<BaseModel> grid = new Grid<BaseModel>(store,cm);
 	    grid.setBorders(false);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  
@@ -734,8 +839,7 @@ public class LoadMantenimientoUtils {
 				}
 				else{
 					Log.debug("Estamos en el caso de guardar y vamos a llamar a la funcion en familias");
-					Log.debug("El valor del combo es: " + seccion);
-					famiUtils.checkValuesAndSaveFamilia(nombre.getValue(), codigo.getValue(), (int)seccion );
+					famiUtils.checkValuesAndSaveFamilia(nombre.getValue(), codigo.getValue(), (int)idSeccion );
 					
 					b1.setText("Agregar");
 					b2.setText("Modificar");
@@ -757,22 +861,51 @@ public class LoadMantenimientoUtils {
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Modificar");
 	    b2.addSelectionListener(new SelectionListener<ButtonEvent>(){
-
-			@Override
+	    	@Override
 			public void componentSelected(ButtonEvent ce) {
-				famiUtils.deleteFamilia(familia);
+				if(b2.getText().equalsIgnoreCase("Modificar")){
+					b1.setText("Guardar");
+					b2.setText("Deshacer");
+					b3.setVisible(false);
+					b4.setVisible(false);
+					habilita(true);
+				}
+				else{
+					atras();
+					b1.setText("Agregar");
+					b2.setText("Modificar");
+					b3.setVisible(true);
+					b4.setVisible(true);
+				}
 				
 			}
-	    	
+			
+			private void atras() {
+				//recargamos los datos anteriores
+				nombre.setValue(familia.getDescripcion());
+				nombre.setEnabled(false);
+				codigo.setValue(familia.getCodigo());
+				codigo.setEnabled(false);
+				combo.select(familia); //repasar esto
+				combo.setEnabled(false);
+			}
+
+			private void habilita(boolean que) {
+				nombre.setEnabled(que);
+				codigo.setEnabled(que);
+				combo.setEnabled(que);
+				
+			}
+
 	    });
+	    
 	    b2.setStyleAttribute("padding-right", "5px");
 	    b3.setText("Eliminar");
 	    b3.addSelectionListener(new SelectionListener<ButtonEvent>(){
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				// TODO Auto-generated method stub
-				
+				famiUtils.deleteFamilia(idFamilia);
 			}
 	    	
 	    });
@@ -782,8 +915,8 @@ public class LoadMantenimientoUtils {
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				// TODO Auto-generated method stub
-				
+				DialogoBuscar busqueda = new DialogoBuscar();
+				busqueda.show();
 			}
 	    	
 	    });
@@ -841,7 +974,7 @@ public class LoadMantenimientoUtils {
 	    combo.setStore(familias);  
 	    combo.setDisplayField("nombre");  
 	    combo.setValueField("id");
-	    combo.setFieldLabel("Familias");
+	    combo.setFieldLabel("Familia");
 	    combo.setWidth(150);  
 	    combo.setEnabled(false);
 	    combo.addSelectionChangedListener(new SelectionChangedListener<BaseModel>(){
@@ -878,7 +1011,7 @@ public class LoadMantenimientoUtils {
 				}
 				else{
 					Log.debug("El valor del combo es: " + familia);
-					subUtils.checkValuesAndSaveSubFamilia(nombre.getValue(), codigo.getValue(), (int)familia );
+					subUtils.checkValuesAndSaveSubFamilia(nombre.getValue(), codigo.getValue(), (int)idFamilia );
 					
 					b1.setText("Agregar");
 					b2.setText("Modificar");
@@ -900,10 +1033,39 @@ public class LoadMantenimientoUtils {
 	    b1.setStyleAttribute("padding-right", "5px");
 	    b2.setText("Modificar");
 	    b2.addSelectionListener(new SelectionListener<ButtonEvent>(){
-
-			@Override
+	    	@Override
 			public void componentSelected(ButtonEvent ce) {
-				//subUtils.deleteSubfamilia(subfamilia);
+				if(b2.getText().equalsIgnoreCase("Modificar")){
+					b1.setText("Guardar");
+					b2.setText("Deshacer");
+					b3.setVisible(false);
+					b4.setVisible(false);
+					habilita(true);
+				}
+				else{
+					atras();
+					b1.setText("Agregar");
+					b2.setText("Modificar");
+					b3.setVisible(true);
+					b4.setVisible(true);
+				}
+				
+			}
+			
+			private void atras() {
+				//recargamos los datos anteriores
+				nombre.setValue(familia.getDescripcion());
+				nombre.setEnabled(false);
+				codigo.setValue(familia.getCodigo());
+				codigo.setEnabled(false);
+				combo.select(familia); //repasar esto
+				combo.setEnabled(false);
+			}
+
+			private void habilita(boolean que) {
+				nombre.setEnabled(que);
+				codigo.setEnabled(que);
+				combo.setEnabled(que);
 				
 			}
 	    	
@@ -914,7 +1076,7 @@ public class LoadMantenimientoUtils {
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				// TODO Auto-generated method stub
+				subUtils.deleteSubfamilia(idSubfamilia);
 				
 			}
 	    	
@@ -925,8 +1087,8 @@ public class LoadMantenimientoUtils {
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				// TODO Auto-generated method stub
-				
+				DialogoBuscar busqueda = new DialogoBuscar();
+				busqueda.show();
 			}
 	    	
 	    });
@@ -962,12 +1124,14 @@ public class LoadMantenimientoUtils {
 	}
 
 	public void loadFormPuestos(FormPanel frmPuestos) {
-		FormData formData = new FormData("40%"); 
+		FormData formData = new FormData("90%"); 
+		FormData formDataMid = new FormData("40%");
 		Margins m = new Margins();
 		m.top = 5;
 		m.left=5;
 		m.right=5;
 		formData.setMargins(m);
+		formDataMid.setMargins(m);
 		
 		frmPuestos.setSize("100%", "100%");  
 		frmPuestos.setBodyBorder(false);
@@ -1005,11 +1169,11 @@ public class LoadMantenimientoUtils {
 	    destiUtils.loadUnidadCombo(unidades);
 	  
 	    final ComboBox<BaseModel> comboUnidad = new ComboBox<BaseModel>();  
-	    comboUnidad.setEmptyText("Delegación / Destinatario");  
+	    comboUnidad.setEmptyText("Selecciona una delegación / destinatario");  
 	    comboUnidad.setStore(unidades);  
 	    comboUnidad.setDisplayField("nombre");  
 	    comboUnidad.setValueField("id");
-	    comboUnidad.setFieldLabel("Secciones");
+	    comboUnidad.setFieldLabel("Delegación / Destinatario");
 	    comboUnidad.setWidth(150);  
 	    comboUnidad.setEnabled(true);
 	    left.add(comboUnidad, formData);
@@ -1027,7 +1191,7 @@ public class LoadMantenimientoUtils {
 	    CheckBox activo = new CheckBox();  
 	    activo.setFieldLabel("Activo");
 	    right.addStyleName("check");
-	    right.add(activo, formData);
+	    right.add(activo, formDataMid);
 	    
 	    List<ColumnConfig> configs = new ArrayList<ColumnConfig>();  
 	    
@@ -1058,12 +1222,12 @@ public class LoadMantenimientoUtils {
 	    
 	      
 	    
-	    ListStore<Stock> store = new ListStore<Stock>();
+	    ListStore<BaseModel> store = new ListStore<BaseModel>();
 	  //  store.add(getStocks()); //(REVISAR ESTO PORQUE DA ERROR EN LA DEMO)
 	    
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
-	    Grid<Stock> grid = new Grid<Stock>(store,cm);
+	    Grid<BaseModel> grid = new Grid<BaseModel>(store,cm);
 	    grid.setBorders(false);  
 	    grid.setStripeRows(true);  
 	    grid.setColumnLines(true);  

@@ -106,43 +106,10 @@ public class ProveedoresDao  extends HibernateDaoSupport{
 	
 	@Transactional
 	public boolean removeProveedor(Proveedores proveedor) {
-		sesion = sessionFactory.openSession();
-		try{
-			sesion.beginTransaction();
-			sesion.delete(proveedor); 
-			sesion.getTransaction().commit();
-		  return true;	
-		}
-		catch(Exception e){
-			return false;
-		}
-		finally{
-			sesion.close();
-		}
+		proveedor.setId_estado(0);
+		return updateProveedor(proveedor);
 		
 	}
-
-	@Transactional
-	public long getMaxId() { 
-		long valor = 0;
-		sesion = sessionFactory.openSession();
-		try{
-			Query query =  sesion.createQuery("select max(id) as max from Proveedores");
-			
-			List sublist = query.list();
-			if(sublist.get(0)!=null)
-				valor = (Long) sublist.get(0);
-	
-			return valor;
-		}
-		catch(Exception e){
-			return valor;
-		}
-		finally{
-			sesion.close();
-		}
-	}
-
 
 }
 

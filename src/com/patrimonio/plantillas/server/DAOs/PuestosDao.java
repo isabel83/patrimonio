@@ -85,19 +85,8 @@ public class PuestosDao extends HibernateDaoSupport{
 	
 	public boolean removePuesto(Puestos puesto) {
 
-		sesion = sessionFactory.openSession();
-		try{
-			sesion.beginTransaction();
-			sesion.delete(puesto); 
-			sesion.getTransaction().commit();
-			return true;
-		}
-		catch(Exception e){
-			return false;
-		}
-		finally{
-			sesion.close();
-		}
+		puesto.setId_estado(0);
+		return updatePuesto(puesto);
 	}
 
 }

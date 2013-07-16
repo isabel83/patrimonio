@@ -11,24 +11,41 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.patrimonio.plantillas.client.services.DestinatarioService;
 import com.patrimonio.plantillas.client.services.DestinatarioServiceAsync;
 import com.patrimonio.plantillas.shared.clases.Destinatarios;
-import com.patrimonio.plantillas.shared.clases.Secciones;
 
 public class RpcUtilsDestinatarios {
 
 	DestinatarioServiceAsync destService = GWT.create(DestinatarioService.class);
-
+	Destinatarios destinatario= new Destinatarios();
 	
-
-	
-	public void checkValuesAndSaveDestinatario(String nombre, Boolean est) {
-		int estado = 0;
-		if(est) estado = 1;
-		Log.debug("vamos a generar el destinatario");
-		Destinatarios dest = loadDestinatario(nombre, estado);
-		Log.debug("El destinatario vale: " + dest);
+	public void checkValuesAndSaveDestinatario(String nombre, Boolean tienePuesto) {
+		
+		Destinatarios dest = loadDestinatario(nombre, 1);
 		guardaDestinatario(dest);
 		
 	}
+	
+	public Destinatarios cargaDestinatario(long id) {
+		destService.findDestinatario(id, new AsyncCallback<Destinatarios>(){
+
+			@Override
+			public void onFailure(Throwable caught) {
+				MessageBox guardado = new MessageBox();
+				guardado.setMessage("El destinatario no existe");
+				guardado.setIcon(MessageBox.ERROR);
+				guardado.setTitle("Atención");
+				guardado.show();
+				 
+			}
+
+			@Override
+			public void onSuccess(Destinatarios result) {
+				destinatario = result;				
+			}
+			
+		});
+		return destinatario;
+	}
+	
 	
 	private Destinatarios loadDestinatario(String nombre, int estado) {
 		Destinatarios destinatario = new Destinatarios();
@@ -38,7 +55,6 @@ public class RpcUtilsDestinatarios {
 	}
 
 	private void guardaDestinatario(Destinatarios dest) {
-		Log.debug("Ahora llamamos a la funcion del servicio para guardar el dest");
 		destService.saveDestinatario(dest,  new AsyncCallback<Void>(){
 
 			@Override
@@ -68,10 +84,30 @@ public class RpcUtilsDestinatarios {
 
 	public void deleteDestinatario(long idDestinatario) {
 		//chequeamos si tiene asociadas familias y las deshabilitamos
-		
+		destService.deleteDestinatario(idDestinatario, new AsyncCallback<Void>(){
+			@Override
+			public void onFailure(Throwable caught) {
+				MessageBox guardado = new MessageBox();
+				guardado.setMessage("Ha habido un error eliminando este destinatario");
+				guardado.setIcon(MessageBox.ERROR);
+				guardado.setTitle("Atención");
+				guardado.show();
+			}
+
+			@Override
+			public void onSuccess(Void result) {
+				System.out.println("GUARADO");
+				MessageBox guardado = new MessageBox();
+				guardado.setMessage("El destinatario ha sido eliminado");
+				guardado.setIcon(MessageBox.INFO);
+				guardado.setTitle("Eliminado");
+				guardado.show();
+			}
+		});
+	
 	}
 
-	public void loadUnidadCombo(final ListStore unidades) {
+	public void loadUnidadCombo(final ListStore<BaseModel> unidades) {
 		destService.findAllForList(new AsyncCallback<List<Destinatarios>>(){
 
 			@Override

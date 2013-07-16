@@ -52,6 +52,8 @@ public class Plantillas implements EntryPoint {
 
 	@Override
 	public void onModuleLoad() {
+		// EN CASO DE NO CONSEGUIR EDITAR EL LOGO EN EL FRONT-END, METEREMOS UN EDITOR PARA FILE UPLOAD
+		// RootPanel.get("cabeceraContainer").addStyleName("PRUEBA");
 		
 		final Label errorLabel = new Label();
 

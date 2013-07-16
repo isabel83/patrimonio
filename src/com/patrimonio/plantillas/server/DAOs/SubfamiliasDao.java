@@ -85,19 +85,8 @@ public class SubfamiliasDao extends HibernateDaoSupport{
 	}
 	
 	public boolean removeSubfamilia(Subfamilias subfamilia) {
-		sesion = sessionFactory.openSession();
-		try{
-			sesion.beginTransaction();
-			sesion.delete(subfamilia); 
-			sesion.getTransaction().commit();
-		    return true;
-		}
-		catch(Exception e){
-			return false;
-		}
-		finally{
-			sesion.close();
-		}
+		subfamilia.setId_estado(0);
+		return updateSubfamilia(subfamilia);
 	}
 
 	public List<Subfamilias> findAll() {

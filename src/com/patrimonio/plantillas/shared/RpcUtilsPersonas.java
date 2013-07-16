@@ -16,8 +16,8 @@ public class RpcUtilsPersonas {
 	PersonaServiceAsync personasService = GWT.create(PersonaService.class);
 
 	public void checkValuesAndSavePersona(String nombre, int perfil) {
-		Personas fam = new Personas(nombre,perfil,0);
-		guardaPersona(fam);
+		Personas person = new Personas(nombre,perfil,1);
+		guardaPersona(person);
 	}
 
 	private void guardaPersona(Personas persona) {
@@ -46,7 +46,7 @@ public class RpcUtilsPersonas {
 		
 	}
 
-	public void loadPersonasCombo(final ListStore personas) {
+	public void loadPersonasCombo(final ListStore<BaseModel> personas) {
 		personasService.findAllForList(new AsyncCallback<List<Personas>>(){
 
 			@Override
@@ -72,7 +72,26 @@ public class RpcUtilsPersonas {
 	}
 
 	public void deletePersona(long persona) {
-		// TODO Auto-generated method stub
+		personasService.deletePersona(persona, new AsyncCallback<Void>(){
+			@Override
+			public void onFailure(Throwable caught) {
+				MessageBox guardado = new MessageBox();
+				guardado.setMessage("Ha habido un error eliminando esta persona");
+				guardado.setIcon(MessageBox.ERROR);
+				guardado.setTitle("Atención");
+				guardado.show();
+			}
+
+			@Override
+			public void onSuccess(Void result) {
+				System.out.println("GUARADO");
+				MessageBox guardado = new MessageBox();
+				guardado.setMessage("La persona ha sido eliminada");
+				guardado.setIcon(MessageBox.INFO);
+				guardado.setTitle("Eliminado");
+				guardado.show();
+			}
+		});
 		
 	}
 

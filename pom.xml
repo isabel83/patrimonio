@@ -232,16 +232,16 @@
                     <wait>true</wait>
                     <!-- The following tag details the container you want to deploy to. -->
                     <container>
-                        <containerId>tomcat5x</containerId>
+                        <containerId>tomcat7x</containerId>
                         <!-- Type==I nstalled means that you want to deploy to a container that's installed on your local computer Type==R emote means that yoy want to deploy to a container that's installed on remote pc.-->
                         <type>installed</type>
-                        <home>C:\servers\apache-tomcat-5.5.23</home>
+                        <home>C:\servers\apache-tomcat-7.0.8</home>
                         <!-- timeout>180000</timeout-->
                     </container>
                     <configuration>
                         <!-- You have to now specify another configuration with type==e xisting and re-issue the home path -->
                         <type>existing</type>
-                        <home>C:\servers\apache-tomcat-5.5.23</home>
+                        <home>C:\servers\apache-tomcat-7.0.8</home>
                         <properties>
                             <!-- Esto es util si levantamos el tomcat en otro puerto que no sea el 8080 -->
                             <cargo.host>localhost</cargo.host>
@@ -254,8 +254,8 @@
                         <deployables>
                             <!-- This deployable specifies the webapp you want to deploy -->
                             <deployable>
-                                <groupId>au.com.uptick.gwt.maven.sample</groupId>
-                                <artifactId>MyGwtMavenSampleApp</artifactId>
+                                <groupId>com.patrimonio.plantillas</groupId>
+                                <artifactId>Plantillas</artifactId>
                                 <type>war</type>
                                 <!-- If you want to redefine the name of Web application settings , In most cases you will define this property -->
                                 <!--properties>

@@ -87,22 +87,22 @@ public class ExpedientesDao   extends HibernateDaoSupport{
 	}
 	
 	public boolean removeExpediente(List<Expedientes> expedientes) {
-
-		sesion = sessionFactory.openSession();
-		try{
-			sesion.beginTransaction();
-			for (Expedientes ex : expedientes) {
-				getSessionFactory().getCurrentSession().delete(ex); 
-			}
-			sesion.getTransaction().commit();
-			return true;
-		}
-		catch(Exception e){
-			return false;
-		}
-		finally{
+	
 			sesion = sessionFactory.openSession();
-		}
+			try{
+				sesion.beginTransaction();
+				for (Expedientes ex : expedientes) {
+					getSessionFactory().getCurrentSession().delete(ex); 
+				}
+				sesion.getTransaction().commit();
+				return true;
+			}
+			catch(Exception e){
+				return false;
+			}
+			finally{
+				sesion = sessionFactory.openSession();
+			}
 	}
 
 }

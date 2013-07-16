@@ -7,6 +7,7 @@ import java.util.Iterator;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.Orientation;
+import com.extjs.gxt.ui.client.data.BaseModel;
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
 import com.extjs.gxt.ui.client.data.BeanModelReader;
 import com.extjs.gxt.ui.client.data.DataProxy;
@@ -38,7 +39,6 @@ import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.patrimonio.plantillas.client.widgets.Stock;
 import com.patrimonio.plantillas.shared.RpcUtilsArticulos;
 import com.patrimonio.plantillas.shared.clases.Articulos;
 
@@ -201,12 +201,12 @@ public class DialogoEliminados extends Dialog{
 	    
 	      
 	    
-	    ListStore<Stock> store = new ListStore<Stock>();
+	    ListStore<BaseModel> store = new ListStore<BaseModel>();
 	  //  store.add(getStocks()); //(REVISAR ESTO PORQUE DA ERROR EN LA DEMO)
 	    
 	    ColumnModel cm = new ColumnModel(configs);  
 	  
-	    Grid<Stock> grid = new Grid<Stock>(store,cm);
+	    Grid<BaseModel> grid = new Grid<BaseModel>(store,cm);
 	    grid.setStyleAttribute("borderTop", "none");  
 	    grid.setAutoExpandColumn("nombre");  
 	    grid.setAutoExpandColumn("actividad");

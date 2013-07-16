@@ -96,19 +96,8 @@ public class SeccionesDao   extends HibernateDaoSupport{
 	
 	public boolean removeSeccion(Secciones seccion) {
 
-		sesion = sessionFactory.openSession();
-		try{
-			sesion.beginTransaction();
-			sesion.delete(seccion); 
-			sesion.getTransaction().commit();
-			return true;
-		}
-		catch(Exception e){
-			return false;
-		}
-		finally{
-			sesion.close();
-		}
+		seccion.setId_estado(0);
+		return updateSeccion(seccion);
 	}
 
 	

@@ -115,20 +115,8 @@ public class ArticulosDao extends HibernateDaoSupport{
 	}
 	
 	public boolean removeArticulo(Articulos articulo) {
-		sesion = sessionFactory.openSession();
-		try{
-			sesion.beginTransaction();
-			sesion.delete(articulo); 
-			sesion.getTransaction().commit();
-			return true;
-		}
-		catch(Exception e){
-			return false;
-		}
-		finally{
-			sesion.close();
-		}
-		
+		articulo.setId_estado(0);
+		return updateArticulo(articulo);
 	}
 
 	public List<Articulos> findByCriterios(Articulos articuloBusqueda) {

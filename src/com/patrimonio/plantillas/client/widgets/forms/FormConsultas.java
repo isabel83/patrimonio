@@ -37,15 +37,6 @@ public class FormConsultas extends ContentPanel{
 
 
 	@Override
-	protected void onLoad() {
-		
-		super.onLoad();
-
-		recalculate();
-	}
-	
-
-	@Override
 	protected void onRender(Element parent, int pos) {
 		super.onRender(parent, pos);
 
@@ -66,122 +57,53 @@ public class FormConsultas extends ContentPanel{
 			    // do module loading stuff  
 			  });    
 		
+
+		FormPanel form = new FormPanel();
+		form.setHeaderVisible(false);
+		form.setExpanded(true);
+		form.setAutoHeight(true);
+		form.setBodyBorder(false);
+		form.setBorders(false);
+		loadPanelConsultas(form, panelActivo);
+		add(form);
 		
-	
-		
-		//Log.debug("antes de cargar los tab panels del Formulario");
-		
-		TabPanel tabPanel = new TabPanel();
-		tabPanel.setAutoHeight(true);
-		tabPanel.setWidth("95%");
-		tabPanel.setBodyBorder(false);
-		tabPanel.setBorders(false);
-		loadPanelConsultas(tabPanel);
-		tabPanel.setSelection(tabPanel.getItem(panelActivo));
-		add(tabPanel);
-		
-		//Log.debug("Terminando en el onrender del formPage");
 			
 	} 
 	
 	
-	private void loadPanelConsultas(TabPanel panel) {
-		
-		FormPanel frmConsultaPedido = new FormPanel();
-		frmConsultaPedido.setHeaderVisible(false);
-		frmConsultaPedido.setExpanded(true);
-		frmConsultaPedido.setAutoHeight(true);
-		utils.loadFormConsultaPedido(frmConsultaPedido);
-		
-		TabItem tabConsultaPedido = new TabItem();
-		tabConsultaPedido.add(new MenuIconos());
-		tabConsultaPedido.add(frmConsultaPedido);
-		tabConsultaPedido.disableTextSelection(true);
-		panel.add(tabConsultaPedido);
-		
-		final FormPanel frmConsultaAlbaranesMSolicitado = new FormPanel();
-		frmConsultaAlbaranesMSolicitado.setHeaderVisible(false);
-		frmConsultaAlbaranesMSolicitado.setExpanded(true);
-		frmConsultaAlbaranesMSolicitado.setAutoHeight(true);
-		utils.loadFormConsultaAlbMatSolicitado(frmConsultaAlbaranesMSolicitado);
-		
-		TabItem tabAlbaranesMSolicitado = new TabItem();
-		tabAlbaranesMSolicitado.add(new MenuIconos());
-		tabAlbaranesMSolicitado.add(frmConsultaAlbaranesMSolicitado);
-		panel.add(tabAlbaranesMSolicitado);
-		
-		final FormPanel frmConsultaAlbaranesMServido = new FormPanel();
-		frmConsultaAlbaranesMServido.setHeaderVisible(false);
-		frmConsultaAlbaranesMServido.setExpanded(true);
-		frmConsultaAlbaranesMServido.setAutoHeight(true);
-		utils.loadFormConsultaAlbMatServido(frmConsultaAlbaranesMServido);
-		
-		TabItem tabAlbaranesMServido = new TabItem();
-		tabAlbaranesMServido.add(new MenuIconos());
-		tabAlbaranesMServido.add(frmConsultaAlbaranesMServido);
-		panel.add(tabAlbaranesMServido);
-		
-		final FormPanel frmControlMaterial = new FormPanel();
-		frmControlMaterial.setHeaderVisible(false);
-		frmControlMaterial.setExpanded(true);
-		frmControlMaterial.setAutoHeight(true);
-		utils.loadFormConsultaControlMaterial(frmControlMaterial);
-		
-		TabItem tabControlMaterial = new TabItem();
-		tabControlMaterial.add(new MenuIconos());
-		tabControlMaterial.add(frmControlMaterial);
-		panel.add(tabControlMaterial);
-		
-		final FormPanel frmConsultaArticulos = new FormPanel();
-		frmConsultaArticulos.setHeaderVisible(false);
-		frmConsultaArticulos.setExpanded(true);
-		frmConsultaArticulos.setAutoHeight(true);
-		utils.loadFormConsultaArticulos(frmConsultaArticulos);
-		
-		TabItem tabCArticulos = new TabItem();
-		tabCArticulos.add(new MenuIconos());
-		tabCArticulos.add(frmConsultaArticulos);
-		panel.add(tabCArticulos);
-		
-		final FormPanel frmCPrevision = new FormPanel();
-		frmCPrevision.setHeaderVisible(true);
-		frmCPrevision.setAutoHeight(true);
-		frmCPrevision.setBodyBorder(false);
-		frmCPrevision.getHeader().addStyleName("titular");
-		utils.loadFormConsultaPrevision(frmCPrevision);
-		
-		TabItem tabCprevision = new TabItem();
-		tabCprevision.addListener(Events.Select, new Listener<ComponentEvent>(){
- 
-			@Override
-			public void handleEvent(ComponentEvent be) {
-				final TextField<String> anio = new TextField<String>();  
-				anio.setStyleAttribute("margin", "10px 2px 10px 2px");
-				anio.setWidth("272px");
-				Dialog anyo = new Dialog();
-				anyo.setHideOnButtonClick(true);
-				anyo.setHeading("Introduce el año sobre el que quieres realizar la consulta de previsión");
-				anyo.setButtons(Dialog.OKCANCEL);
-				anyo.getButtonById(Dialog.OK).addSelectionListener(new SelectionListener<ButtonEvent>(){
-
-					@Override
-					public void componentSelected(ButtonEvent ce) {
-//						Log.debug("Estamos en el OK del dialogo y el valor de año es: " + anio.getValue());
-//						Log.debug("El valor del formulario es: " + frmCPrevision);
-						utils.titularPrevisiones += anio.getValue();
-						frmCPrevision.setHeading(utils.titularPrevisiones);
-						frmCPrevision.setExpanded(true);
-					}
+	private void loadPanelConsultas(final FormPanel form, int activo) {
+		switch(activo){
+			case 0: utils.loadFormConsultaPedido(form); break;
+			case 1: utils.loadFormConsultaAlbMatSolicitado(form); break;
+			case 2: utils.loadFormConsultaAlbMatServido(form); break;
+			case 3: utils.loadFormConsultaControlMaterial(form); break;
+			case 4: utils.loadFormConsultaArticulos(form); break;
+			case 5: form.getHeader().addStyleName("titular");
+					form.setHeaderVisible(true);
+					utils.loadFormConsultaPrevision(form);
+					final TextField<String> anio = new TextField<String>();  
+					anio.setStyleAttribute("margin", "10px 2px 10px 2px");
+					anio.setWidth("272px");
+					Dialog anyo = new Dialog();
+					anyo.setHideOnButtonClick(true);
+					anyo.setHeading("Introduce el año sobre el que quieres realizar la consulta de previsión");
+					anyo.setButtons(Dialog.OKCANCEL);
+					anyo.getButtonById(Dialog.OK).addSelectionListener(new SelectionListener<ButtonEvent>(){
+						@Override
+						public void componentSelected(ButtonEvent ce) {
+							utils.titularPrevisiones += anio.getValue();
+							form.setHeading(utils.titularPrevisiones);
+							form.setExpanded(true);
+						}
+						
+					});
+					anyo.add(anio, new BorderLayoutData(LayoutRegion.CENTER));
+					anyo.show();
 					
-				});
-				anyo.add(anio, new BorderLayoutData(LayoutRegion.CENTER));
-				anyo.show();
-			}
-			
-		});
-		tabCprevision.add(new MenuIconos());
-		tabCprevision.add(frmCPrevision);
-		panel.add(tabCprevision);
+					break;
+		}
 		
 	}
+
+
 }

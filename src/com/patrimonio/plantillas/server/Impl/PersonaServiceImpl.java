@@ -21,7 +21,6 @@ public class PersonaServiceImpl extends RemoteServiceServlet implements PersonaS
 	
 	@Override
 	public Personas findPersona(long idPersona) {
-		
 		return personaDao.findById(idPersona);
 	}
 	
@@ -51,7 +50,6 @@ public class PersonaServiceImpl extends RemoteServiceServlet implements PersonaS
 	public void saveOrUpdatePersona(long idPersona, int estado, int perfil, String descripcion) throws Exception {
 		Personas persona = new Personas(idPersona, estado, perfil, descripcion);
 		personaDao.updatePersona(persona);
-		
 	}
 
 	@Override
@@ -60,7 +58,6 @@ public class PersonaServiceImpl extends RemoteServiceServlet implements PersonaS
 		if(persona!=null){
 			personaDao.removePersona(persona);
 		}
-		
 	}
 
 }
