@@ -26,7 +26,7 @@
         </dependency>
         <dependency>
             <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-dev</artifactId>
+            <artifactId>gwt-dev</artifactId> 
             <version>${gwtVersion}</version>
             <scope>test</scope>
         </dependency>
@@ -110,13 +110,13 @@
         </dependency>
         <dependency>
         	<groupId>org.hibernate</groupId>
-        	<artifactId>hibernate-validator</artifactId>
+        	<artifactId>hibernate-validator</artifactId> 
         	<version>5.0.1.Final</version>
         </dependency>
         <dependency>
         	<groupId>org.springframework</groupId>
         	<artifactId>spring-asm</artifactId>
-        	<version>3.1.4.RELEASE</version>
+        	<version>3.0.7.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>code.google.com</groupId>

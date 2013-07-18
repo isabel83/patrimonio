@@ -28,7 +28,7 @@
                  Ver: http://static.springsource.org/spring/docs/2.0.x/reference/transaction.html
                  Ver: http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/transaction.html#transaction-declarative -->                             
        <!--<tx:annotation-driven transaction-manager="transactionManager" />-->
-        
+        <context:property-placeholder location="classpath:hibernate.properties"/>
         <!-- AOP - para interceptar las llamadas a los metodos del servicio 
         <aop:config>
                  The execution of any method defined by the interface execution(* com.xyz.service.MyService.*(..)) 
@@ -47,7 +47,7 @@
 		</bean>-->
          
     
-        <bean id="sessionFactory" class=" org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 			<property name="configLocation" value="classpath:hibernate.cfg.xml" /> 
 		</bean> 
                 

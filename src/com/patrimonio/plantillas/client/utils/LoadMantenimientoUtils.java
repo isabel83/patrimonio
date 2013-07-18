@@ -39,6 +39,7 @@ import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoBuscar;
 import com.patrimonio.plantillas.shared.RpcUtilsDestinatarios;
 import com.patrimonio.plantillas.shared.RpcUtilsFamilias;
+import com.patrimonio.plantillas.shared.RpcUtilsPersonas;
 import com.patrimonio.plantillas.shared.RpcUtilsProveedores;
 import com.patrimonio.plantillas.shared.RpcUtilsSecciones;
 import com.patrimonio.plantillas.shared.RpcUtilsSubfamilias;
@@ -55,7 +56,7 @@ public class LoadMantenimientoUtils {
 	RpcUtilsSecciones secUtils = new RpcUtilsSecciones();
 	RpcUtilsFamilias famiUtils = new RpcUtilsFamilias();
 	RpcUtilsSubfamilias subUtils = new RpcUtilsSubfamilias();
-	
+	RpcUtilsPersonas persUtils = new RpcUtilsPersonas();
 	
 	protected long idProveedor;
 	protected long idDestinatario;
@@ -1178,17 +1179,17 @@ public class LoadMantenimientoUtils {
 	    comboUnidad.setEnabled(true);
 	    left.add(comboUnidad, formData);
 	  
-	    TextField<String> grupo = new TextField<String>();  
+	    final TextField<String> grupo = new TextField<String>();  
 	    grupo.setFieldLabel("Grupo profesional / Colectivo");
 	    grupo.setLabelStyle("float: initial");
 	    right.add(grupo, formData);
 	    
-	    TextField<String> nombre = new TextField<String>();  
+	    final TextField<String> nombre = new TextField<String>();  
 	    nombre.setFieldLabel("Nombre Trabajador");
 	    nombre.setLabelStyle("margin-top: 5px");
 	    left.add(nombre, formData);
 	    
-	    CheckBox activo = new CheckBox();  
+	    final CheckBox activo = new CheckBox();  
 	    activo.setFieldLabel("Activo");
 	    right.addStyleName("check");
 	    right.add(activo, formDataMid);
@@ -1258,9 +1259,79 @@ public class LoadMantenimientoUtils {
 	    paginacion.setStyleName("paginacion");
 	    
 	    ButtonGroup gButtons = new ButtonGroup(4);
-	    Button b1  = new Button(), b2 = new Button(), b3 = new Button(), b4 = new Button();
+	    final Button b1  = new Button();
+		final Button b2 = new Button();
+		final Button b3 = new Button();
+		final Button b4 = new Button();
 	    b1.setText("Agregar");
+	    b1.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				if(b1.getText().equalsIgnoreCase("Agregar")){
+					b1.setText("Guardar");
+					b2.setText("Deshacer");
+					b3.setVisible(false);
+					b4.setVisible(false);
+					habilitaTodo(true);
+				}
+				else{
+					//persUtils.checkValuesAndSavePuesto(nombre.getValue(),1);
+					
+					b1.setText("Agregar");
+					b2.setText("Modificar");
+					b3.setVisible(true);
+					b4.setVisible(true);
+					habilitaTodo(false);
+				}
+				
+			}
+
+			public void habilitaTodo(boolean que) {
+				comboUnidad.setEnabled(que);
+				nombre.setEnabled(que);
+				grupo.setEnabled(que);
+				activo.setEnabled(que);
+			}
+		
+	    });
+	    
 	    b1.setStyleAttribute("padding-right", "5px");
+	    b2.setText("Modificar");
+	    b2.addSelectionListener(new SelectionListener<ButtonEvent>(){
+	    	@Override
+			public void componentSelected(ButtonEvent ce) {
+				if(b2.getText().equalsIgnoreCase("Modificar")){
+					b1.setText("Guardar");
+					b2.setText("Deshacer");
+					b3.setVisible(false);
+					b4.setVisible(false);
+					habilita(true);
+				}
+				else{
+					atras();
+					b1.setText("Agregar");
+					b2.setText("Modificar");
+					b3.setVisible(true);
+					b4.setVisible(true);
+				}
+				
+			}
+			
+			private void atras() {
+				//recargamos los datos anteriores
+				habilita(false);
+			}
+
+			private void habilita(boolean que) {
+				nombre.setEnabled(que);
+				comboUnidad.setEnabled(que);
+				grupo.setEnabled(que);
+				activo.setEnabled(que);
+				
+			}
+	    	
+	    });
 	    b2.setText("Modificar");
 	    b2.setStyleAttribute("padding-right", "5px");
 	    b3.setText("Buscar nombre");
@@ -1285,3 +1356,4 @@ public class LoadMantenimientoUtils {
 	}
 
 }
+

@@ -2,12 +2,6 @@ package com.patrimonio.plantillas.shared.clases;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import com.extjs.gxt.ui.client.data.BaseModel;
 import com.patrimonio.plantillas.client.DTOs.PuestosDTO;
 
@@ -27,8 +21,7 @@ public class Puestos extends BaseModel implements Serializable{
 		this.ID_PUESTO=id;
 	}
 	
-	public Puestos(long id, int estado, String descripcion){
-		this.ID_PUESTO=id;
+	public Puestos(int estado, String descripcion){
 		this.ID_ESTADO=estado;
 		this.DESCRIPCION=descripcion;
 	}

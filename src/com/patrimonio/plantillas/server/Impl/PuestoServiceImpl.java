@@ -22,13 +22,8 @@ public class PuestoServiceImpl extends RemoteServiceServlet implements PuestoSer
 	}
 
 	@Override
-	public void savePuesto(long idPuesto, int estado, String descripcion) throws Exception {
-		Puestos puesto = puestoDAO.findById(idPuesto);
-		if(puesto==null){
-			puesto = new Puestos(idPuesto,estado,descripcion);
+	public void savePuesto(Puestos puesto) throws Exception {
 			puestoDAO.savePuesto(puesto);
-		}
-		
 	}
 
 	@Override
@@ -44,8 +39,8 @@ public class PuestoServiceImpl extends RemoteServiceServlet implements PuestoSer
 
 	@Override
 	public void saveOrUpdatePuesto(long idPuesto, int estado, String descripcion) throws Exception {
-		Puestos puesto = new Puestos(idPuesto,estado,descripcion);
-		puestoDAO.updatePuesto(puesto);
+//		Puestos puesto = new Puestos(idPuesto,estado,descripcion);
+//		puestoDAO.updatePuesto(puesto);
 		
 	}
 

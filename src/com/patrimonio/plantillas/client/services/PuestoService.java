@@ -11,7 +11,7 @@ public interface PuestoService extends RemoteService{
 
 	public PagingLoadResult<Puestos> findAll(PagingLoadConfig config);
 	public Puestos findPuesto (long idPuesto);
-	public void savePuesto(long idPuesto, int estado, String descripcion) throws Exception;
+	public void savePuesto(Puestos puesto) throws Exception;
 	public void updatePuesto(long idPuesto, int estado, String descripcion) throws Exception;
 	public void saveOrUpdatePuesto(long idPuesto, int estado, String descripcion) throws Exception;
 	public void deletePuesto(long idPuesto) throws Exception;
