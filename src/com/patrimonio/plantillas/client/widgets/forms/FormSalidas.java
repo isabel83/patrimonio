@@ -6,6 +6,7 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Element;
 import com.patrimonio.plantillas.client.utils.LoadSalidasUtils;
+import com.patrimonio.plantillas.client.widgets.menus.MenuIconos;
 
 public class FormSalidas extends ContentPanel{
 
@@ -32,6 +33,7 @@ public class FormSalidas extends ContentPanel{
 		setStyleName("migas");
 		setWidth(1024);
 		setAutoHeight(true);
+		add(new MenuIconos());
 		
 		GWT.setUncaughtExceptionHandler(new   
 			      GWT.UncaughtExceptionHandler() {  

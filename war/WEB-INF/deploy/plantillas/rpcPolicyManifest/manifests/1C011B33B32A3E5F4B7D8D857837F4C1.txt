@@ -1,0 +1,2 @@
+serviceClass: com.patrimonio.plantillas.client.services.PersonaService
+path: AB5727C9FB8F7D2BC33FE7DE00BE6BD5.gwt.rpc

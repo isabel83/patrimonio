@@ -1,9 +1,6 @@
 package com.patrimonio.plantillas.client.widgets.forms;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.TabItem;
-import com.extjs.gxt.ui.client.widget.TabPanel;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.google.gwt.core.client.GWT;
@@ -25,7 +22,7 @@ public class FormMntTablas extends ContentPanel{
 	@Override
 	protected void onRender(Element parent, int pos) {
 		super.onRender(parent, pos);
-		Log.debug("EL ON RENDER");
+		//Log.debug("EL ON RENDER");
 		setLayout(new BorderLayout());
 		setBodyBorder(false);
 		setBorders(false);
@@ -34,11 +31,12 @@ public class FormMntTablas extends ContentPanel{
 		setStyleName("migas");
 		setWidth(1024);
 		setAutoHeight(true);
+		add(new MenuIconos());
 		
 		GWT.setUncaughtExceptionHandler(new   
 			      GWT.UncaughtExceptionHandler() {  
 			      public void onUncaughtException(Throwable e) {  
-			        Log.debug("EN UNCAUGHT: " + e.getLocalizedMessage()); 
+			       // Log.debug("EN UNCAUGHT: " + e.getLocalizedMessage()); 
 			    }  
 			  });    
 		

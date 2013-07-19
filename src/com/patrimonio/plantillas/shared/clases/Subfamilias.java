@@ -16,9 +16,9 @@ public class Subfamilias extends BaseModel implements Serializable{
 
 	private Long ID_SUBFAMILIA; //todos requeridos
 
-	private int ID_FAMILIA;
+	private Integer ID_FAMILIA;
 
-	private int ID_ESTADO;
+	private Integer ID_ESTADO;
 
 	private String DESCRIPCION;
 

@@ -52,12 +52,12 @@ public class RpcUtilsSecciones {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				Log.debug("Error en carga de proveedores: " + caught.getLocalizedMessage());
+				//Log.debug("Error en carga de proveedores: " + caught.getLocalizedMessage());
 			}
 
 			@Override
 			public void onSuccess(List<Secciones> result) {
-				Log.debug("Estamos en el on success, hay: " + result.size());
+				//Log.debug("Estamos en el on success, hay: " + result.size());
 				for(Secciones sec: result){
 						
 					 BaseModel model = new BaseModel();

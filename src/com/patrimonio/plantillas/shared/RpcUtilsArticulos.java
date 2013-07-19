@@ -71,7 +71,30 @@ public class RpcUtilsArticulos {
 		return filtrados;
 	}
 
-	public void loadArticulosCombo(final ListStore<BaseModel> articulos) {
+	public void loadArticulosCombo(final ListStore<BaseModel> articulos, int idProv) {
+		if(idProv>0){
+			articuloService.loadArticulosPro(idProv,new AsyncCallback<List<Articulos>>(){
+				
+				@Override
+				public void onFailure(Throwable caught) {
+					Log.debug("Error en carga de proveedores: " + caught.getLocalizedMessage());
+				}
+	
+				@Override
+				public void onSuccess(List<Articulos> result) {
+					Log.debug("Estamos en el on success, hay: " + result.size());
+					for(Articulos arti: result){
+						 BaseModel model = new BaseModel();
+		                 model.set("id",arti.getId_articulo());
+		                 model.set("nombre", arti.getNombre());
+						 articulos.add(model);
+					} 
+					
+					
+				}
+				
+			});
+		}
 //		articuloService.findAllForList(new AsyncCallback<List<Articulos>>(){
 //
 //			@Override
@@ -96,4 +119,10 @@ public class RpcUtilsArticulos {
 //		});
 		
 	}
+
+//	public Pedidos loadArticuloGrid(Articulos seleccionado) {
+//		return seleccionado;
+//		
+//		
+//	}
 }

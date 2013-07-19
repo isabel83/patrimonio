@@ -112,12 +112,12 @@ public class RpcUtilsDestinatarios {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				Log.debug("Error en carga de proveedores: " + caught.getLocalizedMessage());
+				//Log.debug("Error en carga de proveedores: " + caught.getLocalizedMessage());
 			}
 
 			@Override
 			public void onSuccess(List<Destinatarios> result) {
-				Log.debug("Estamos en el on success, hay: " + result.size());
+				//Log.debug("Estamos en el on success, hay: " + result.size());
 				for(Destinatarios des: result){
 						
 					 BaseModel model = new BaseModel();

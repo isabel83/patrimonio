@@ -17,9 +17,9 @@ public class Arti_Prov extends BaseModel implements Serializable{
 
 	private Long ID_ARTI_PROV;	
 	
-	private int ID_ARTICULO;
+	private Integer ID_ARTICULO;
 	
-	private int ID_PROVEEDOR;
+	private Integer ID_PROVEEDOR;
 	
 	public Arti_Prov(){
 		

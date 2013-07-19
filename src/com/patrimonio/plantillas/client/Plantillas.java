@@ -149,7 +149,7 @@ public class Plantillas implements EntryPoint {
 				rootPanel.clear();
 				
 				RootPanel.get("menuContainer").add(new MenuNavegacion(rootPanel));
-				Image fondo = new Image("/resources/images/patrimonioFondo1.jpg");
+				Image fondo = new Image("resources/images/patrimonioFondo1.jpg");
 				fondo.addStyleName("fondo");
 				rootPanel.add(fondo);
 			}

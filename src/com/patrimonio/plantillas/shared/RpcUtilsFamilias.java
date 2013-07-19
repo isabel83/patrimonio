@@ -52,12 +52,12 @@ public class RpcUtilsFamilias {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				Log.debug("Error en carga de familias: " + caught.getLocalizedMessage());
+				//Log.debug("Error en carga de familias: " + caught.getLocalizedMessage());
 			}
 
 			@Override
 			public void onSuccess(List<Familias> result) {
-				Log.debug("Estamos en el on success de familias hay: " + result.size());
+				//Log.debug("Estamos en el on success de familias hay: " + result.size());
 				for(Familias fam: result){
 						
 					 BaseModel model = new BaseModel();
@@ -101,12 +101,12 @@ public class RpcUtilsFamilias {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				Log.debug("Error en carga de familias: " + caught.getLocalizedMessage());
+				//Log.debug("Error en carga de familias: " + caught.getLocalizedMessage());
 			}
 
 			@Override
 			public void onSuccess(List<Familias> result) {
-				Log.debug("Estamos en el on success de familias hay: " + result.size());
+				//Log.debug("Estamos en el on success de familias hay: " + result.size());
 				for(Familias fam: result){
 					if(fam.getId_seccion()==seccion){	
 						 BaseModel model = new BaseModel();

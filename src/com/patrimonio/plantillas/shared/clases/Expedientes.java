@@ -7,10 +7,10 @@ import com.extjs.gxt.ui.client.data.BaseModel;
 public class Expedientes extends BaseModel implements Serializable{
 	
 	private Long ID_EXPEDIENTE; // todos requeridos
-	private int ANO;
+	private Integer ANO;
 	private String EXPEDIENTE;
 	private String DESCRIPCION;
-	private int ID_EXPEDIENTE_TIPO;
+	private Integer ID_EXPEDIENTE_TIPO;
 	
 	public Expedientes(){
 		

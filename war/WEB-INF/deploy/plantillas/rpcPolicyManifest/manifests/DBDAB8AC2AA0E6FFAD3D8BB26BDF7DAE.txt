@@ -1,0 +1,2 @@
+serviceClass: com.patrimonio.plantillas.client.services.SeccionService
+path: F5435074B33D184191DE0A8966A0AEB9.gwt.rpc

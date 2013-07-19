@@ -160,6 +160,7 @@ public class LoadSalidasUtils {
 	    cpArticulos.setCollapsible(true);
 	    cpArticulos.setAutoHeight(true);
 	    cpArticulos.setFrame(true);
+	    cpArticulos.setExpanded(false);
 	    cpArticulos.setStyleAttribute("paddingTop", "10px");
 	    
 	    
@@ -404,8 +405,10 @@ DataProxy proxy = null;
 	    bottom.add(cpArticulos,formData);
 	    
 	    ContentPanel cp = new ContentPanel();  
-	    cp.setBodyBorder(false);  
-	    cp.setHeaderVisible(false);
+	    cp.setBodyBorder(true);  
+	    cp.setHeading("Solicitud");
+	    cp.setFrame(true);
+	    cp.setVisible(false);
 	    cp.setButtonAlign(HorizontalAlignment.CENTER);  
 	    cp.setLayout(new FitLayout());
 	    cp.setHeight("200px");

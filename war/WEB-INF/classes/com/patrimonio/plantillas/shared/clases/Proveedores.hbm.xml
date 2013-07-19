@@ -26,7 +26,7 @@
         <property name="POBLACION" type="java.lang.String" access="field">
             <column name="POBLACION" />
         </property>
-        <property name="CP" type="int" access="field">
+        <property name="CP" type="java.lang.Integer" access="field">
             <column name="CP" />
         </property>
         <property name="PROVINCIA" type="java.lang.String" access="field">
@@ -38,7 +38,7 @@
         <property name="TLF2" type="java.lang.String" access="field">
             <column name="TLF2" />
         </property>
-        <property name="MOVIL" type="int" access="field">
+        <property name="MOVIL" type="java.lang.Integer" access="field">
             <column name="MOVIL" />
         </property>
         <property name="FAX" type="java.lang.String" access="field">
@@ -47,7 +47,7 @@
         <property name="EMAIL" type="java.lang.String" access="field">
             <column name="EMAIL" />
         </property>
-        <property name="ID_ESTADO" type="int" access="field">
+        <property name="ID_ESTADO" type="java.lang.Integer" access="field">
             <column name="ID_ESTADO" />
         </property>
     </class>

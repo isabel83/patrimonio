@@ -29,7 +29,7 @@ public class Proveedores extends BaseModel implements Serializable{
 
     private String POBLACION; //no requerido
 
-    private int CP; //no requerido
+    private Integer CP; //no requerido
 
     private String PROVINCIA; //no requerido
 
@@ -37,7 +37,7 @@ public class Proveedores extends BaseModel implements Serializable{
 
     private String TLF2; //no requerido
 
-    private int MOVIL; //no requerido
+    private Integer MOVIL; //no requerido
 
     private String FAX; //no requerido
 

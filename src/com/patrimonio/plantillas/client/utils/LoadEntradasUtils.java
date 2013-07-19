@@ -88,7 +88,7 @@ public class LoadEntradasUtils {
 	    panel.setButtonAlign(HorizontalAlignment.CENTER);  
 	   
 	  
-	    LayoutContainer main = new LayoutContainer();  
+	    final LayoutContainer main = new LayoutContainer();  
 	    main.setLayout(new ColumnLayout());  
 	    main.setStyleAttribute("paddingBottom", "15px");
 	  
@@ -100,7 +100,7 @@ public class LoadEntradasUtils {
 	    left.setLayout(layout);  
 	  
 	    DateTimeFormat dtFormat = DateTimeFormat.getFormat("dd-MM-yyyy");
-	    DateField fechaPedido = new DateField();
+	    final DateField fechaPedido = new DateField();
 	    fechaPedido.getPropertyEditor().setFormat(dtFormat);
 	    fechaPedido.setValue(new Date()); //fecha de hoy por defecto
 	    fechaPedido.setTitle("Seleccione la fecha en la que desea realizar el pedido");
@@ -108,11 +108,11 @@ public class LoadEntradasUtils {
 	    fechaPedido.setStyleAttribute("paddingBottom", "5px");
 	    left.add(fechaPedido,new FormData("40%"));  
 	  
-	    TextField<String> numPedido = new TextField<String>();  
+	    final TextField<String> numPedido = new TextField<String>();  
 	    numPedido.setFieldLabel("Número de pedido");  
 	    left.add(numPedido,formData);
 	    
-	    TextField<String> nifProv = new TextField<String>();  
+	    final TextField<String> nifProv = new TextField<String>();  
 	    nifProv.setFieldLabel("NIF del proveedor");
 	    nifProv.disable();
 	    left.add(nifProv,formData);
@@ -121,7 +121,7 @@ public class LoadEntradasUtils {
 	    ListStore<BaseModel> proveedores = new ListStore<BaseModel>();  
 	    provUtils.loadProveedoresCombo(proveedores);
 	  
-	    ComboBox<BaseModel> combo = new ComboBox<BaseModel>();  
+	    final ComboBox<BaseModel> combo = new ComboBox<BaseModel>();  
 	    combo.setEmptyText("Selecciona un proveedor");  
 	    combo.setStore(proveedores);  
 	    combo.setDisplayField("nombre");  
@@ -132,17 +132,14 @@ public class LoadEntradasUtils {
 	    
 	    left.add(combo,formData);
 	    
-	    
-	    
-	    
 	    // vamos creando el pedido
 	    final LayoutContainer right = new LayoutContainer(); 
 	    layout = new FormLayout();  
 	    layout.setLabelAlign(LabelAlign.TOP);  
-	    //right.setVisible(false);
+	    right.setVisible(false);
 	    right.setLayout(layout);  
 	    
-	    LayoutContainer bottom = new LayoutContainer();  
+	    final LayoutContainer bottom = new LayoutContainer();  
 	    layout = new FormLayout();  
 	    layout.setLabelAlign(LabelAlign.TOP);  
 	    bottom.setLayout(layout);
@@ -155,11 +152,11 @@ public class LoadEntradasUtils {
 	    cpRight.setHeading("Seleccione los artículos a incluir en el pedido");
 	    cpRight.setBodyBorder(false);
 	    
-	    Log.debug("Antes de ir a cargar el combo");
-	    ListStore<BaseModel> art = new ListStore<BaseModel>();  
-	    artiUtils.loadArticulosCombo(art);
+	   // Log.debug("Antes de ir a cargar el combo");
+	    final ListStore<BaseModel> art = new ListStore<BaseModel>();  
+	   
 	    
-	    ComboBox<BaseModel> comboA = new ComboBox<BaseModel>();  
+	    final ComboBox<BaseModel> comboA = new ComboBox<BaseModel>();  
 	    comboA.setEmptyText("Selecciona un articulo");  
 	    comboA.setStore(art);  
 	    comboA.setDisplayField("nombre");  
@@ -170,7 +167,7 @@ public class LoadEntradasUtils {
 	    
 	    Label lblMarca = new Label("Marca:");
 	    lblMarca.addStyleName("etiqueta");
-	    TextField<String> marca = new TextField<String>();  
+	    final TextField<String> marca = new TextField<String>();  
 	    marca.setEnabled(false);
 	    cpRight.add(lblMarca,  new RowData(1, -1, new Margins(4,1,4,4)));
 	    cpRight.add(marca, new RowData(1, -1, new Margins(1,4,4,4)));	   
@@ -192,11 +189,11 @@ public class LoadEntradasUtils {
 	    midLeft.addStyleName("check");
 	  
 	    
-	    CheckBox seleccionar = new CheckBox();  
+	    final CheckBox seleccionar = new CheckBox();  
 	    seleccionar.setFieldLabel("Seleccionar");
 	    midLeft.add(seleccionar, formData);
 	    	    
-	    TextField<Integer> cantidad = new TextField<Integer>();  
+	    final TextField<Integer> cantidad = new TextField<Integer>();  
 	    cantidad.setFieldLabel("Cantidad");  
 	    cantidad.setValue(0);
 	    midRight.add(cantidad, formData);
@@ -210,7 +207,7 @@ public class LoadEntradasUtils {
 	    Label lblObs = new Label("Observaciones");
 	    lblObs.addStyleName("etiqueta");
 	    cpRight.add(lblObs, formData);
-	    TextArea observaciones = new TextArea();
+	    final TextArea observaciones = new TextArea();
 	    observaciones.setVisibleLines(4);
 	    cpRight.add(observaciones,new RowData(1, -1, new Margins(4)));
 	    
@@ -218,6 +215,7 @@ public class LoadEntradasUtils {
 	    Button bt1 = new Button(), bt2 = new Button();
 	   
 	    bt1.setText("Aceptar");
+	    
 	    bt1.setStyleAttribute("padding-right", "5px");
 	    bt2.setText("Buscar");
 	    bt2.addListener(Events.OnClick, new Listener<BaseEvent>(){ 
@@ -238,7 +236,6 @@ public class LoadEntradasUtils {
 	    
 	    right.add(cpRight);
 	    
-	    	  
 
 	    List<ColumnConfig> configs = new ArrayList<ColumnConfig>();  
 	    
@@ -273,10 +270,10 @@ public class LoadEntradasUtils {
 	    column.setWidth(200); 
 	    configs.add(column);  
 	    
-	    ListStore<BaseModel> store = new ListStore<BaseModel>();
+	    final ListStore<BaseModel> store = new ListStore<BaseModel>();
 	  //  store.add(getArticulos()); //(REVISAR ESTO PORQUE DA ERROR EN LA DEMO)
 	    
-	    ColumnModel cm = new ColumnModel(configs);  
+	    final ColumnModel cm = new ColumnModel(configs);  
 	  
 	    DataProxy proxy = null; 
 		final BasePagingLoader<PagingLoadResult<ModelData>> loader = new BasePagingLoader<PagingLoadResult<ModelData>>(  
@@ -284,7 +281,7 @@ public class LoadEntradasUtils {
 	        loader.setRemoteSort(true);
 	    
 	    
-	    Grid<BaseModel> grid = new Grid<BaseModel>(store,cm);
+	    final Grid<BaseModel> grid = new Grid<BaseModel>(store,cm);
 	    grid.setStyleAttribute("borderTop", "none");  
 	    grid.setBorders(false);
 	    grid.setStripeRows(true);  
@@ -293,16 +290,17 @@ public class LoadEntradasUtils {
 	    grid.setColumnLines(true);
 	      
 	    
-	     
+	   
 	    
 	    final PagingToolBar toolBar = new PagingToolBar(50); 
 	    toolBar.bind(loader);
 	    toolBar.setStyleName("paginacion");
 	    
-	    ContentPanel cp = new ContentPanel();  
+	    final ContentPanel cp = new ContentPanel();  
 	    cp.setBodyBorder(true);  
 	    cp.setHeading("Pedido");
 	    cp.setFrame(true);
+	    cp.setVisible(false);
 	    cp.setButtonAlign(HorizontalAlignment.CENTER);  
 	    cp.setLayout(new FitLayout());
 	    cp.setHeight("200px");
@@ -311,25 +309,87 @@ public class LoadEntradasUtils {
 	    bottom.add(cp, formData);
 	    
 	    
-	    ButtonGroup gButtons = new ButtonGroup(2);
-	    Button b2 = new Button(), b3 = new Button();
+	    final ButtonGroup gButtons = new ButtonGroup(2);
+	    Button b1 = new Button(), b2 = new Button();
 	   
-	    b2.setText("Guardar Pedido");
-	    b2.setStyleAttribute("padding-right", "5px");
-	    b3.setText("Vaciar");
+	    b1.setText("Guardar Pedido");
+	    b1.addListener(Events.OnClick, new Listener<BaseEvent>(){
 
+			@Override
+			public void handleEvent(BaseEvent be) {
+				//aqui tenemos que seleccionar todos los datos para  V_PEDIDO
+				
+			}
+	    	
+	    });
+	    b1.setStyleAttribute("padding-right", "5px");
+	    b2.setText("Vaciar");
+	    b2.addListener(Events.OnClick, new Listener<BaseEvent>(){
+
+			@Override
+			public void handleEvent(BaseEvent be) {
+				fechaPedido.setValue(new Date());
+				numPedido.clear();
+				nifProv.clear();
+				marca.clear();
+				combo.clear();
+				comboA.clear();
+				seleccionar.clear();
+				cantidad.clear();
+				observaciones.setValue(null);
+				right.setVisible(false);
+				grid.reconfigure(store, cm);
+				bottom.setVisible(false);
+				gButtons.setVisible(false);
+				main.recalculate();
+				main.layout(true);
+			}
+	    	
+	    });
 	    
+	    
+	    gButtons.add(b1);
 	    gButtons.add(b2);
-	    gButtons.add(b3);
 	    gButtons.setBodyBorder(false);
 	    gButtons.setBorders(false);
+	    gButtons.setVisible(false);
 	    gButtons.addStyleName("botonesFuncionales");
+	    
+	    //***************************************************************************************//
+	    combo.addSelectionChangedListener(new SelectionChangedListener<BaseModel>(){
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent<BaseModel> se) {
+				if(se.getSelectedItem()!=null){ //si es nulo, estaremos vaciando la pantalla
+					long id= se.getSelectedItem().get("id");
+				//	artiUtils.loadArticulosCombo(art,id);
+					right.setVisible(true);
+					right.recalculate();
+					main.layout(true);
+				}
+			}
+	    	
+	    });
+	    bt1.addListener(Events.OnClick, new Listener<BaseEvent>(){
+
+			@Override
+			public void handleEvent(BaseEvent be) {
+				//Pedidos p = artiUtils.loadArticuloGrid(comboA.getValue());
+				//grid.getStore().add(p);
+				cp.setVisible(true);
+				cp.recalculate();
+				gButtons.setVisible(true);
+				bottom.setVisible(true);
+				bottom.recalculate();
+				main.layout(true);
+			}
+	    	
+	    });
 	    
 	    main.add(left, new ColumnData(.4));  
 	    main.add(right, new ColumnData(.6));  
 	    main.add(bottom, new ColumnData(1));
-	    main.add(toolBar, new ColumnData(.6));
-	    main.add(gButtons, new ColumnData(.4));
+	    main.add(gButtons, new ColumnData(1));
 	    panel.add(main, new FormData("100%"));  
 	    
  
@@ -365,7 +425,6 @@ public class LoadEntradasUtils {
 	  
 	    TextField<String> numPeticion = new TextField<String>();  
 	    numPeticion.setFieldLabel("Número de petición");
-	    numPeticion.setValue("24/2013");
 	    left.add(numPeticion,formData);
 	    
 	    
@@ -377,7 +436,6 @@ public class LoadEntradasUtils {
 	  
 	    TextField<String> fechaPeticion = new TextField<String>();  
 	    fechaPeticion.setFieldLabel("Fecha de la petición");
-	    fechaPeticion.setValue("10/05/2013");
 	    right.add(fechaPeticion,formData);
 	    
 	    LayoutContainer bottom = new LayoutContainer();  
@@ -388,10 +446,7 @@ public class LoadEntradasUtils {
 	    
 	    TextField<String> codigoProveedor = new TextField<String>();  
 	    codigoProveedor.setFieldLabel("Proveedor");
-	    codigoProveedor.setValue("B28227775 - ABAISA S.L.");
 	    bottom.add(codigoProveedor,formData);
-
-	  
 
 	    List<ColumnConfig> configs = new ArrayList<ColumnConfig>();  
 	    
@@ -677,12 +732,12 @@ public class LoadEntradasUtils {
 	    
 	      
 	    
-	    ListStore<BaseModel> store = new ListStore<BaseModel>();
+	    final ListStore<BaseModel> store = new ListStore<BaseModel>();
 	  //  store.add(getStocks()); //(REVISAR ESTO PORQUE DA ERROR EN LA DEMO)
 	    
-	    ColumnModel cm = new ColumnModel(configs);  
+	    final ColumnModel cm = new ColumnModel(configs);  
 	  
-	    Grid<BaseModel> grid = new Grid<BaseModel>(store,cm);
+	    final Grid<BaseModel> grid = new Grid<BaseModel>(store,cm);
 	    grid.setAutoExpandColumn("nombre");  
 	    grid.setAutoExpandColumn("actividad");
 	    grid.setBorders(false);  
@@ -712,9 +767,9 @@ public class LoadEntradasUtils {
 
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				comboSeccion.reset();
-				comboFamilia.reset();
-				comboSubFamilia.reset();
+				comboSeccion.clear();
+				comboFamilia.clear();
+				comboSubFamilia.clear();
 				codigoArt.clear();
 				nombreArt.clear();
 				marcaArt.clear();
@@ -722,6 +777,7 @@ public class LoadEntradasUtils {
 				minimas.clear();
 				idoneas.clear();
 				reales.clear();
+				grid.reconfigure(store, cm);
 			}
 	    	
 	    });
@@ -749,11 +805,12 @@ public class LoadEntradasUtils {
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent<BaseModel> se) {
-				Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
-				seccion = se.getSelectedItem().get("id");
-				famiUtils.loadFamiliasComboFiltrado(familias, seccion);
-				comboFamilia.setEnabled(true);
-				comboFamilia.recalculate();
+				if(se.getSelectedItem()!=null){ //estamos vaciando el panel
+					seccion = se.getSelectedItem().get("id");
+					famiUtils.loadFamiliasComboFiltrado(familias, seccion);
+					comboFamilia.setEnabled(true);
+					comboFamilia.recalculate();
+				}
 			}
 	    	
 	    });
@@ -762,11 +819,12 @@ public class LoadEntradasUtils {
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent<BaseModel> se) {
-				Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
-				familia = se.getSelectedItem().get("id");
-				subUtils.loadSubFamiliasComboFiltrado(subFamilia, familia);
-				comboSubFamilia.setEnabled(true);
-				comboSubFamilia.recalculate();
+				if(se.getSelectedItem()!=null){ //estamos vaciando el panel
+					familia = se.getSelectedItem().get("id");
+					subUtils.loadSubFamiliasComboFiltrado(subFamilia, familia);
+					comboSubFamilia.setEnabled(true);
+					comboSubFamilia.recalculate();
+				}
 			}
 	    	
 	    });
@@ -775,7 +833,7 @@ public class LoadEntradasUtils {
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent<BaseModel> se) {
-				Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
+				if(se.getSelectedItem()!=null)
 				subfamilia = se.getSelectedItem().get("id");
 			}
 	    	
@@ -932,7 +990,7 @@ public class LoadEntradasUtils {
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent<BaseModel> se) {
-				Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
+				//Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
 				seccion = se.getSelectedItem().get("id");
 				famiUtils.loadFamiliasComboFiltrado(familias, seccion);
 				comboFamilia.setEnabled(true);
@@ -945,7 +1003,7 @@ public class LoadEntradasUtils {
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent<BaseModel> se) {
-				Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
+				//Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
 				familia = se.getSelectedItem().get("id");
 				subUtils.loadSubFamiliasComboFiltrado(subFamilia, familia);
 				comboSubFamilia.setEnabled(true);
@@ -958,7 +1016,7 @@ public class LoadEntradasUtils {
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent<BaseModel> se) {
-				Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
+				//Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
 				subfamilia = se.getSelectedItem().get("id");
 			}
 	    	

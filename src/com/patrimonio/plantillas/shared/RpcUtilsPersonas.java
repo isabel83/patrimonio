@@ -55,12 +55,12 @@ public class RpcUtilsPersonas {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				Log.debug("Error en carga de personas: " + caught.getLocalizedMessage());
+				//Log.debug("Error en carga de personas: " + caught.getLocalizedMessage());
 			}
 
 			@Override
 			public void onSuccess(List<Personas> result) {
-				Log.debug("Estamos en el on success de personas hay: " + result.size());
+				//Log.debug("Estamos en el on success de personas hay: " + result.size());
 				for(Personas per: result){
 						
 					 BaseModel model = new BaseModel();

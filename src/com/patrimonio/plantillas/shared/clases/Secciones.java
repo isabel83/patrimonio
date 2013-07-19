@@ -18,7 +18,7 @@ public class Secciones extends BaseModel implements Serializable{
 
 	private String DESCRIPCION;
 
-	private int ID_ESTADO;
+	private Integer ID_ESTADO;
 	
 	public Secciones(){
 		

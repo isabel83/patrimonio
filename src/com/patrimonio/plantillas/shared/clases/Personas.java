@@ -16,9 +16,9 @@ public class Personas extends BaseModel implements Serializable{
 	
 	private Long ID_PERSONA; //todos requeridos
 
-	private int ID_ESTADO;
+	private Integer ID_ESTADO;
 
-	private int ID_PERFIL;
+	private Integer ID_PERFIL;
 
 	private String DESCRIPCION;
 	

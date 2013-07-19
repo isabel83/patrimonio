@@ -8,7 +8,7 @@
             <column name="ID_DESTINATARIO" />
             <generator class="native" />
         </id>
-        <property name="ID_ESTADO" type="int" access="field">
+        <property name="ID_ESTADO" type="java.lang.Integer" access="field">
             <column name="ID_ESTADO" />
         </property>
         <property name="DESCRIPCION" type="java.lang.String" access="field">

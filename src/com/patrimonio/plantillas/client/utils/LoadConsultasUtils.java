@@ -823,7 +823,7 @@ public class LoadConsultasUtils {
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent<BaseModel> se) {
-				Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
+				//Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
 				seccion = se.getSelectedItem().get("id");
 				famiUtils.loadFamiliasComboFiltrado(familias, seccion);
 				comboFamilia.setEnabled(true);
@@ -836,7 +836,7 @@ public class LoadConsultasUtils {
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent<BaseModel> se) {
-				Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
+				//Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
 				familia = se.getSelectedItem().get("id");
 				subUtils.loadSubFamiliasComboFiltrado(subFamilia, familia);
 				comboSubFamilia.setEnabled(true);
@@ -849,7 +849,7 @@ public class LoadConsultasUtils {
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent<BaseModel> se) {
-				Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
+				//Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
 				subfamilia = se.getSelectedItem().get("id");
 			}
 	    	

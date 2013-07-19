@@ -1,0 +1,2 @@
+serviceClass: com.patrimonio.plantillas.client.services.ArticuloService
+path: 0B3BE4AB2378FB2E5657F31990098277.gwt.rpc

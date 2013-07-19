@@ -12,6 +12,8 @@ import com.extjs.gxt.ui.client.data.BeanModelReader;
 import com.extjs.gxt.ui.client.data.DataProxy;
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
+import com.extjs.gxt.ui.client.data.PagingLoader;
+import com.extjs.gxt.ui.client.data.RpcProxy;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
@@ -25,6 +27,7 @@ import com.extjs.gxt.ui.client.widget.button.ButtonGroup;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
@@ -36,6 +39,7 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoBuscar;
 import com.patrimonio.plantillas.shared.RpcUtilsDestinatarios;
 import com.patrimonio.plantillas.shared.RpcUtilsFamilias;
@@ -72,6 +76,9 @@ public class LoadMantenimientoUtils {
 	
 	
 	public void loadFormProveedores(FormPanel frmProveedores) {
+		
+		List<Proveedores> todos = provUtils.cargaGolbal();
+		
 		FormData formDataMid = new FormData("50%");
 		FormData formData = new FormData("90%");
 		Margins m = new Margins();
@@ -177,19 +184,20 @@ public class LoadMantenimientoUtils {
 	    right.add(estado, new FormData("10%"));
 	    
 	    
-//	    RpcProxy<PagingLoadResult<Proveedores>> proxy = new RpcProxy<PagingLoadResult<Proveedores>>() {
-//			@Override
-//			public void load(Object loadConfig,
-//					AsyncCallback<PagingLoadResult<Proveedores>> callback) {
-//				proService.findAll((PagingLoadConfig) loadConfig,callback);
-//			}
-//		};
+	    RpcProxy<PagingLoadResult<Proveedores>> proxy = new RpcProxy<PagingLoadResult<Proveedores>>() {
+
+			@Override
+			protected void load(Object loadConfig, AsyncCallback<PagingLoadResult<Proveedores>> callback) {
+				provUtils.cargaGolbal();
+			}
+		};
 
 		// loader
-//		final PagingLoader<PagingLoadResult<ModelData>> loader = new BasePagingLoader<PagingLoadResult<ModelData>>(proxy);
+		final PagingLoader<PagingLoadResult<ModelData>> loader = new BasePagingLoader<PagingLoadResult<ModelData>>(proxy);
 
-	    final PagingToolBar paginacion = new PagingToolBar(provUtils.countAll()); 
-	    //paginacion.bind(loader);
+	    final PagingToolBar paginacion = new PagingToolBar(1); 
+	    paginacion.bind(loader);
+	    loader.load();
 	    paginacion.setStyleName("paginacion");
 	    
 	    ButtonGroup gButtons = new ButtonGroup(4);
@@ -213,7 +221,7 @@ public class LoadMantenimientoUtils {
 					habilitaTodo(true);
 				}
 				else{
-					Log.debug("Estamos en el caso de guardar y vamos a llamar a la funcion en provUtils");
+					//Log.debug("Estamos en el caso de guardar y vamos a llamar a la funcion en provUtils");
 					provUtils.checkValuesAndSaveProveedor(nif.getValue(),nombre.getValue(),actividad.getValue(),contacto.getValue(),domicilio.getValue(),poblacion.getValue(),
 							Integer.parseInt(cp.getValue()),provincia.getValue(),tfno.getValue(),tfno2.getValue(),fax.getValue(),Integer.parseInt(movil.getValue()),correo.getValue(), estado.getValue());
 					
@@ -620,7 +628,7 @@ public class LoadMantenimientoUtils {
 					habilitaTodo(true);
 				}
 				else{
-					Log.debug("Estamos en el caso de guardar y vamos a llamar a la funcion en secciones");
+					//Log.debug("Estamos en el caso de guardar y vamos a llamar a la funcion en secciones");
 					secUtils.checkValuesAndSaveSecciones(nombre.getValue());
 					
 					b1.setText("Agregar");
@@ -756,7 +764,7 @@ public class LoadMantenimientoUtils {
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent<BaseModel> se) {
-				Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
+				//Log.debug("El id seleccionado es: " + se.getSelectedItem().get("id"));
 				idSeccion = se.getSelectedItem().get("id");
 			}
 	    	
@@ -839,7 +847,7 @@ public class LoadMantenimientoUtils {
 					habilitaTodo(true);
 				}
 				else{
-					Log.debug("Estamos en el caso de guardar y vamos a llamar a la funcion en familias");
+					//Log.debug("Estamos en el caso de guardar y vamos a llamar a la funcion en familias");
 					famiUtils.checkValuesAndSaveFamilia(nombre.getValue(), codigo.getValue(), (int)idSeccion );
 					
 					b1.setText("Agregar");
@@ -982,7 +990,7 @@ public class LoadMantenimientoUtils {
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent<BaseModel> se) {
-				Log.debug("El id seleccionado es: " + se.getSelectedItem().get("nombre"));
+				//Log.debug("El id seleccionado es: " + se.getSelectedItem().get("nombre"));
 				familia = se.getSelectedItem().get("id");
 			}
 	    	
@@ -1011,7 +1019,7 @@ public class LoadMantenimientoUtils {
 					habilitaTodo(true);
 				}
 				else{
-					Log.debug("El valor del combo es: " + familia);
+				//	Log.debug("El valor del combo es: " + familia);
 					subUtils.checkValuesAndSaveSubFamilia(nombre.getValue(), codigo.getValue(), (int)idFamilia );
 					
 					b1.setText("Agregar");

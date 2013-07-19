@@ -51,12 +51,12 @@ public class RpcUtilsSubfamilias {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				Log.debug("Error en carga de familias: " + caught.getLocalizedMessage());
+				//Log.debug("Error en carga de familias: " + caught.getLocalizedMessage());
 			}
 
 			@Override
 			public void onSuccess(List<Subfamilias> result) {
-				Log.debug("Estamos en el on success de familias hay: " + result.size());
+				//Log.debug("Estamos en el on success de familias hay: " + result.size());
 				for(Subfamilias sub: result){
 					if(sub.getId_familia()==familia){	
 						 BaseModel model = new BaseModel();

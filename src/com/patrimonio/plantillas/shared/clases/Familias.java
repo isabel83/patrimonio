@@ -16,9 +16,9 @@ public class Familias extends BaseModel implements Serializable{
 	
 	private Long ID_FAMILIA; //todos requeridos
 	
-	private int ID_SECCION;
+	private Integer ID_SECCION;
 	
-	private int ID_ESTADO;
+	private Integer ID_ESTADO;
 	
 	private String DESCRIPCION;
 	

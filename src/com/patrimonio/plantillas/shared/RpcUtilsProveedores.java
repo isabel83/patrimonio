@@ -25,6 +25,8 @@ public class RpcUtilsProveedores {
 	
 	
 	protected int total;
+	protected long id=0;
+	protected List<Proveedores> todos;
 	
 	public void loadProveedores(final ListBox lstProveedores,PagingLoadConfig loadConfig){
 		proService.findAll(loadConfig, new AsyncCallback<PagingLoadResult<Proveedores>>(){
@@ -73,19 +75,19 @@ public class RpcUtilsProveedores {
 	}
 
 	public void loadProveedoresCombo(final ListStore<BaseModel> proveedores) {
-		Log.debug("Estamos en la funcion de load en shared");
+		//Log.debug("Estamos en la funcion de load en shared");
 		proService.findAllForList(new AsyncCallback<List<Proveedores>>(){
 
 			@Override
 			public void onFailure(Throwable caught) {
-				Log.debug("Error en carga de proveedores: " + caught.getLocalizedMessage());
+				//Log.debug("Error en carga de proveedores: " + caught.getLocalizedMessage());
 			}
 
 			@Override
 			public void onSuccess(List<Proveedores> result) {
-				Log.debug("Estamos en el on success, hay: " + result.size());
+				//Log.debug("Estamos en el on success, hay: " + result.size());
 				for(Proveedores pro: result){
-					Log.debug("Proveedor: " + pro.getId_proveedor() + " , " + pro.getNombre());
+					//Log.debug("Proveedor: " + pro.getId_proveedor() + " , " + pro.getNombre());
 						
 					 BaseModel model = new BaseModel();
 	                 model.set("id",pro.getId_proveedor());
@@ -193,7 +195,7 @@ public class RpcUtilsProveedores {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				Log.debug("Error en carga de proveedores: " + caught.getLocalizedMessage());
+				//Log.debug("Error en carga de proveedores: " + caught.getLocalizedMessage());
 			}
 
 			@Override
@@ -203,6 +205,25 @@ public class RpcUtilsProveedores {
 			
 		});
 		return total;
+	}
+
+	public List<Proveedores> cargaGolbal() {
+		proService.findAllForList(new AsyncCallback<List<Proveedores>>(){
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(List<Proveedores> result) {
+				todos = result;
+				
+			}
+			
+		});
+		return todos;
 	}
 
 	 

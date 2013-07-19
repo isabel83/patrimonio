@@ -8,10 +8,10 @@
             <column name="ID_ARTI_PROV" />
             <generator class="native" />
         </id>
-        <property name="ID_ARTICULO" type="int"  access="field">
+        <property name="ID_ARTICULO" type="java.lang.Integer"  access="field">
             <column name="ID_ARTICULO" /> 
         </property>
-        <property name="ID_PROVEEDOR" type="int"  access="field">
+        <property name="ID_PROVEEDOR" type="java.lang.Integer"  access="field">
             <column name="ID_PROVEEDOR" />
         </property>
     </class>

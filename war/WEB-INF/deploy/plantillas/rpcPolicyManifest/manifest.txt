@@ -1,11 +1,2 @@
 # Module plantillas
 # RPC service class, partial path of RPC policy file
-com.patrimonio.plantillas.client.services.DestinatarioService, CD9C1971B9BAEC27E5F543658F00E080.gwt.rpc
-com.patrimonio.plantillas.client.services.ProveedorService, BE0E958938A44EFACE6DC3747B1B782D.gwt.rpc
-com.patrimonio.plantillas.client.services.ArticuloService, 2EF9B9ABD38D67581CA1BD5795B0581D.gwt.rpc
-com.patrimonio.plantillas.client.services.SeccionService, E3EDB3A0680E2E05BBD87CD8C2619866.gwt.rpc
-com.patrimonio.plantillas.client.services.SubfamiliaService, 4E5F3CF78C491257EC6C44DB568C7498.gwt.rpc
-com.patrimonio.plantillas.client.services.FamiliaService, 6C8D3B550902D1BB54902D45579B45E2.gwt.rpc
-com.patrimonio.plantillas.client.services.PuestoService, C3BF57A3EB541FAA44D1DDD05234D3A4.gwt.rpc
-com.patrimonio.plantillas.client.LoginService, DB88F61C40CAF3836518A58D9D652497.gwt.rpc
-com.patrimonio.plantillas.client.services.PersonaService, 17F1D00943AE79D8C5CB57BF6CBDE8A1.gwt.rpc

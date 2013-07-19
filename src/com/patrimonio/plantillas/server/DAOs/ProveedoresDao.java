@@ -75,15 +75,13 @@ public class ProveedoresDao  extends HibernateDaoSupport{
 		try {
 			sesion.save(proveedor); 
 			t.commit();
-		
-			  return true;
+			return true;
 		} catch (Exception e) {
 			return false;
 		}
 		finally{
 			sesion.close();
 		}
-		 
 	}
 
 	@Transactional

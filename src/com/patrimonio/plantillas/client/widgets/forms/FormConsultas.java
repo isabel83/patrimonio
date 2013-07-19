@@ -1,19 +1,10 @@
 package com.patrimonio.plantillas.client.widgets.forms;
 
-import com.allen_sauer.gwt.log.client.Log;
-import com.extjs.gxt.ui.client.Style.HideMode;
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
-import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.Dialog;
-import com.extjs.gxt.ui.client.widget.TabItem;
-import com.extjs.gxt.ui.client.widget.TabPanel;
-import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
@@ -21,7 +12,6 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Element;
 import com.patrimonio.plantillas.client.utils.LoadConsultasUtils;
-import com.patrimonio.plantillas.client.widgets.dialogs.DialogoBuscar;
 import com.patrimonio.plantillas.client.widgets.menus.MenuIconos;
 
 public class FormConsultas extends ContentPanel{
@@ -48,6 +38,7 @@ public class FormConsultas extends ContentPanel{
 		setStyleName("migas");
 		setWidth(1024);
 		setAutoHeight(true);
+		add(new MenuIconos());
 		
 		GWT.setUncaughtExceptionHandler(new   
 			      GWT.UncaughtExceptionHandler() {  

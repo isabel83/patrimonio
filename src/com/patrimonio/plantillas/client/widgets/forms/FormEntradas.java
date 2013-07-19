@@ -2,13 +2,9 @@ package com.patrimonio.plantillas.client.widgets.forms;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Element;
-import com.allen_sauer.gwt.log.client.Log;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.TabPanel;
-import com.extjs.gxt.ui.client.widget.TabItem;
-
 import com.patrimonio.plantillas.client.utils.LoadEntradasUtils;
 import com.patrimonio.plantillas.client.widgets.menus.MenuIconos;
 
@@ -37,6 +33,7 @@ public class FormEntradas extends ContentPanel{
 		setStyleName("migas");
 		setWidth(1024);
 		setAutoHeight(true);
+		add(new MenuIconos());
 		
 		GWT.setUncaughtExceptionHandler(new   
 			      GWT.UncaughtExceptionHandler() {  
