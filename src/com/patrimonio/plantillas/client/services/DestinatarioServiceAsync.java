@@ -2,6 +2,9 @@ package com.patrimonio.plantillas.client.services;
 
 import java.util.List;
 
+import com.extjs.gxt.ui.client.data.BeanModel;
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.patrimonio.plantillas.shared.clases.Destinatarios;
 
@@ -18,6 +21,8 @@ public interface DestinatarioServiceAsync {
 	void deleteDestinatario(long idDestinatario, AsyncCallback<Void> callback);
 
 	void findAllForList(AsyncCallback<List<Destinatarios>> asyncCallback);
+
+	void getDestinatarios(PagingLoadConfig loadConfig, AsyncCallback<PagingLoadResult<Destinatarios>> callback);
 
 	
 }

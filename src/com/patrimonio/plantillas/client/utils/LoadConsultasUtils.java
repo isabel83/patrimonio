@@ -51,6 +51,7 @@ import com.patrimonio.plantillas.shared.RpcUtilsPersonas;
 import com.patrimonio.plantillas.shared.RpcUtilsProveedores;
 import com.patrimonio.plantillas.shared.RpcUtilsSecciones;
 import com.patrimonio.plantillas.shared.RpcUtilsSubfamilias;
+import com.patrimonio.plantillas.shared.clases.Destinatarios;
 import com.patrimonio.plantillas.shared.clases.Proveedores;
 
 public class LoadConsultasUtils {
@@ -340,10 +341,10 @@ public class LoadConsultasUtils {
 	    left.add(comboSeccion, new FormData("100%"));
 	    
 
-	    ListStore<BaseModel> unidades = new ListStore<BaseModel>();  
+	    ListStore<Destinatarios> unidades = new ListStore<Destinatarios>();  
 	    destiUtils.loadUnidadCombo(unidades);
 	  
-	    final ComboBox<BaseModel> comboUnidad = new ComboBox<BaseModel>();  
+	    final ComboBox<Destinatarios> comboUnidad = new ComboBox<Destinatarios>();  
 	    comboUnidad.setEmptyText("Selecciona una unidad");  
 	    comboUnidad.setStore(unidades);  
 	    comboUnidad.setDisplayField("nombre");  
@@ -504,10 +505,10 @@ public class LoadConsultasUtils {
 	    left.add(comboSeccion, new FormData("100%"));
 	    
 
-	    ListStore<BaseModel> unidades = new ListStore<BaseModel>();  
+	    ListStore<Destinatarios> unidades = new ListStore<Destinatarios>();  
 	    destiUtils.loadUnidadCombo(unidades);
 	  
-	    final ComboBox<BaseModel> comboUnidad = new ComboBox<BaseModel>();  
+	    final ComboBox<Destinatarios> comboUnidad = new ComboBox<Destinatarios>();  
 	    comboUnidad.setEmptyText("Selecciona una unidad");  
 	    comboUnidad.setStore(unidades);  
 	    comboUnidad.setDisplayField("nombre");  
@@ -680,10 +681,10 @@ public class LoadConsultasUtils {
 	    left.add(comboSeccion, new FormData("100%"));
 	    
 
-	    ListStore<BaseModel> unidades = new ListStore<BaseModel>();  
+	    ListStore<Destinatarios> unidades = new ListStore<Destinatarios>();  
 	    destiUtils.loadUnidadCombo(unidades);
 	  
-	    final ComboBox<BaseModel> comboUnidad = new ComboBox<BaseModel>();  
+	    final ComboBox<Destinatarios> comboUnidad = new ComboBox<Destinatarios>();  
 	    comboUnidad.setEmptyText("Selecciona una unidad");  
 	    comboUnidad.setStore(unidades);  
 	    comboUnidad.setDisplayField("nombre");  

@@ -4,16 +4,16 @@
 	<target name="default" depends="buildwar,deploy"></target>
  
 	<target name="buildwar">
-		<war basedir="war" destfile="Patrimonio.war" webxml="war/WEB-INF/web.xml">
+		<war basedir="war" destfile="PatrimonioNacional.war" webxml="war/WEB-INF/web.xml">
 			
 			<webinf dir="war/WEB-INF/">
 				<include name="**/*.jar" />
 			</webinf>
 		</war>
 	</target>
- 
+  
 	<target name="deploy">
-		<copy file="Patrimonio.war" todir="." />
+		<copy file="PatrimonioNacional.war" todir="." />
 	</target>
  
 </project>

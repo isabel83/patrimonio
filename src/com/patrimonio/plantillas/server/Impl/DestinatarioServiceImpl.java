@@ -2,6 +2,8 @@ package com.patrimonio.plantillas.server.Impl;
 
 import java.util.List;
 
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.patrimonio.plantillas.server.DAOs.DestinatariosDao;
 import com.patrimonio.plantillas.shared.clases.Destinatarios;
@@ -33,8 +35,8 @@ public class DestinatarioServiceImpl extends RemoteServiceServlet implements Des
 
 	@Override
 	public void saveOrUpdateDestinatario(long idDestinatario, int estado, String descripcion) throws Exception {
-		Destinatarios destinatario = new Destinatarios(idDestinatario,estado,descripcion);
-		destinatarioDAO.updateDestinatario(destinatario);
+//		Destinatarios destinatario = new Destinatarios(estado,descripcion);
+//		destinatarioDAO.updateDestinatario(destinatario);
 	}
 
 	@Override
@@ -47,6 +49,11 @@ public class DestinatarioServiceImpl extends RemoteServiceServlet implements Des
 	@Override
 	public List<Destinatarios> findAllForList() throws Exception {
 		return destinatarioDAO.findAll();
+	}
+
+	@Override
+	public PagingLoadResult<Destinatarios> getDestinatarios(PagingLoadConfig config) throws Exception {
+		return destinatarioDAO.getDestinatarios(config);
 	}
 
 }

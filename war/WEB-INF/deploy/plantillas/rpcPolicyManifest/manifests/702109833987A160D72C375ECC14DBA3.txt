@@ -1,2 +1,0 @@
-serviceClass: com.patrimonio.plantillas.client.services.DestinatarioService
-path: CD9C1971B9BAEC27E5F543658F00E080.gwt.rpc

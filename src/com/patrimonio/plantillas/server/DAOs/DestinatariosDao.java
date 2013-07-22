@@ -100,4 +100,6 @@ public class DestinatariosDao  extends HibernateDaoSupport{
 		return todos;
 	}
 
+	
+
 }

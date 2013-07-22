@@ -1,2 +1,0 @@
-serviceClass: com.patrimonio.plantillas.client.services.PuestoService
-path: C3BF57A3EB541FAA44D1DDD05234D3A4.gwt.rpc

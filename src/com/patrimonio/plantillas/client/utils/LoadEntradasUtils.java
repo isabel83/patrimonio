@@ -98,6 +98,18 @@ public class LoadEntradasUtils {
 	    FormLayout layout = new FormLayout();  
 	    layout.setLabelAlign(LabelAlign.TOP);  
 	    left.setLayout(layout);  
+	    
+	    LayoutContainer mRight = new LayoutContainer();  
+	    mRight.setStyleAttribute("paddingLeft", "10px");  
+	    FormLayout lay = new FormLayout(); 
+	    lay.setLabelAlign(LabelAlign.TOP);
+	    mRight.setLayout(lay);  
+	    
+	    LayoutContainer mLeft = new LayoutContainer();  
+	    mLeft.setStyleAttribute("paddingRight", "10px");
+	    lay = new FormLayout();  
+	    lay.setLabelAlign(LabelAlign.TOP);
+	    mLeft.setLayout(lay); 
 	  
 	    DateTimeFormat dtFormat = DateTimeFormat.getFormat("dd-MM-yyyy");
 	    final DateField fechaPedido = new DateField();
@@ -106,7 +118,18 @@ public class LoadEntradasUtils {
 	    fechaPedido.setTitle("Seleccione la fecha en la que desea realizar el pedido");
 	    fechaPedido.setFieldLabel("Fecha del pedido");
 	    fechaPedido.setStyleAttribute("paddingBottom", "5px");
-	    left.add(fechaPedido,new FormData("40%"));  
+	    mLeft.add(fechaPedido,formData);
+	    
+	    final TextField<String> numExp = new TextField<String>();  
+	    numExp.setFieldLabel("Número de expediente");  
+	    mRight.add(numExp,formData);
+	    
+	    LayoutContainer subM = new LayoutContainer();  
+	    subM.setLayout(new ColumnLayout()); 
+	    subM.add(mLeft, new ColumnData(.5));
+	    subM.add(mRight, new ColumnData(.5));  
+	    left.add(subM,formData);
+	       
 	  
 	    final TextField<String> numPedido = new TextField<String>();  
 	    numPedido.setFieldLabel("Número de pedido");  
@@ -177,7 +200,7 @@ public class LoadEntradasUtils {
 	    
 	    LayoutContainer midRight = new LayoutContainer();  
 	    midRight.setStyleAttribute("paddingLeft", "10px");  
-	    FormLayout lay = new FormLayout(); 
+	    lay = new FormLayout(); 
 	    lay.setLabelAlign(LabelAlign.TOP);
 	    midRight.setLayout(lay);  
 	    
@@ -362,7 +385,7 @@ public class LoadEntradasUtils {
 			public void selectionChanged(SelectionChangedEvent<BaseModel> se) {
 				if(se.getSelectedItem()!=null){ //si es nulo, estaremos vaciando la pantalla
 					long id= se.getSelectedItem().get("id");
-				//	artiUtils.loadArticulosCombo(art,id);
+					artiUtils.loadArticulosCombo(art,(int)id);
 					right.setVisible(true);
 					right.recalculate();
 					main.layout(true);
@@ -769,7 +792,9 @@ public class LoadEntradasUtils {
 			public void componentSelected(ButtonEvent ce) {
 				comboSeccion.clear();
 				comboFamilia.clear();
+				comboFamilia.setEnabled(false);
 				comboSubFamilia.clear();
+				comboSubFamilia.setEnabled(false);
 				codigoArt.clear();
 				nombreArt.clear();
 				marcaArt.clear();
@@ -1044,7 +1069,9 @@ public class LoadEntradasUtils {
 			public void componentSelected(ButtonEvent ce) {
 				comboSeccion.reset();
 				comboFamilia.reset();
+				comboFamilia.setEnabled(false);
 				comboSubFamilia.reset();
+				comboSubFamilia.setEnabled(false);
 				codigoArt.clear();
 				nombreArt.clear();
 				marcaArt.clear();

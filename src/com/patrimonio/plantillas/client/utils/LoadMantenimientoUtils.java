@@ -2,24 +2,34 @@ package com.patrimonio.plantillas.client.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.SortDir;
 import com.extjs.gxt.ui.client.data.BaseModel;
+import com.extjs.gxt.ui.client.data.BasePagingLoadConfig;
 import com.extjs.gxt.ui.client.data.BasePagingLoader;
+import com.extjs.gxt.ui.client.data.BeanModel;
 import com.extjs.gxt.ui.client.data.BeanModelReader;
 import com.extjs.gxt.ui.client.data.DataProxy;
 import com.extjs.gxt.ui.client.data.ModelData;
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoader;
 import com.extjs.gxt.ui.client.data.RpcProxy;
+import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.GridEvent;
+import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.util.Margins;
+import com.extjs.gxt.ui.client.widget.Component;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.button.Button;
@@ -30,16 +40,24 @@ import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
+import com.extjs.gxt.ui.client.widget.grid.CellEditor;
+import com.extjs.gxt.ui.client.widget.grid.CheckBoxSelectionModel;
+import com.extjs.gxt.ui.client.widget.grid.CheckColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
+import com.extjs.gxt.ui.client.widget.grid.EditorGrid;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
+import com.extjs.gxt.ui.client.widget.grid.RowEditor;
 import com.extjs.gxt.ui.client.widget.layout.ColumnData;
 import com.extjs.gxt.ui.client.widget.layout.ColumnLayout;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.patrimonio.plantillas.client.services.DestinatarioService;
+import com.patrimonio.plantillas.client.services.DestinatarioServiceAsync;
 import com.patrimonio.plantillas.client.widgets.dialogs.DialogoBuscar;
 import com.patrimonio.plantillas.shared.RpcUtilsDestinatarios;
 import com.patrimonio.plantillas.shared.RpcUtilsFamilias;
@@ -73,6 +91,7 @@ public class LoadMantenimientoUtils {
 	protected Familias familia = new Familias();
 	protected Subfamilias subfamilia = new Subfamilias();
 	
+	DestinatarioServiceAsync destService = GWT.create(DestinatarioService.class);
 	
 	
 	public void loadFormProveedores(FormPanel frmProveedores) {
@@ -373,15 +392,14 @@ public class LoadMantenimientoUtils {
 		frmDestinatarios.setBodyBorder(false);
 		frmDestinatarios.setLabelAlign(LabelAlign.TOP);  
 		frmDestinatarios.setButtonAlign(HorizontalAlignment.CENTER);  
-	   
-	  
+		
 	    LayoutContainer main = new LayoutContainer();  
 	    main.setLayout(new ColumnLayout());  
 	    main.setStyleAttribute("paddingBottom", "35px");
 	    main.setStyleAttribute("paddingTop", "35px");
 	    main.setBorders(false);
 	  
-	    LayoutContainer left = new LayoutContainer();  
+	    /*LayoutContainer left = new LayoutContainer();  
 	    left.setStyleAttribute("paddingLeft", "10px");
 	    FormLayout layout = new FormLayout();  
 	    layout.setLabelAlign(LabelAlign.TOP);  
@@ -524,9 +542,141 @@ public class LoadMantenimientoUtils {
 	    
 	    main.add(left, new ColumnData(.5));
 	    main.add(right, new ColumnData(.5));
-	    main.add(paginacion, new ColumnData(.6));
-	    main.add(gButtons, new ColumnData(.4));
+	    main.add(paginacion, new ColumnData(.6));*/
 	    
+	    
+	    RpcProxy<PagingLoadResult<Destinatarios>> proxy = new RpcProxy<PagingLoadResult<Destinatarios>>() {  
+	        @Override  
+	        public void load(Object loadConfig, AsyncCallback<PagingLoadResult<Destinatarios>> callback) {  
+	        	destService.getDestinatarios((PagingLoadConfig) loadConfig, callback); 
+	        }  
+	      };  
+	    
+	    final PagingLoader<PagingLoadResult<ModelData>> loader = new BasePagingLoader<PagingLoadResult<ModelData>>(proxy);  
+	   loader.setRemoteSort(true);  
+	    	
+	  
+		final ListStore<Destinatarios> store = new ListStore<Destinatarios>(loader);
+	    //store.add(destiUtils.loadAll());
+	   //Log.debug("El store tiene" + store.getCount());
+	    
+		final PagingToolBar toolBar = new PagingToolBar(50);
+		toolBar.bind(loader);  
+		
+		List<ColumnConfig> columns = new ArrayList<ColumnConfig>();  
+		ColumnConfig column = new ColumnConfig();
+		column.setId("id_destinatario");
+		column.setHidden(true);
+		columns.add(column);
+		
+		ColumnConfig column1 = new ColumnConfig();  
+		column1.setId("descripcion");  
+		column1.setHeader("Nombre");
+		column1.setWidth(550);  
+		  
+		TextField<String> text = new TextField<String>();  
+		text.setAllowBlank(false);  
+		column1.setEditor(new CellEditor(text));  
+		columns.add(column1);  
+	    
+		CheckColumnConfig activo = new CheckColumnConfig("id_estado", "Activo", 100);
+		CellEditor checkBoxEditor = new CellEditor(new CheckBox());  
+		activo.setEditor(checkBoxEditor);  
+		columns.add(activo);  
+		
+
+		
+//		CheckColumnConfig checkColumn = new CheckColumnConfig("tiene", "Tiene puesto relacionado?", 100);  
+//		checkBoxEditor = new CellEditor(new CheckBox());  
+//		checkColumn.setEditor(checkBoxEditor);  
+//		columns.add(checkColumn); 
+	    
+		
+	    
+	    final ColumnModel cm = new ColumnModel(columns);  
+	   
+	
+	    final RowEditor<BaseModel> re = new RowEditor<BaseModel>();
+	    final Grid<Destinatarios> grid = new Grid<Destinatarios>(store, cm);  
+		grid.setAutoExpandColumn("descripcion");
+	    grid.setLoadMask(true);
+		grid.setColumnReordering(true);
+		grid.disableTextSelection(false);
+		grid.setBorders(true);
+		grid.setHeight(500);
+		grid.addPlugin(activo);
+		grid.addListener(Events.Attach, new Listener<GridEvent<Destinatarios>>() {
+			public void handleEvent(GridEvent<Destinatarios> be) {
+				PagingLoadConfig config = new BasePagingLoadConfig();
+				config.setOffset(0);
+				config.setLimit(3);
+
+				Map<String, Object> state = grid.getState();
+				if (state.containsKey("offset")) {
+					int offset = (Integer) state.get("offset");
+					int limit = (Integer) state.get("limit");
+					config.setOffset(offset);
+					config.setLimit(limit);
+				}
+
+				loader.load(config);
+			}
+		});
+		grid.addListener(Events.AfterLayout, new Listener<GridEvent<Destinatarios>>(){
+
+			@Override
+			public void handleEvent(GridEvent<Destinatarios> be) {
+				grid.recalculate();
+				
+			}
+			
+		});
+	    
+	    
+	    ButtonGroup gButtons = new ButtonGroup(4);
+	    final Button b1  = new Button();
+	    final Button b2 = new Button();
+	    
+	    
+	    b1.setText("Agregar");
+	    b1.addSelectionListener(new SelectionListener<ButtonEvent>(){
+
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				Destinatarios d = new Destinatarios();  
+		        d.setDescripcion("Nombre");
+		        d.setId_estado(0);  
+		        
+		  
+		        re.stopEditing(false);  
+		        store.insert(d, 0);  
+		        re.startEditing(store.indexOf(d), true);
+			}
+		
+	    });
+	    
+	    b1.setStyleAttribute("padding-right", "5px");
+	    b2.setText("Eliminar");
+	    b2.addSelectionListener(new SelectionListener<ButtonEvent>(){
+			@Override
+			public void componentSelected(ButtonEvent ce) {
+				grid.getStore().remove(grid.getStore().getAt(0));  
+		        if (grid.getStore().getCount() == 0) {  
+		          ce.<Component> getComponent().disable();  
+		        }  
+			}
+	    });
+	    
+	    
+	    
+	    gButtons.add(b1);
+	    gButtons.add(b2);
+	    gButtons.addStyleName("botonesFuncionales");
+	    
+	    main.add(grid, new ColumnData(1));  
+	    main.add(toolBar, new ColumnData(.6));
+	    main.add(gButtons, new ColumnData(.4));
+	    grid.recalculate();
 	    frmDestinatarios.add(main, new FormData("100%"));
 	}
 
@@ -1174,10 +1324,10 @@ public class LoadMantenimientoUtils {
 	    bottom.setStyleAttribute("paddingRight", "10px");
 	    
 	    
-	    ListStore<BaseModel> unidades = new ListStore<BaseModel>();  
+	    ListStore<Destinatarios> unidades = new ListStore<Destinatarios>();  
 	    destiUtils.loadUnidadCombo(unidades);
 	  
-	    final ComboBox<BaseModel> comboUnidad = new ComboBox<BaseModel>();  
+	    final ComboBox<Destinatarios> comboUnidad = new ComboBox<Destinatarios>();  
 	    comboUnidad.setEmptyText("Selecciona una delegación / destinatario");  
 	    comboUnidad.setStore(unidades);  
 	    comboUnidad.setDisplayField("nombre");  

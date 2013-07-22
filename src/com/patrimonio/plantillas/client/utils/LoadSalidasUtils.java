@@ -52,6 +52,7 @@ import com.patrimonio.plantillas.client.widgets.dialogs.DialogoNuevoArticulo;
 import com.patrimonio.plantillas.shared.RpcUtilsDestinatarios;
 import com.patrimonio.plantillas.shared.RpcUtilsPersonas;
 import com.patrimonio.plantillas.shared.RpcUtilsSecciones;
+import com.patrimonio.plantillas.shared.clases.Destinatarios;
 
 public class LoadSalidasUtils {
 	
@@ -124,10 +125,10 @@ public class LoadSalidasUtils {
 	    bottom.add(comboSeccion, new FormData("100%"));
 	    
 
-	    ListStore<BaseModel> unidades = new ListStore<BaseModel>();  
+	    ListStore<Destinatarios> unidades = new ListStore<Destinatarios>();  
 	    destiUtils.loadUnidadCombo(unidades);
 	  
-	    final ComboBox<BaseModel> comboUnidad = new ComboBox<BaseModel>();  
+	    final ComboBox<Destinatarios> comboUnidad = new ComboBox<Destinatarios>();  
 	    comboUnidad.setEmptyText("Selecciona un destinatario");  
 	    comboUnidad.setStore(unidades);  
 	    comboUnidad.setDisplayField("nombre");  

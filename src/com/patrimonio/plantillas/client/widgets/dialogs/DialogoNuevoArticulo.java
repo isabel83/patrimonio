@@ -415,7 +415,9 @@ public class DialogoNuevoArticulo extends Dialog{
 			public void handleEvent(BaseEvent be) {
 //				comboSeccion.clear();
 //				comboFamilia.clear();
+//				comboFamilia.setEnabled(false);
 //				comboSubFamilia.clear();
+//				comboSubFamilia.setEditable(false);
 //				codigoArt.clear();
 //				nombreArt.clear();
 //				marcaArt.clear();

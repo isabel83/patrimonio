@@ -1,9 +1,12 @@
 package com.patrimonio.plantillas.shared;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.allen_sauer.gwt.log.client.Log;
-import com.extjs.gxt.ui.client.data.BaseModel;
+import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
+import com.extjs.gxt.ui.client.data.PagingLoadConfig;
+import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.google.gwt.core.client.GWT;
@@ -16,6 +19,8 @@ public class RpcUtilsDestinatarios {
 
 	DestinatarioServiceAsync destService = GWT.create(DestinatarioService.class);
 	Destinatarios destinatario= new Destinatarios();
+	final List<Destinatarios> todos = new ArrayList<Destinatarios>();
+	PagingLoadResult<Destinatarios> paginados = null;
 	
 	public void checkValuesAndSaveDestinatario(String nombre, Boolean tienePuesto) {
 		
@@ -107,22 +112,21 @@ public class RpcUtilsDestinatarios {
 	
 	}
 
-	public void loadUnidadCombo(final ListStore<BaseModel> unidades) {
+	public void loadUnidadCombo(final ListStore<Destinatarios> unidades) {
 		destService.findAllForList(new AsyncCallback<List<Destinatarios>>(){
 
 			@Override
 			public void onFailure(Throwable caught) {
-				//Log.debug("Error en carga de proveedores: " + caught.getLocalizedMessage());
 			}
 
 			@Override
 			public void onSuccess(List<Destinatarios> result) {
-				//Log.debug("Estamos en el on success, hay: " + result.size());
 				for(Destinatarios des: result){
 						
-					 BaseModel model = new BaseModel();
+					 Destinatarios model = new Destinatarios();
 	                 model.set("id",des.getId_destinatario());
 	                 model.set("nombre", des.getDescripcion());
+	                 model.set("activo", des.getId_estado());
 					 unidades.add(model);
 				} 
 				
@@ -132,6 +136,53 @@ public class RpcUtilsDestinatarios {
 		});
 		
 	}
+
+	public PagingLoadResult<Destinatarios> loadDestinatarios(PagingLoadConfig config, AsyncCallback<PagingLoadResult<Destinatarios>> callback) {
+		
+		destService.getDestinatarios(config, new  AsyncCallback<PagingLoadResult<Destinatarios>>(){
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(PagingLoadResult<Destinatarios> result) {
+				paginados = result;
+			}
+			
+		});
+		return paginados;
+		
+	}
+
+	public List<Destinatarios> loadAll() {
+		destService.findAllForList(new AsyncCallback<List<Destinatarios>>(){
+
+			@Override
+			public void onFailure(Throwable caught) {
+			}
+
+			@Override
+			public void onSuccess(List<Destinatarios> result) {
+				Log.debug("El result me da" + result.size());
+				for(Destinatarios des: result){						
+					 Destinatarios model = new Destinatarios();
+	                 model.set("id",des.getId_destinatario());
+	                 model.set("nombre", des.getDescripcion());
+	                 model.set("activo", des.getId_estado());
+					 todos.add(model);
+				} 
+				
+				
+			}
+			
+		});
+		Log.debug("el valor de todos es: " + todos.size());
+		return todos;
+	}
+
 
 
 }
