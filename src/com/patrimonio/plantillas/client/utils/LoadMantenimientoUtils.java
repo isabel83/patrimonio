@@ -393,157 +393,13 @@ public class LoadMantenimientoUtils {
 		frmDestinatarios.setLabelAlign(LabelAlign.TOP);  
 		frmDestinatarios.setButtonAlign(HorizontalAlignment.CENTER);  
 		
-	    LayoutContainer main = new LayoutContainer();  
+	    final LayoutContainer main = new LayoutContainer();  
 	    main.setLayout(new ColumnLayout());  
 	    main.setStyleAttribute("paddingBottom", "35px");
 	    main.setStyleAttribute("paddingTop", "35px");
 	    main.setBorders(false);
 	  
-	    /*LayoutContainer left = new LayoutContainer();  
-	    left.setStyleAttribute("paddingLeft", "10px");
-	    FormLayout layout = new FormLayout();  
-	    layout.setLabelAlign(LabelAlign.TOP);  
-	    left.setLayout(layout);  
-	    
-	    LayoutContainer right = new LayoutContainer();
-	    right.setStyleAttribute("paddingRight", "10px");
-	    layout = new FormLayout();  
-	    layout.setLabelAlign(LabelAlign.TOP);  
-	    right.setLayout(layout);  
-	    
-	    
-	    final TextField<String> nombre = new TextField<String>();  
-	    nombre.setFieldLabel("Nombre"); 
-	    nombre.setAutoValidate(true);
-	    nombre.setEnabled(false);
-	    left.add(nombre,formData);	
-	    
-	    final CheckBox tienePuesto = new CheckBox();  
-	    tienePuesto.addStyleName("margenTop");
-	    tienePuesto.setEnabled(false);
-	    tienePuesto.setFieldLabel("¿Tiene puestos de trabajo que dependen de esta unidad para la entrega de vestuario?(Si/No)");
-	    right.addStyleName("check");
-	    right.add(tienePuesto, formData);
-	    
-	    DataProxy entregasPRx = null; 
-		final BasePagingLoader<PagingLoadResult<ModelData>> entregasLoader = new BasePagingLoader<PagingLoadResult<ModelData>>(  
-				entregasPRx, new BeanModelReader());  
-	        entregasLoader.setRemoteSort(true); 
-	    
-	    final PagingToolBar paginacion = new PagingToolBar(50); 
-	    paginacion.bind(entregasLoader);
-	    paginacion.setStyleName("paginacion");
-	    
-	    
-	    ButtonGroup gButtons = new ButtonGroup(4);
-	    final Button b1  = new Button();
-	    final Button b2 = new Button();
-	    final Button b3 = new Button();
-	    final Button b4 = new Button();
-	    
-	    
-	    b1.setText("Agregar");
-	    b1.addSelectionListener(new SelectionListener<ButtonEvent>(){
-
-			@Override
-			public void componentSelected(ButtonEvent ce) {
-				
-				if(b1.getText().equalsIgnoreCase("Agregar")){
-					b1.setText("Guardar");
-					b2.setText("Deshacer");
-					b3.setVisible(false);
-					b4.setVisible(false);
-					habilitaTodo(true);
-				}
-				else{
-					destiUtils.checkValuesAndSaveDestinatario(nombre.getValue(), tienePuesto.getValue());
-					
-					b1.setText("Agregar");
-					b2.setText("Modificar");
-					b3.setVisible(true);
-					b4.setVisible(true);
-					habilitaTodo(false);
-				}
-				
-			}
-
-			public void habilitaTodo(boolean que) {
-				nombre.setEnabled(que);
-				tienePuesto.setEnabled(que);
-			}
-		
-	    });
-	    
-	    b1.setStyleAttribute("padding-right", "5px");
-	    b2.setText("Modificar");
-	    b2.addSelectionListener(new SelectionListener<ButtonEvent>(){
-			@Override
-			public void componentSelected(ButtonEvent ce) {
-				if(b2.getText().equalsIgnoreCase("Modificar")){
-					b1.setText("Guardar");
-					b2.setText("Deshacer");
-					b3.setVisible(false);
-					b4.setVisible(false);
-					habilita();
-				}
-				else{
-					atras();
-					b1.setText("Agregar");
-					b2.setText("Modificar");
-					b3.setVisible(true);
-					b4.setVisible(true);
-				}
-				
-			}
-
-			private void habilita() {
-				nombre.setEnabled(true);
-				tienePuesto.setEnabled(true);
-				
-			}
-
-			private void atras() {
-				nombre.setValue(destinatario.getDescripcion());
-				nombre.setEnabled(false);
-				tienePuesto.setValue(false);
-				tienePuesto.setEnabled(false);
-			}
-	    	
-	    });
-	    b2.setStyleAttribute("padding-right", "5px");
-	    b3.setText("Eliminar");
-	    b3.addSelectionListener(new SelectionListener<ButtonEvent>(){
-
-			@Override
-			public void componentSelected(ButtonEvent ce) {
-				destiUtils.deleteDestinatario(idDestinatario);
-				
-			}
-	    	
-	    });
-	    b3.setStyleAttribute("padding-right", "5px");
-	    b4.setText("Buscar");
-	    b4.addSelectionListener(new SelectionListener<ButtonEvent>(){
-
-			@Override
-			public void componentSelected(ButtonEvent ce) {
-				DialogoBuscar busqueda = new DialogoBuscar();
-				busqueda.show();
-				
-			}
-	    	
-	    });
-	    
-	    gButtons.add(b1);
-	    gButtons.add(b2);
-	    gButtons.add(b3);
-	    gButtons.add(b4);
-	    gButtons.addStyleName("botonesFuncionales");
-	    
-	    main.add(left, new ColumnData(.5));
-	    main.add(right, new ColumnData(.5));
-	    main.add(paginacion, new ColumnData(.6));*/
-	    
+	
 	    
 	    RpcProxy<PagingLoadResult<Destinatarios>> proxy = new RpcProxy<PagingLoadResult<Destinatarios>>() {  
 	        @Override  
@@ -558,7 +414,7 @@ public class LoadMantenimientoUtils {
 	  
 		final ListStore<Destinatarios> store = new ListStore<Destinatarios>(loader);
 	    //store.add(destiUtils.loadAll());
-	   //Log.debug("El store tiene" + store.getCount());
+	   
 	    
 		final PagingToolBar toolBar = new PagingToolBar(50);
 		toolBar.bind(loader);  
@@ -609,7 +465,7 @@ public class LoadMantenimientoUtils {
 			public void handleEvent(GridEvent<Destinatarios> be) {
 				PagingLoadConfig config = new BasePagingLoadConfig();
 				config.setOffset(0);
-				config.setLimit(3);
+				config.setLimit(50);
 
 				Map<String, Object> state = grid.getState();
 				if (state.containsKey("offset")) {
@@ -622,62 +478,63 @@ public class LoadMantenimientoUtils {
 				loader.load(config);
 			}
 		});
-		grid.addListener(Events.AfterLayout, new Listener<GridEvent<Destinatarios>>(){
-
-			@Override
-			public void handleEvent(GridEvent<Destinatarios> be) {
-				grid.recalculate();
-				
-			}
-			
-		});
-	    
-	    
-	    ButtonGroup gButtons = new ButtonGroup(4);
-	    final Button b1  = new Button();
-	    final Button b2 = new Button();
-	    
-	    
-	    b1.setText("Agregar");
-	    b1.addSelectionListener(new SelectionListener<ButtonEvent>(){
-
-			@Override
-			public void componentSelected(ButtonEvent ce) {
-				Destinatarios d = new Destinatarios();  
-		        d.setDescripcion("Nombre");
-		        d.setId_estado(0);  
-		        
-		  
-		        re.stopEditing(false);  
-		        store.insert(d, 0);  
-		        re.startEditing(store.indexOf(d), true);
-			}
 		
-	    });
 	    
-	    b1.setStyleAttribute("padding-right", "5px");
-	    b2.setText("Eliminar");
-	    b2.addSelectionListener(new SelectionListener<ButtonEvent>(){
-			@Override
-			public void componentSelected(ButtonEvent ce) {
-				grid.getStore().remove(grid.getStore().getAt(0));  
-		        if (grid.getStore().getCount() == 0) {  
-		          ce.<Component> getComponent().disable();  
-		        }  
-			}
-	    });
-	    
-	    
-	    
-	    gButtons.add(b1);
-	    gButtons.add(b2);
-	    gButtons.addStyleName("botonesFuncionales");
+//	    ButtonGroup gButtons = new ButtonGroup(4);
+//	    final Button b1  = new Button();
+//	    final Button b2 = new Button();
+//	    
+//	    
+//	    b1.setText("Agregar");
+//	    b1.addSelectionListener(new SelectionListener<ButtonEvent>(){
+//
+//			@Override
+//			public void componentSelected(ButtonEvent ce) {
+//				Destinatarios d = new Destinatarios();  
+//		        d.setDescripcion("Nombre");
+//		        d.setId_estado(0);  
+//		        
+//		  
+//		        re.stopEditing(false);  
+//		        store.insert(d, 0);  
+//		        re.startEditing(store.indexOf(d), true);
+//			}
+//		
+//	    });
+//	    
+//	    b1.setStyleAttribute("padding-right", "5px");
+//	    b2.setText("Eliminar");
+//	    b2.addSelectionListener(new SelectionListener<ButtonEvent>(){
+//			@Override
+//			public void componentSelected(ButtonEvent ce) {
+//				grid.getStore().remove(grid.getStore().getAt(0));  
+//		        if (grid.getStore().getCount() == 0) {  
+//		          ce.<Component> getComponent().disable();  
+//		        }  
+//			}
+//	    });
+//	    
+//	    
+//	    
+//	    gButtons.add(b1);
+//	    gButtons.add(b2);
+//	    gButtons.addStyleName("botonesFuncionales");
 	    
 	    main.add(grid, new ColumnData(1));  
 	    main.add(toolBar, new ColumnData(.6));
-	    main.add(gButtons, new ColumnData(.4));
-	    grid.recalculate();
+	    //main.add(gButtons, new ColumnData(.4));
+	   
 	    frmDestinatarios.add(main, new FormData("100%"));
+	    frmDestinatarios.fireEvent(Events.Render);
+	    frmDestinatarios.addListener(Events.Render, new Listener<BaseEvent>(){
+
+			@Override
+			public void handleEvent(BaseEvent be) {
+				grid.recalculate();
+				main.layout(true);
+			}
+	    	
+	    });
 	}
 
 	public void loadFormSecciones(FormPanel frmSecciones) {
