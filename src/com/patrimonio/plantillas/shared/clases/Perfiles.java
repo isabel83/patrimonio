@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
-import com.patrimonio.plantillas.client.DTOs.PerfilesDTO;
 
 
 public class Perfiles extends BaseModel implements Serializable{
@@ -28,10 +27,7 @@ public class Perfiles extends BaseModel implements Serializable{
 		this.DESCRIPCION=descripcion;
 	}
 	
-	public Perfiles(PerfilesDTO perfil){
-		this.ID_PERFIL=perfil.getID_PERFIL();
-		this.DESCRIPCION=perfil.getDESCRIPCION();
-	}
+	
 	
 	public Long getId_perfil() {
 		return this.ID_PERFIL;

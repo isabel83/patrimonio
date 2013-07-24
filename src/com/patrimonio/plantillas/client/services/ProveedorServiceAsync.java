@@ -5,7 +5,6 @@ import java.util.List;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.patrimonio.plantillas.client.DTOs.ProveedoresDTO;
 import com.patrimonio.plantillas.shared.clases.Proveedores;
 
 public interface ProveedorServiceAsync {

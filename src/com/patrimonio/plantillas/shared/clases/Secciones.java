@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
-import com.patrimonio.plantillas.client.DTOs.SeccionesDTO;
 
 
 public class Secciones extends BaseModel implements Serializable{
@@ -31,13 +30,7 @@ public class Secciones extends BaseModel implements Serializable{
 		this.DESCRIPCION=descripcion;
 		this.ID_ESTADO=estado;
 	}
-	
-	public Secciones(SeccionesDTO seccion){
-		this.ID_SECCION=seccion.getId_seccion();
-		this.DESCRIPCION=seccion.getDescripcion();
-		this.ID_ESTADO=seccion.getId_estado();
-	}
-		
+
 	public Long getId_seccion() {
 		return this.ID_SECCION;
 	}

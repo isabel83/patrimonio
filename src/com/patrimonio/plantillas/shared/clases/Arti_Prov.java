@@ -2,14 +2,9 @@ package com.patrimonio.plantillas.shared.clases;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
-import com.patrimonio.plantillas.client.DTOs.Arti_ProvDTO;
+
 
 
 public class Arti_Prov extends BaseModel implements Serializable{
@@ -31,14 +26,6 @@ public class Arti_Prov extends BaseModel implements Serializable{
 		this.ID_ARTICULO=articulo;
 		this.ID_PROVEEDOR=proveedor;
 	}
-	
-	public Arti_Prov(Arti_ProvDTO articulopro){
-		this.ID_ARTI_PROV= articulopro.getId();
-		this.ID_ARTICULO=articulopro.getArticulo();
-		this.ID_PROVEEDOR=articulopro.getProveedor();
-	}
-
-	
 
 	public Long getID_ARTI_PROV() {
 		return ID_ARTI_PROV;

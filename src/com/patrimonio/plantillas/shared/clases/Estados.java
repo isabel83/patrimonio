@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
-import com.patrimonio.plantillas.client.DTOs.EstadosDTO;
 
 public class Estados extends BaseModel implements Serializable{
 
@@ -26,11 +25,6 @@ public class Estados extends BaseModel implements Serializable{
 		this.DESCRIPCION=descripcion;
 	}
 
-	public Estados(EstadosDTO estado){
-		this.ID_ESTADO=estado.getId_estado();
-		this.DESCRIPCION=estado.getDescripcion();
-	}
-	
 
 	public Long getID_ESTADO() {
 		return ID_ESTADO;

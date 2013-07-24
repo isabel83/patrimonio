@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
-import com.patrimonio.plantillas.client.DTOs.SubfamiliasDTO;
 
 
 public class Subfamilias extends BaseModel implements Serializable{
@@ -45,13 +44,6 @@ public class Subfamilias extends BaseModel implements Serializable{
 	}
 	
 	
-	public Subfamilias(SubfamiliasDTO subfamilia){
-		this.ID_SUBFAMILIA=subfamilia.getId_subfamilia();
-		this.ID_FAMILIA=subfamilia.getId_familia();
-		this.ID_ESTADO=subfamilia.getId_estado();
-		this.DESCRIPCION=subfamilia.getDescripcion();
-		this.CODIGO=subfamilia.getCodigo();
-	}
 	
 	public Long getId_subfamilia() {
 		return this.ID_SUBFAMILIA;

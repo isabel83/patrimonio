@@ -3,7 +3,6 @@ package com.patrimonio.plantillas.shared.clases;
 import java.io.Serializable;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
-import com.patrimonio.plantillas.client.DTOs.PuestosDTO;
 
 public class Puestos extends BaseModel implements Serializable{
 
@@ -26,11 +25,7 @@ public class Puestos extends BaseModel implements Serializable{
 		this.DESCRIPCION=descripcion;
 	}
 	
-	public Puestos(PuestosDTO puesto){
-		this.ID_PUESTO=puesto.getId_puesto();
-		this.ID_ESTADO=puesto.getId_estado();
-		this.DESCRIPCION=puesto.getDescripcion();
-	}
+	
 	
 	public Long getId_puesto() {
 		return this.ID_PUESTO;

@@ -21,6 +21,10 @@ h1 {
   text-align: right;
 }
 
+.DND .x-panel-bwrap .x-panel-body{
+	border: none !important;
+}
+
 /** Most GWT widgets already have a style name defined */
 .gwt-DialogBox {
   width: 400px;

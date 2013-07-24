@@ -6,7 +6,6 @@ import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import com.patrimonio.plantillas.client.DTOs.ProveedoresDTO;
 import com.patrimonio.plantillas.shared.clases.Proveedores;
 
 @RemoteServiceRelativePath("proveedor")

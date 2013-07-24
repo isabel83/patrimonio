@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
-import com.patrimonio.plantillas.client.DTOs.PersonasDTO;
 
 
 public class Personas extends BaseModel implements Serializable{
@@ -38,12 +37,6 @@ public class Personas extends BaseModel implements Serializable{
 		this.DESCRIPCION=descripcion;
 	}
 	
-	public Personas(PersonasDTO persona){
-		this.ID_PERSONA=persona.getId_persona();
-		this.ID_ESTADO = persona.getId_estado();
-		this.ID_PERFIL=persona.getId_perfil();
-		this.DESCRIPCION=persona.getDescripcion();
-	}
 	
 	public Personas(String nombre, int perfil, int estado) { 
 		this.ID_ESTADO = estado;

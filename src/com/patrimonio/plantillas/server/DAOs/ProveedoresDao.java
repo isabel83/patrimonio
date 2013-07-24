@@ -56,16 +56,25 @@ public class ProveedoresDao  extends HibernateDaoSupport{
 	}
 	
 
-	@SuppressWarnings("unchecked")
 	@Transactional
 	public PagingLoadResult<Proveedores> getProveedores(PagingLoadConfig loadConfig){
-		Query query =  sessionFactory.openSession().createQuery("from Proveedor");
-		Integer cuantos=query.list().size();
-		query.setFirstResult(loadConfig.getOffset());
-		query.setMaxResults(loadConfig.getLimit());
-		ArrayList<Proveedores> sublist = (ArrayList<Proveedores>) query.list();
-		sessionFactory.getCurrentSession().close();
-		return new BasePagingLoadResult<Proveedores>(sublist, loadConfig.getOffset(),cuantos);
+		sesion = sessionFactory.openSession();
+		try{
+			Query query =  sesion.createQuery("from Proveedores");
+			Integer cuantos=query.list().size();
+			query.setFirstResult(loadConfig.getOffset());
+			query.setMaxResults(loadConfig.getLimit());
+			ArrayList<Proveedores> sublist = (ArrayList<Proveedores>) query.list();
+			return new BasePagingLoadResult<Proveedores>(sublist, loadConfig.getOffset(),cuantos);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+		finally{
+			sesion.close();
+		}
+		
 	}
 	
 	@Transactional

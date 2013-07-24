@@ -2,15 +2,12 @@ package com.patrimonio.plantillas.client.widgets.forms;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Element;
-import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.patrimonio.plantillas.client.utils.LoadEntradasUtils;
 import com.patrimonio.plantillas.client.widgets.menus.MenuIconos;
 
 public class FormEntradas extends ContentPanel{
 
-	LoadEntradasUtils utils = new LoadEntradasUtils();
 
 	int panelActivo = 0;
 	
@@ -43,25 +40,15 @@ public class FormEntradas extends ContentPanel{
 			    
 			  });    
 		
-		FormPanel form = new FormPanel();
-		form.setHeaderVisible(false);
-		form.setExpanded(true);
-		form.setAutoHeight(true);
-		form.setBodyBorder(false);
-		form.setBorders(false);
-		loadEntradas(form, panelActivo);
-		add(form);
-	}
-	
-	
-	private void loadEntradas(FormPanel form, int activo) {
-		switch(activo) {
-			case 0: utils.loadFormNuevoPedido(form); break;
-			case 1: utils.loadFormRecepcion(form);break;
-			case 2: utils.loadFormNuevoArticulo(form);break;
-			case 3: utils.loadFormArticuloEliminado(form);break;
+		switch(panelActivo){
+			case 0:add(new NuevoPedido());break;
+			case 1:add(new Recepcion());break;
+			case 2:add(new NuevoArticulo());break;
+			case 3:add(new ArticuloEliminado());break;
 		}
-	}
 
+	}
+	
+	
 
 }

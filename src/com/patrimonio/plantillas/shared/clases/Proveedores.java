@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
-import com.patrimonio.plantillas.client.DTOs.ProveedoresDTO;
+import com.extjs.gxt.ui.client.data.BeanModelReader;
 
 
 public class Proveedores extends BaseModel implements Serializable{
@@ -72,23 +72,7 @@ public class Proveedores extends BaseModel implements Serializable{
 		this.EMAIL=mail;
 		this.ID_ESTADO=estado;
 	}
-	
-	public Proveedores (ProveedoresDTO proveedor){
-		this.NIF=proveedor.getNif();
-		this.NOMBRE=proveedor.getNombre();
-		this.ACTIVIDAD=proveedor.getActividad();
-		this.CONTACTO=proveedor.getContacto();
-		this.DOMICILIO=proveedor.getDomicilio();
-		this.POBLACION=proveedor.getPoblacion();
-		this.CP=proveedor.getCp();
-		this.PROVINCIA=proveedor.getProvincia();
-		this.TLF1=proveedor.getTlf1();
-		this.TLF2=proveedor.getTlf2();
-		this.MOVIL=proveedor.getMovil();
-		this.FAX=proveedor.getFax();
-		this.EMAIL=proveedor.getEmail();
-		this.ID_ESTADO=proveedor.getId_estado();
-	}
+		
 	
 	public Long getId_proveedor() {
 			return this.ID_PROVEEDOR;

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import com.patrimonio.plantillas.client.DTOs.ProveedoresDTO;
 import com.patrimonio.plantillas.client.services.ProveedorService;
 import com.patrimonio.plantillas.server.DAOs.ProveedoresDao;
 import com.patrimonio.plantillas.shared.clases.Proveedores;
@@ -89,8 +88,6 @@ public class ProveedorServiceImpl extends RemoteServiceServlet implements Provee
 		return proveedorDao.findAll();
 	}
 
-	private ProveedoresDTO createProDTO(Proveedores pro) {
-		return new ProveedoresDTO(pro.getId_proveedor(), pro.getNif(), pro.getNombre());
-	}
+
 
 }

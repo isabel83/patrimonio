@@ -1,15 +1,7 @@
 package com.patrimonio.plantillas.shared.clases;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import com.extjs.gxt.ui.client.data.BaseModel;
-import com.patrimonio.plantillas.client.DTOs.ArticulosDTO;
 
 public class Articulos extends BaseModel implements Serializable{
 	
@@ -60,21 +52,7 @@ public class Articulos extends BaseModel implements Serializable{
 		this.ID_ESTADO=estado;
 	}
 	
-	public Articulos(ArticulosDTO articulo){
-		this.ID_ARTICULO=articulo.getID_ARTICULO();
-		this.ID_SECCION=articulo.getID_SECCION();
-		this.ID_FAMILIA=articulo.getID_FAMILIA();
-		this.ID_SUBFAMILIA=articulo.getID_SUBFAMILIA();
-		this.CODIGO=articulo.getCODIGO();
-		this.NOMBRE=articulo.getNOMBRE();
-		this.MARCA=articulo.getMARCA();
-		this.N_MINIMO=articulo.getN_MINIMO();
-		this.N_IDONEO=articulo.getN_IDONEO();
-		this.OBSERVACIONES=articulo.getOBSERVACIONES();
-		this.ID_ESTADO=articulo.getID_ESTADO();
-	}
-		
-		
+
 
 	public Long getId_articulo() {
 //		try {
